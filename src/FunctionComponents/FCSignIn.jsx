@@ -1,4 +1,6 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+import GoogleLogin from 'react-google-login';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -17,8 +19,8 @@ function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
-                Your Website
+            <Link color="inherit">
+                ExPa Application
       </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
@@ -27,7 +29,11 @@ function Copyright() {
 }
 
 export default function FCSignIn() {
+    
     const classes = useStyles();
+    const responseGoogle = (response) => {
+        console.log(response);
+      }
     return (
         <Container component="main" maxWidth="xs" style={{ backgroundColor: "#ffdf80" }}>
             <CssBaseline />
@@ -44,12 +50,14 @@ export default function FCSignIn() {
                             <Link href="#" variant="body2"> Forgot password? </Link>
                         </Grid>
                         <Grid item>
-                            <Link href="#" variant="body2">
-                                {"Don't have an account? Sign Up"}
-                            </Link>
+                            <Link href="#" variant="body2"> Don't have an account? Sign Up </Link>
                         </Grid>
                     </Grid>
                 </form>
+                <div className={classes.Quick}>
+                    <p class="fm-sns-title" data-spm-anchor-id="a2g0o.home.0.i6.654d2145siOtTC">Quick access with</p>
+                    <GoogleLogin clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com" buttonText onSuccess={responseGoogle} onFailure={responseGoogle} cookiePolicy={'single_host_origin'} />
+                </div>
             </div>
             <Box mt={8}>
                 <Copyright />
@@ -88,5 +96,8 @@ const useStyles = makeStyles((theme) => ({
     ExPa: {
         fontSize: 80,
         fontWeight: 'bold',
+    },
+    Quick: {
+        marginTop: 5,
     }
 }));

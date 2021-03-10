@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import CCRegister from '../ClassComponents/CCRegister';
+import Login from '../ServiceComponents/Login';
 
 function Copyright() {
     return (
@@ -56,7 +57,7 @@ export default function FCSignIn() {
                     </form>
                     <div className={classes.Quick}>
                         <p className="fm-sns-title" data-spm-anchor-id="a2g0o.home.0.i6.654d2145siOtTC">Quick access with</p>
-                        <GoogleLogin clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com" buttonText onSuccess={responseGoogle} onFailure={responseGoogle} cookiePolicy={'single_host_origin'} />
+                        <Login />
                     </div>
                 </div>
                 <Box mt={15}>

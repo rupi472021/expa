@@ -10,7 +10,7 @@ function App() {
     <div className="App">
         {/* <FCSignIn/> */}
         <CCRegister/>
-        <h1>ben</h1>
+        <h1>daniel</h1>
     </div>
   );
 }

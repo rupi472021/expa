@@ -29,40 +29,40 @@ function Copyright() {
 }
 
 export default function FCSignIn() {
-    
+
     const classes = useStyles();
     const responseGoogle = (response) => {
         console.log(response);
-      }
+    }
     return (
-        <Container component="main" maxWidth="xs" style={{ backgroundColor: "#ffdf80" }}>
-            <CssBaseline />
-            <div className={classes.paper}>
-                <Avatar alt="Remy Sharp" src="https://i.ibb.co/7S6XfNZ/circle-cropped.png" className={classes.large} />
-                <Typography className={classes.ExPa} > ExPa </Typography>
-                <form className={classes.form} noValidate>
-                    <TextField className={classes.TextField} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
-                    <TextField className={classes.TextField} variant="outlined" margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password" />
-                    <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
-                    <Button type="submit" fullWidth variant="contained" className={classes.submit}> Sign In </Button>
-                    <Grid container>
-                        <Grid item xs>
-                            <Link href="#" variant="body2"> Forgot password? </Link>
+            <Container component="main" maxWidth="s" style={{ backgroundColor: "#ffdf80" }}>
+                <CssBaseline />
+                <div className={classes.paper}>
+                    <Avatar alt="Remy Sharp" src="https://i.ibb.co/7S6XfNZ/circle-cropped.png" className={classes.large} />
+                    <Typography className={classes.ExPa} > ExPa </Typography>
+                    <form className={classes.form} noValidate>
+                        <TextField className={classes.TextField} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
+                        <TextField className={classes.TextField} variant="outlined" margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password" />
+                        <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
+                        <Button type="submit" fullWidth variant="contained" className={classes.submit}> Sign In </Button>
+                        <Grid container>
+                            <Grid item xs>
+                                <Link href="#" variant="body2"> Forgot password? </Link>
+                            </Grid>
+                            <Grid item>
+                                <Link href="#" variant="body2"> Don't have an account? Sign Up </Link>
+                            </Grid>
                         </Grid>
-                        <Grid item>
-                            <Link href="#" variant="body2"> Don't have an account? Sign Up </Link>
-                        </Grid>
-                    </Grid>
-                </form>
-                <div className={classes.Quick}>
-                    <p class="fm-sns-title" data-spm-anchor-id="a2g0o.home.0.i6.654d2145siOtTC">Quick access with</p>
-                    <GoogleLogin clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com" buttonText onSuccess={responseGoogle} onFailure={responseGoogle} cookiePolicy={'single_host_origin'} />
+                    </form>
+                    <div className={classes.Quick}>
+                        <p class="fm-sns-title" data-spm-anchor-id="a2g0o.home.0.i6.654d2145siOtTC">Quick access with</p>
+                        <GoogleLogin clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com" buttonText onSuccess={responseGoogle} onFailure={responseGoogle} cookiePolicy={'single_host_origin'} />
+                    </div>
                 </div>
-            </div>
-            <Box mt={8}>
-                <Copyright />
-            </Box>
-        </Container>
+                <Box mt={15}>
+                    <Copyright />
+                </Box>
+            </Container>
     );
 }
 
@@ -99,5 +99,5 @@ const useStyles = makeStyles((theme) => ({
     },
     Quick: {
         marginTop: 5,
-    }
+    },
 }));

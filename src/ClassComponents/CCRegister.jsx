@@ -19,7 +19,6 @@ import React, { Component } from 'react'
                           <label>Last name</label>
                           <input type="text" className="form-control" placeholder="Last name" />
                       </div>
-      
                       <div className="form-group">
                           <label>Email</label>
                           <input type="email" className="form-control" placeholder="Enter email" />

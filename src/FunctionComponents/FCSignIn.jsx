@@ -14,6 +14,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import CCRegister from '../ClassComponents/CCRegister';
 
 function Copyright() {
     return (
@@ -28,6 +29,8 @@ function Copyright() {
     );
 }
 
+
+
 export default function FCSignIn() {
 
     const classes = useStyles();
@@ -35,7 +38,7 @@ export default function FCSignIn() {
         console.log(response);
     }
     return (
-            <Container component="main" maxWidth="s" style={{ backgroundColor: "#ffdf80" }}>
+            <Container component="main" /*maxWidth="s"*/ style={{ backgroundColor: "#ffdf80" }}>
                 <CssBaseline />
                 <div className={classes.paper}>
                     <Avatar alt="Remy Sharp" src="https://i.ibb.co/7S6XfNZ/circle-cropped.png" className={classes.large} />
@@ -55,7 +58,7 @@ export default function FCSignIn() {
                         </Grid>
                     </form>
                     <div className={classes.Quick}>
-                        <p class="fm-sns-title" data-spm-anchor-id="a2g0o.home.0.i6.654d2145siOtTC">Quick access with</p>
+                        <p className="fm-sns-title" data-spm-anchor-id="a2g0o.home.0.i6.654d2145siOtTC">Quick access with</p>
                         <GoogleLogin clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com" buttonText onSuccess={responseGoogle} onFailure={responseGoogle} cookiePolicy={'single_host_origin'} />
                     </div>
                 </div>

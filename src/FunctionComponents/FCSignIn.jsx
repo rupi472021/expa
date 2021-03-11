@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Login from '../ServiceComponents/Login';
+import CCF from '../ServiceComponents/CCF';
 
 function Copyright() {
     return (
@@ -31,38 +32,37 @@ function Copyright() {
 export default function FCSignIn() {
 
     const classes = useStyles();
-    const responseGoogle = (response) => {
-        console.log(response);
-    }
+
     return (
-            <Container component="main" /*maxWidth="s"*/ style={{ backgroundColor: "#ffdf80" }}>
-                <CssBaseline />
-                <div className={classes.paper}>
-                    <Avatar alt="Remy Sharp" src="https://i.ibb.co/7S6XfNZ/circle-cropped.png" className={classes.large} />
-                    <Typography className={classes.ExPa} > ExPa </Typography>
-                    <form className={classes.form} noValidate>
-                        <TextField className={classes.TextField} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
-                        <TextField className={classes.TextField} variant="outlined" margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password" />
-                        <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
-                        <Button type="submit" fullWidth variant="contained" className={classes.submit}> Sign In </Button>
-                        <Grid container>
-                            <Grid item xs>
-                                <Link href="#" variant="body2"> Forgot password? </Link>
-                            </Grid>
-                            <Grid item>
-                                <Link href="#" variant="body2"> Don't have an account? Sign Up </Link>
-                            </Grid>
+        <Container component="main" /*maxWidth="s"*/ style={{ backgroundColor: "#ffdf80" }}>
+            <CssBaseline />
+            <div className={classes.paper}>
+                <Avatar alt="Remy Sharp" src="https://i.ibb.co/7S6XfNZ/circle-cropped.png" className={classes.large} />
+                <Typography className={classes.ExPa} > ExPa </Typography>
+                <form className={classes.form} noValidate>
+                    <TextField className={classes.TextField} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
+                    <TextField className={classes.TextField} variant="outlined" margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password" />
+                    <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
+                    <Button type="submit" fullWidth variant="contained" className={classes.submit}> Sign In </Button>
+                    <Grid container>
+                        <Grid item xs>
+                            <Link href="/forget_password_page" variant="body2"> Forgot password? </Link>
                         </Grid>
-                    </form>
-                    <div className={classes.Quick}>
-                        <p className="fm-sns-title" data-spm-anchor-id="a2g0o.home.0.i6.654d2145siOtTC">Quick access with</p>
-                        <Login />
-                    </div>
+                        <Grid item>
+                            <Link variant="body2" href="/Register" > Don't have an account? Sign Up </Link>
+                        </Grid>
+                    </Grid>
+                </form>
+                <div className={classes.Quick}>
+                    <p className="fm-sns-title" data-spm-anchor-id="a2g0o.home.0.i6.654d2145siOtTC">Quick access with</p>
+                    <Login />
+                    <CCF />
                 </div>
-                <Box mt={15}>
-                    <Copyright />
-                </Box>
-            </Container>
+            </div>
+            <Box mt={15}>
+                <Copyright />
+            </Box>
+        </Container>
     );
 }
 

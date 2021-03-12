@@ -16,6 +16,8 @@ function App() {
           </Route>
         </Switch>
       </header>
+       {/* <FCSignIn />   */}
+      <FCRegister />
     </div>
   );
 }

@@ -38,9 +38,9 @@ export default function FCRegister() {
 
                     <TextField className={classes.TextField} variant="outlined" margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password" />
                     {/* <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" /> */}
-                    <Button type="submit" fullWidth variant="contained" className={classes.submit}>בוא נכיר אותך</Button>
+                    <Button type="submit" fullWidth variant="contained" className={classes.submit}> lets keep going </Button>
 
-                    <input name="user[email]" autocapitalize="off" required="" class="form-control input py-1" value="" type="text" id="user_email" autocomplete="off" spellcheck="false" aria-describedby=" "></input>
+                    {/* <input name="user[email]" autocapitalize="off" required="" class="form-control input py-1" value="" type="text" id="user_email" autocomplete="off" spellcheck="false" aria-describedby=" "></input> */}
 
             
                 </form>
@@ -78,6 +78,7 @@ const useStyles = makeStyles((theme) => ({
     //     height: theme.spacing(16),
     // },
     ExPa: {
+        marginTop:30,
         fontSize: 30,
         fontWeight: 'bold',
     },

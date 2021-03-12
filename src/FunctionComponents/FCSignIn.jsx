@@ -38,7 +38,7 @@ export default function FCSignIn() {
             <CssBaseline />
             <div className={classes.paper}>
                 <Avatar alt="Remy Sharp" src="https://i.ibb.co/7S6XfNZ/circle-cropped.png" className={classes.large} />
-                <Typography className={classes.ExPa} > ExPa </Typography>
+                {/* <Typography className={classes.ExPa} > ExPa </Typography> */}
                 <form className={classes.form} noValidate>
                     <TextField className={classes.TextField} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
                     <TextField className={classes.TextField} variant="outlined" margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password" />
@@ -68,7 +68,7 @@ export default function FCSignIn() {
 
 const useStyles = makeStyles((theme) => ({
     paper: {
-        marginTop: theme.spacing(8),
+        // marginTop: theme.spacing(8),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -90,6 +90,7 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 'bold',
     },
     large: {
+        marginTop:20,
         width: theme.spacing(16),
         height: theme.spacing(16),
     },

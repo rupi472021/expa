@@ -35,7 +35,7 @@ export default function FCSignIn() {
 
         console.log("in signinbtn function");
 
-        let apiUrl = `http://localhost:54976/api/User`;
+        let apiUrl = `http://localhost:53281/api/User`;
 
         fetch(apiUrl)
             .then(res => {

@@ -1,8 +1,8 @@
 import './App.css';
 import { Switch, Route ,withRouter } from 'react-router-dom';
 import FCSignIn from './FunctionComponents/FCSignIn';
+import CCResetPasswordPage from './ClassComponents/CCResetPasswordPage';
 import FCRegister from './FunctionComponents/FCRegister';
-import ResetPasswordPage from './ClassComponents/ResetPasswordPage';
 
 function App() {
   return (
@@ -13,10 +13,10 @@ function App() {
             <FCSignIn />
           </Route>
           <Route exact path="/register" >
-            <FCRegister />
+            <FCRegister/>
           </Route>
           <Route exact path="/forget_password_page" >
-            <ResetPasswordPage />
+            <CCResetPasswordPage/>
           </Route>
         </Switch>
       </header>

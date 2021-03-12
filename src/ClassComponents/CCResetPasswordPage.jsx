@@ -3,7 +3,7 @@ import { AvForm, AvGroup, AvInput, AvFeedback } from 'availity-reactstrap-valida
 import { Button, Label } from 'reactstrap';
 import { makeStyles } from '@material-ui/core/styles';
 
-export default class ResetPasswordPage extends React.Component {
+export default class CCResetPasswordPage extends React.Component {
     constructor(props) {
         super(props);
 

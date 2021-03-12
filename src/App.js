@@ -7,8 +7,8 @@ import FCRegister from './FunctionComponents/FCRegister';
 function App() {
   return (
     <div className="App">
-      <FCSignIn />
-      {/* <FCRegister /> */}
+       {/* <FCSignIn />   */}
+      <FCRegister />
     </div>
   );
 }

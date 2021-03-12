@@ -2,12 +2,8 @@ import React from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button';
 import 'fontsource-roboto';
-
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { makeStyles } from '@material-ui/core/styles';
-
-
-
 import Avatar from '@material-ui/core/Avatar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -18,7 +14,6 @@ import Checkbox from '@material-ui/core/Checkbox';
 // import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-
 
 
 export default function FCRegister() {

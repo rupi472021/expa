@@ -1,24 +1,44 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { Component } from 'react'
 import FacebookLogin from 'react-facebook-login';
 
+export default class FaceBookLogin extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            isLoggedIn: false,
+            name: '',
+            email: '',
+            picture: '',
+        }
+    }
 
-function FaceBook() {
-  const responseFacebook = (response) => {
-    console.log(response);
-  }
+    responseFacebook = (response) => {
+        console.log('[Login Success from Facebook] currentUser:', response)
+        this.setState({
+            isLoggedIn: true,
+            name: response.name,
+            email: response.email,
+            picture: response.picture.data.url
+        })
+        console.log("user facebook profile iamge is : " + response.picture.data.url )
+    }
 
-  return (
-    <div>
-      <FacebookLogin
-        appId="1088597931155576"
-        autoLoad={true}
-        buttonText="Login with"
-        fields="name,email,picture"
-        callback={responseFacebook} />
-    </div>
-  );
+    render() {
+        return (
+            this.setState.isLoggedIn ? 'Home' :
+                (<div style={{marginTop: 5}}>
+                    <FacebookLogin
+                        appId="452917926124291"
+                        autoLoad={false}
+                        textButton='Login'
+                        fields="name,email,picture"
+                        icon="fa-facebook"
+                        //onClick={this.responseFacebook}
+                        callback={this.responseFacebook}
+                    />
+                </div>)
+        )
+    }
 }
 
-export default FaceBook;

@@ -11,8 +11,8 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Login from '../ServiceComponents/Login';
-import CCF from '../ServiceComponents/CCF';
+import GoogleLoginn from '../ServiceComponents/GoogleLoginn';
+import FaceBookLogin from '../ServiceComponents/FaceBookLogin';
 
 function Copyright() {
     return (
@@ -27,11 +27,33 @@ function Copyright() {
     );
 }
 
-
-
 export default function FCSignIn() {
 
     const classes = useStyles();
+
+    const signinbtn = () => {
+
+        console.log("in signinbtn function");
+
+        let apiUrl = `http://localhost:54976/api/User`;
+
+        fetch(apiUrl)
+            .then(res => {
+                console.log('res=', res);
+                console.log('res.status', res.status);
+                console.log('res.ok', res.ok);
+                return res.json()
+            })
+            .then(
+                (result) => {
+                    console.log("GET data from SQL= ", result);
+                    result.map(st => console.log(st.Fname)); // all Fname in Users_Expa
+                    console.log('result[0].FullName=', result[0].Fname + " " + result[0].Lname); 
+                },
+                (error) => {
+                    console.log("err GET=", error);
+                });
+    }
 
     return (
         <Container component="main" /*maxWidth="s"*/ style={{ backgroundColor: "#ffdf80" }}>
@@ -43,7 +65,7 @@ export default function FCSignIn() {
                     <TextField className={classes.TextField} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
                     <TextField className={classes.TextField} variant="outlined" margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password" />
                     <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
-                    <Button type="submit" fullWidth variant="contained" className={classes.submit}> Sign In </Button>
+                    <Button fullWidth variant="contained" onClick={signinbtn} className={classes.submit}> Sign In </Button>
                     <Grid container>
                         <Grid item xs>
                             <Link href="/forget_password_page" variant="body2"> Forgot password? </Link>
@@ -55,11 +77,11 @@ export default function FCSignIn() {
                 </form>
                 <div className={classes.Quick}>
                     <p className="fm-sns-title" data-spm-anchor-id="a2g0o.home.0.i6.654d2145siOtTC">Quick access with</p>
-                    <Login />
-                    <CCF />
+                    <GoogleLoginn />
+                    <FaceBookLogin />
                 </div>
             </div>
-            <Box mt={15}>
+            <Box mt={6.2}>
                 <Copyright />
             </Box>
         </Container>
@@ -90,7 +112,7 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 'bold',
     },
     large: {
-        marginTop:20,
+        marginTop: 20,
         width: theme.spacing(16),
         height: theme.spacing(16),
     },

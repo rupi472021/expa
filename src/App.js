@@ -1,18 +1,23 @@
 import './App.css';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import React from 'react';
+import { Switch, Route ,withRouter } from 'react-router-dom';
 import FCSignIn from './FunctionComponents/FCSignIn';
 import FCRegister from './FunctionComponents/FCRegister';
 
 function App() {
   return (
     <div className="App">
-      <FCSignIn />
-      {/* <FCRegister /> */}
+      <header>
+        <Switch>
+          <Route  exact path="/" >
+            <FCSignIn />
+          </Route>
+          <Route  exact path="/register" >
+            <FCRegister />
+          </Route>
+        </Switch>
+      </header>
     </div>
   );
 }
 
-export default App;
-
-
+export default withRouter(App);

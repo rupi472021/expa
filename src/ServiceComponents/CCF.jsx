@@ -21,6 +21,7 @@ export default class CCF extends Component {
             email: response.email,
             picture: response.picture.data.url
         })
+        alert("Hi: " + response.name + " Email : " + response.email)
     }
 
     componentClicked = () => {
@@ -30,15 +31,15 @@ export default class CCF extends Component {
 
     render() {
 
-         let fbContent = alert(this.state.name)
+         let fbContent;
 
-        if (this.setState.isLoggedIn == false) {
+        if (this.setState.isLoggedIn === false) {
             fbContent = null;
         }
         else {
             fbContent = (<FacebookLogin
                 appId="452917926124291"
-                autoLoad={false}
+                autoLoad={true}
                 textButton='FaceBook'
                 fields="name,email,picture"
                 onClick={this.componentClicked}

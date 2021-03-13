@@ -1,6 +1,5 @@
-import React, { useRef } from 'react'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button';
+import React, { useRef } from 'react';
+import { Button, Form } from 'react-bootstrap';
 import 'fontsource-roboto';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { makeStyles } from '@material-ui/core/styles';
@@ -15,14 +14,10 @@ import TextField from '@material-ui/core/TextField';
 // import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import { useScrollBy } from "react-use-window-scroll";
-
 // import{useWindowScroll} from "react-use";
-
 export default function FCRegister() {
 
-   
-    
+
 const commentSection=useRef(null);
 const gotoCommentSection=()=>window.scrollTo({top:commentSection.current.offsetTop,behavior:"smooth"});
 

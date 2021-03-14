@@ -1,0 +1,58 @@
+
+    .but {
+        margin-top: 10px;
+        opacity: 0.74;
+    }
+
+    .ExPa{
+        font-size: 20px;
+    }
+
+    .paper {
+        /* margin-top: theme.spacing(0); */
+        display: 'flex';
+        flex-direction: 'column';
+        align-items: 'center';
+    }
+
+    /* avatar {
+        margin: theme.spacing(1);
+        backgroundColor: theme.palette.secondary.main;
+    }  */
+
+    .form {
+        width: 100%;
+         /* marginTop: theme.spacing(1), */
+     }
+     .TextField {
+         background-color: "white";
+         border-radius: 5px;
+         width: 100%;
+    }
+     .submit {
+         /* margin: theme.spacing(3, 0, 2), */
+         background-color: "#009900"; 
+         font-weight: 'bold';
+     }
+
+     /* large {
+          width: theme.spacing(16);
+         height: theme.spacing(16); 
+        } */
+
+     .ExPa {
+         margin-top: 10px;
+         font-size: 40px;
+         font-weight: 'bold';
+     }
+     .Quick {
+         margin-top: 5px;
+     }
+
+    .que {
+        opacity: 0.5;
+    }
+
+    .ProfilePhoto {
+        background: 'green';
+    }

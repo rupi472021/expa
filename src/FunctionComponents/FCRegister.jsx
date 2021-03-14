@@ -1,6 +1,8 @@
 import React, { useRef } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button';
+import Image from 'react-bootstrap/Image';
+
 import 'fontsource-roboto';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { makeStyles } from '@material-ui/core/styles';
@@ -16,15 +18,20 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { useScrollBy } from "react-use-window-scroll";
+import Avatar from '@material-ui/core/Avatar';
 
 // import{useWindowScroll} from "react-use";
 
-export default function FCRegister() {
+import "bootstrap/dist/css/bootstrap.min.css";
+// import UploadImages from '../Components/Image-Upload';
+import PictureUploader from '../Components/PictureUploader';
+import { Row } from 'reactstrap';
+import { Col } from 'react-bootstrap';
 
-   
-    
-const commentSection=useRef(null);
-const gotoCommentSection=()=>window.scrollTo({top:commentSection.current.offsetTop,behavior:"smooth"});
+
+export default function FCRegister() {
+    const commentSection = useRef(null);
+    const gotoCommentSection = () => window.scrollTo({ top: commentSection.current.offsetTop, behavior: "smooth" });
 
     const classes = useStyles();
 
@@ -37,12 +44,28 @@ const gotoCommentSection=()=>window.scrollTo({top:commentSection.current.offsetT
     return (
 
         <Container component="main" /*maxWidth="s"*/ style={{ backgroundColor: "#ffdf80" }}>
-            <Button variant="primary" size="sm" href="/" className={classes.but} style={{background:"red",}} /*onClick={() => HandleClick()}*/>Back</Button>
+            <Button variant="primary" size="sm" href="/" className={classes.but} style={{ background: "red", }} /*onClick={() => HandleClick()}*/>Back</Button>
             {/* <CssBaseline /> */}
             <div className={classes.paper}>
-                {/* <Avatar alt="Remy Sharp" src="https://i.ibb.co/7S6XfNZ/circle-cropped.png" className={classes.large} /> */}
+
                 <Typography className={classes.ExPa} > Create an Account </Typography>
                 <Form className={classes.form} noValidate>
+                    {/* <Avatar alt="Remy Sharp" src="https://i.ibb.co/7S6XfNZ/circle-cropped.png" className={classes.large} /> */}
+                    {/* <div className="container">
+                        <h3>bezkoder.com</h3>
+                        <h4>React Image Upload with Preview</h4>
+
+                        <div className="content">
+                            <UploadImages/>
+                        </div>
+                    </div> */}
+                    <Row>
+                        <Col xs={6} md={4}>
+                            <Image src="../logo.svg/171x180" roundedCircle />
+                        </Col>
+
+                    </Row>
+                    {/* <PictureUploader className={classes.ProfilePhoto} /> */}
                     <TextField className={classes.TextField} variant="outlined" margin="normal" required fullWidth id="fName" label="First Name" name="fName" autoComplete="First Name" autoFocus />
                     <TextField className={classes.TextField} variant="outlined" margin="normal" required fullWidth id="lName" label="Last Name" name="lName" autoComplete="Last Name" autoFocus />
                     <TextField className={classes.TextField} variant="outlined" margin="normal" required fullWidth id="email" label="Email address" name="email" autoComplete="Email" autoFocus />
@@ -57,7 +80,7 @@ const gotoCommentSection=()=>window.scrollTo({top:commentSection.current.offsetT
                 </Form>
 
                 <Form className={classes.que} /*ref={question}*/ noValidate>
-                    <TextField className={classes.TextField} variant="outlined" margin="normal" required fullWidth id="fName" label="Would you travel with another " name="fName" autoComplete="First Name" autoFocus />
+                    <TextField ref={commentSection} className={classes.TextField} variant="outlined" margin="normal" required fullWidth id="fName" label="Would you travel with another " name="fName" autoComplete="First Name" autoFocus />
                     <TextField className={classes.TextField} variant="outlined" margin="normal" required fullWidth id="lName" label="Last Name" name="lName" autoComplete="Last Name" autoFocus />
                     <TextField className={classes.TextField} variant="outlined" margin="normal" required fullWidth id="fName" label="First Name" name="fName" autoComplete="First Name" autoFocus />
                     <TextField className={classes.TextField} variant="outlined" margin="normal" required fullWidth id="lName" label="Last Name" name="lName" autoComplete="Last Name" autoFocus />
@@ -68,13 +91,13 @@ const gotoCommentSection=()=>window.scrollTo({top:commentSection.current.offsetT
                     <TextField className={classes.TextField} variant="outlined" margin="normal" required fullWidth id="fName" label="First Name" name="fName" autoComplete="First Name" autoFocus />
                     <TextField className={classes.TextField} variant="outlined" margin="normal" required fullWidth id="lName" label="Last Name" name="lName" autoComplete="Last Name" autoFocus />
                     <TextField className={classes.TextField} variant="outlined" margin="normal" required fullWidth id="fName" label="First Name" name="fName" autoComplete="First Name" autoFocus />
-                    <TextField ref={commentSection} className={classes.TextField} variant="outlined" margin="normal" required fullWidth id="lName" label="Last Name" name="lName" autoComplete="Last Name" autoFocus />
+                    <TextField className={classes.TextField} variant="outlined" margin="normal" required fullWidth id="lName" label="Last Name" name="lName" autoComplete="Last Name" autoFocus />
                     <TextField className={classes.TextField} variant="outlined" margin="normal" required fullWidth id="fName" label="Would you travel with another " name="fName" autoComplete="First Name" autoFocus />
                     <TextField className={classes.TextField} variant="outlined" margin="normal" required fullWidth id="lName" label="Last Name" name="lName" autoComplete="Last Name" autoFocus />
                     <TextField className={classes.TextField} variant="outlined" margin="normal" required fullWidth id="fName" label="First Name" name="fName" autoComplete="First Name" autoFocus />
                     <TextField className={classes.TextField} variant="outlined" margin="normal" required fullWidth id="lName" label="Last Name" name="lName" autoComplete="Last Name" autoFocus />
                     <TextField className={classes.TextField} variant="outlined" margin="normal" required fullWidth id="fName" label="First Name" name="fName" autoComplete="First Name" autoFocus />
-                    <TextField  className={classes.TextField} variant="outlined" margin="normal" required fullWidth id="lName" label="Last Name" name="lName" autoComplete="Last Name" autoFocus />
+                    <TextField className={classes.TextField} variant="outlined" margin="normal" required fullWidth id="lName" label="Last Name" name="lName" autoComplete="Last Name" autoFocus />
                 </Form>
             </div>
         </Container >
@@ -82,6 +105,28 @@ const gotoCommentSection=()=>window.scrollTo({top:commentSection.current.offsetT
 }
 
 const useStyles = makeStyles((theme) => ({
+    ProfilePhoto:{
+        background:'red'
+    },
+    // container:{
+    //     // width: 600px !important;
+    //     // margin: 20px;
+    //     width:800
+    //   },
+
+    //   content :{
+    //     // margin: 20px 0;
+    //     margin:20,
+    //     height:200
+    //   },
+
+    //   preview :{
+    //     // max-width: 200px;
+    //     maxWidth:200
+    // },
+
+
+
     que: {
         opacity: 0.5,
     },
@@ -89,7 +134,7 @@ const useStyles = makeStyles((theme) => ({
     but: {
         marginTop: 10,
         opacity: 0.74,
-        
+
     },
 
     paper: {
@@ -108,7 +153,9 @@ const useStyles = makeStyles((theme) => ({
     },
     TextField: {
         backgroundColor: "white",
-        borderRadius: 15
+        borderRadius: 5,
+        width: '100%',
+
     },
     submit: {
         margin: theme.spacing(3, 0, 2),

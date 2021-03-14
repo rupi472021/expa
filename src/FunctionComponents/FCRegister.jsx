@@ -3,6 +3,8 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
 
+import React, { useRef } from 'react';
+import { Button, Form } from 'react-bootstrap';
 import 'fontsource-roboto';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { makeStyles } from '@material-ui/core/styles';

@@ -32,9 +32,14 @@ export default class CCResetPasswordPage extends React.Component {
 
     // Handle submission once all form data is valid
     handleValidSubmit() {
-        const { resetPasswordFunction } = this.props;
-        const formData = this.state;
-        resetPasswordFunction(formData.email);
+        // const { resetPasswordFunction } = this.props;
+        // const formData = this.state;
+        // resetPasswordFunction(formData.email);
+        alert("Password was send to your email")
+    }
+
+    ben = () =>{
+        alert("hi")
     }
 
     render() {
@@ -59,7 +64,7 @@ export default class CCResetPasswordPage extends React.Component {
                         </p>
                         <AvForm onValidSubmit={this.handleValidSubmit}>
                             <AvGroup>
-                                <Label for="userEmail">Email </Label>
+                                <Label for="userEmail">Email: </Label>
                                 <AvInput
                                     id="userEmail"
                                     name="email"
@@ -72,7 +77,8 @@ export default class CCResetPasswordPage extends React.Component {
                                 />
                                 <AvFeedback>A valid email is required to reset your password</AvFeedback>
                             </AvGroup>
-                            <Button>Reset Password</Button>
+                            <Button>Reset Password</Button><br></br><br></br>
+                            <Button variant="primary" size="m" href="/" style={{background:"red",}}> Back </Button>
                         </AvForm>
                     </div>
                 </div>

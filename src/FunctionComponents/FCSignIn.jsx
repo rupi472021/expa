@@ -65,7 +65,7 @@ export default function FCSignIn() {
                     <TextField className={classes.TextField} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
                     <TextField className={classes.TextField} variant="outlined" margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password" />
                     <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
-                    <Button fullWidth variant="contained" onClick={signinbtn} className={classes.submit}> Sign In </Button>
+                    <Button fullWidth size="large" variant="contained" onClick={signinbtn} className={classes.submit}> Sign In </Button>
                     <Grid container>
                         <Grid item xs>
                             <Link href="/forget_password_page" variant="body2"> Forgot password? </Link>
@@ -81,7 +81,7 @@ export default function FCSignIn() {
                     <FaceBookLogin />
                 </div>
             </div>
-            <Box mt={6.2}>
+            <Box mt={5.1}>
                 <Copyright />
             </Box>
         </Container>

@@ -1,6 +1,6 @@
 import React from 'react';
-import $ from 'jquery';
-import FCRegister from '../FunctionComponents/FCRegister';
+//import $ from 'jquery';
+//import FCRegister from '../FunctionComponents/FCRegister';
 
 export default class PictureUploader extends React.Component {
   constructor(props) {
@@ -11,8 +11,6 @@ export default class PictureUploader extends React.Component {
       src: false
     }
   }
-
-
 
   handlePictureSelected=(event)=> {
       

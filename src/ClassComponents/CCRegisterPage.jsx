@@ -1,7 +1,7 @@
-import React, { Component, useRef } from 'react'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button';
-import Image from 'react-bootstrap/Image';
+import React, { Component } from 'react'
+//import Form from 'react-bootstrap/Form'
+import { Button, Form, Image } from 'react-bootstrap';
+//import Image from 'react-bootstrap/Image';
 import 'fontsource-roboto';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { makeStyles } from '@material-ui/core/styles';

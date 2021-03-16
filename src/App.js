@@ -18,14 +18,14 @@ function App() {
           <CCLoginPage />
         </Route>
         <Route exact path="/register" >
-          <FCRegister />
+          <CCRegisterPage />
         </Route>
         <Route exact path="/forget_password_page" >
           <CCResetPasswordPage />
         </Route>
       </Switch>
     </div>
-      //  <CCRegisterPage/>
+       //<CCRegisterPage/>
 
   );
 }

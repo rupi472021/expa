@@ -59,7 +59,7 @@ export default class CCRegisterPage extends Component {
             
             <Container component="main" /*maxWidth="s"*/ style={{ backgroundColor: "#ffdf80" }}>
                 <Button variant="primary" size="sm" href="/" className="but" style={{ background: "green", }} /*onClick={() => HandleClick()}*/>Back</Button>
-                {/* <CssBaseline /> */}
+                
                 <div className="paper">
 
                     <h1 className="ExPa" > Create an Account </h1>
@@ -91,6 +91,7 @@ export default class CCRegisterPage extends Component {
 
                         {/* <input name="user[email]" autocapitalize="off" required="" class="form-control input py-1" value="" type="text" id="user_email" autocomplete="off" spellcheck="false" aria-describedby=" "></input> */}
                         <Button id="scroller" variant="primary" size="md" className="but" onClick={this.scrolltotop}>Let's know you better </Button>
+                        <Button fullWidth variant="primary"  size="large"> Sign In </Button>
 
                     </Form>
 

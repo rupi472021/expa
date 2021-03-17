@@ -24,14 +24,14 @@
         width: 100%;
         
      } */
-      /* .TextField {
+       .TextField {
           background-color:white;
          border-radius: 5px;
          width: 50%; }  */
     
      .submit {
          /* margin: theme.spacing(3, 0, 2), */
-         background-color: "#009900"; 
+         /* background-color: "#009900";  */
          font-weight: 'bold';
      }
 
@@ -50,7 +50,7 @@
      }
 
     .que {
-        opacity: 0.5;
+        opacity: 1;
     }
 
     .ProfilePhoto {

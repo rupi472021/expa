@@ -33,8 +33,9 @@ import { Row } from 'reactstrap';
 import { Col } from 'react-bootstrap';
 import classes from './BlogCard.module.css';
 
-import '../MyStyle.css';
+// import '../MyStyle.css';
 import { CssBaseline } from '@material-ui/core';
+import { Opacity } from '@material-ui/icons';
 
 
 export default class CCRegisterPage extends Component {
@@ -43,6 +44,9 @@ export default class CCRegisterPage extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            opacity: 0.2,
+        }
 
     }
 
@@ -60,6 +64,10 @@ export default class CCRegisterPage extends Component {
 
     goTO = () => {
         window.scrollTo({ top: 500, behavior: 'smooth' });
+        // document.getElementsByClassName("part2").style.backgroundColor='blue';
+        this.setState(prevState => ({
+            opacity: 1
+        }))
 
     }
 
@@ -133,23 +141,52 @@ export default class CCRegisterPage extends Component {
 
             <div className={classes.NewBLogCard}>
                 <Container>
-                    <CssBaseline />
+                    {/* <CssBaseline /> */}
                     <div className={classes.Container} >
-                    <Button variant="secondary" size="sm" href="/" className="but" /*onClick={() => HandleClick()}*/>Back</Button>
+
+                        <Button variant="secondary" size="sm" href="/" className="but" /*onClick={() => HandleClick()}*/>Back</Button>
                         <Avatar alt="Remy Sharp" src="https://i.ibb.co/7S6XfNZ/circle-cropped.png" style={{ width: '15vh', height: '15vh', marginTop: '10px' }} />
-                                        <h1 className="ExPa" > Create an Account </h1>
+                        <h1 className="ExPa" > Create an Account </h1>
+
 
                         <form>
                             <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
-                            <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password" />
-                            <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password" />
-                            <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
-                            <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
-                            <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
+                            <Row>
+                                <Col>
+                                    <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password" />
+                                </Col>
+                                <Col>
+                                    <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth name="Cpassword" label="Confirm Password" type="password" id="Cpassword" autoComplete="cunfirm-password" />
+                                </Col>
+                            </Row>
+                            <br></br>
+                            <Button fullWidth variant="primary" size="lg" onClick={this.goTO}>GET STARTED</Button>
+                            <br></br>
+                            <br></br>
+                            <br></br>
+                            <br></br>
 
 
-                            <Button className={classes.ButtonSignIn} fullWidth variant="contained" color="Primary" size="large" onClick={this.signinbtn}> Sign In </Button><br></br><br></br><br></br>
+                            <div className={classes.part2} style={{ opacity: this.state.opacity }}>
+                                <p>hey</p>
+                                <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="fName" label="First Name" name="fName" autoComplete="First Name" autoFocus />
+                                <p>hey</p>
+                                <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="lName" label="Last Name" name="lName" autoComplete="Lirst Name" autoFocus />
+                                <p>hey</p>
 
+
+                                <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
+                                <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
+                                <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
+                                <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
+                                <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
+                                <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
+                                <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
+                                <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
+                                <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
+                                <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
+
+                            </div>
                         </form>
                     </div>
                 </Container >

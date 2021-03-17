@@ -3,7 +3,8 @@
     padding: -10px;
     box-sizing: border-box;
     border-radius: 0px;
-    background-color: #ffdf80;
+    /* background-color: #ffdf80; */
+    background-color:#1d21243b;
     height: 100vh;
 }
 
@@ -11,7 +12,18 @@
     align-items: center;
     display:flex;
     flex-direction: column;
-    
+    /* background-color:#1d21243b; */
+
+}
+
+.part2{
+    opacity: 1;
+
+}
+
+p{
+padding-right: 340px;
+/* top: -50px; */
 }
 
 @media(min-width: 992px){

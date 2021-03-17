@@ -61,7 +61,8 @@ export default class CCLoginPage extends Component {
     }
 
     signinbtn = () => {
-        alert("in signinbtn function")
+        console.log("in signinbtn function");
+        
     }
 
     render() {

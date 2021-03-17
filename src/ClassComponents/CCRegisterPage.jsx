@@ -32,8 +32,7 @@ import PictureUploader from '../Components/PictureUploader';
 import { Row } from 'reactstrap';
 import { Col } from 'react-bootstrap';
 import classes from './BlogCard.module.css';
-
-// import '../MyStyle.css';
+import '../MyStyle.css';
 import { CssBaseline } from '@material-ui/core';
 import { Opacity } from '@material-ui/icons';
 
@@ -45,7 +44,7 @@ export default class CCRegisterPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            opacity: 0.2,
+            opacity: 0.4,
         }
 
     }
@@ -144,7 +143,7 @@ export default class CCRegisterPage extends Component {
                     {/* <CssBaseline /> */}
                     <div className={classes.Container} >
 
-                        <Button variant="secondary" size="sm" href="/" className="but" /*onClick={() => HandleClick()}*/>BEN</Button>
+                        <Button variant="secondary" size="sm" href="/" className="but" /*onClick={() => HandleClick()}*/>BACK</Button>
                         <Avatar alt="Remy Sharp" src="https://i.ibb.co/7S6XfNZ/circle-cropped.png" style={{ width: '15vh', height: '15vh', marginTop: '10px' }} />
                         <h1 className="ExPa" > Create an Account </h1>
 
@@ -167,7 +166,7 @@ export default class CCRegisterPage extends Component {
                             <br></br>
 
 
-                            <div className={classes.part2} style={{ opacity: this.state.opacity }}>
+                            <div id="part2" style={{ opacity: this.state.opacity }}>
                                 <p>hey</p>
                                 <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="fName" label="First Name" name="fName" autoComplete="First Name" autoFocus />
                                 <p>hey</p>

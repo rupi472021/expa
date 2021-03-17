@@ -20,15 +20,15 @@
         backgroundColor: theme.palette.secondary.main;
     }  */
 
-    .form {
+    /* .form {
         width: 100%;
-         /* marginTop: theme.spacing(1), */
-     }
-     .TextField {
-         background-color: "white";
+        
+     } */
+      /* .TextField {
+          background-color:white;
          border-radius: 5px;
-         width: 100%;
-    }
+         width: 50%; }  */
+    
      .submit {
          /* margin: theme.spacing(3, 0, 2), */
          background-color: "#009900"; 

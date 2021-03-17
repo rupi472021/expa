@@ -40,7 +40,7 @@ export default class CCLoginPage extends Component {
                 (result) => {
                     console.log("GET data from SQL= ", result);
                     result.map(st => console.log(st.Fname)); // all Fname in Users_Expa
-                    console.log('the first row in this table is = ', result[0].Fname + " " + result[0].Lname + " age: "  + result[0].Age + " email: " + result[0].Email);
+                    console.log('the first row in this table is = ', result[0].Fname + " " + result[0].Lname + " age: " + result[0].Age + " email: " + result[0].Email);
                 },
                 (error) => {
                     console.log("err GET=", error);
@@ -62,7 +62,7 @@ export default class CCLoginPage extends Component {
 
     signinbtn = () => {
         console.log("in signinbtn function");
-        
+
     }
 
     render() {
@@ -71,7 +71,7 @@ export default class CCLoginPage extends Component {
                 <Container>
                     <CssBaseline />
                     <div className={classes.Container} >
-                        <Avatar alt="Remy Sharp" src="https://i.ibb.co/7S6XfNZ/circle-cropped.png" style={{width: '20vh', height: '20vh', marginTop: '10px' }} />
+                        <Avatar alt="Remy Sharp" src="https://i.ibb.co/7S6XfNZ/circle-cropped.png" style={{ width: '20vh', height: '20vh', marginTop: '10px' }} />
                         <form>
                             <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
                             <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password" />

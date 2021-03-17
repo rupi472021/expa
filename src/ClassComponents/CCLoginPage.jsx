@@ -13,6 +13,7 @@ import Container from '@material-ui/core/Container';
 import GoogleLoginn from '../ServiceComponents/GoogleLoginn';
 import FaceBookLogin from '../ServiceComponents/FaceBookLogin';
 import classes from './BlogCard.module.css';
+import { Redirect } from 'react-router-dom';
 
 export default class CCLoginPage extends Component {
 
@@ -26,7 +27,9 @@ export default class CCLoginPage extends Component {
 
     componentDidMount = () => { //GET all Users from Users_expa (SQL) onload
 
-        console.log("in signinbtn function");
+        localStorage.clear(); //clear local storge onload
+
+        console.log("in componentDidMount function");
         let apiUrl = `http://localhost:54976/api/User`;
 
         fetch(apiUrl)

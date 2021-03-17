@@ -6,7 +6,7 @@ import FCRegister from './FunctionComponents/FCRegister';
 import PictureUploader from './Components/PictureUploader';
 import CCRegisterPage from './ClassComponents/CCRegisterPage';
 import CCLoginPage from './ClassComponents/CCLoginPage';
-
+import FCPickUserPage from './FunctionComponents/FCPickUserPage';
 
 
 function App() {
@@ -14,7 +14,6 @@ function App() {
     <div className="App">
       <Switch>
         <Route exact path="/" >
-          {/* <FCSignIn /> */}
           <CCLoginPage />
         </Route>
         <Route exact path="/register" >
@@ -23,10 +22,11 @@ function App() {
         <Route exact path="/forget_password_page" >
           <CCResetPasswordPage />
         </Route>
+        <Route exact path="/pick_user_page" >
+          <FCPickUserPage />
+        </Route>
       </Switch>
     </div>
-       //<CCRegisterPage/>
-
   );
 }
 

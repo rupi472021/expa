@@ -22,6 +22,7 @@ export default class CCLoginPage extends Component {
         this.state = {
             email: '',
             password: '',
+            data_from_sql: '',
         }
     };
 
@@ -44,6 +45,7 @@ export default class CCLoginPage extends Component {
                     console.log("GET data from SQL= ", result);
                     result.map(st => console.log(st.Fname)); // all Fname in Users_Expa
                     console.log('the first row in this table is = ', result[0].Fname + " " + result[0].Lname + " age: " + result[0].Age + " email: " + result[0].Email);
+                    this.setState({data_from_sql: result});
                 },
                 (error) => {
                     console.log("err GET=", error);
@@ -91,7 +93,7 @@ export default class CCLoginPage extends Component {
                         </form>
                         <div>
                             <p> Quick access with </p>
-                            <GoogleLoginn />
+                            <GoogleLoginn dataFromParent ={this.state.data_from_sql}/>
                             <FaceBookLogin />
                         </div><br></br>
                     </div>

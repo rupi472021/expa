@@ -13,7 +13,6 @@ import Container from '@material-ui/core/Container';
 import GoogleLoginn from '../ServiceComponents/GoogleLoginn';
 import FaceBookLogin from '../ServiceComponents/FaceBookLogin';
 import classes from './BlogCard.module.css';
-import { Redirect } from 'react-router-dom';
 
 export default class CCLoginPage extends Component {
 
@@ -45,7 +44,7 @@ export default class CCLoginPage extends Component {
                     console.log("GET data from SQL= ", result);
                     result.map(st => console.log(st.Fname)); // all Fname in Users_Expa
                     console.log('the first row in this table is = ', result[0].Fname + " " + result[0].Lname + " age: " + result[0].Age + " email: " + result[0].Email);
-                    this.setState({data_from_sql: result});
+                    this.setState({ data_from_sql: result });
                 },
                 (error) => {
                     console.log("err GET=", error);
@@ -66,7 +65,27 @@ export default class CCLoginPage extends Component {
     }
 
     signinbtn = () => {
-        console.log("in signinbtn function");
+
+        if (this.state.emaill == '' || this.state.password == '') {
+            alert("please fill out all requireds fields")
+        }
+        else (this.handle());
+    }
+
+    handle = () => {
+
+        console.log("in handle function");
+        console.log(this.state.data_from_sql) // show all data from Users table in the SQL
+
+        if (this.state.data_from_sql.find((user => user.email === this.state.email))) {
+            localStorage.setItem('user_email', this.state.email)
+            alert("Hi " + this.state.email + " you loggin successfully to ExPa via Google!")
+            window.location.href = "http://localhost:3000/pick_user_page";
+        }
+        else {
+            alert("Hi one detail or more שre wrong, if it's your first time in ExPa - Sign Up!")
+            window.location.reload(false)
+        };
 
     }
 
@@ -78,8 +97,8 @@ export default class CCLoginPage extends Component {
                     <div className={classes.Container} >
                         <Avatar alt="Remy Sharp" src="https://i.ibb.co/7S6XfNZ/circle-cropped.png" style={{ width: '20vh', height: '20vh', marginTop: '10px' }} />
                         <form>
-                            <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
-                            <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password" />
+                            <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus onChange={(e) => this.setState({ email: e.target.value })} />
+                            <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password" onChange={(a) => this.setState({ password: a.target.value })} />
                             <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
                             <Button className={classes.ButtonSignIn} fullWidth variant="contained" color="Primary" size="large" onClick={this.signinbtn}> Sign In </Button><br></br><br></br><br></br>
                             <Grid container>
@@ -93,11 +112,11 @@ export default class CCLoginPage extends Component {
                         </form>
                         <div>
                             <p> Quick access with </p>
-                            <GoogleLoginn dataFromParent ={this.state.data_from_sql}/>
-                            <FaceBookLogin />
+                            <GoogleLoginn dataFromParent={this.state.data_from_sql} />
+                            <FaceBookLogin dataFromParent={this.state.data_from_sql} />
                         </div><br></br>
                     </div>
-                    <Box>{this.Copyright}</Box>
+                    {/* <Box>{this.Copyright}</Box> */}
                 </Container>
             </div>
         )

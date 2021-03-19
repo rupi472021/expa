@@ -7,12 +7,12 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import GoogleLoginn from '../ServiceComponents/GoogleLoginn';
 import FaceBookLogin from '../ServiceComponents/FaceBookLogin';
 import classes from './BlogCard.module.css';
+import Box from '@material-ui/core/Box';
 
 export default class CCLoginPage extends Component {
 
@@ -77,16 +77,15 @@ export default class CCLoginPage extends Component {
         console.log("in handle function");
         console.log(this.state.data_from_sql) // show all data from Users table in the SQL
 
-        if (this.state.data_from_sql.find((user => user.email === this.state.email))) {
+        if (this.state.data_from_sql.find((user => user.Email == this.state.email) && (user => user.Password == this.state.password))) {
             localStorage.setItem('user_email', this.state.email)
             alert("Hi " + this.state.email + " you loggin successfully to ExPa via Google!")
             window.location.href = "http://localhost:3000/pick_user_page";
         }
         else {
-            alert("Hi one detail or more שre wrong, if it's your first time in ExPa - Sign Up!")
-            window.location.reload(false)
-        };
-
+            alert("Hi, one detail or more are wrong, if it's your first time in ExPa - Sign Up!");
+            window.location.reload(false);
+        }
     }
 
     render() {
@@ -110,13 +109,19 @@ export default class CCLoginPage extends Component {
                                 </Grid>
                             </Grid>
                         </form>
-                        <div>
-                            <p> Quick access with </p>
-                            <GoogleLoginn dataFromParent={this.state.data_from_sql} />
-                            <FaceBookLogin dataFromParent={this.state.data_from_sql} />
-                        </div><br></br>
+                        <div style={{ width: '80%' }}>
+                            <p style={{ marginLeft: 50 }}> Quick access with </p>
+                        </div>
+                        <div style={{ height: 70, width: '80%' }}>
+                            <div style={{ marginRight: 100 }}>
+                                <GoogleLoginn dataFromParent={this.state.data_from_sql} />
+                            </div>
+                            <div style={{ marginLeft: 120, marginTop: -50 }}>
+                                <FaceBookLogin dataFromParent={this.state.data_from_sql} />
+                            </div>
+                            <Box m={1}>{this.Copyright()}</Box>
+                        </div>
                     </div>
-                    {/* <Box>{this.Copyright}</Box> */}
                 </Container>
             </div>
         )

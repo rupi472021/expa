@@ -167,13 +167,10 @@ export default class CCRegisterPage extends Component {
 
 
                             <div id="part2" style={{ opacity: this.state.opacity }}>
-                                <p>hey</p>
+                                <h4>oeuwfhwoeuh</h4>
                                 <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="fName" label="First Name" name="fName" autoComplete="First Name" autoFocus />
-                                <p>hey</p>
+                                oeuwfhwoeuh
                                 <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="lName" label="Last Name" name="lName" autoComplete="Lirst Name" autoFocus />
-                                <p>hey</p>
-
-
                                 <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
                                 <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
                                 <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />

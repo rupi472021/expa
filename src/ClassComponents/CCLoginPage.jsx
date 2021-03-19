@@ -59,7 +59,7 @@ export default class CCLoginPage extends Component {
                     ExPa Application
           </Link>{' '}
                 {new Date().getFullYear()}
-                {'.'}
+                {' '}
             </Typography>
         );
     }
@@ -111,7 +111,7 @@ export default class CCLoginPage extends Component {
                         </form>
                         <div style={{ width: '80%' }}>
                             <p style={{ marginLeft: 50 }}> Quick access with </p>
-                        </div>
+                        </div><br></br><br></br>
                         <div style={{ height: 70, width: '80%' }}>
                             <div style={{ marginRight: 100 }}>
                                 <GoogleLoginn dataFromParent={this.state.data_from_sql} />
@@ -119,7 +119,7 @@ export default class CCLoginPage extends Component {
                             <div style={{ marginLeft: 120, marginTop: -50 }}>
                                 <FaceBookLogin dataFromParent={this.state.data_from_sql} />
                             </div>
-                            <Box m={1}>{this.Copyright()}</Box>
+                            <Box style={{ marginLeft: 50 }} m={1}>{this.Copyright()}</Box>
                         </div>
                     </div>
                 </Container>

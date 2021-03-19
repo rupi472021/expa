@@ -14,6 +14,7 @@ export default class FaceBookLogin extends Component {
     }
 
     responseFacebook = (response) => {
+
         console.log('[Login Success from Facebook] currentUser:', response)
         this.setState({
             isLoggedIn: true,
@@ -21,14 +22,26 @@ export default class FaceBookLogin extends Component {
             email: response.email,
             picture: response.picture.data.url
         })
+        this.saveUserDataInLocalStorge(response);
+    }
 
-        console.log("user facebook profile iamge is : " + response.picture.data.url)
-        localStorage.setItem('user_full_name', response.name); //save first name in LS
-        localStorage.setItem('user_email', response.email); //save user's email in LS
-        localStorage.setItem('user_image', response.picture.data.url); //save profile image in LS
-        localStorage.setItem('social_media_name', response.graphDomain); //save the name "FacceBook" in LS
-        window.location.href = "http://localhost:3000/pick_user_page";
-        
+    saveUserDataInLocalStorge = (data) => {
+
+        console.log("user facebook profile iamge is : " + data.picture.data.url)
+        localStorage.setItem('user_full_name', data.name); //save first name in LS
+        localStorage.setItem('user_email', data.email); //save user's email in LS
+        localStorage.setItem('user_image', data.picture.data.url); //save profile image in LS
+        localStorage.setItem('social_media_name', data.graphDomain); //save the name "FacceBook" in LS
+        this.checkIfUserExistsInSQL(data);
+    }
+
+    checkIfUserExistsInSQL = (data) => {
+
+        if (this.props.dataFromParent.find((user => user.Email === data.email))) {
+            alert("Hi " + data.name + " you loggin successfully to ExPa via FaceBook!")
+            window.location.href = "http://localhost:3000/pick_user_page";
+        }
+        else (alert("Hi " + data.name + " it's your first time in ExPa - please Sign Up!"));
     }
 
     render() {
@@ -41,8 +54,8 @@ export default class FaceBookLogin extends Component {
                         textButton='Login'
                         fields="name,email,picture"
                         icon="fa-facebook"
-                        //onClick={this.responseFacebook}
                         callback={this.responseFacebook}
+                    // callback={this.responseFacebook}
                     />
                 </div>)
         )

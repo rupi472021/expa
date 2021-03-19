@@ -1,3 +1,4 @@
+import { Slide } from '@material-ui/core';
 import React from 'react';
 import { GoogleLogin } from 'react-google-login';
 //refresh token
@@ -9,10 +10,10 @@ export default function GoogleLoginn(props) {
     const onSuccess = (res) => {
 
         console.log('[Login Success from google] currentUser:', res.profileObj);
-        localStorage.setItem('user_fname', res.profileObj.givenName); //save first name in LS
-        localStorage.setItem('user_lname', res.profileObj.familyName); //save last name in LS
-        localStorage.setItem('user_email', res.profileObj.email); //save user's email in LS
-        localStorage.setItem('user_image', res.profileObj.imageUrl); //save profile image in LS
+        localStorage.setItem('user_fname', res.profileObj.givenName); //save first name from Google in LS
+        localStorage.setItem('user_lname', res.profileObj.familyName); //save last name from Google in LS
+        localStorage.setItem('user_email', res.profileObj.email); //save user's email from Google in LS
+        localStorage.setItem('user_image', res.profileObj.imageUrl); //save profile image from Google in LS
 
         checkIfUserExistsInSQL(res.profileObj)
     };
@@ -21,18 +22,14 @@ export default function GoogleLoginn(props) {
     };
     const checkIfUserExistsInSQL = (data) => {
 
-        for (let index = 0; index < props.dataFromParent.length; index++) {
-            if(props.dataFromParent[index].email == data.email){
-            alert("Hi " + data.givenName + " you loggin successfully to ExPa!")
+        if (props.dataFromParent.find((user => user.Email === data.email))) {
+            alert("Hi " + data.givenName + " you loggin successfully to ExPa via Google!")
             window.location.href = "http://localhost:3000/pick_user_page";
-            }else(window.location.href = "http://localhost:3000/Register");
         }
-        //  if (props.dataFromParent.filter((n) => n.Email == data.email)) {
-        //      alert("Hi " + data.givenName + " you loggin successfully to ExPa!")
-        //      window.location.href = "http://localhost:3000/pick_user_page";
-        //  }
-        //  else (alert("this is your first time in ExPA - Please fill out the form below"))
+        else (alert("Hi " + data.givenName + " it's your first time in ExPa - please Sign Up!"));
     }
+
+
 
     return (
         <div>

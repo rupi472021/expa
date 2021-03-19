@@ -58,5 +58,11 @@
     }
 
     #part2{
-background-color: violet;
+    /* background-color: blue; */
+    margin-bottom: 300px;
+    }
+
+    p{
+        /* font-size: 10px; */
+        margin-bottom: -50px;
     }

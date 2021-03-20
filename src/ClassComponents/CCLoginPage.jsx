@@ -30,7 +30,7 @@ export default class CCLoginPage extends Component {
         localStorage.clear(); //clear local storge onload
 
         console.log("in componentDidMount function");
-        let apiUrl = `https://localhost:53281/api/User`;
+        let apiUrl = `http://localhost:53281/api/User`;
 
         fetch(apiUrl)
             .then(res => {
@@ -79,7 +79,7 @@ export default class CCLoginPage extends Component {
 
         if (this.state.data_from_sql.find((user => user.Email == this.state.email) && (user => user.Password == this.state.password))) {
             localStorage.setItem('user_email', this.state.email)
-            alert("Hi " + this.state.email + " you loggin successfully to ExPa via Google!")
+            alert("Hi " + this.state.email + " you loggin successfully to ExPa!")
             window.location.href = "http://localhost:3000/pick_user_page";
         }
         else {

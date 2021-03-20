@@ -33,7 +33,7 @@ export default class CCLoginPage extends Component {
         localStorage.clear(); //clear local storge onload
 
         console.log("in componentDidMount function");
-        let apiUrl = `http://localhost:53281//api/User`;
+        let apiUrl = `http://localhost:54976/api/User`;
 
         fetch(apiUrl)
             .then(res => {
@@ -45,8 +45,8 @@ export default class CCLoginPage extends Component {
             .then(
                 (result) => {
                     console.log("GET data from SQL= ", result);
-                    result.map(st => console.log(st.Fname)); // all Fname in Users_Expa
-                    console.log('the first row in this table is = ', result[0].Fname + " " + result[0].Lname + " age: " + result[0].Age + " email: " + result[0].Email);
+                    // result.map(st => console.log(st.fname)); // all Fname in Users_Expa
+                    // console.log('the first row in this table is = ', result[0].Fname + " " + result[0].Lname + " age: " + result[0].Age + " email: " + result[0].Email);
                     this.setState({ data_from_sql: result });
                 },
                 (error) => {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Form, Image } from 'react-bootstrap';
+import { Button, Form, Image, Dropdown } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
@@ -11,8 +11,7 @@ import classes from './BlogCard.module.css';
 import '../MyStyle.css';
 import { CssBaseline } from '@material-ui/core';
 import { Opacity } from '@material-ui/icons';
-import { User } from '../Classes/User';
-
+//import { Dropdown } from 'react-bootstrap'
 
 export default class CCRegisterPage extends Component {
     // const classes=useStyle();
@@ -27,7 +26,6 @@ export default class CCRegisterPage extends Component {
             cPassword: '',
             data_from_sql: '',
         }
-
     }
 
     clearForm = () => {
@@ -38,7 +36,7 @@ export default class CCRegisterPage extends Component {
             password: '',
             cPassword: '',
             // data_from_sql:[...],
-            
+
         })
     }
 
@@ -47,7 +45,7 @@ export default class CCRegisterPage extends Component {
         localStorage.clear(); //clear local storge onload
 
         console.log("in componentDidMount function");
-        let apiUrl = `http://localhost:53281//api/User`;
+        let apiUrl = `http://localhost:54976/api/User`;
 
         fetch(apiUrl)
             .then(res => {
@@ -73,10 +71,6 @@ export default class CCRegisterPage extends Component {
     //     document.getElementById("scroller").scroll(0, 0)
 
     // }
-
-
-
-
 
     goTO = () => {
 
@@ -110,14 +104,13 @@ export default class CCRegisterPage extends Component {
         /*window.location.reload(false);*/
 
         const newUser = {
-            Email:this.state.email,
-            Password:this.state.password
+            Email: this.state.email,
+            Password: this.state.password
         }
 
-
-        const url = 'http://localhost:53281/api/user';
+        let apiUrl = `http://localhost:54976/api/User`;
         ////POST
-        fetch(url, {
+        fetch(apiUrl, {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, *cors, same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -133,26 +126,17 @@ export default class CCRegisterPage extends Component {
         }).then(response =>
             this.clearForm()
         );
-
-
     }
-
-
-
 
     render() {
         return (
-
             <div className={classes.NewBLogCard}>
                 <Container>
                     {/* <CssBaseline /> */}
                     <div className={classes.Container} >
-
                         <Button variant="secondary" size="sm" href="/" className="but" /*onClick={() => HandleClick()}*/>BACK</Button>
                         <Avatar alt="Remy Sharp" src="https://i.ibb.co/7S6XfNZ/circle-cropped.png" style={{ width: '15vh', height: '15vh', marginTop: '10px' }} />
                         <h1 className="ExPa" > Create an Account </h1>
-
-
                         <form>
                             <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" onChange={(e) => this.setState({ email: e.target.value })} autoFocus />
                             <Row>
@@ -169,18 +153,16 @@ export default class CCRegisterPage extends Component {
                             <br></br>
                             <br></br>
                             <br></br>
-
                             <div id="part2" style={{ opacity: this.state.opacity }}>
                                 <h4></h4>
-                                <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="fName" label="First Name" name="fName" autoComplete="First Name" autoFocus />
-                                <h4>Age</h4>
+                                <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="fName" label="Gender" name="fName" autoComplete="First Name" autoFocus />
+                                <h4>Gender</h4>
                                 <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="lName" label="Last Name" name="lName" autoComplete="Lirst Name" autoFocus />
-                                <h4>oeuwfhwoeuh</h4>
+                                <h4>Age</h4>
                                 <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
-                                <h4>oeuwfhwoeuh</h4>
+                                <h4>Type of vehicle you own</h4>
                                 <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
-
-
+                                <h4>Type of vehicle you own</h4>
                             </div>
                         </form>
                     </div>

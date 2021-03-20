@@ -1,6 +1,7 @@
-import { Slide } from '@material-ui/core';
 import React from 'react';
 import { GoogleLogin } from 'react-google-login';
+import Swal from 'sweetalert2'
+
 //refresh token
 //import { refreshTokenSetup } from '../utils/refreshTokenSetup';
 const clientId = '337989254519-c3ucmom5f9ubap04mfmv76am274hivnm.apps.googleusercontent.com';
@@ -23,13 +24,29 @@ export default function GoogleLoginn(props) {
     const checkIfUserExistsInSQL = (data) => {
 
         if (props.dataFromParent.find((user => user.Email === data.email))) {
-            alert("Hi " + data.givenName + " you loggin successfully to ExPa via Google!")
-            window.location.href = "http://localhost:3000/pick_user_page";
+
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Hi ' + data.givenName + ' you loggin successfully to ExPa via Google!',
+                imageHeight: 1500,
+                showConfirmButton: true,
+                Onclick: () => { Swal.clickConfirm() }
+            }).then(() => {
+                window.location.href = "http://localhost:3000/main_menu_page"
+            })
         }
-        else (alert("Hi " + data.givenName + " it's your first time in ExPa - please Sign Up!"));
+        else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "Hi " + data.givenName + " if it's your first time in ExPa - please Sign Up!",
+                Onclick: () => { Swal.clickConfirm() }
+            }).then(() => {
+                window.location.reload(false)
+            })
+        }
     }
-
-
 
     return (
         <div>

@@ -13,6 +13,7 @@ import GoogleLoginn from '../ServiceComponents/GoogleLoginn';
 import FaceBookLogin from '../ServiceComponents/FaceBookLogin';
 import classes from './BlogCard.module.css';
 import Box from '@material-ui/core/Box';
+import Swal from 'sweetalert2'
 
 export default class CCLoginPage extends Component {
 
@@ -21,6 +22,8 @@ export default class CCLoginPage extends Component {
         this.state = {
             email: '',
             password: '',
+            social_media_name: 'Login Page',
+            image: 'https://png.pngtree.com/png-clipart/20200701/original/pngtree-character-default-avatar-png-image_5407167.jpg',
             data_from_sql: '',
         }
     };
@@ -79,12 +82,30 @@ export default class CCLoginPage extends Component {
 
         if (this.state.data_from_sql.find((user => user.Email == this.state.email) && (user => user.Password == this.state.password))) {
             localStorage.setItem('user_email', this.state.email)
-            alert("Hi " + this.state.email + " you loggin successfully to ExPa!")
-            window.location.href = "http://localhost:3000/pick_user_page";
+            localStorage.setItem('user_image', this.state.image)
+            localStorage.setItem('social_media_name', this.state.social_media_name)
+
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Hi you loggin successfully to ExPa!',
+                imageHeight: 1500,
+                showConfirmButton: true,
+                Onclick: () => { Swal.clickConfirm() }
+            }).then(() => {
+                window.location.href = "http://localhost:3000/main_menu_page"
+            })
         }
         else {
-            alert("Hi, one detail or more are wrong, if it's your first time in ExPa - Sign Up!");
-            window.location.reload(false);
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "one detail or more are wrong, if it's your first time in ExPa - Sign Up!",
+                Onclick: () => { Swal.clickConfirm() }
+            }).then(() => {
+                window.location.reload(false)
+            })
         }
     }
 

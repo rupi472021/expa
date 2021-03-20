@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import FacebookLogin from 'react-facebook-login';
+import Swal from 'sweetalert2'
 
 export default class FaceBookLogin extends Component {
 
@@ -38,10 +39,28 @@ export default class FaceBookLogin extends Component {
     checkIfUserExistsInSQL = (data) => {
 
         if (this.props.dataFromParent.find((user => user.Email === data.email))) {
-            alert("Hi " + data.name + " you loggin successfully to ExPa via FaceBook!")
-            window.location.href = "http://localhost:3000/pick_user_page";
+
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Hi ' + data.name + ' you loggin successfully to ExPa via FaceBook!',
+                imageHeight: 1500,
+                showConfirmButton: true,
+                Onclick: () => { Swal.clickConfirm() }
+            }).then(() => {
+                window.location.href = "http://localhost:3000/main_menu_page"
+            })
         }
-        else (alert("Hi " + data.name + " it's your first time in ExPa - please Sign Up!"));
+        else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "Hi " + data.name + " if it's your first time in ExPa - please Sign Up!",
+                Onclick: () => { Swal.clickConfirm() }
+            }).then(() => {
+                window.location.reload(false)
+            })
+        }
     }
 
     render() {

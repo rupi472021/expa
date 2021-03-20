@@ -30,7 +30,7 @@ export default class CCLoginPage extends Component {
         localStorage.clear(); //clear local storge onload
 
         console.log("in componentDidMount function");
-        let apiUrl = `http://localhost:54976//api/User`;
+        let apiUrl = `http://localhost:53281//api/User`;
 
         fetch(apiUrl)
             .then(res => {
@@ -99,7 +99,7 @@ export default class CCLoginPage extends Component {
                             <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus onChange={(e) => this.setState({ email: e.target.value })} />
                             <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password" onChange={(a) => this.setState({ password: a.target.value })} />
                             <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
-                            <Button className={classes.ButtonSignIn} fullWidth variant="contained" color="Primary" size="large" onClick={this.signinbtn}> Sign I </Button><br></br><br></br><br></br>
+                            <Button className={classes.ButtonSignIn} fullWidth variant="contained" color="Primary" size="large" onClick={this.signinbtn}> Sign IN </Button><br></br><br></br><br></br>
                             <Grid container>
                                 <Grid item xs>
                                     <Link href="/forget_password_page" variant="body2"> Forgot password? </Link>

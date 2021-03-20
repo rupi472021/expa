@@ -36,6 +36,8 @@
     "react-use-window-scroll": "^1.0.13",
     "reactstrap": "^8.9.0",
     "redirect": "^0.2.0",
+    "sweetalert2": "^10.15.6",
+    "sweetalert2-react-content": "^3.3.1",
     "web-vitals": "^1.1.0"
   },
   "scripts": {

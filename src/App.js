@@ -5,7 +5,7 @@ import CCResetPasswordPage from './ClassComponents/CCResetPasswordPage';
 import PictureUploader from './Components/PictureUploader';
 import CCRegisterPage from './ClassComponents/CCRegisterPage';
 import CCLoginPage from './ClassComponents/CCLoginPage';
-import FCPickUserPage from './FunctionComponents/FCPickUserPage';
+import FCMainMenuPage from './FunctionComponents/FCMainMenuPage';
 
 
 function App() {
@@ -21,8 +21,8 @@ function App() {
         <Route exact path="/forget_password_page" >
           <CCResetPasswordPage />
         </Route>
-        <Route exact path="/pick_user_page" >
-          <FCPickUserPage />
+        <Route exact path="/main_menu_page" >
+          <FCMainMenuPage />
         </Route>
       </Switch>
     </div>

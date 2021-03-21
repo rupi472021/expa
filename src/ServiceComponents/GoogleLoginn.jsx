@@ -44,6 +44,7 @@ export default function GoogleLoginn(props) {
                 Onclick: () => { Swal.clickConfirm() }
             }).then(() => {
                 window.location.reload(false)
+                localStorage.clear();
             })
         }
     }

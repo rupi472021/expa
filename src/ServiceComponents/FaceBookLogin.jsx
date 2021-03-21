@@ -48,7 +48,7 @@ export default class FaceBookLogin extends Component {
                 showConfirmButton: true,
                 Onclick: () => { Swal.clickConfirm() }
             }).then(() => {
-                window.location.href = "http://localhost:3000/main_menu_page"
+                window.location.href = "http://localhost:3000/main_menu_page";
             })
         }
         else {
@@ -58,11 +58,11 @@ export default class FaceBookLogin extends Component {
                 text: "Hi " + data.name + " if it's your first time in ExPa - please Sign Up!",
                 Onclick: () => { Swal.clickConfirm() }
             }).then(() => {
-                window.location.reload(false)
+                window.location.reload(false);
+                localStorage.clear();
             })
         }
     }
-
     render() {
         return (
             this.setState.isLoggedIn ? 'Home' :

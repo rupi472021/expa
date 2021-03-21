@@ -4,6 +4,7 @@ import CCResetPasswordPage from './ClassComponents/CCResetPasswordPage';
 import PictureUploader from './Components/PictureUploader';
 import CCRegisterPage from './ClassComponents/CCRegisterPage';
 import CCLoginPage from './ClassComponents/CCLoginPage';
+import CCCreateNewTrip from './ClassComponents/CCCreateNewTrip';
 import FCMainMenuPage from './FunctionComponents/FCMainMenuPage';
 import React, { Component } from 'react'
 import { responsiveFontSizes } from '@material-ui/core';
@@ -60,6 +61,9 @@ class App extends Component {
           </Route>
           <Route exact path="/main_menu_page" >
             <FCMainMenuPage />
+          </Route>
+          <Route exact path="/main_menu_page/create_new_trip_page" >
+            <CCCreateNewTrip />
           </Route>
         </Switch>
       </div>

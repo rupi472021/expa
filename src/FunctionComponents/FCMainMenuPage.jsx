@@ -18,6 +18,7 @@ export default function FCMainMenuPage() {
             confirmButtonText: 'Yes'
         }).then((result) => {
             if (result.isConfirmed) {
+                localStorage.clear();
                 window.location.href = "http://localhost:3000/"
             }
         })
@@ -25,7 +26,7 @@ export default function FCMainMenuPage() {
 
     return (
         <div style={{ backgroundColor: '#1d21243b', height: '100vh', alignItems: 'center' }}>
-            <Button variant="contained" color="back" size="sm" onClick={backbtn}> BACK</Button>
+            <Button variant="contained" color="back" size="sm" className="but" onClick={backbtn}> BACK</Button>
             <div style={{ textAlign: 'center' }}><br></br>
                 <img src={localStorage.getItem('user_image')} alt={true} style={{ width: '30%' }} /><br></br><br></br>
                 <p>

@@ -128,10 +128,10 @@ export default class CCLoginPage extends Component {
                         </div><br></br><br></br>
                         <div style={{ height: 70, width: '80%' }}>
                             <div style={{ marginRight: 100 }}>
-                                <GoogleLoginn dataFromParent={this.state.data_from_sql} />
+                                <GoogleLoginn dataFromParent={this.props.dataFromApptoLoginPage} />
                             </div>
                             <div style={{ marginLeft: 120, marginTop: -50 }}>
-                                <FaceBookLogin dataFromParent={this.state.data_from_sql} />
+                                <FaceBookLogin dataFromParent={this.props.dataFromApptoLoginPage} />
                             </div>
                             <Box style={{ marginLeft: 50 }} m={1}>{this.Copyright()}</Box>
                         </div>

@@ -20,8 +20,6 @@ class App extends Component {
 
   componentDidMount = () => { //GET all Users from Users_expa (SQL) onload
 
-    localStorage.clear(); //clear local storge onload
-
     console.log("in componentDidMount function");
     let apiUrl = `http://localhost:54976/api/User`;
 

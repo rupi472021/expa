@@ -155,7 +155,7 @@ export default class CCRegisterPage extends Component {
             <div className={classes.NewBLogCard}>
                 <Container>
                     <div className={classes.Container} >
-                        <Button variant="secondary" size="sm" href="/" className="but" /*onClick={() => HandleClick()}*/>BACK</Button>
+                        <Button variant="secondary" size="sm" href="/" className="but"> BACK </Button>
                         <Avatar alt="Remy Sharp" src="https://i.ibb.co/7S6XfNZ/circle-cropped.png" style={{ width: '15vh', height: '15vh', marginTop: '10px' }} />
                         <h1 className="ExPa" > Create an Account </h1>
 

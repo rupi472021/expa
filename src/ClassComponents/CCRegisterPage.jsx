@@ -12,23 +12,14 @@ import '../MyStyle.css';
 // import { UncontrolledButtonDropdown } from 'reactstrap';
 /* eslint-disable no-use-before-define */
 import Autocomplete from '@material-ui/lab/Autocomplete';
-
-
 import RangeSlider from 'react-bootstrap-range-slider';
-import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
-
-
+//import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
 import DropdownItem from 'react-bootstrap/esm/DropdownItem';
 import { SettingsOverscanOutlined } from '@material-ui/icons';
-
-
 // // Using an ES6 transpiler like Babel
 // import Slider from 'react-rangeslider'
-
 // // To include the default styles
 // import 'react-rangeslider/lib/index.css'
-
-
 
 export default class CCRegisterPage extends Component {
 
@@ -37,6 +28,7 @@ export default class CCRegisterPage extends Component {
     //     const [dropdownOpen, setOpen] = useState(false);
 
     //    toggle = () => setOpen(!dropdownOpen);
+
     commentSection = React.createRef();
 
     constructor(props) {
@@ -99,7 +91,6 @@ export default class CCRegisterPage extends Component {
     // scrolltotop = () => {
     //     // window.querySelector('body').scrollTo(0,0)
     //     document.getElementById("scroller").scroll(0, 0)
-
     // }
 
     goTO = () => {
@@ -142,7 +133,7 @@ export default class CCRegisterPage extends Component {
 
         }
 
-        let apiUrl = `http://localhost:53281/api/User`;
+        let apiUrl = `http://localhost:54976/api/User`;
         ////POST
         fetch(apiUrl, {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -162,11 +153,6 @@ export default class CCRegisterPage extends Component {
         );
     }
     toggle = () => this.state.setOpen(!this.state.dropdownOpen);
-
-
-
-
-
 
     render() {
         return (
@@ -189,10 +175,6 @@ export default class CCRegisterPage extends Component {
                         <Button variant="secondary" size="sm" href="/" className="but" /*onClick={() => HandleClick()}*/>BACK</Button>
                         <Avatar alt="Remy Sharp" src="https://i.ibb.co/7S6XfNZ/circle-cropped.png" style={{ width: '15vh', height: '15vh', marginTop: '10px' }} />
                         <h1 className="ExPa" > Create an Account </h1>
-
-
-
-
                         <form>
                             <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" onChange={(e) => this.setState({ email: e.target.value })} autoFocus />
                             <Row>
@@ -254,7 +236,7 @@ export default class CCRegisterPage extends Component {
                                     <DropdownItem eventKey="2">Only By My Own</DropdownItem>
                                     <DropdownItem eventKey="3">With My Closest Friends</DropdownItem>
                                 </DropdownButton>
-                             
+
 
 
                                 <br></br>

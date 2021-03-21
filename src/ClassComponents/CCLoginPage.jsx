@@ -138,7 +138,7 @@ export default class CCLoginPage extends Component {
                                     <Link href="/forget_password_page" variant="body2"> Forgot password? </Link>
                                 </Grid>
                                 <Grid item>
-                                    <Link variant="body2" href="/Register" {<CCRegisterPage/>}> Don't have an account? Sign Up </Link><br></br><br></br>
+                                    <Link variant="body2" href="/Register" > Don't have an account? Sign Up </Link><br></br><br></br>
                                 </Grid>
                             </Grid>
                         </form>

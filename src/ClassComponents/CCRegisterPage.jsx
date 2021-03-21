@@ -7,36 +7,16 @@ import Avatar from '@material-ui/core/Avatar';
 import { ButtonDropdown, DropdownMenu, DropdownToggle, Row, UncontrolledButtonDropdown } from 'reactstrap';
 import classes from './BlogCard.module.css';
 import '../MyStyle.css';
-// import { CssBaseline } from '@material-ui/core';
-// import { Opacity } from '@material-ui/icons';
-// import { UncontrolledButtonDropdown } from 'reactstrap';
-/* eslint-disable no-use-before-define */
 import Autocomplete from '@material-ui/lab/Autocomplete';
-
-
+import Swal from 'sweetalert2';
 import RangeSlider from 'react-bootstrap-range-slider';
 import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
-
-
 import DropdownItem from 'react-bootstrap/esm/DropdownItem';
 import { SettingsOverscanOutlined } from '@material-ui/icons';
 
 
-// // Using an ES6 transpiler like Babel
-// import Slider from 'react-rangeslider'
-
-// // To include the default styles
-// import 'react-rangeslider/lib/index.css'
-
-
-
 export default class CCRegisterPage extends Component {
 
-    // const classes=useStyle();
-
-    //     const [dropdownOpen, setOpen] = useState(false);
-
-    //    toggle = () => setOpen(!dropdownOpen);
     commentSection = React.createRef();
 
     constructor(props) {
@@ -57,8 +37,6 @@ export default class CCRegisterPage extends Component {
     }
 
     clearForm = () => {
-        // const ings = [...this.state.ingredients];
-        // ings.map((item) => item.checked = false);
         this.setState({
             email: '',
             password: '',
@@ -70,69 +48,96 @@ export default class CCRegisterPage extends Component {
         })
     }
 
-    // componentDidMount = () => { //GET all Users from Users_expa (SQL) onload
-    //     window.scrollTo(0, 0);
-    //     localStorage.clear(); //clear local storge onload
+    componentDidMount = () => { //GET all Users from Users_expa (SQL) onload
+        window.scrollTo(0, 0);
+        localStorage.clear(); //clear local storge onload
 
-    //     console.log("in componentDidMount function");
-    //     let apiUrl = `http://localhost:53281/api/User`;
+        console.log("in componentDidMount function");
+        let apiUrl = `http://localhost:53281/api/User`;
 
-    //     fetch(apiUrl)
-    //         .then(res => {
-    //             console.log('res=', res);
-    //             console.log('res.status', res.status);
-    //             console.log('res.ok', res.ok);
-    //             return res.json()
-    //         })
-    //         .then(
-    //             (result) => {
-    //                 console.log("GET data from SQL= ", result);
-    //                 result.map(st => console.log(st.Fname)); // all Fname in Users_Expa
-    //                 console.log('the first row in this table is = ', result[0].Fname + " " + result[0].Lname + " age: " + result[0].Age + " email: " + result[0].Email);
-    //                 this.setState({ data_from_sql: result });
-    //             },
-    //             (error) => {
-    //                 console.log("err GET=", error);
-    //             });
-    // }
+        fetch(apiUrl)
+            .then(res => {
+                console.log('res=', res);
+                console.log('res.status', res.status);
+                console.log('res.ok', res.ok);
+                return res.json()
+            })
+            .then(
+                (result) => {
+                    console.log("GET data from SQL= ", result);
+                    result.map(st => console.log(st.Fname)); // all Fname in Users_Expa
+                    console.log('the first row in this table is = ', result[0].Fname + " " + result[0].Lname + " age: " + result[0].Age + " email: " + result[0].Email);
+                    this.setState({ data_from_sql: result });
+                },
+                (error) => {
+                    console.log("err GET=", error);
+                });
+    }
 
-    // scrolltotop = () => {
-    //     // window.querySelector('body').scrollTo(0,0)
-    //     document.getElementById("scroller").scroll(0, 0)
-
-    // }
 
     goTO = () => {
 
         if (this.state.emaill == '' || this.state.password == '') {
-            alert("please fill out all requireds fields")
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "Some Details Are Missing",
+                Onclick: () => { Swal.clickConfirm() }
+            }).then(() => {
+                window.location.reload(false)
+            })
+
+
         }
 
         else if (this.state.data_from_sql.find((user => user.Email == this.state.email))) {
-            alert("Hi " + this.state.email + " you are allready sign up before !")
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "Hi " + this.state.email + " you are allready sign up before !",
+                Onclick: () => { Swal.clickConfirm() }
+            }).then(() => {
+                window.location.reload(false)
+            })
+
         }
 
         else if (this.state.password != this.state.cPassword) {
-            alert("Please Insert Again Password");
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "Confirm Password Missing Details - Please Insert Again ",
+                Onclick: () => { Swal.clickConfirm() }
+            }).then(() => {
+                window.location.reload(false)
+            })
         }
 
         else {
-            window.scrollTo({ top: 500, behavior: 'smooth' })
+            // Swal.fire({
+            //     position: 'center',
+            //     icon: 'success',
+            //     title: 'Hi, Your Sign UP Successfully',
+            //     imageHeight: 1500,
+            //     showConfirmButton: true,
+            //     Onclick: () => { Swal.clickConfirm() }
+            // }).then(() => {
+            //     window.location.reload(false)
+            // })
+
+            window.scrollTo({ top: 530, behavior: 'smooth' })
             this.setState(prevState => ({
                 opacity: 1
             }))
             this.handle();
         }
-        console.log(this.state.email)
-        console.log(this.state.password)
-        console.log(this.state.cPassword)
+
     }
 
 
     handle = () => {
-        alert("Hi, Your Sign UP Successfully");
-        /*window.location.reload(false);*/
-
+        alert("suces")
         const newUser = {
             Email: this.state.email,
             Password: this.state.password,
@@ -143,6 +148,7 @@ export default class CCRegisterPage extends Component {
         }
 
         let apiUrl = `http://localhost:53281/api/User`;
+
         ////POST
         fetch(apiUrl, {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -164,34 +170,15 @@ export default class CCRegisterPage extends Component {
     toggle = () => this.state.setOpen(!this.state.dropdownOpen);
 
 
-
-
-
-
     render() {
         return (
 
             <div className={classes.NewBLogCard}>
-
-                {/* <Form>
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>Email address</Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" />
-                        <Form.Text className="text-muted">
-                            We'll never share your email with anyone else.
-    				</Form.Text>
-                    </Form.Group>
-                </Form> */}
-
                 <Container>
-                    {/* <CssBaseline /> */}
                     <div className={classes.Container} >
                         <Button variant="secondary" size="sm" href="/" className="but" /*onClick={() => HandleClick()}*/>BACK</Button>
                         <Avatar alt="Remy Sharp" src="https://i.ibb.co/7S6XfNZ/circle-cropped.png" style={{ width: '15vh', height: '15vh', marginTop: '10px' }} />
                         <h1 className="ExPa" > Create an Account </h1>
-
-
-
 
                         <form>
                             <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" onChange={(e) => this.setState({ email: e.target.value })} autoFocus />
@@ -211,14 +198,9 @@ export default class CCRegisterPage extends Component {
                                     <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth name="Cpassword" label="Confirm" type="password" id="Cpassword" autoComplete="confirm-password" onChange={(e) => this.setState({ cPassword: e.target.value })} />
                                 </Col>
                             </Row>
-
                             <br></br>
                             <Button fullWidth variant="primary" size="lg" onClick={this.goTO}>GET STARTED</Button>
-                            <br></br>
-                            <br></br>
-                            <br></br>
-                            <br></br>
-
+                            <br></br><br></br><br></br><br></br>
 
                             <div id="part2" style={{ opacity: this.state.opacity }}>
                                 <h4>What is Your Gender ?</h4>
@@ -242,10 +224,7 @@ export default class CCRegisterPage extends Component {
                                 </ButtonGroup>
 
 
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
+                                <br></br><br></br><br></br><br></br>
 
 
                                 <h4>Would You Like To Travel With Other Friends ?</h4>
@@ -254,7 +233,6 @@ export default class CCRegisterPage extends Component {
                                     <DropdownItem eventKey="2">Only By My Own</DropdownItem>
                                     <DropdownItem eventKey="3">With My Closest Friends</DropdownItem>
                                 </DropdownButton>
-                             
 
 
                                 <br></br>
@@ -276,14 +254,6 @@ export default class CCRegisterPage extends Component {
                                         </Dropdown.Menu>
                                     </Dropdown>
                                 </div> */}
-                                {/* 
-                                <Autocomplete
-                                    id="combo-box-demo"
-                                    options={top100Films}
-                                    getOptionLabel={(option) => option.title}
-                                    style={{ width: 300 }}
-                                    renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
-                                /> */}
 
 
                                 {/* <Form>
@@ -305,10 +275,6 @@ export default class CCRegisterPage extends Component {
                                         <DropdownItem>Another Action</DropdownItem>
                                     </DropdownMenu>
                                 </UncontrolledButtonDropdown> */}
-
-
-
-
 
                                 {/* <ButtonGroup>
                                     <Button>Left</Button>
@@ -339,13 +305,8 @@ export default class CCRegisterPage extends Component {
 
  */}
 
-
-
-
-
                             </div>
                         </form>
-
                     </div>
                 </Container >
             </div>
@@ -353,13 +314,6 @@ export default class CCRegisterPage extends Component {
     }
 }
 
-// Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
-const top100Films = [
-    { title: 'The Shawshank Redemption' },
-    { title: 'The Godfather' },
-    { title: 'The Godfather: Part II' },
-
-];
 
 
 

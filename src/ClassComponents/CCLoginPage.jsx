@@ -13,7 +13,7 @@ import GoogleLoginn from '../ServiceComponents/GoogleLoginn';
 import FaceBookLogin from '../ServiceComponents/FaceBookLogin';
 import classes from './BlogCard.module.css';
 import Box from '@material-ui/core/Box';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 export default class CCLoginPage extends Component {
 
@@ -45,8 +45,8 @@ export default class CCLoginPage extends Component {
             .then(
                 (result) => {
                     console.log("GET data from SQL= ", result);
-                    // result.map(st => console.log(st.fname)); // all Fname in Users_Expa
-                    // console.log('the first row in this table is = ', result[0].Fname + " " + result[0].Lname + " age: " + result[0].Age + " email: " + result[0].Email);
+                    result.map(st => console.log(st.Fname)); // all Fname in Users_Expa
+                    console.log('the first row in this table is = ', result[0].Fname + " " + result[0].Lname + " age: " + result[0].Age + " email: " + result[0].Email);
                     this.setState({ data_from_sql: result });
                 },
                 (error) => {
@@ -54,13 +54,24 @@ export default class CCLoginPage extends Component {
                 });
     }
 
+    handleShow = () => {
+        Swal.fire({
+            title: 'ExPa Founders',
+            text: 'Ben Meshulam & Daniel Brand',
+            //imageUrl: 'https://lh3.googleusercontent.com/a-/AOh14Gh90aYoFoXYdOQd253DwvoPxqjuuyQxJh65nGz1GBE=s96-c',
+            imageWidth: 150,
+            imageHeight: 150,
+            imageAlt: 'Custom image',
+        })
+    }
+
     Copyright = () => { // footer page in the LoginPage
         return (
             <Typography variant="body2" color="textSecondary" align="center">
                 {'Copyright © '}
-                <Link color="inherit">
+                <Link color="inherit" onClick={this.handleShow}>
                     ExPa Application
-          </Link>{' '}
+          </Link>
                 {new Date().getFullYear()}
                 {' '}
             </Typography>

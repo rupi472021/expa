@@ -5,11 +5,25 @@ import App from './App';
 //import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles"
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#000000"
+    },
+    secondary: {
+      main: "#845422"
+    },
+  }
+})
 
 ReactDOM.render(
   <BrowserRouter>
     <React.StrictMode>
-      <App />
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
     </React.StrictMode>
   </BrowserRouter>,
   document.getElementById('root')

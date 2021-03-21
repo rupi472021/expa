@@ -14,6 +14,7 @@ import FaceBookLogin from '../ServiceComponents/FaceBookLogin';
 import classes from './BlogCard.module.css';
 import Box from '@material-ui/core/Box';
 import Swal from 'sweetalert2';
+import CCRegisterPage from './CCRegisterPage';
 
 export default class CCLoginPage extends Component {
 
@@ -58,7 +59,7 @@ export default class CCLoginPage extends Component {
         Swal.fire({
             title: 'ExPa Founders',
             text: 'Ben Meshulam & Daniel Brand',
-            //imageUrl: 'https://lh3.googleusercontent.com/a-/AOh14Gh90aYoFoXYdOQd253DwvoPxqjuuyQxJh65nGz1GBE=s96-c',
+            imageUrl: 'https://lh3.googleusercontent.com/a-/AOh14Gh90aYoFoXYdOQd253DwvoPxqjuuyQxJh65nGz1GBE=s96-c',
             imageWidth: 150,
             imageHeight: 150,
             imageAlt: 'Custom image',
@@ -137,7 +138,7 @@ export default class CCLoginPage extends Component {
                                     <Link href="/forget_password_page" variant="body2"> Forgot password? </Link>
                                 </Grid>
                                 <Grid item>
-                                    <Link variant="body2" href="/Register" > Don't have an account? Sign Up </Link><br></br><br></br>
+                                    <Link variant="body2" href="/Register" {<CCRegisterPage/>}> Don't have an account? Sign Up </Link><br></br><br></br>
                                 </Grid>
                             </Grid>
                         </form>

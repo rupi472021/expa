@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { Button, ButtonGroup, DropdownButton, Form, Image, ProgressBar,Col,Dropdown } from 'react-bootstrap';
+import { Form, Button, ButtonGroup, DropdownButton, Image, ProgressBar, Col, Dropdown } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
 import Avatar from '@material-ui/core/Avatar';
-import { ButtonDropdown, DropdownItem, Row, UncontrolledButtonDropdown } from 'reactstrap';
+import { ButtonDropdown, DropdownMenu, DropdownToggle, Row, UncontrolledButtonDropdown } from 'reactstrap';
 import classes from './BlogCard.module.css';
 import '../MyStyle.css';
 // import { CssBaseline } from '@material-ui/core';
@@ -12,11 +12,26 @@ import '../MyStyle.css';
 // import { UncontrolledButtonDropdown } from 'reactstrap';
 /* eslint-disable no-use-before-define */
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import DropdownToggle from 'react-bootstrap/lib/DropdownToggle';
-import DropdownMenu from 'react-bootstrap/lib/DropdownMenu';
+
+
+import RangeSlider from 'react-bootstrap-range-slider';
+import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
+
+
+import DropdownItem from 'react-bootstrap/esm/DropdownItem';
+import { SettingsOverscanOutlined } from '@material-ui/icons';
+
+
+// // Using an ES6 transpiler like Babel
+// import Slider from 'react-rangeslider'
+
+// // To include the default styles
+// import 'react-rangeslider/lib/index.css'
+
 
 
 export default class CCRegisterPage extends Component {
+
     // const classes=useStyle();
 
     //     const [dropdownOpen, setOpen] = useState(false);
@@ -35,7 +50,9 @@ export default class CCRegisterPage extends Component {
             cPassword: '',
             data_from_sql: '',
             dropdownOpen: false,
-            setOpen: false
+            setOpen: false,
+            setValue: '50',
+            value: ''
         }
     }
 
@@ -146,10 +163,25 @@ export default class CCRegisterPage extends Component {
     }
     toggle = () => this.state.setOpen(!this.state.dropdownOpen);
 
+
+
+
+
+
     render() {
         return (
 
             <div className={classes.NewBLogCard}>
+
+                {/* <Form>
+                    <Form.Group controlId="formBasicEmail">
+                        <Form.Label>Email address</Form.Label>
+                        <Form.Control type="email" placeholder="Enter email" />
+                        <Form.Text className="text-muted">
+                            We'll never share your email with anyone else.
+    				</Form.Text>
+                    </Form.Group>
+                </Form> */}
 
                 <Container>
                     {/* <CssBaseline /> */}
@@ -189,18 +221,48 @@ export default class CCRegisterPage extends Component {
 
 
                             <div id="part2" style={{ opacity: this.state.opacity }}>
-                                <h4>Age</h4>
-                                <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="" label="Gender" name="fName" autoComplete="First Name" autoFocus />
-                                <h4>Gender</h4>
-                                <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="" label="Last Name" name="lName" autoComplete="Lirst Name" autoFocus />
-                                <h4>Age</h4>
-                                <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="" label="Email Address" name="email" autoComplete="email" autoFocus />
-                                <h4>Type of vehicle you own</h4>
-                                <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="" label="Email Address" name="email" autoComplete="email" autoFocus />
-                                <h4>Type of vehicle you own</h4>
+                                <h4>What is Your Gender ?</h4>
+                                <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
+                                    <Button>Male</Button>&nbsp;
+                                    <Button>Female</Button>
+                                </ButtonGroup>
+                                <br></br><br></br><br></br>
 
-                                <ProgressBar animated now={95} />
-                                 {/* <div className="dropdown">
+                                <h4>How Old Are You ?</h4>
+                                <RangeSlider value={this.state.setValue} onChange={(e) => this.setState({ setValue: e.target.value })} />
+                                <br></br>
+
+                                <h4>What Type of Vehicle Do You Own ?</h4>
+                                <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
+                                    <Button>Jeep</Button>&nbsp;&nbsp;
+                                    <Button>ATV</Button>&nbsp;&nbsp;
+                                    <Button>RZR</Button>&nbsp;&nbsp;
+                                    <Button>Motorcycle</Button>&nbsp;&nbsp;
+                                    <Button>Other</Button>
+                                </ButtonGroup>
+
+
+                                <br></br>
+                                <br></br>
+                                <br></br>
+                                <br></br>
+
+
+                                <h4>Would You Like To Travel With Other Friends ?</h4>
+                                <DropdownButton as={ButtonGroup} title="Would You Like To Travel With Other Friends ?" id="bg-vertical-dropdown-1">
+                                    <DropdownItem eventKey="1">Sure !</DropdownItem>
+                                    <DropdownItem eventKey="2">Only By My Own</DropdownItem>
+                                    <DropdownItem eventKey="3">With My Closest Friends</DropdownItem>
+                                </DropdownButton>
+                             
+
+
+                                <br></br>
+                                {/*progressbar */}
+
+                                {/* <ProgressBar animated now={95} /> */}
+
+                                {/* <div className="dropdown">
                                     <Dropdown>
                                         <Dropdown.Toggle
                                             variant="secondary btn-sm"
@@ -213,15 +275,40 @@ export default class CCRegisterPage extends Component {
                                             <Dropdown.Item href="#">English</Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>
-                                </div> */} 
-
-                                 <Autocomplete
+                                </div> */}
+                                {/* 
+                                <Autocomplete
                                     id="combo-box-demo"
                                     options={top100Films}
                                     getOptionLabel={(option) => option.title}
                                     style={{ width: 300 }}
                                     renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
-                                />
+                                /> */}
+
+
+                                {/* <Form>
+                                    <Form.Group controlId="formBasicRange">
+                                        <Form.Label>Range</Form.Label>
+                                        <Form.Control type="range" />
+                                    </Form.Group>
+                                </Form> */}
+                                {/* 
+                                <UncontrolledButtonDropdown>
+                                    <DropdownToggle caret>
+                                        Dropdown
+                                    </DropdownToggle>
+                                    <DropdownMenu>
+                                        <DropdownItem header>Header</DropdownItem>
+                                        <DropdownItem disabled>Action</DropdownItem>
+                                        <DropdownItem>Another Action</DropdownItem>
+                                        <DropdownItem divider />
+                                        <DropdownItem>Another Action</DropdownItem>
+                                    </DropdownMenu>
+                                </UncontrolledButtonDropdown> */}
+
+
+
+
 
                                 {/* <ButtonGroup>
                                     <Button>Left</Button>
@@ -250,21 +337,10 @@ export default class CCRegisterPage extends Component {
                                     <DropdownItem eventKey="2">Dropdown link</DropdownItem>
                                 </DropdownButton>
 
-
-
-                                <UncontrolledButtonDropdown>
-                                    <DropdownToggle caret>
-                                        Dropdown
-                                    </DropdownToggle>
-                                    <DropdownMenu>
-                                        <DropdownItem header>Header</DropdownItem>
-                                        <DropdownItem disabled>Action</DropdownItem>
-                                        <DropdownItem>Another Action</DropdownItem>
-                                        <DropdownItem divider />
-                                        <DropdownItem>Another Action</DropdownItem>
-                                    </DropdownMenu>
-                                </UncontrolledButtonDropdown> 
  */}
+
+
+
 
 
                             </div>

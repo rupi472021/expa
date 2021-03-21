@@ -169,7 +169,6 @@ export default class CCRegisterPage extends Component {
     }
     toggle = () => this.state.setOpen(!this.state.dropdownOpen);
 
-
     render() {
         return (
 

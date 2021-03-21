@@ -14,7 +14,7 @@ import FaceBookLogin from '../ServiceComponents/FaceBookLogin';
 import classes from './BlogCard.module.css';
 import Box from '@material-ui/core/Box';
 import Swal from 'sweetalert2';
-import CCRegisterPage from './CCRegisterPage';
+
 
 export default class CCLoginPage extends Component {
 
@@ -34,7 +34,7 @@ export default class CCLoginPage extends Component {
         localStorage.clear(); //clear local storge onload
 
         console.log("in componentDidMount function");
-        let apiUrl = `http://localhost:53281/api/User`;
+        let apiUrl = `http://localhost:54976/api/User`;
 
         fetch(apiUrl)
             .then(res => {
@@ -59,9 +59,9 @@ export default class CCLoginPage extends Component {
         Swal.fire({
             title: 'ExPa Founders',
             text: 'Ben Meshulam & Daniel Brand',
-            imageUrl: 'https://lh3.googleusercontent.com/a-/AOh14Gh90aYoFoXYdOQd253DwvoPxqjuuyQxJh65nGz1GBE=s96-c',
-            imageWidth: 150,
-            imageHeight: 150,
+            imageUrl: 'https://i.ibb.co/2Pg5WtY/ben-daniel.png',
+            imageWidth: 1000,
+            imageHeight: 250,
             imageAlt: 'Custom image',
         })
     }

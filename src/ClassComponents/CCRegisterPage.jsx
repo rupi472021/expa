@@ -48,30 +48,12 @@ export default class CCRegisterPage extends Component {
         })
     }
 
-    componentDidMount = () => { //GET all Users from Users_expa (SQL) onload
+    componentDidMount = () => {
+
         window.scrollTo(0, 0);
         localStorage.clear(); //clear local storge onload
+        console.log(this.props.dataFromApptoRegisterPage);
 
-        console.log("in componentDidMount function");
-        let apiUrl = `http://localhost:53281/api/User`;
-
-        fetch(apiUrl)
-            .then(res => {
-                console.log('res=', res);
-                console.log('res.status', res.status);
-                console.log('res.ok', res.ok);
-                return res.json()
-            })
-            .then(
-                (result) => {
-                    console.log("GET data from SQL= ", result);
-                    result.map(st => console.log(st.Fname)); // all Fname in Users_Expa
-                    console.log('the first row in this table is = ', result[0].Fname + " " + result[0].Lname + " age: " + result[0].Age + " email: " + result[0].Email);
-                    this.setState({ data_from_sql: result });
-                },
-                (error) => {
-                    console.log("err GET=", error);
-                });
     }
 
 
@@ -91,7 +73,7 @@ export default class CCRegisterPage extends Component {
 
         }
 
-        else if (this.state.data_from_sql.find((user => user.Email == this.state.email))) {
+        else if (this.props.dataFromApptoRegisterPage.find((user => user.Email == this.state.email))) {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -100,7 +82,6 @@ export default class CCRegisterPage extends Component {
             }).then(() => {
                 window.location.reload(false)
             })
-
         }
 
         else if (this.state.password != this.state.cPassword) {
@@ -115,21 +96,19 @@ export default class CCRegisterPage extends Component {
         }
 
         else {
-            // Swal.fire({
-            //     position: 'center',
-            //     icon: 'success',
-            //     title: 'Hi, Your Sign UP Successfully',
-            //     imageHeight: 1500,
-            //     showConfirmButton: true,
-            //     Onclick: () => { Swal.clickConfirm() }
-            // }).then(() => {
-            //     window.location.reload(false)
-            // })
-
             window.scrollTo({ top: 530, behavior: 'smooth' })
             this.setState(prevState => ({
                 opacity: 1
             }))
+
+            // Swal.fire({
+            //     position: 'top-down',
+            //     icon: 'success',
+            //     title: 'Hi you loggin successfully to ExPa!',
+            //     imageHeight: 1500,
+            //     showConfirmButton: true,
+            // })
+
             this.handle();
         }
 
@@ -137,7 +116,8 @@ export default class CCRegisterPage extends Component {
 
 
     handle = () => {
-        alert("suces")
+        alert("Fill Out")
+
         const newUser = {
             Email: this.state.email,
             Password: this.state.password,
@@ -147,7 +127,7 @@ export default class CCRegisterPage extends Component {
 
         }
 
-        let apiUrl = `http://localhost:53281/api/User`;
+        let apiUrl = `http://localhost:54976/api/User`;
 
         ////POST
         fetch(apiUrl, {
@@ -211,6 +191,7 @@ export default class CCRegisterPage extends Component {
 
                                 <h4>How Old Are You ?</h4>
                                 <RangeSlider value={this.state.setValue} onChange={(e) => this.setState({ setValue: e.target.value })} />
+                                <h2>{this.state.setValue}</h2>
                                 <br></br>
 
                                 <h4>What Type of Vehicle Do You Own ?</h4>

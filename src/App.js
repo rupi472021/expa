@@ -6,17 +6,56 @@ import CCRegisterPage from './ClassComponents/CCRegisterPage';
 import CCLoginPage from './ClassComponents/CCLoginPage';
 import FCMainMenuPage from './FunctionComponents/FCMainMenuPage';
 import React, { Component } from 'react'
+import { responsiveFontSizes } from '@material-ui/core';
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      data_from_sql: '',
+    }
+  };
+
+
+  componentDidMount = () => { //GET all Users from Users_expa (SQL) onload
+
+    localStorage.clear(); //clear local storge onload
+
+    console.log("in componentDidMount function");
+    let apiUrl = `http://localhost:54976/api/User`;
+
+    fetch(apiUrl)
+      .then(res => {
+        console.log('res=', res);
+        console.log('res.status', res.status);
+        console.log('res.ok', res.ok);
+        return res.json()
+      })
+      .then(
+        (result) => {
+          console.log("GET data from SQL= ", result);
+          result.map(st => console.log(st.Fname)); // all Fname in Users_Expa
+          console.log('the first row in this table is = ', result[0].Fname + " " + result[0].Lname + " age: " + result[0].Age + " email: " + result[0].Email);
+          this.setState({
+            data_from_sql: result,
+          })
+        },
+        (error) => {
+          console.log("err GET=", error);
+        });
+  }
+
+
   render() {
     return (
       <div className="App">
         <Switch>
           <Route exact path="/" >
-            <CCLoginPage />
+            <CCLoginPage dataFromApptoLoginPage={this.state.data_from_sql} />
           </Route>
           <Route exact path="/register" >
-            <CCRegisterPage />
+            <CCRegisterPage dataFromApptoRegisterPage={this.state.data_from_sql} />
           </Route>
           <Route exact path="/forget_password_page" >
             <CCResetPasswordPage />

@@ -29,32 +29,6 @@ export default class CCLoginPage extends Component {
         }
     };
 
-    componentDidMount = () => { //GET all Users from Users_expa (SQL) onload
-
-        localStorage.clear(); //clear local storge onload
-
-        console.log("in componentDidMount function");
-        let apiUrl = `http://localhost:54976/api/User`;
-
-        fetch(apiUrl)
-            .then(res => {
-                console.log('res=', res);
-                console.log('res.status', res.status);
-                console.log('res.ok', res.ok);
-                return res.json()
-            })
-            .then(
-                (result) => {
-                    console.log("GET data from SQL= ", result);
-                    result.map(st => console.log(st.Fname)); // all Fname in Users_Expa
-                    console.log('the first row in this table is = ', result[0].Fname + " " + result[0].Lname + " age: " + result[0].Age + " email: " + result[0].Email);
-                    this.setState({ data_from_sql: result });
-                },
-                (error) => {
-                    console.log("err GET=", error);
-                });
-    }
-
     handleShow = () => {
         Swal.fire({
             title: 'ExPa Founders',
@@ -82,7 +56,14 @@ export default class CCLoginPage extends Component {
     signinbtn = () => {
 
         if (this.state.emaill == '' || this.state.password == '') {
-            alert("please fill out all requireds fields")
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "one detail or more are missing, please try again",
+                Onclick: () => { Swal.clickConfirm() }
+            }).then(() => {
+                window.location.reload(false)
+            })
         }
         else (this.handle());
     }
@@ -90,9 +71,9 @@ export default class CCLoginPage extends Component {
     handle = () => {
 
         console.log("in handle function");
-        console.log(this.state.data_from_sql) // show all data from Users table in the SQL
+        console.log(this.props.dataFromApptoLoginPage) // show all data from Users table in the SQL from parent
 
-        if (this.state.data_from_sql.find((user => user.Email == this.state.email) && (user => user.Password == this.state.password))) {
+        if (this.props.dataFromApptoLoginPage.find((user => user.Email == this.state.email) && (user => user.Password == this.state.password))) {
             localStorage.setItem('user_email', this.state.email)
             localStorage.setItem('user_image', this.state.image)
             localStorage.setItem('social_media_name', this.state.social_media_name)
@@ -109,7 +90,6 @@ export default class CCLoginPage extends Component {
             })
         }
         else {
-
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -119,11 +99,12 @@ export default class CCLoginPage extends Component {
                 window.location.reload(false)
             })
         }
+
     }
 
     render() {
         return (
-            <div className={classes.NewBLogCard}>
+            <div className={classes.NewBLogCard} >
                 <Container>
                     <CssBaseline />
                     <div className={classes.Container} >

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Button } from 'react-bootstrap';
-import { DropdownMenu, MenuItem } from 'react-bootstrap-dropdown-menu';
+import { Form, Button, DropdownButton, Dropdown } from 'react-bootstrap';
 
 export default class CCCreateNewTrip extends Component {
 
@@ -13,11 +12,6 @@ export default class CCCreateNewTrip extends Component {
             trip_nights: '',
         }
     };
-
-
-    handleSelect = (event) => {
-        this.setState({ vehicle_type: event })
-    }
 
     render() {
         return (
@@ -45,11 +39,17 @@ export default class CCCreateNewTrip extends Component {
                         </div>
                     ))}
                     </Form>
-                    <Button variant="primary" type="button" onClick={() => console.log(this.state.vehicle_type)}> Publish Trip </Button>
-                </Form>
-            </div>
+                </Form><br></br>
+                <DropdownButton id="dropdown-split-variants" title="Trip's Vehicle Type:">
+                    <Dropdown.ItemText>Dropdown item text</Dropdown.ItemText>
+                    <Dropdown.Item onClick={(ATV) => this.setState({ vehicle_type: ATV.target.value })} as="button" value="ATV"> ATV </Dropdown.Item>
+                    <Dropdown.Item onClick={(JEEP) => this.setState({ vehicle_type: JEEP.target.value })} as="button" value="JEEP"> JEEP </Dropdown.Item>
+                    <Dropdown.Item onClick={(RZR) => this.setState({ vehicle_type: RZR.target.value })} as="button" value="RZR"> RZR </Dropdown.Item>
+                    <Dropdown.Item onClick={(Motorcycle) => this.setState({ vehicle_type: Motorcycle.target.value })} as="button" value="Motorcycle"> Motorcycle </Dropdown.Item>
+                    <Dropdown.Item onClick={(Other) => this.setState({ vehicle_type: Other.target.value })} as="button" value="Other"> Other </Dropdown.Item>
+                </DropdownButton><br></br>
+                <Button variant="primary" type="button" onClick={() => console.log("your trip name is: " + this.state.trip_name + " on this date: " + this.state.trip_date + " you choose vehicle type: " + this.state.vehicle_type + " and number of nights: " + this.state.trip_nights)}> Publish Trip </Button>
+            </div >
         )
     }
 }
-
-//console.log("your trip name is: " + this.state.trip_name + " on this date: " + this.state.trip_date + " you choose vehicle type: " + this.state.vehicle_type + " and number of nights: " + this.state.trip_nights)}

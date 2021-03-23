@@ -15,6 +15,31 @@ import DropdownItem from 'react-bootstrap/esm/DropdownItem';
 import { SettingsOverscanOutlined } from '@material-ui/icons';
 
 
+
+
+
+import { makeStyles } from '@material-ui/core/styles';
+import Chip from '@material-ui/core/Chip';
+import Divider from '@material-ui/core/Divider';
+import Typography from '@material-ui/core/Typography';
+
+const useStyles = makeStyles((theme) => ({
+
+    chip: {
+        margin: theme.spacing(0.5),
+        marginRight:20
+    },
+ 
+}));
+
+
+
+
+
+
+
+
+
 export default class CCRegisterPage extends Component {
 
     commentSection = React.createRef();
@@ -32,7 +57,9 @@ export default class CCRegisterPage extends Component {
             dropdownOpen: false,
             setOpen: false,
             setValue: '50',
-            value: ''
+            value: '',
+            q1: '',
+            q3: '',
         }
     }
 
@@ -53,7 +80,6 @@ export default class CCRegisterPage extends Component {
         window.scrollTo(0, 0);
         localStorage.clear(); //clear local storge onload
         console.log(this.props.dataFromApptoRegisterPage);
-
     }
 
 
@@ -127,7 +153,7 @@ export default class CCRegisterPage extends Component {
 
         }
 
-        let apiUrl = `http://localhost:54976/api/User`;
+        let apiUrl = `http://localhost:53281/api/User`;
 
         ////POST
         fetch(apiUrl, {
@@ -181,12 +207,16 @@ export default class CCRegisterPage extends Component {
                             <Button fullWidth variant="primary" size="lg" onClick={this.goTO}>GET STARTED</Button>
                             <br></br><br></br><br></br><br></br>
 
+
+                            {/* Questionnaire */}
                             <div id="part2" style={{ opacity: this.state.opacity }}>
                                 <h4>What is Your Gender ?</h4>
                                 <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
-                                    <Button>Male</Button>&nbsp;
-                                    <Button>Female</Button>
+                                    <Button value="Male" onClick={(e) => this.setState({ q1: e.target.value })}>Male</Button>&nbsp;
+                                    <Button value="Female" onClick={(e) => this.setState({ q1: e.target.value })}>Female</Button>
                                 </ButtonGroup>
+                                <h4>{this.state.q1}</h4>
+
                                 <br></br><br></br><br></br>
 
                                 <h4>How Old Are You ?</h4>
@@ -195,13 +225,15 @@ export default class CCRegisterPage extends Component {
                                 <br></br>
 
                                 <h4>What Type of Vehicle Do You Own ?</h4>
-                                <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
-                                    <Button>Jeep</Button>&nbsp;&nbsp;
-                                    <Button>ATV</Button>&nbsp;&nbsp;
-                                    <Button>RZR</Button>&nbsp;&nbsp;
-                                    <Button>Motorcycle</Button>&nbsp;&nbsp;
-                                    <Button>Other</Button>
+                                <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q3: e.target.value })}>
+                                    <Button value="Jeep">Jeep</Button>&nbsp;&nbsp;
+                                    <Button value="ATV">ATV</Button>&nbsp;&nbsp;
+                                    <Button value="RZR">RZR</Button>&nbsp;&nbsp;
+                                    <Button value="Motorcycle">Motorcycle</Button>&nbsp;&nbsp;
+                                    <Button value="Other">Other</Button>
                                 </ButtonGroup>
+                                <h2>{this.state.q3}</h2>
+
 
 
                                 <br></br><br></br><br></br><br></br>
@@ -216,6 +248,14 @@ export default class CCRegisterPage extends Component {
 
 
                                 <br></br>
+
+
+                                <div>
+                                    <Chip className={classes.chip} label="Extra Soft" />
+                                    <Chip className={classes.chip} label="Soft" />
+                                    <Chip className={classes.chip} label="Medium" />
+                                    <Chip className={classes.chip} label="Hard" />
+                                </div>
                                 {/*progressbar */}
 
                                 {/* <ProgressBar animated now={95} /> */}
@@ -298,3 +338,72 @@ export default class CCRegisterPage extends Component {
 
 
 
+// import React from 'react';
+// import { makeStyles } from '@material-ui/core/styles';
+// import Chip from '@material-ui/core/Chip';
+// import Button from '@material-ui/core/Button';
+// import Grid from '@material-ui/core/Grid';
+// import Divider from '@material-ui/core/Divider';
+// import Typography from '@material-ui/core/Typography';
+
+// const useStyles = makeStyles((theme) => ({
+//     root: {
+//         width: '100%',
+//         maxWidth: 360,
+//         backgroundColor: theme.palette.background.paper,
+//     },
+//     chip: {
+//         margin: theme.spacing(0.5),
+//     },
+//     section1: {
+//         margin: theme.spacing(3, 2),
+//     },
+//     section2: {
+//         margin: theme.spacing(2),
+//     },
+//     section3: {
+//         margin: theme.spacing(3, 1, 1),
+//     },
+// }));
+
+// export default function MiddleDividers() {
+//     const classes = useStyles();
+
+//     return (
+//         <div className={classes.root}>
+//             <div className={classes.section1}>
+//                 <Grid container alignItems="center">
+//                     <Grid item xs>
+//                         <Typography gutterBottom variant="h4">
+//                             Toothbrush
+//             </Typography>
+//                     </Grid>
+//                     <Grid item>
+//                         <Typography gutterBottom variant="h6">
+//                             $4.50
+//             </Typography>
+//                     </Grid>
+//                 </Grid>
+//                 <Typography color="textSecondary" variant="body2">
+//                     Pinstriped cornflower blue cotton blouse takes you on a walk to the park or just down the
+//                     hall.
+//         </Typography>
+//             </div>
+//             <Divider variant="middle" />
+//             <div className={classes.section2}>
+//                 <Typography gutterBottom variant="body1">
+//                     Select type
+//         </Typography>
+//                 <div>
+//                     <Chip className={classes.chip} label="Extra Soft" />
+//                     <Chip className={classes.chip} color="primary" label="Soft" />
+//                     <Chip className={classes.chip} label="Medium" />
+//                     <Chip className={classes.chip} label="Hard" />
+//                 </div>
+//             </div>
+//             <div className={classes.section3}>
+//                 <Button color="primary">Add to cart</Button>
+//             </div>
+//         </div>
+//     );
+// }

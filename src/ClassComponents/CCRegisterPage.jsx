@@ -27,9 +27,9 @@ const useStyles = makeStyles((theme) => ({
 
     chip: {
         margin: theme.spacing(0.5),
-        marginRight:20
+        marginRight: 20
     },
- 
+
 }));
 
 
@@ -47,10 +47,11 @@ export default class CCRegisterPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            opacity: 0.4,
+            opacity: 1,
             email: '',
             fname: '',
             lname: '',
+            age: '',
             password: '',
             cPassword: '',
             data_from_sql: '',
@@ -60,6 +61,8 @@ export default class CCRegisterPage extends Component {
             value: '',
             q1: '',
             q3: '',
+            q4: '',
+            disabled: false,
         }
     }
 
@@ -117,15 +120,19 @@ export default class CCRegisterPage extends Component {
                 text: "Confirm Password Missing Details - Please Insert Again ",
                 Onclick: () => { Swal.clickConfirm() }
             }).then(() => {
-                window.location.reload(false)
+                window.location.reload(false);
             })
         }
 
         else {
             window.scrollTo({ top: 530, behavior: 'smooth' })
             this.setState(prevState => ({
-                opacity: 1
+                opacity: 1,
+                disabled: true,
+
+
             }))
+
 
             // Swal.fire({
             //     position: 'top-down',
@@ -135,22 +142,68 @@ export default class CCRegisterPage extends Component {
             //     showConfirmButton: true,
             // })
 
-            this.handle();
+            // this.handle();
         }
 
     }
 
+    postTosqlQues = () => {
+        alert("Post to Answer")
+        if (this.state.q1 == '' || this.state.q3 == '' || this.state.q4 == '' || this.state.age == '') {
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "Some Details Are Missing",
+                Onclick: () => { Swal.clickConfirm() }
+            }).then(() => {
+                window.location.reload(false)
+            })
+
+
+        }
+        else {
+            const newAnswer = {
+                Email: this.state.email,
+                Q1: this.state.q1,
+                Q2: this.state.q3,
+                Q3: this.state.q4,
+            }
+
+            let apiUrl = `http://localhost:53281/api/Questionnaire`;
+
+            ////POST
+            fetch(apiUrl, {
+                method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                mode: 'cors', // no-cors, *cors, same-origin
+                cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                credentials: 'same-origin', // include, *same-origin, omit
+                headers: {
+                    'Content-Type': 'application/json'
+                    // 'Content-type': 'application/json; charset=UTF-8', //very important to add the 'charset=UTF-8'!!!!
+                    // 'Accept': 'application/json; charset=UTF-8'
+                },
+                redirect: 'follow', // manual, *follow, error
+                referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+                body: JSON.stringify(newAnswer) // body data type must match "Content-Type" header
+            }).then(response =>
+                this.clearForm()
+            );
+
+            this.handle();
+        }
+    }
+
 
     handle = () => {
-        alert("Fill Out")
+        alert("Getting IN")
 
         const newUser = {
             Email: this.state.email,
             Password: this.state.password,
             Fname: this.state.fname,
             Lname: this.state.lname,
-            Age: 17
-
+            Age: this.state.age
         }
 
         let apiUrl = `http://localhost:53281/api/User`;
@@ -186,27 +239,29 @@ export default class CCRegisterPage extends Component {
                         <h1 className="ExPa" > Create an Account </h1>
 
                         <form>
-                            <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" onChange={(e) => this.setState({ email: e.target.value })} autoFocus />
-                            <Row>
-                                <Col>
-                                    <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="fname" label="First Name" name="fname" autoComplete="First Name" onChange={(e) => this.setState({ fname: e.target.value })} autoFocus />
-                                </Col>
-                                <Col>
-                                    <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="lname" label="Last Name" name="lname" autoComplete="Last Name" onChange={(e) => this.setState({ lname: e.target.value })} autoFocus />
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password" onChange={(e) => this.setState({ password: e.target.value })} />
-                                </Col>
-                                <Col>
-                                    <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth name="Cpassword" label="Confirm" type="password" id="Cpassword" autoComplete="confirm-password" onChange={(e) => this.setState({ cPassword: e.target.value })} />
-                                </Col>
-                            </Row>
-                            <br></br>
-                            <Button fullWidth variant="primary" size="lg" onClick={this.goTO}>GET STARTED</Button>
-                            <br></br><br></br><br></br><br></br>
+                            <div id="part1" >
 
+                                <TextField disabled={this.state.disabled} style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" onChange={(e) => this.setState({ email: e.target.value })} autoFocus />
+                                <Row>
+                                    <Col>
+                                        <TextField disabled={this.state.disabled} style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="fname" label="First Name" name="fname" autoComplete="First Name" onChange={(e) => this.setState({ fname: e.target.value })} autoFocus />
+                                    </Col>
+                                    <Col>
+                                        <TextField disabled={this.state.disabled} style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="lname" label="Last Name" name="lname" autoComplete="Last Name" onChange={(e) => this.setState({ lname: e.target.value })} autoFocus />
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        <TextField disabled={this.state.disabled} style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password" onChange={(e) => this.setState({ password: e.target.value })} />
+                                    </Col>
+                                    <Col>
+                                        <TextField disabled={this.state.disabled} style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth name="Cpassword" label="Confirm" type="password" id="Cpassword" autoComplete="confirm-password" onChange={(e) => this.setState({ cPassword: e.target.value })} />
+                                    </Col>
+                                </Row>
+                                <br></br>
+                                <Button fullWidth variant="info" size="lg" onClick={this.goTO} disabled={this.state.disabled} >Let's GO !</Button>
+                                <br></br><br></br><br></br><br></br>
+                            </div>
 
                             {/* Questionnaire */}
                             <div id="part2" style={{ opacity: this.state.opacity }}>
@@ -215,13 +270,13 @@ export default class CCRegisterPage extends Component {
                                     <Button value="Male" onClick={(e) => this.setState({ q1: e.target.value })}>Male</Button>&nbsp;
                                     <Button value="Female" onClick={(e) => this.setState({ q1: e.target.value })}>Female</Button>
                                 </ButtonGroup>
-                                <h4>{this.state.q1}</h4>
+                                {/* <h4>{this.state.q1}</h4> */}
 
                                 <br></br><br></br><br></br>
 
                                 <h4>How Old Are You ?</h4>
-                                <RangeSlider value={this.state.setValue} onChange={(e) => this.setState({ setValue: e.target.value })} />
-                                <h2>{this.state.setValue}</h2>
+                                <RangeSlider value={this.state.age} onChange={(e) => this.setState({ age: e.target.value })} />
+                                <h2>{this.state.age}</h2>
                                 <br></br>
 
                                 <h4>What Type of Vehicle Do You Own ?</h4>
@@ -232,30 +287,41 @@ export default class CCRegisterPage extends Component {
                                     <Button value="Motorcycle">Motorcycle</Button>&nbsp;&nbsp;
                                     <Button value="Other">Other</Button>
                                 </ButtonGroup>
-                                <h2>{this.state.q3}</h2>
-
-
+                                {/* <h2>{this.state.q3}</h2> */}
 
                                 <br></br><br></br><br></br><br></br>
-
-
                                 <h4>Would You Like To Travel With Other Friends ?</h4>
-                                <DropdownButton as={ButtonGroup} title="Would You Like To Travel With Other Friends ?" id="bg-vertical-dropdown-1">
+                                <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q4: e.target.value })}>
+                                    <Button value="Sure">Sure !</Button>&nbsp;&nbsp;
+                                    <Button value="By My Own">Only By My Own</Button>&nbsp;&nbsp;
+                                    <Button value="Closest Friends">With My Closest Friends</Button>&nbsp;&nbsp;
+                                </ButtonGroup>
+                                {/* <h2>{this.state.q4}</h2> */}
+                                <br></br><br></br>
+                                <Button fullWidth variant="success" size="lg" onClick={this.postTosqlQues}>GET STARTED</Button>
+
+                                {/* <DropdownButton as={ButtonGroup} title="Would You Like To Travel With Other Friends ?" id="bg-vertical-dropdown-1">
                                     <DropdownItem eventKey="1">Sure !</DropdownItem>
                                     <DropdownItem eventKey="2">Only By My Own</DropdownItem>
                                     <DropdownItem eventKey="3">With My Closest Friends</DropdownItem>
-                                </DropdownButton>
+                                </DropdownButton> */}
 
-
+                                {/* <Row>
+                                    <Form.Check aria-label="option 1" />
+                                    <Form.Check aria-label="option 1" />
+                                    <Form.Check aria-label="option 1" />
+                                    <Form.Check aria-label="option 1" />
+                                </Row> */}
                                 <br></br>
 
 
-                                <div>
+                                {/* <div>
                                     <Chip className={classes.chip} label="Extra Soft" />
                                     <Chip className={classes.chip} label="Soft" />
                                     <Chip className={classes.chip} label="Medium" />
                                     <Chip className={classes.chip} label="Hard" />
-                                </div>
+                                </div> */}
+
                                 {/*progressbar */}
 
                                 {/* <ProgressBar animated now={95} /> */}

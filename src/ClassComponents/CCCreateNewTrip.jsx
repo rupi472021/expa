@@ -9,15 +9,15 @@ export default class CCCreateNewTrip extends Component {
         this.state = {
             trip_name: '',
             trip_date: '',
-            vehicle_type: '',
             trip_nights: '',
             trip_area: '',
-
+            num_of_participants: '',
+            vehicle_type: '',
         }
     };
 
     checkValidationbtn = () => {
-        if (this.state.trip_name == '' || this.state.trip_date == '' || this.state.vehicle_type == '' || this.state.trip_nights == '') {
+        if (this.state.trip_name == '' || this.state.trip_date == '' || this.state.vehicle_type == '' || this.state.trip_nights == '' || this.state.trip_area == ' ' || this.state.num_of_participants == '') {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -31,9 +31,38 @@ export default class CCCreateNewTrip extends Component {
     }
 
     publish = () => {
-        //alert("in publish function") 
+        //alert("in publish function")
+        
+        const newTrip = {
+            Admin_email: localStorage.getItem('user_email'),
+            Name: this.state.trip_name,
+            Date: this.state.trip_date,
+            NumOfnights: this.state.trip_nights,
+            Area: this.state.trip_area,
+            Participants: this.state.num_of_participants,
+            VehicleType: this.state.vehicle_type
+        }
 
+        let apiUrl = `http://localhost:54976/api/NewTrip`;
 
+        ////POST
+        fetch(apiUrl, {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, *cors, same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json'
+                // 'Content-type': 'application/json; charset=UTF-8', //very important to add the 'charset=UTF-8'!!!!
+                // 'Accept': 'application/json; charset=UTF-8'
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+            body: JSON.stringify(newTrip) // body data type must match "Content-Type" header
+        }).then(response =>
+            alert("good post")
+            //this.clearForm()
+        );
 
     }
 
@@ -90,19 +119,22 @@ export default class CCCreateNewTrip extends Component {
                         </div>
                     ))}
                     </Form>
-                </Form><br></br>
-                <DropdownButton id="dropdown-split-variants" title="Trip's Vehicle Type:">
-                    <Dropdown.ItemText>Dropdown item text</Dropdown.ItemText>
+                    <Form.Group controlId="formBasicName">
+                        <Form.Label> Number of Participants:</Form.Label>
+                        <Form.Control style={{ width: '50%', marginLeft: 100 }} type="number" placeholder="Enter Number of Participants" size='small' onChange={(number) => this.setState({ num_of_participants: number.target.value })} />
+                    </Form.Group>
+                </Form>
+                        Trip's Vehicle Type:
+                <DropdownButton defult="D" title={this.state.vehicle_type}>
                     <Dropdown.Item onClick={(ATV) => this.setState({ vehicle_type: ATV.target.value })} as="button" value="ATV"> ATV </Dropdown.Item>
                     <Dropdown.Item onClick={(JEEP) => this.setState({ vehicle_type: JEEP.target.value })} as="button" value="JEEP"> JEEP </Dropdown.Item>
                     <Dropdown.Item onClick={(RZR) => this.setState({ vehicle_type: RZR.target.value })} as="button" value="RZR"> RZR </Dropdown.Item>
                     <Dropdown.Item onClick={(Motorcycle) => this.setState({ vehicle_type: Motorcycle.target.value })} as="button" value="Motorcycle"> Motorcycle </Dropdown.Item>
                     <Dropdown.Item onClick={(Other) => this.setState({ vehicle_type: Other.target.value })} as="button" value="Other"> Other </Dropdown.Item>
                 </DropdownButton><br></br>
-                <Button variant="primary" type="button" onClick={() => alert("your trip name is: " + this.state.trip_name + " on this date & time: " + this.state.trip_date + " numbers of nights: " + this.state.trip_nights + " Trip area: " + this.state.trip_area + " and vehicle type is: " + this.state.vehicle_type)} > Publish Trip </Button><br></br><br></br>
-                <Button variant="secondary" size="sm" className="but" onClick={this.backbtn}> Main Menu </Button>
+                <Button variant="primary" type="button" onClick={this.checkValidationbtn} > Publish Trip </Button><br></br><br></br>
             </div >
-            // onClick={() => alert("your trip name is: " + this.state.trip_name + " on this date & time: " + this.state.trip_date + " numbers og nights: " +this.state.trip_nights+ " Trip area: " +this.state.trip_area+ " and vehicle type is: " +this.state.vehicle_type)}
+            // onClick={() => alert("trip name: " + this.state.trip_name + " date & time: " + this.state.trip_date + " numbers of nights: " + this.state.trip_nights + " Trip area: " + this.state.trip_area + " number of participants: " + this.state.num_of_participants + " and vehicle type is: " + this.state.vehicle_type)}
         )
     }
 }

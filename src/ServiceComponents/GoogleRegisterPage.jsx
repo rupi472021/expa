@@ -15,17 +15,12 @@ export default function GoogleRegisterPage() {
         localStorage.setItem('user_email', res.profileObj.email); //save user's email from Google in LS
         localStorage.setItem('user_image', res.profileObj.imageUrl); //save profile image from Google in LS
 
-        fromGoogleToRegister();
+
     };
 
     const onFailure = (res) => {
         console.log('[Login Falied from google] res:', res);
     };
-
-    const fromGoogleToRegister = () => {
-        alert(localStorage.getItem('user_email'));
-        this.props.datafromgoogle();
-    }
 
     return (
         <div>
@@ -37,7 +32,6 @@ export default function GoogleRegisterPage() {
                 cookiePolicy={'single_host_origin'}
                 style={{ marginTop: '100px' }}
                 isSignedIn={false}
-
             />
         </div>
     );

@@ -241,7 +241,7 @@ export default class CCRegisterPage extends Component {
                         <h1 className="ExPa" > Create an Account </h1>
                         <form>
                             <div id="part1" >
-                                Access with: <GoogleRegisterPage datafromgoogle={this.datafromgoogle} />
+                                Access with: <GoogleRegisterPage />
                                 <TextField disabled={this.state.disabled} style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" onChange={(e) => this.setState({ email: e.target.value })} autoFocus />
                                 <Row>
                                     <Col>

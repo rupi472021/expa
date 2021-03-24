@@ -26,7 +26,7 @@ export default function FCMainMenuPage() {
 
     return (
         <div style={{ backgroundColor: '#1d21243b', height: '100vh', alignItems: 'center' }}>
-            <Button variant="contained" color="back" size="sm" className="but" onClick={backbtn}> BACK</Button>
+            <div style={{ padding: 10 }}><Button variant="contained" color="back" size="sm" className="but" onClick={backbtn}> BACK </Button></div>
             <div style={{ textAlign: 'center' }}><br></br>
                 <img src={localStorage.getItem('user_image')} alt={true} style={{ width: '30%' }} /><br></br><br></br>
                 <p>

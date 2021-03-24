@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
 import Avatar from '@material-ui/core/Avatar';
-import { ButtonDropdown, DropdownMenu, DropdownToggle, Row, UncontrolledButtonDropdown } from 'reactstrap';
+import { ButtonDropdown, DropdownMenu, DropdownToggle, Input, Row, UncontrolledButtonDropdown } from 'reactstrap';
 import classes from './BlogCard.module.css';
 import '../MyStyle.css';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -13,15 +13,13 @@ import RangeSlider from 'react-bootstrap-range-slider';
 import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
 import DropdownItem from 'react-bootstrap/esm/DropdownItem';
 import { SettingsOverscanOutlined } from '@material-ui/icons';
-
-
-
-
-
+import Google_RegisterPage from '../ServiceComponents/GoogleRegisterPage';
 import { makeStyles } from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
 import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
+import GoogleRegisterPage from '../ServiceComponents/GoogleRegisterPage';
+
 
 const useStyles = makeStyles((theme) => ({
 
@@ -46,6 +44,7 @@ export default class CCRegisterPage extends Component {
 
     constructor(props) {
         super(props);
+        this.datafromgoogle = this.datafromgoogle.bind(this);
         this.state = {
             opacity: 1,
             email: '',
@@ -170,7 +169,7 @@ export default class CCRegisterPage extends Component {
                 Q3: this.state.q4,
             }
 
-            let apiUrl = `http://localhost:53281/api/Questionnaire`;
+            let apiUrl = `http://localhost:54976/api/Questionnaire`;
 
             ////POST
             fetch(apiUrl, {
@@ -206,7 +205,7 @@ export default class CCRegisterPage extends Component {
             Age: this.state.age
         }
 
-        let apiUrl = `http://localhost:53281/api/User`;
+        let apiUrl = `http://localhost:54976/api/User`;
 
         ////POST
         fetch(apiUrl, {
@@ -228,19 +227,21 @@ export default class CCRegisterPage extends Component {
     }
     toggle = () => this.state.setOpen(!this.state.dropdownOpen);
 
+    datafromgoogle = (d) => {
+        alert(d);
+    }
+
     render() {
         return (
-
             <div className={classes.NewBLogCard}>
                 <Container>
                     <div className={classes.Container} >
                         <Button variant="secondary" size="sm" href="/" className="but"> BACK </Button>
                         <Avatar alt="Remy Sharp" src="https://i.ibb.co/7S6XfNZ/circle-cropped.png" style={{ width: '15vh', height: '15vh', marginTop: '10px' }} />
                         <h1 className="ExPa" > Create an Account </h1>
-
                         <form>
                             <div id="part1" >
-
+                                Access with: <GoogleRegisterPage datafromgoogle={this.datafromgoogle} />
                                 <TextField disabled={this.state.disabled} style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" onChange={(e) => this.setState({ email: e.target.value })} autoFocus />
                                 <Row>
                                     <Col>

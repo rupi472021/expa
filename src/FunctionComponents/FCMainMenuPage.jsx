@@ -35,12 +35,12 @@ export default function FCMainMenuPage() {
             </div>
             <div>
                 <div style={{ marginTop: 100 }}>
-                    <Button style={{ marginBottom: 75, marginLeft: 10 }} variant="contained" color="secondary" size="large"> Join Trip </Button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <Button disabled={true} style={{ marginBottom: 75, marginLeft: 10 }} variant="contained" color="secondary" size="large"> Join Trip </Button>&nbsp;&nbsp;&nbsp;&nbsp;
                     <Button style={{ marginTop: 75, marginLeft: -140, position: 'absulot' }} variant="contained" color="secondary" size="large" href='/main_menu_page/create_new_trip_page'> New Trip </Button>
                 </div>
                 <div style={{ marginTop: 125 }}>
-                    <Button variant="contained" color="primary" size="large"> My Profile </Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <Button variant="contained" color="primary" size="large"> My Trips </Button>
+                    <Button disabled={true} variant="contained" color="primary" size="large"> My Profile </Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <Button disabled={true} variant="contained" color="primary" size="large"> My Trips </Button>
                 </div>
             </div>
         </div>

@@ -62,6 +62,7 @@ export default class CCRegisterPage extends Component {
             q3: '',
             q4: '',
             disabled: false,
+            visibilityt: 'hidden'
         }
     }
 
@@ -205,7 +206,7 @@ export default class CCRegisterPage extends Component {
             Age: this.state.age
         }
 
-        let apiUrl = `http://localhost:54976/api/User`;
+        let apiUrl = `http://localhost:53281/api/User`;
 
         ////POST
         fetch(apiUrl, {
@@ -231,6 +232,14 @@ export default class CCRegisterPage extends Component {
         alert(d);
     }
 
+
+    OpenJoinOption = () => {
+        alert("bling")
+        this.setState(prevState => ({
+            visibilityt: 'visible',
+        }))
+    }
+
     render() {
         return (
             <div className={classes.NewBLogCard}>
@@ -241,7 +250,7 @@ export default class CCRegisterPage extends Component {
                         <h1 className="ExPa" > Create an Account </h1>
                         <form>
                             <div id="part1" >
-                                Access with: <GoogleRegisterPage datafromgoogle={this.datafromgoogle} />
+                                Access with: <GoogleRegisterPage />
                                 <TextField disabled={this.state.disabled} style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" onChange={(e) => this.setState({ email: e.target.value })} autoFocus />
                                 <Row>
                                     <Col>
@@ -286,9 +295,31 @@ export default class CCRegisterPage extends Component {
                                     <Button value="ATV">ATV</Button>&nbsp;&nbsp;
                                     <Button value="RZR">RZR</Button>&nbsp;&nbsp;
                                     <Button value="Motorcycle">Motorcycle</Button>&nbsp;&nbsp;
-                                    <Button value="Other">Other</Button>
+                                    <Button onClick={this.OpenJoinOption} value="Other">None</Button>
                                 </ButtonGroup>
                                 {/* <h2>{this.state.q3}</h2> */}
+
+
+                                <br></br><br></br><br></br>
+
+                                <div style={{ visibility: this.state.visibilityt }}>
+                                    <h4>Would you like to join another partners?</h4>
+                                    <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q3: e.target.value })}>
+                                        <Button value="YES">YES</Button>&nbsp;&nbsp;
+                                    <Button value="NO">NO</Button>&nbsp;&nbsp;
+                                </ButtonGroup>
+                                </div>
+
+
+                                <br></br><br></br><br></br>
+                                <h4>How often do you travel?</h4>
+                                <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q3: e.target.value })}>
+                                    <Button value="YES">Once a Week</Button>&nbsp;&nbsp;
+                                    <Button value="NO">יקקטי</Button>&nbsp;&nbsp;
+                                </ButtonGroup>
+
+
+
 
                                 <br></br><br></br><br></br><br></br>
                                 <h4>Would You Like To Travel With Other Friends ?</h4>

@@ -50,7 +50,7 @@ export default class CCRegisterPage extends Component {
             email: '',
             fname: '',
             lname: '',
-            age: '',
+            // age: '30',
             password: '',
             cPassword: '',
             data_from_sql: '',
@@ -59,10 +59,19 @@ export default class CCRegisterPage extends Component {
             setValue: '50',
             value: '',
             q1: '',
+            q2: '30',
             q3: '',
             q4: '',
+            q5: '',
+            q6: '',
+            q7: '',
+            q8: '',
+            q9: '',
+            q10: '',
+            q11: '',
+
             disabled: false,
-            visibilityt: 'hidden'
+            visibilityt: 'hidden',
         }
     }
 
@@ -149,7 +158,7 @@ export default class CCRegisterPage extends Component {
 
     postTosqlQues = () => {
         alert("Post to Answer")
-        if (this.state.q1 == '' || this.state.q3 == '' || this.state.q4 == '' || this.state.age == '') {
+        if (this.state.q1 == '' || this.state.q2== '' || this.state.q3 == '' || this.state.q4 == '' || this.state.q5 == '' || this.state.q6 == '' || this.state.q7 == ''|| this.state.q8 == ''|| this.state.q9 == ''|| this.state.q10 == ''|| this.state.q11 == '') {
 
             Swal.fire({
                 icon: 'error',
@@ -166,11 +175,19 @@ export default class CCRegisterPage extends Component {
             const newAnswer = {
                 Email: this.state.email,
                 Q1: this.state.q1,
-                Q2: this.state.q3,
-                Q3: this.state.q4,
+                Q2: this.state.q2,
+                Q3: this.state.q3,
+                Q4: this.state.q4,
+                Q5: this.state.q5,
+                Q6: this.state.q6,
+                Q7: this.state.q7,
+                Q8: this.state.q8,
+                Q9: this.state.q9,
+                Q10: this.state.q10,
+                Q11: this.state.q11,
             }
 
-            let apiUrl = `http://localhost:54976/api/Questionnaire`;
+            let apiUrl = `http://localhost:53281/api/Questionnaire`;
 
             ////POST
             fetch(apiUrl, {
@@ -273,64 +290,131 @@ export default class CCRegisterPage extends Component {
                                 <br></br><br></br><br></br><br></br>
                             </div>
 
+
+
+
                             {/* Questionnaire */}
                             <div id="part2" style={{ opacity: this.state.opacity }}>
-                                <h4>What is Your Gender ?</h4>
+                                <h4>I am a...</h4>
                                 <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
                                     <Button value="Male" onClick={(e) => this.setState({ q1: e.target.value })}>Male</Button>&nbsp;
                                     <Button value="Female" onClick={(e) => this.setState({ q1: e.target.value })}>Female</Button>
                                 </ButtonGroup>
-                                {/* <h4>{this.state.q1}</h4> */}
-
+                                <h4>{this.state.q1}</h4>
                                 <br></br><br></br><br></br>
 
-                                <h4>How Old Are You ?</h4>
-                                <RangeSlider value={this.state.age} onChange={(e) => this.setState({ age: e.target.value })} />
-                                <h2>{this.state.age}</h2>
+
+
+                                <h4>I am {this.state.q2} Years Old</h4>
+                                <RangeSlider value={this.state.q2} onChange={(e) => this.setState({ q2: e.target.value })} />
+                                <h4>{this.state.q2}</h4>
                                 <br></br>
 
-                                <h4>What Type of Vehicle Do You Own ?</h4>
+
+                                <h4>I have Kids </h4>
                                 <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q3: e.target.value })}>
+                                    <Button value="YES">YES</Button>&nbsp;&nbsp;
+                                    <Button value="NO">NO</Button>&nbsp;&nbsp;
+                                </ButtonGroup>
+                                <h4>{this.state.q3}</h4>
+                                <br></br><br></br><br></br>
+
+
+                                <h4>I have ...</h4>
+                                <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q4: e.target.value })}>
                                     <Button value="Jeep">Jeep</Button>&nbsp;&nbsp;
                                     <Button value="ATV">ATV</Button>&nbsp;&nbsp;
                                     <Button value="RZR">RZR</Button>&nbsp;&nbsp;
                                     <Button value="Motorcycle">Motorcycle</Button>&nbsp;&nbsp;
-                                    <Button onClick={this.OpenJoinOption} value="Other">None</Button>
+                                    <Button onClick={this.OpenJoinOption} value="None">None of the Above</Button>
                                 </ButtonGroup>
-                                {/* <h2>{this.state.q3}</h2> */}
-
-
+                                <h2>{this.state.q4}</h2>
                                 <br></br><br></br><br></br>
 
-                                <div style={{ visibility: this.state.visibilityt }}>
-                                    <h4>Would you like to join another partners?</h4>
-                                    <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q3: e.target.value })}>
-                                        <Button value="YES">YES</Button>&nbsp;&nbsp;
-                                    <Button value="NO">NO</Button>&nbsp;&nbsp;
+
+
+                                <h4>I am Looking for...</h4>
+                                <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q5: e.target.value })}>
+                                    <Button value="oneTime">One-Time Partners Trip </Button>&nbsp;&nbsp;
+                                    <Button value="short">Partners To Travel With in The Short Term</Button>&nbsp;&nbsp;
+                                    <Button value="long">Partners To Travel With in The Long Term</Button>&nbsp;&nbsp;
+                                </ButtonGroup>
+                                <h4>{this.state.q5}</h4>
+                                <br></br><br></br><br></br>
+
+
+                                <h4>I'd love to Travel With Those Ages </h4>
+                                <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q6: e.target.value })}>
+                                    <Button value="20-50">20-50</Button>&nbsp;&nbsp;
+                                </ButtonGroup>
+                                <h4>{this.state.q6}</h4>
+                                <br></br><br></br><br></br>
+
+
+
+                                <div /*style={{ visibility: this.state.visibilityt }}*/>
+                                    <h4>I have no problem being with other Partners in the same vehicle </h4>
+                                    <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q7: e.target.value })}>
+                                        <Button value="YES">Right! Sharing Is Caring </Button>&nbsp;&nbsp;
+                                    <Button value="NO">Ahh Sorry... It's not for me</Button>&nbsp;&nbsp;
                                 </ButtonGroup>
                                 </div>
-
-
+                                <h4>{this.state.q7}</h4>
                                 <br></br><br></br><br></br>
-                                <h4>How often do you travel?</h4>
-                                <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q3: e.target.value })}>
-                                    <Button value="YES">Once a Week</Button>&nbsp;&nbsp;
-                                    <Button value="NO">יקקטי</Button>&nbsp;&nbsp;
+
+
+
+                                {/* לשנות למד של 1-5 , 5 זה הכי גבוה מטייל בתדירות גבוהה */}
+                                <h4>I Travel ...</h4>
+                                <h4>(1 being the lowest frequency and 5 being the highest frequency) </h4>
+
+                                <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q8: e.target.value })}>
+                                    <Button value="1">1</Button>&nbsp;&nbsp;
+                                    <Button value="2">2</Button>&nbsp;&nbsp;
+                                    <Button value="3">3</Button>&nbsp;&nbsp;
+                                    <Button value="4">4</Button>&nbsp;&nbsp;
+                                    <Button value="5">5</Button>&nbsp;&nbsp;
                                 </ButtonGroup>
+                                <h4>{this.state.q8}</h4>
+                                <br></br><br></br><br></br>
 
 
-
-
-                                <br></br><br></br><br></br><br></br>
-                                <h4>Would You Like To Travel With Other Friends ?</h4>
-                                <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q4: e.target.value })}>
-                                    <Button value="Sure">Sure !</Button>&nbsp;&nbsp;
-                                    <Button value="By My Own">Only By My Own</Button>&nbsp;&nbsp;
-                                    <Button value="Closest Friends">With My Closest Friends</Button>&nbsp;&nbsp;
+                                <h4>That Word Better Describes Me</h4>
+                                <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q9: e.target.value })}>
+                                    <Button value="affable ">Affable</Button>&nbsp;&nbsp;
+                                    <Button value="troglodyte ">Troglodyte</Button>&nbsp;&nbsp;
                                 </ButtonGroup>
-                                {/* <h2>{this.state.q4}</h2> */}
+                                <h4>{this.state.q9}</h4>
+                                <br></br><br></br><br></br>
+
+
+                                <h4>I like to talk about these issues</h4>
+                                <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q10: e.target.value })}>
+                                    <Button value="Politics ">Politics</Button>&nbsp;&nbsp;
+                                    <Button value="Sport">Sport</Button>&nbsp;&nbsp;
+                                    <Button value="Economy">Economy</Button>&nbsp;&nbsp;
+                                    <Button value="FamilyLife">Family Life</Button>&nbsp;&nbsp;
+                                    <Button value="Studying">Studying</Button>&nbsp;&nbsp;
+                                    <Button value="Workplace">Workplace</Button>&nbsp;&nbsp;
+                                    <Button value="NightLife">NightLife</Button>&nbsp;&nbsp;
+                                    <Button value="Other">Other</Button>&nbsp;&nbsp;
+                                </ButtonGroup>
+                                <h4>{this.state.q10}</h4>
                                 <br></br><br></br>
+
+
+                                <h4>Cigarette ? </h4>
+                                <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q11: e.target.value })}>
+                                    <Button value="no">Not For ME</Button>&nbsp;&nbsp;
+                                    <Button value="yes">I Smoke</Button>&nbsp;&nbsp;
+                                </ButtonGroup>
+                                <h4>{this.state.q11}</h4>
+                                <br></br><br></br><br></br>
+
+
                                 <Button fullWidth variant="success" size="lg" onClick={this.postTosqlQues}>GET STARTED</Button>
+
+
 
                                 {/* <DropdownButton as={ButtonGroup} title="Would You Like To Travel With Other Friends ?" id="bg-vertical-dropdown-1">
                                     <DropdownItem eventKey="1">Sure !</DropdownItem>
@@ -343,11 +427,11 @@ export default class CCRegisterPage extends Component {
                                     <Form.Check aria-label="option 1" />
                                     <Form.Check aria-label="option 1" />
                                     <Form.Check aria-label="option 1" />
-                                </Row> */}
-                                <br></br>
+                                </Row>
+                                <br></br> */}
 
-
-                                {/* <div>
+                                {/* 
+                                <div>
                                     <Chip className={classes.chip} label="Extra Soft" />
                                     <Chip className={classes.chip} label="Soft" />
                                     <Chip className={classes.chip} label="Medium" />

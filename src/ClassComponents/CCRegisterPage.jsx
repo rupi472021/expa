@@ -69,7 +69,8 @@ export default class CCRegisterPage extends Component {
             q9: '',
             q10: '',
             q11: '',
-
+            btnColor1: 'primary',
+            btnColor2: 'primary',
             disabled: false,
             visibilityt: 'hidden',
         }
@@ -158,7 +159,7 @@ export default class CCRegisterPage extends Component {
 
     postTosqlQues = () => {
         alert("Post to Answer")
-        if (this.state.q1 == '' || this.state.q2== '' || this.state.q3 == '' || this.state.q4 == '' || this.state.q5 == '' || this.state.q6 == '' || this.state.q7 == ''|| this.state.q8 == ''|| this.state.q9 == ''|| this.state.q10 == ''|| this.state.q11 == '') {
+        if (this.state.q1 == '' || this.state.q2 == '' || this.state.q3 == '' || this.state.q4 == '' || this.state.q5 == '' || this.state.q6 == '' || this.state.q7 == '' || this.state.q8 == '' || this.state.q9 == '' || this.state.q10 == '' || this.state.q11 == '') {
 
             Swal.fire({
                 icon: 'error',
@@ -296,9 +297,9 @@ export default class CCRegisterPage extends Component {
                             {/* Questionnaire */}
                             <div id="part2" style={{ opacity: this.state.opacity }}>
                                 <h4>I am a...</h4>
-                                <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
-                                    <Button value="Male" onClick={(e) => this.setState({ q1: e.target.value })}>Male</Button>&nbsp;
-                                    <Button value="Female" onClick={(e) => this.setState({ q1: e.target.value })}>Female</Button>
+                                <ButtonGroup aria-label="contained primary button group">
+                                    <Button variant={this.state.btnColor1} value="Male" onClick={(e) => this.setState({ q1: e.target.value, btnColor1: 'secondary' })}>Male</Button>&nbsp;
+                                    <Button variant={this.state.btnColor2} onClick={(e) => this.setState({ q1: e.target.value, btnColor2: 'secondary' })}>Female</Button>
                                 </ButtonGroup>
                                 <h4>{this.state.q1}</h4>
                                 <br></br><br></br><br></br>

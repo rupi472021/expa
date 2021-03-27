@@ -6,7 +6,7 @@ import CCRegisterPage from './ClassComponents/CCRegisterPage';
 import CCLoginPage from './ClassComponents/CCLoginPage';
 import CCCreateNewTrip from './ClassComponents/CCCreateNewTrip';
 import FCMainMenuPage from './FunctionComponents/FCMainMenuPage';
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { responsiveFontSizes } from '@material-ui/core';
 
 class App extends Component {
@@ -22,7 +22,7 @@ class App extends Component {
   componentDidMount = () => { //GET all Users from Users_expa (SQL) onload
 
     console.log("in componentDidMount function");
-    let apiUrl = `http://localhost:53281/api/User`;
+    let apiUrl = `http://localhost:54976/api/User`;
 
     fetch(apiUrl)
       .then(res => {
@@ -35,7 +35,7 @@ class App extends Component {
         (result) => {
           console.log("GET data from SQL= ", result);
           result.map(st => console.log(st.Fname)); // all Fname in Users_Expa
-          console.log('the first row in this table is = ', result[0].Fname + " " + result[0].Lname + " age: " + result[0].Age + " email: " + result[0].Email);
+          console.log('the third row in this table is = first name:', result[2].Fname + " last name:" + result[2].Lname + " age: " + result[2].Age + " email: " + result[2].Email);
           this.setState({
             data_from_sql: result,
           })

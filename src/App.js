@@ -35,7 +35,6 @@ class App extends Component {
         (result) => {
           console.log("GET data from SQL= ", result);
           result.map(st => console.log(st.Fname)); // all Fname in Users_Expa
-          console.log('the third row in this table is = first name:', result[2].Fname + " last name:" + result[2].Lname + " age: " + result[2].Age + " email: " + result[2].Email);
           this.setState({
             data_from_sql: result,
           })

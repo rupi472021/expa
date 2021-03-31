@@ -19,6 +19,7 @@ export default class CCCreateNewTrip extends Component {
             vehicle_type: '',
             with_children: '',
             match_percent: '',
+            match_from_SQL: '',
         }
     };
 
@@ -55,7 +56,7 @@ export default class CCCreateNewTrip extends Component {
             MatchPercent: this.state.match_percent
         }
 
-        let apiUrl = `http://localhost:53281/api/NewTrip`;
+        let apiUrl = `http://localhost:54976/api/NewTrip`;
         ////POST
         fetch(apiUrl, {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -78,10 +79,37 @@ export default class CCCreateNewTrip extends Component {
                 showConfirmButton: true,
                 Onclick: () => { Swal.clickConfirm() }
             }).then(() => {
-                window.location.href = "http://localhost:3000/main_menu_page"
+                //window.location.href = "http://localhost:3000/main_menu_page"
+                this.getmatch();
             })
         );
     }
+
+    getmatch = () => {
+
+        console.log("in getmatch function");
+        let apiUrl = `http://localhost:54976/api/Questionnaire?matchPercent=` + this.state.match_percent;
+
+        fetch(apiUrl)
+            .then(res => {
+                console.log('res=', res);
+                console.log('res.status', res.status);
+                console.log('res.ok', res.ok);
+                return res.json()
+            })
+            .then(
+                (result) => {
+                    console.log("GET match SQL= ", result);
+                    result.map(st => console.log(result)); // all Fname in Users_Expa
+                    this.setState({
+                        match_from_SQL: result,
+                    })
+                },
+                (error) => {
+                    console.log("err GET=", error);
+                });
+    }
+
 
     backbtn = () => {
         Swal.fire({
@@ -166,7 +194,7 @@ export default class CCCreateNewTrip extends Component {
                         <Dropdown.Item onClick={(Motorcycle) => this.setState({ vehicle_type: Motorcycle.target.value })} as="button" value="Motorcycle"> Motorcycle </Dropdown.Item>
                         <Dropdown.Item onClick={(Other) => this.setState({ vehicle_type: Other.target.value })} as="button" value="Other"> Other </Dropdown.Item>
                     </DropdownButton><br></br>
-                    <div> Childrens ? 
+                    <div> Childrens ?
                     <Checkbox value="yes" onChange={(yes) => this.setState({ with_children: yes.target.value })} /> Yes
                     <Checkbox value="no" onChange={(no) => this.setState({ with_children: no.target.value })} /> No
                     </div>

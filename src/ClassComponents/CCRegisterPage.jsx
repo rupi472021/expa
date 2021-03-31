@@ -188,7 +188,7 @@ export default class CCRegisterPage extends Component {
                 Q11: this.state.q11,
             }
 
-            let apiUrl = `http://localhost:53281/api/Questionnaire`;
+            let apiUrl = `http://localhost:54976/api/Questionnaire`;
 
             ////POST
             fetch(apiUrl, {
@@ -224,7 +224,7 @@ export default class CCRegisterPage extends Component {
             Age: this.state.age
         }
 
-        let apiUrl = `http://localhost:53281/api/User`;
+        let apiUrl = `http://localhost:54976/api/User`;
 
         ////POST
         fetch(apiUrl, {

@@ -19,6 +19,8 @@ export default class CCCreateNewTrip extends Component {
             vehicle_type: '',
             with_children: '',
             match_percent: '',
+            temparray: [],
+            tempemail: '',
         }
     };
 
@@ -78,10 +80,44 @@ export default class CCCreateNewTrip extends Component {
                 showConfirmButton: true,
                 Onclick: () => { Swal.clickConfirm() }
             }).then(() => {
-                window.location.href = "http://localhost:3000/main_menu_page"
+                // window.location.href = "http://localhost:3000/main_menu_page"
+                this.getRelevantUser();
+
             })
         );
+
     }
+
+    getRelevantUser = () => {
+        alert("in relevant");
+        let em = 'dan@gmail.com'; /*localStorage.getItem('user_email')*/
+        let per = 50;                /*this.state.match_percent*/
+        const url = `http://localhost:53281/api/Questionnaire/getSpecific/${em}/${per}`
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                data.forEach((item) => {
+                    // this.ingredients.push({ data: item, image: item.Image });
+                    // temp.push({ image: item.Image });
+                    this.state.temparray.push({ tempemail: item.Email });
+                })
+            }).catch(function (error) {
+                console.log("Error getting document:", error);
+            });
+        console.log("Temp Rec");
+        console.log(this.state.temparray);
+
+        // this.setState({
+        //     show: true,
+        //     // ingsToRender: [...this.state.temp]
+        // })
+        // this.state.temp.forEach((item) => {
+        //     this.state.ingsToRender.push({ image: item.Image });
+
+        // })
+
+    }
+
 
     backbtn = () => {
         Swal.fire({
@@ -166,7 +202,7 @@ export default class CCCreateNewTrip extends Component {
                         <Dropdown.Item onClick={(Motorcycle) => this.setState({ vehicle_type: Motorcycle.target.value })} as="button" value="Motorcycle"> Motorcycle </Dropdown.Item>
                         <Dropdown.Item onClick={(Other) => this.setState({ vehicle_type: Other.target.value })} as="button" value="Other"> Other </Dropdown.Item>
                     </DropdownButton><br></br>
-                    <div> Childrens ? 
+                    <div> Childrens ?
                     <Checkbox value="yes" onChange={(yes) => this.setState({ with_children: yes.target.value })} /> Yes
                     <Checkbox value="no" onChange={(no) => this.setState({ with_children: no.target.value })} /> No
                     </div>

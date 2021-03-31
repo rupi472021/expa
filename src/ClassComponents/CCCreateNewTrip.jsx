@@ -20,6 +20,8 @@ export default class CCCreateNewTrip extends Component {
             with_children: '',
             match_percent: '',
             match_from_SQL: '',
+            temparray: [],
+            tempemail: '',
         }
     };
 
@@ -83,6 +85,7 @@ export default class CCCreateNewTrip extends Component {
                 this.getmatch();
             })
         );
+
     }
 
     getmatch = () => {

@@ -58,7 +58,7 @@ export default class CCCreateNewTrip extends Component {
             MatchPercent: this.state.match_percent
         }
 
-        let apiUrl = `http://localhost:54976/api/NewTrip`;
+        let apiUrl = `http://localhost:53281/api/NewTrip`;
         ////POST
         fetch(apiUrl, {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -91,26 +91,34 @@ export default class CCCreateNewTrip extends Component {
     getmatch = () => {
 
         console.log("in getmatch function");
-        let apiUrl = `http://localhost:54976/api/Questionnaire?matchPercent=` + this.state.match_percent;
-
+        let apiUrl = `http://localhost:53281/api/Questionnaire/getSpecific/${localStorage.getItem('user_email')}/${this.state.match_percent}`
+        
         fetch(apiUrl)
-            .then(res => {
-                console.log('res=', res);
-                console.log('res.status', res.status);
-                console.log('res.ok', res.ok);
-                return res.json()
-            })
-            .then(
-                (result) => {
-                    console.log("GET match SQL= ", result);
-                    result.map(st => console.log(result)); // all Fname in Users_Expa
-                    this.setState({
-                        match_from_SQL: result,
-                    })
-                },
-                (error) => {
-                    console.log("err GET=", error);
-                });
+            .then(response => response.json())
+            .then(data => {
+                this.state.temparray=[];
+                console.log("this is oz data")
+                console.log(data);
+                data.forEach((item) => {
+                    // this.ingredients.push({ data: item, image: item.Image });
+                    // temp.push({ image: item.Image });
+                    this.state.temparray.push({ tempemail: item.Email });
+                })
+            }).catch(function (error) {
+                console.log("Error getting document:", error);
+            });
+        console.log("Temp Rec");
+        console.log(this.state.temparray);
+
+        // this.setState({
+        //     show: true,
+        //     // ingsToRender: [...this.state.temp]
+        // })
+        // this.state.temp.forEach((item) => {
+        //     this.state.ingsToRender.push({ image: item.Image });
+
+        // })
+
     }
 
 

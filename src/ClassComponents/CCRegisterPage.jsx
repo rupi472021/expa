@@ -15,9 +15,9 @@ import DropdownItem from 'react-bootstrap/esm/DropdownItem';
 import { SettingsOverscanOutlined } from '@material-ui/icons';
 import Google_RegisterPage from '../ServiceComponents/GoogleRegisterPage';
 import { makeStyles } from '@material-ui/core/styles';
-import Chip from '@material-ui/core/Chip';
-import Divider from '@material-ui/core/Divider';
-import Typography from '@material-ui/core/Typography';
+// import Chip from '@material-ui/core/Chip';
+// import Divider from '@material-ui/core/Divider';
+// import Typography from '@material-ui/core/Typography';
 import GoogleRegisterPage from '../ServiceComponents/GoogleRegisterPage';
 
 
@@ -73,6 +73,7 @@ export default class CCRegisterPage extends Component {
             btnColor2: 'primary',
             disabled: false,
             visibilityt: 'hidden',
+            answerList: [],
         }
     }
 
@@ -93,6 +94,7 @@ export default class CCRegisterPage extends Component {
         window.scrollTo(0, 0);
         localStorage.clear(); //clear local storge onload
         console.log(this.props.dataFromApptoRegisterPage);
+
     }
 
 
@@ -135,6 +137,7 @@ export default class CCRegisterPage extends Component {
         }
 
         else {
+
             window.scrollTo({ top: 530, behavior: 'smooth' })
             this.setState(prevState => ({
                 opacity: 1,
@@ -173,23 +176,18 @@ export default class CCRegisterPage extends Component {
 
         }
         else {
+            this.state.answerList=[];
+            this.state.answerList.push(this.state.q1, this.state.q2, this.state.q3, this.state.q4, this.state.q5, this.state.q6, this.state.q7, this.state.q8, this.state.q9, this.state.q10, this.state.q11);
+            console.log("this answer for q1 q2 is");
+            console.log(this.state.answerList);
             const newAnswer = {
                 Email: this.state.email,
-                Q1: this.state.q1,
-                Q2: this.state.q2,
-                Q3: this.state.q3,
-                Q4: this.state.q4,
-                Q5: this.state.q5,
-                Q6: this.state.q6,
-                Q7: this.state.q7,
-                Q8: this.state.q8,
-                Q9: this.state.q9,
-                Q10: this.state.q10,
-                Q11: this.state.q11,
+                LAnswer: this.state.answerList
             }
-
-            let apiUrl = `http://localhost:54976/api/Questionnaire`;
-
+///post to questionnaire 
+            let apiUrl = `http://localhost:53281/api/Questionnaire`;
+            console.log("New Answer const");
+            console.log(newAnswer);
             ////POST
             fetch(apiUrl, {
                 method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -224,7 +222,7 @@ export default class CCRegisterPage extends Component {
             Age: this.state.age
         }
 
-        let apiUrl = `http://localhost:54976/api/User`;
+        let apiUrl = `http://localhost:53281/api/User`;
 
         ////POST
         fetch(apiUrl, {
@@ -296,7 +294,7 @@ export default class CCRegisterPage extends Component {
 
                             {/* Questionnaire */}
                             <div id="part2" style={{ opacity: this.state.opacity }}>
-                                <h4>I am a...</h4>
+                                <h4>I am ...</h4>
                                 <ButtonGroup aria-label="contained primary button group">
                                     <Button variant={this.state.btnColor1} value="Male" onClick={(e) => this.setState({ q1: e.target.value, btnColor1: 'secondary' })}>Male</Button>&nbsp;
                                     <Button variant={this.state.btnColor2} onClick={(e) => this.setState({ q1: e.target.value, btnColor2: 'secondary' })}>Female</Button>

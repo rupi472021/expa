@@ -20,14 +20,14 @@ background-color: yellow;
 } */
 
 p{
-padding-right: 34px;
+ padding-right: 34px;
 }
 
 
 @media(min-width: 992px){
 
     .NewBLogCard{
-        width: 100%;
+        width: 100%; 
         display: block;
     }
 

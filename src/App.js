@@ -22,7 +22,7 @@ class App extends Component {
   componentDidMount = () => { //GET all Users from Users_expa (SQL) onload
 
     console.log("in componentDidMount function");
-    let apiUrl = `http://localhost:53281/api/User`;
+    let apiUrl = `http://localhost:54976/api/User`;
 
     fetch(apiUrl)
       .then(res => {
@@ -69,27 +69,5 @@ class App extends Component {
     )
   }
 }
-
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <Switch>
-//         <Route exact path="/" >
-//           <CCLoginPage />
-//         </Route>
-//         <Route exact path="/register" >
-//           <CCRegisterPage />
-//         </Route>
-//         <Route exact path="/forget_password_page" >
-//           <CCResetPasswordPage />
-//         </Route>
-//         <Route exact path="/main_menu_page" >
-//           <FCMainMenuPage />
-//         </Route>
-//       </Switch>
-//     </div>
-//   );
-// }
 
 export default withRouter(App);

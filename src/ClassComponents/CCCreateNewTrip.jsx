@@ -58,7 +58,7 @@ export default class CCCreateNewTrip extends Component {
             MatchPercent: this.state.match_percent
         }
 
-        let apiUrl = `http://localhost:53281/api/NewTrip`;
+        let apiUrl = `http://localhost:54976/api/NewTrip`;
         ////POST
         fetch(apiUrl, {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -91,7 +91,7 @@ export default class CCCreateNewTrip extends Component {
     getmatch = () => {
 
         console.log("in getmatch function");
-        let apiUrl = `http://localhost:53281/api/Questionnaire/getSpecific/${localStorage.getItem('user_email')}/${this.state.match_percent}`
+        let apiUrl = `http://localhost:54976/api/Questionnaire/getSpecific/${localStorage.getItem('user_email')}/${this.state.match_percent}`
         
         fetch(apiUrl)
             .then(response => response.json())

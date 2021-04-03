@@ -218,8 +218,7 @@ export default class CCRegisterPage extends Component {
             Email: this.state.email,
             Password: this.state.password,
             Fname: this.state.fname,
-            Lname: this.state.lname,
-            Age: this.state.age
+            Lname: this.state.lname
         }
 
         let apiUrl = `http://localhost:53281/api/User`;

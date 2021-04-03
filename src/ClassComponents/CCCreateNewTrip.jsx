@@ -92,33 +92,21 @@ export default class CCCreateNewTrip extends Component {
 
         console.log("in getmatch function");
         let apiUrl = `http://localhost:54976/api/Questionnaire/getSpecific/${localStorage.getItem('user_email')}/${this.state.match_percent}`
-        
+
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
-                this.state.temparray=[];
-                console.log("this is oz data")
+                //this.state.temparray=[];
+                console.log("data from sql:")
                 console.log(data);
                 data.forEach((item) => {
-                    // this.ingredients.push({ data: item, image: item.Image });
-                    // temp.push({ image: item.Image });
-                    this.state.temparray.push({ tempemail: item.Email });
+                    this.state.temparray.push({ tempemail: item.Email, match: item.Match / 23 * 100 });
                 })
             }).catch(function (error) {
                 console.log("Error getting document:", error);
             });
         console.log("Temp Rec");
         console.log(this.state.temparray);
-
-        // this.setState({
-        //     show: true,
-        //     // ingsToRender: [...this.state.temp]
-        // })
-        // this.state.temp.forEach((item) => {
-        //     this.state.ingsToRender.push({ image: item.Image });
-
-        // })
-
     }
 
 

@@ -22,8 +22,36 @@ export default class CCCreateNewTrip extends Component {
             match_from_SQL: '',
             temparray: [],
             tempemail: '',
+            visibility: 'hidden',
+            disable: true,
         }
     };
+
+    // componentDidMount = () => { //GET all Trips from Trip_Cretia (SQL) onload
+
+    //     console.log("in componentDidMount function");
+    //     let apiUrl = `http://localhost:53281/api/NewTrip`;
+
+    //     fetch(apiUrl)
+    //       .then(res => {
+    //         console.log('res=', res);
+    //         console.log('res.status', res.status);
+    //         console.log('res.ok', res.ok);
+    //         return res.json()
+    //       })
+    //       .then(
+    //         (result) => {
+    //           console.log("GET all trips data from SQL= ", result);
+    //           result.map(st => console.log(st.Name)); // all Fname in Users_Expa
+    //           this.setState({
+    //             data_from_sql: result,
+    //           })
+    //         },
+    //         (error) => {
+    //           console.log("err GET=", error);
+    //         });
+    //   }
+
 
     checkValidationbtn = () => {
         if (this.state.trip_name == '' || this.state.trip_date == '' || this.state.vehicle_type == '' || this.state.trip_nights == '' || this.state.trip_area == ' ' || this.state.num_of_participants == '' || this.state.with_children == '' || this.state.match_percent == '') {
@@ -41,6 +69,10 @@ export default class CCCreateNewTrip extends Component {
 
     publish = () => {
         //alert("in publish function")
+
+        this.setState(prevState => ({
+            disable: false,
+        }))
 
         const input = this.state.trip_date;
         const [date, time] = input.split('T');
@@ -92,12 +124,12 @@ export default class CCCreateNewTrip extends Component {
 
         console.log("in getmatch function");
         let apiUrl = `http://localhost:53281/api/Questionnaire/getSpecific/${localStorage.getItem('user_email')}/${this.state.match_percent}`
-        
+
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
-                this.state.temparray=[];
-                console.log("this is oz data")
+                this.state.temparray = [];
+                console.log("this is data")
                 console.log(data);
                 data.forEach((item) => {
                     // this.ingredients.push({ data: item, image: item.Image });
@@ -154,6 +186,106 @@ export default class CCCreateNewTrip extends Component {
         console.log("trip name : " + this.state.match_percent);
     }
 
+    editTripDetails = () => {
+        
+        const input = this.state.trip_date;
+        const [date, time] = input.split('T');
+
+        const newTrip = {
+            Admin_email: localStorage.getItem('user_email'),
+            Name: this.state.trip_name,
+            Date: date,
+            Time: time,
+            NumOfnights: this.state.trip_nights,
+            Area: this.state.trip_area,
+            Participants: this.state.num_of_participants,
+            VehicleType: this.state.vehicle_type,
+            WithChildren: this.state.with_children,
+            MatchPercent: this.state.match_percent
+        }
+
+
+            // event.preventDefault(); 
+            let apiUrl = `http://localhost:53281/api/NewTrip/`+this.state.trip_name+"/"+this.state.match_percent+"/"+this.state.with_children;
+            fetch(apiUrl, {
+                method: 'PUT', // *GET, POST, PUT, DELETE, etc.
+                mode: 'cors', // no-cors, *cors, same-origin
+                cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                credentials: 'same-origin', // include, *same-origin, omit
+                headers: {
+                    'Content-Type': 'application/json'
+                    // 'Content-type': 'application/json; charset=UTF-8', //very important to add the 'charset=UTF-8'!!!!
+                    // 'Accept': 'application/json; charset=UTF-8'
+                },
+                redirect: 'follow', // manual, *follow, error
+                referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+                // body: JSON.stringify(newTrip) // body data type must match "Content-Type" header
+            })
+
+
+
+
+            // // var apiUrl = "http://proj.ruppin.ac.il/igroup49/test2/tar1/api/DealInCust/used/" + this.state.coupon_code;
+            // fetch(apiUrl, {
+            //   method: 'PUT',
+            //   headers: {
+            //     Accept: 'application/json',
+            //     'Content-Type': 'application/json',
+            //   },
+            //   body: JSON.stringify(newTrip)
+            // })
+            //   .then((response) => response.json())
+            //   .then((responseJson) => {
+            //     console.log(responseJson);
+            //   })
+            //   .catch((error) => {
+            //     alert(JSON.stringify(error));
+            //     console.error(error);
+            //   });
+        
+            // alert("You are submitting " + this.state.trip_name);
+          
+
+
+
+        // let apiUrl = `http://localhost:53281/api/NewTrip`;
+  
+        //   console.log('start');
+        //   fetch(apiUrl+"/"+this.state.trip_name,
+        //     {
+        //       method: 'PUT',
+        //       body: JSON.stringify(newTrip),
+        //       headers: new Headers({
+        //         'Content-Type': 'application/json; charset=UTF-8',
+        //         'Accept': 'application/json; charset=UTF-8'
+        //       })
+        //     })
+        //     .then(res => {
+        //       console.log('res=', res);
+        //       console.log('res.status', res.status);
+              
+        //       console.log('res.ok', res.ok);
+      
+        //       if (res.ok) {
+        //         console.log('put succeeded');
+        //       }
+      
+        //       return res.json()
+        //     })
+        //     .then(
+        //       (result) => {
+        //         console.log("fetch btnFetchGetTrips= ", result);
+        //       },
+        //       (error) => {
+        //         console.log("err post=", error);
+        //       });
+        //   console.log('end');
+        
+
+    }
+
+
+
     render() {
         return (
             <div style={{ backgroundColor: '#1d21243b', height: '100%' }}>
@@ -209,7 +341,7 @@ export default class CCCreateNewTrip extends Component {
                     <Checkbox value="yes" onChange={(yes) => this.setState({ with_children: yes.target.value })} /> Yes
                     <Checkbox value="no" onChange={(no) => this.setState({ with_children: no.target.value })} /> No
                     </div>
-                    <h6>I want At least {this.state.match_percent}% match with my ExPa!</h6>
+                    <h6>I want At least {this.state.match_percent}% match with my ExPa Partners!</h6>
                     <RangeSlider value={this.state.match_percent} onChange={(match) => this.setState({ match_percent: match.target.value })} />
                     {/* <Checkbox value="50" onChange={(fifty) => this.setState({ match_percent: fifty.target.value })} /> 50% and above
                     <Checkbox value="70" onChange={(seventy) => this.setState({ match_percent: seventy.target.value })} /> 70% and above
@@ -217,7 +349,10 @@ export default class CCCreateNewTrip extends Component {
                     <Checkbox value="90" onChange={(ninety) => this.setState({ match_percent: ninety.target.value })} /> 90% and above
                     <Checkbox value="0" onChange={(none) => this.setState({ match_percent: none.target.value })} /> don't care */}
                     <br></br>
+                    <Button disabled={this.state.disable} variant="primary" type="button" onClick={this.editTripDetails} > Edit Trip </Button>
+                    <br></br><br></br>
                     <Button variant="primary" type="button" onClick={this.checkValidationbtn} > Publish Trip </Button>
+
                 </div >
             </div>
         )

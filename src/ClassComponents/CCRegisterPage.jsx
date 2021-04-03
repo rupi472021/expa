@@ -176,7 +176,7 @@ export default class CCRegisterPage extends Component {
 
         }
         else {
-            this.state.answerList=[];
+            this.state.answerList = [];
             this.state.answerList.push(this.state.q1, this.state.q2, this.state.q3, this.state.q4, this.state.q5, this.state.q6, this.state.q7, this.state.q8, this.state.q9, this.state.q10, this.state.q11);
             console.log("this answer for q1 q2 is");
             console.log(this.state.answerList);
@@ -184,7 +184,7 @@ export default class CCRegisterPage extends Component {
                 Email: this.state.email,
                 LAnswer: this.state.answerList
             }
-///post to questionnaire 
+            ///post to questionnaire 
             let apiUrl = `http://localhost:53281/api/Questionnaire`;
             console.log("New Answer const");
             console.log(newAnswer);
@@ -238,10 +238,11 @@ export default class CCRegisterPage extends Component {
             referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
             body: JSON.stringify(newUser) // body data type must match "Content-Type" header
         }).then(response =>
-            this.clearForm()
+             this.clearForm(),
+            window.location.href = "http://localhost:3000/main_menu_page"
         );
     }
-    toggle = () => this.state.setOpen(!this.state.dropdownOpen);
+    // toggle = () => this.state.setOpen(!this.state.dropdownOpen);
 
     datafromgoogle = (d) => {
         alert(d);
@@ -343,7 +344,11 @@ export default class CCRegisterPage extends Component {
 
                                 <h4>I'd love to Travel With Those Ages </h4>
                                 <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q6: e.target.value })}>
-                                    <Button value="20-50">20-50</Button>&nbsp;&nbsp;
+                                    <Button value="16-21">16 - 21</Button>&nbsp;&nbsp;
+                                    <Button value="22-30">22 - 30</Button>&nbsp;&nbsp;
+                                    <Button value="31-40">31 - 40</Button>&nbsp;&nbsp;
+                                    <Button value="41-55">41 - 55</Button>&nbsp;&nbsp;
+                                    <Button value="56-65">56 - 65</Button>&nbsp;&nbsp;
                                 </ButtonGroup>
                                 <h4>{this.state.q6}</h4>
                                 <br></br><br></br><br></br>
@@ -403,8 +408,8 @@ export default class CCRegisterPage extends Component {
 
                                 <h4>Cigarette ? </h4>
                                 <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q11: e.target.value })}>
-                                    <Button value="no">Not For ME</Button>&nbsp;&nbsp;
                                     <Button value="yes">I Smoke</Button>&nbsp;&nbsp;
+                                    <Button value="no">Not For ME</Button>&nbsp;&nbsp;
                                 </ButtonGroup>
                                 <h4>{this.state.q11}</h4>
                                 <br></br><br></br><br></br>

@@ -21,6 +21,10 @@ export default function FCMainMenuPage() {
             if (result.isConfirmed) {
                 localStorage.clear();
                 window.location.href = "http://localhost:3000/"
+                // window.location.href = "http://proj.ruppin.ac.il/igroup47/prod/"
+
+                
+
             }
         })
     }

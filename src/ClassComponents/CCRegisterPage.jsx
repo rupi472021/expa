@@ -50,6 +50,7 @@ export default class CCRegisterPage extends Component {
             disabled: false,
             visibilityt: 'hidden',
             answerList: [],
+            image:"https://png.pngtree.com/png-clipart/20200701/original/pngtree-character-default-avatar-png-image_5407167.jpg"
         }
     }
 
@@ -137,10 +138,8 @@ export default class CCRegisterPage extends Component {
     }
 
     postTosqlQues = () => {
-        alert("Post to Answer")
         ///validate blank fields
         if (this.state.q1 == '' || this.state.q2 == '' || this.state.q3 == '' || this.state.q4 == '' || this.state.q5 == '' || this.state.q6 == '' || this.state.q7 == '' || this.state.q8 == '' || this.state.q9 == '' || this.state.q10 == '' || this.state.q11 == '') {
-
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -149,7 +148,6 @@ export default class CCRegisterPage extends Component {
             }).then(() => {
                 window.location.reload(false)
             })
-
 
         }
         else {
@@ -190,8 +188,6 @@ export default class CCRegisterPage extends Component {
     }
 
     handle = () => {
-        alert("Getting IN")
-
         const newUser = {
             Email: this.state.email,
             Password: this.state.password,
@@ -218,9 +214,12 @@ export default class CCRegisterPage extends Component {
             referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
             body: JSON.stringify(newUser) // body data type must match "Content-Type" header
         }).then(response =>
-            this.clearForm(),
+            // this.clearForm(),
+            localStorage.setItem('user_email', this.state.email),
+            localStorage.setItem('user_fname', this.state.fname),
+            localStorage.setItem('user_lname', this.state.lname),
+            localStorage.setItem('user_image', this.state.image),
             window.location.href = "http://localhost:3000/main_menu_page"
-            // window.location.href = "http://proj.ruppin.ac.il/igroup47/prod/main_menu_page"
 
         );
     }
@@ -417,75 +416,3 @@ export default class CCRegisterPage extends Component {
 }
 
 
-
-
-
-// import React from 'react';
-// import { makeStyles } from '@material-ui/core/styles';
-// import Chip from '@material-ui/core/Chip';
-// import Button from '@material-ui/core/Button';
-// import Grid from '@material-ui/core/Grid';
-// import Divider from '@material-ui/core/Divider';
-// import Typography from '@material-ui/core/Typography';
-
-// const useStyles = makeStyles((theme) => ({
-//     root: {
-//         width: '100%',
-//         maxWidth: 360,
-//         backgroundColor: theme.palette.background.paper,
-//     },
-//     chip: {
-//         margin: theme.spacing(0.5),
-//     },
-//     section1: {
-//         margin: theme.spacing(3, 2),
-//     },
-//     section2: {
-//         margin: theme.spacing(2),
-//     },
-//     section3: {
-//         margin: theme.spacing(3, 1, 1),
-//     },
-// }));
-
-// export default function MiddleDividers() {
-//     const classes = useStyles();
-
-//     return (
-//         <div className={classes.root}>
-//             <div className={classes.section1}>
-//                 <Grid container alignItems="center">
-//                     <Grid item xs>
-//                         <Typography gutterBottom variant="h4">
-//                             Toothbrush
-//             </Typography>
-//                     </Grid>
-//                     <Grid item>
-//                         <Typography gutterBottom variant="h6">
-//                             $4.50
-//             </Typography>
-//                     </Grid>
-//                 </Grid>
-//                 <Typography color="textSecondary" variant="body2">
-//                     Pinstriped cornflower blue cotton blouse takes you on a walk to the park or just down the
-//                     hall.
-//         </Typography>
-//             </div>
-//             <Divider variant="middle" />
-//             <div className={classes.section2}>
-//                 <Typography gutterBottom variant="body1">
-//                     Select type
-//         </Typography>
-//                 <div>
-//                     <Chip className={classes.chip} label="Extra Soft" />
-//                     <Chip className={classes.chip} color="primary" label="Soft" />
-//                     <Chip className={classes.chip} label="Medium" />
-//                     <Chip className={classes.chip} label="Hard" />
-//                 </div>
-//             </div>
-//             <div className={classes.section3}>
-//                 <Button color="primary">Add to cart</Button>
-//             </div>
-//         </div>
-//     );
-// }

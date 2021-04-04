@@ -140,13 +140,13 @@ export default class CCCreateNewTrip extends Component {
         ///Getting all the Users
         console.log("in getmatch function");
         // let apiUrl = `http://localhost:53281/api/Questionnaire/getSpecific/${localStorage.getItem('user_email')}/${this.state.match_percent}`
-        let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/Questionnaire/getSpecific/${localStorage.getItem('user_email')}/${this.state.match_percent}`
+        let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/Questionnaire/getSpecific/${localStorage.getItem('user_email')}/${this.state.match_percent}`
 
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
                 //this.state.temparray=[];
-                console.log("data from sql:")
+                console.log("Relevant Users Algoritem -  data from sql:")
                 console.log(data);
                 data.forEach((item) => {
                     this.state.temparray.push({ tempemail: item.Email, match: item.Match / 23 * 100 });
@@ -281,7 +281,7 @@ export default class CCCreateNewTrip extends Component {
                         <Dropdown.Item onClick={(Motorcycle) => this.setState({ vehicle_type: Motorcycle.target.value })} as="button" value="Motorcycle"> Motorcycle </Dropdown.Item>
                         <Dropdown.Item onClick={(Other) => this.setState({ vehicle_type: Other.target.value })} as="button" value="Other"> Other </Dropdown.Item>
                     </DropdownButton><br></br>
-                    <div> Childrens ?
+                    <div> Childrens ? <br></br>
                     <Checkbox value="yes" onChange={(yes) => this.setState({ with_children: yes.target.value })} /> Yes
                     <Checkbox value="no" onChange={(no) => this.setState({ with_children: no.target.value })} /> No
                     </div>

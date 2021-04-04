@@ -35,8 +35,10 @@ export default function FCSignIn() {
 
         console.log("in signinbtn function");
 
-        let apiUrl = `http://localhost:53281/api/User`;
+        // let apiUrl = `http://localhost:53281/api/User`;
+        let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User`;
 
+        
         fetch(apiUrl)
             .then(res => {
                 console.log('res=', res);

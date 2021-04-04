@@ -162,7 +162,9 @@ export default class CCRegisterPage extends Component {
                 LAnswer: this.state.answerList
             }
             ///post to questionnaire 
-            let apiUrl = `http://localhost:53281/api/Questionnaire`;
+            // let apiUrl = `http://localhost:53281/api/Questionnaire`;
+            let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/Questionnaire`;
+
             console.log("New Answer const");
             console.log(newAnswer);
             ////POST
@@ -197,7 +199,9 @@ export default class CCRegisterPage extends Component {
             Lname: this.state.lname
         }
 
-        let apiUrl = `http://localhost:53281/api/User`;
+        // let apiUrl = `http://localhost:53281/api/User`;
+        let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User`;
+
 
         ////POST
         fetch(apiUrl, {
@@ -216,6 +220,8 @@ export default class CCRegisterPage extends Component {
         }).then(response =>
             this.clearForm(),
             window.location.href = "http://localhost:3000/main_menu_page"
+            // window.location.href = "http://proj.ruppin.ac.il/igroup47/prod/main_menu_page"
+
         );
     }
     // toggle = () => this.state.setOpen(!this.state.dropdownOpen);

@@ -1,11 +1,10 @@
 import React from 'react'
-// import Button from '@material-ui/core/Button';
 import Swal from 'sweetalert2';
 import { ButtonGroup, DropdownButton, Form, Image, ProgressBar, Col, Dropdown } from 'react-bootstrap';
 import DropdownItem from 'react-bootstrap/esm/DropdownItem';
-
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 export default function FCMainMenuPage() {
 
@@ -39,16 +38,11 @@ export default function FCMainMenuPage() {
                 <div style={{ marginTop: 100 }}>
                     <Button fullWidth disabled={true} style={{ alignItems: "center" }} variant="secondary" size="lg"  >Join Trip</Button><br></br><br></br><br></br>
                     <Button fullWidth style={{ alignItems: "center" }} variant="primary" size="lg" href='/main_menu_page/create_new_trip_page'>New Trip</Button>
-
-                    {/* <Button disabled={true} style={{ marginBottom: 75, marginLeft: 10 }} variant="contained" color="secondary" size="large"> Join Trip </Button>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <Button style={{ marginTop: 75, marginLeft: -140, position: 'absulot' }} variant="contained" color="secondary" size="large" href='/main_menu_page/create_new_trip_page'> New Trip </Button> */}
                 </div>
                 <div style={{ marginTop: 125 }}>
                     <Button fullWidth disabled={true} variant="secondary" size="lg"  >My Profile</Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <Button fullWidth disabled={true} variant="secondary" size="lg"  >My Trips</Button>
 
-                    {/* <Button disabled={true} variant="contained" color="primary" size="large"> My Profile </Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <Button disabled={true} variant="contained" color="primary" size="large"> My Trips </Button> */}
                 </div>
             </div>
         </div>

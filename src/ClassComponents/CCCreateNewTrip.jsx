@@ -153,7 +153,6 @@ export default class CCCreateNewTrip extends Component {
     
     }
 
-
     backbtn = () => {
         Swal.fire({
             title: 'Are you sure?',

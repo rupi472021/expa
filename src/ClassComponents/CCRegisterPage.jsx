@@ -11,20 +11,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import Swal from 'sweetalert2';
 import RangeSlider from 'react-bootstrap-range-slider';
 import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
-
-
-
 import GoogleRegisterPage from '../ServiceComponents/GoogleRegisterPage';
-
-
-// const useStyles = makeStyles((theme) => ({
-
-//     chip: {
-//         margin: theme.spacing(0.5),
-//         marginRight: 20
-//     },
-
-// }));
 
 
 
@@ -199,7 +186,6 @@ export default class CCRegisterPage extends Component {
             this.handle();
         }
     }
-
 
     handle = () => {
         alert("Getting IN")

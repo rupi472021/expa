@@ -15,10 +15,6 @@
         align-items: 'center';
     }
 
-    /* avatar {
-        margin: theme.spacing(1);
-        backgroundColor: theme.palette.secondary.main;
-    }  */
 
     /* .form {
         width: 100%;
@@ -27,7 +23,7 @@
        .TextField {
           background-color:white;
          border-radius: 5px;
-         width: 50%; 
+         /* width: 50%;  */
         }  */
     
      .submit {
@@ -60,7 +56,7 @@
 
     #part2{
     /* background-color: blue; */
-    margin-bottom: 300px;
+    margin-bottom: 30px;
     }
 
     p{

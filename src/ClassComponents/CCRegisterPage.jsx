@@ -11,30 +11,20 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import Swal from 'sweetalert2';
 import RangeSlider from 'react-bootstrap-range-slider';
 import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
-import DropdownItem from 'react-bootstrap/esm/DropdownItem';
-import { SettingsOverscanOutlined } from '@material-ui/icons';
-import Google_RegisterPage from '../ServiceComponents/GoogleRegisterPage';
-import { makeStyles } from '@material-ui/core/styles';
-// import Chip from '@material-ui/core/Chip';
-// import Divider from '@material-ui/core/Divider';
-// import Typography from '@material-ui/core/Typography';
+
+
+
 import GoogleRegisterPage from '../ServiceComponents/GoogleRegisterPage';
 
 
-const useStyles = makeStyles((theme) => ({
+// const useStyles = makeStyles((theme) => ({
 
-    chip: {
-        margin: theme.spacing(0.5),
-        marginRight: 20
-    },
+//     chip: {
+//         margin: theme.spacing(0.5),
+//         marginRight: 20
+//     },
 
-}));
-
-
-
-
-
-
+// }));
 
 
 
@@ -50,7 +40,6 @@ export default class CCRegisterPage extends Component {
             email: '',
             fname: '',
             lname: '',
-            // age: '30',
             password: '',
             cPassword: '',
             data_from_sql: '',
@@ -98,8 +87,8 @@ export default class CCRegisterPage extends Component {
     }
 
 
-    goTO = () => {
-
+    submitUserData = () => {
+//Validate Blank Fields
         if (this.state.emaill == '' || this.state.password == '') {
 
             Swal.fire({
@@ -113,7 +102,7 @@ export default class CCRegisterPage extends Component {
 
 
         }
-
+//Validate Email is Available 
         else if (this.props.dataFromApptoRegisterPage.find((user => user.Email == this.state.email))) {
             Swal.fire({
                 icon: 'error',
@@ -124,7 +113,7 @@ export default class CCRegisterPage extends Component {
                 window.location.reload(false)
             })
         }
-
+//Validate Confirm Password 
         else if (this.state.password != this.state.cPassword) {
             Swal.fire({
                 icon: 'error',
@@ -161,7 +150,8 @@ export default class CCRegisterPage extends Component {
     }
 
     postTosqlQues = () => {
-        alert("Post to Answer")
+        alert("Post to Answer") 
+        ///validate blank fields
         if (this.state.q1 == '' || this.state.q2 == '' || this.state.q3 == '' || this.state.q4 == '' || this.state.q5 == '' || this.state.q6 == '' || this.state.q7 == '' || this.state.q8 == '' || this.state.q9 == '' || this.state.q10 == '' || this.state.q11 == '') {
 
             Swal.fire({
@@ -255,14 +245,14 @@ export default class CCRegisterPage extends Component {
             visibilityt: 'visible',
         }))
     }
-
+    
     render() {
         return (
             <div className={classes.NewBLogCard}>
                 <Container>
-                    <div className={classes.Container} >
+                    <div className={classes.Container}>
                         <Button variant="secondary" size="sm" href="/" className="but"> BACK </Button>
-                        <Avatar alt="Remy Sharp" src="https://i.ibb.co/7S6XfNZ/circle-cropped.png" style={{ width: '15vh', height: '15vh', marginTop: '10px' }} />
+                        <div><Avatar alt="Remy Sharp" src="https://i.ibb.co/7S6XfNZ/circle-cropped.png" style={{ width: '15vh', height: '15vh', marginTop: '10px' }} /></div>
                         <h1 className="ExPa" > Create an Account </h1>
                         <form>
                             <div id="part1" >
@@ -285,15 +275,12 @@ export default class CCRegisterPage extends Component {
                                     </Col>
                                 </Row>
                                 <br></br>
-                                <Button fullWidth variant="info" size="lg" onClick={this.goTO} disabled={this.state.disabled} >Let's GO !</Button>
+                                <Button fullWidth variant="info" size="lg" onClick={this.submitUserData} disabled={this.state.disabled} >Let's GO !</Button>
                                 <br></br><br></br><br></br><br></br>
                             </div>
 
-
-
-
                             {/* Questionnaire */}
-                            <div id="part2" style={{ opacity: this.state.opacity }}>
+                            <div id="part2" /*style={{ opacity: this.state.opacity}}*/>
                                 <h4>I am ...</h4>
                                 <ButtonGroup aria-label="contained primary button group">
                                     <Button variant={this.state.btnColor1} value="Male" onClick={(e) => this.setState({ q1: e.target.value, btnColor1: 'secondary' })}>Male</Button>&nbsp;
@@ -320,7 +307,7 @@ export default class CCRegisterPage extends Component {
 
 
                                 <h4>I have ...</h4>
-                                <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q4: e.target.value })}>
+                                <ButtonGroup size="sm" variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q4: e.target.value })}>
                                     <Button value="Jeep">Jeep</Button>&nbsp;&nbsp;
                                     <Button value="ATV">ATV</Button>&nbsp;&nbsp;
                                     <Button value="RZR">RZR</Button>&nbsp;&nbsp;
@@ -333,7 +320,7 @@ export default class CCRegisterPage extends Component {
 
 
                                 <h4>I am Looking for...</h4>
-                                <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q5: e.target.value })}>
+                                <ButtonGroup size="sm" variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q5: e.target.value })}>
                                     <Button value="oneTime">One-Time Partners Trip </Button>&nbsp;&nbsp;
                                     <Button value="short">Partners To Travel With in The Short Term</Button>&nbsp;&nbsp;
                                     <Button value="long">Partners To Travel With in The Long Term</Button>&nbsp;&nbsp;
@@ -343,7 +330,7 @@ export default class CCRegisterPage extends Component {
 
 
                                 <h4>I'd love to Travel With Those Ages </h4>
-                                <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q6: e.target.value })}>
+                                <ButtonGroup size="sm" variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q6: e.target.value })}>
                                     <Button value="16-21">16 - 21</Button>&nbsp;&nbsp;
                                     <Button value="22-30">22 - 30</Button>&nbsp;&nbsp;
                                     <Button value="31-40">31 - 40</Button>&nbsp;&nbsp;
@@ -352,7 +339,6 @@ export default class CCRegisterPage extends Component {
                                 </ButtonGroup>
                                 <h4>{this.state.q6}</h4>
                                 <br></br><br></br><br></br>
-
 
 
                                 <div /*style={{ visibility: this.state.visibilityt }}*/>
@@ -366,12 +352,11 @@ export default class CCRegisterPage extends Component {
                                 <br></br><br></br><br></br>
 
 
-
                                 {/* לשנות למד של 1-5 , 5 זה הכי גבוה מטייל בתדירות גבוהה */}
                                 <h4>I Travel ...</h4>
                                 <h4>(1 being the lowest frequency and 5 being the highest frequency) </h4>
 
-                                <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q8: e.target.value })}>
+                                <ButtonGroup size="sm" variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q8: e.target.value })}>
                                     <Button value="1">1</Button>&nbsp;&nbsp;
                                     <Button value="2">2</Button>&nbsp;&nbsp;
                                     <Button value="3">3</Button>&nbsp;&nbsp;
@@ -392,15 +377,23 @@ export default class CCRegisterPage extends Component {
 
 
                                 <h4>I like to talk about these issues</h4>
-                                <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q10: e.target.value })}>
-                                    <Button value="Politics ">Politics</Button>&nbsp;&nbsp;
-                                    <Button value="Sport">Sport</Button>&nbsp;&nbsp;
-                                    <Button value="Economy">Economy</Button>&nbsp;&nbsp;
+                                <ButtonGroup size="sm" variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q10: e.target.value })}>
+                  
+                                <Row>
+                                    <Col>
+                                    <Button value="Politics ">Politics</Button><br></br>
+                                    <Button value="Sport">Sport</Button>
                                     <Button value="FamilyLife">Family Life</Button>&nbsp;&nbsp;
-                                    <Button value="Studying">Studying</Button>&nbsp;&nbsp;
-                                    <Button value="Workplace">Workplace</Button>&nbsp;&nbsp;
-                                    <Button value="NightLife">NightLife</Button>&nbsp;&nbsp;
-                                    <Button value="Other">Other</Button>&nbsp;&nbsp;
+                                    <Button value="NightLife">NightLife</Button>
+                                    </Col>
+                                    <Col>
+                                    <Button value="Economy">Economy</Button>
+                                    <Button value="Studying">Studying</Button>
+                                    <Button value="Workplace">Workplace</Button>
+                                    <Button value="Other">Other</Button>
+                                    </Col>
+                           
+                                </Row>          
                                 </ButtonGroup>
                                 <h4>{this.state.q10}</h4>
                                 <br></br><br></br>
@@ -416,99 +409,6 @@ export default class CCRegisterPage extends Component {
 
 
                                 <Button fullWidth variant="success" size="lg" onClick={this.postTosqlQues}>GET STARTED</Button>
-
-
-
-                                {/* <DropdownButton as={ButtonGroup} title="Would You Like To Travel With Other Friends ?" id="bg-vertical-dropdown-1">
-                                    <DropdownItem eventKey="1">Sure !</DropdownItem>
-                                    <DropdownItem eventKey="2">Only By My Own</DropdownItem>
-                                    <DropdownItem eventKey="3">With My Closest Friends</DropdownItem>
-                                </DropdownButton> */}
-
-                                {/* <Row>
-                                    <Form.Check aria-label="option 1" />
-                                    <Form.Check aria-label="option 1" />
-                                    <Form.Check aria-label="option 1" />
-                                    <Form.Check aria-label="option 1" />
-                                </Row>
-                                <br></br> */}
-
-                                {/* 
-                                <div>
-                                    <Chip className={classes.chip} label="Extra Soft" />
-                                    <Chip className={classes.chip} label="Soft" />
-                                    <Chip className={classes.chip} label="Medium" />
-                                    <Chip className={classes.chip} label="Hard" />
-                                </div> */}
-
-                                {/*progressbar */}
-
-                                {/* <ProgressBar animated now={95} /> */}
-
-                                {/* <div className="dropdown">
-                                    <Dropdown>
-                                        <Dropdown.Toggle
-                                            variant="secondary btn-sm"
-                                            id="dropdown-basic">
-                                            Language
-                                        </Dropdown.Toggle>
-
-                                        <Dropdown.Menu style={{ backgroundColor: '#73a47' }}>
-                                            <Dropdown.Item href="#" >Arabic</Dropdown.Item>
-                                            <Dropdown.Item href="#">English</Dropdown.Item>
-                                        </Dropdown.Menu>
-                                    </Dropdown>
-                                </div> */}
-
-
-                                {/* <Form>
-                                    <Form.Group controlId="formBasicRange">
-                                        <Form.Label>Range</Form.Label>
-                                        <Form.Control type="range" />
-                                    </Form.Group>
-                                </Form> */}
-                                {/* 
-                                <UncontrolledButtonDropdown>
-                                    <DropdownToggle caret>
-                                        Dropdown
-                                    </DropdownToggle>
-                                    <DropdownMenu>
-                                        <DropdownItem header>Header</DropdownItem>
-                                        <DropdownItem disabled>Action</DropdownItem>
-                                        <DropdownItem>Another Action</DropdownItem>
-                                        <DropdownItem divider />
-                                        <DropdownItem>Another Action</DropdownItem>
-                                    </DropdownMenu>
-                                </UncontrolledButtonDropdown> */}
-
-                                {/* <ButtonGroup>
-                                    <Button>Left</Button>
-                                    <Button>Middle</Button>
-                                    <Button>Right</Button>
-                                </ButtonGroup>
-
-
-                                <ButtonGroup>
-                                    <Button>1</Button>
-                                    <Button>2</Button>
-                                    <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                                        <DropdownToggle caret>
-                                            Dropdown
-                                        </DropdownToggle>
-                                        <DropdownMenu>
-                                            <DropdownItem>Dropdown Link</DropdownItem>
-                                            <DropdownItem>Dropdown Link</DropdownItem>
-                                        </DropdownMenu>
-                                    </ButtonDropdown>
-                                </ButtonGroup>
-
-
-                                <DropdownButton as={ButtonGroup} title="Dropdown" id="bg-vertical-dropdown-1">
-                                    <DropdownItem eventKey="1">Dropdown link</DropdownItem>
-                                    <DropdownItem eventKey="2">Dropdown link</DropdownItem>
-                                </DropdownButton>
-
- */}
 
                             </div>
                         </form>

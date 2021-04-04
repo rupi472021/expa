@@ -24,36 +24,49 @@ export default class CCCreateNewTrip extends Component {
             tempemail: '',
             visibility: 'hidden',
             disable: true,
+            Trip_data_from_sql:[],
         }
     };
 
-    // componentDidMount = () => { //GET all Trips from Trip_Cretia (SQL) onload
+    componentDidMount = () => { //GET all Trips from Trip_Cretia (SQL) onload
 
-    //     console.log("in componentDidMount function");
-    //     let apiUrl = `http://localhost:53281/api/NewTrip`;
+        console.log("in componentDidMount function");
+        let apiUrl = `http://localhost:53281/api/NewTrip`;
 
-    //     fetch(apiUrl)
-    //       .then(res => {
-    //         console.log('res=', res);
-    //         console.log('res.status', res.status);
-    //         console.log('res.ok', res.ok);
-    //         return res.json()
-    //       })
-    //       .then(
-    //         (result) => {
-    //           console.log("GET all trips data from SQL= ", result);
-    //           result.map(st => console.log(st.Name)); // all Fname in Users_Expa
-    //           this.setState({
-    //             data_from_sql: result,
-    //           })
-    //         },
-    //         (error) => {
-    //           console.log("err GET=", error);
-    //         });
-    //   }
+        fetch(apiUrl)
+          .then(res => {
+            console.log('res=', res);
+            console.log('res.status', res.status);
+            console.log('res.ok', res.ok);
+            return res.json()
+          })
+          .then(
+            (result) => {
+              console.log("GET all trips data from SQL= ", result);
+            //   result.map(st => console.log(st.Name)); // all Fname in Users_Expa
+              this.setState({
+                Trip_data_from_sql: result,
+              })
+            },
+            (error) => {
+              console.log("err GET=", error);
+            });
+      }
 
 
     checkValidationbtn = () => {
+        ///Validate that "Trip name" is Available.
+        if (this.state.Trip_data_from_sql.find((trip => trip.Name == this.state.trip_name))) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "Hey ! Trip Name : " + this.state.trip_name + " already in use !",
+                Onclick: () => { Swal.clickConfirm() }
+            }).then(() => {
+                window.location.reload(false)
+            })
+        }
+                ///Validate Blanks Fields.
         if (this.state.trip_name == '' || this.state.trip_date == '' || this.state.vehicle_type == '' || this.state.trip_nights == '' || this.state.trip_area == ' ' || this.state.num_of_participants == '' || this.state.with_children == '' || this.state.match_percent == '') {
             Swal.fire({
                 icon: 'error',
@@ -67,9 +80,9 @@ export default class CCCreateNewTrip extends Component {
         else { this.publish() }
     }
 
+
     publish = () => {
         //alert("in publish function")
-
         this.setState(prevState => ({
             disable: false,
         }))
@@ -91,7 +104,7 @@ export default class CCCreateNewTrip extends Component {
         }
 
         let apiUrl = `http://localhost:54976/api/NewTrip`;
-        ////POST
+        ////POST To TRIP_Criteria SQL TABLE
         fetch(apiUrl, {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, *cors, same-origin
@@ -117,11 +130,10 @@ export default class CCCreateNewTrip extends Component {
                 this.getmatch();
             })
         );
-
     }
 
     getmatch = () => {
-
+        ///Getting all the Users
         console.log("in getmatch function");
         let apiUrl = `http://localhost:54976/api/Questionnaire/getSpecific/${localStorage.getItem('user_email')}/${this.state.match_percent}`
 
@@ -280,7 +292,7 @@ export default class CCCreateNewTrip extends Component {
                 <div><Button variant="secondary" size="sm" onClick={this.backbtn} className="but"> Main Menu </Button></div>
                 <div>
                     <div><br></br>
-                    Hi {localStorage.getItem('user_fname')}, Choose Your Preference For the Perfect Trip!
+                    Hey {localStorage.getItem('user_fname')}! Choose Your Preference For the Perfect Trip!
                 </div><br></br>
                     <Form>
                         <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="dense" required fullWidth id="tripname" label="Trip Name" name="tripname" autoComplete="tripname" onChange={(e) => this.setState({ trip_name: e.target.value })} autoFocus />

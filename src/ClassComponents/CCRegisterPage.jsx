@@ -398,7 +398,6 @@ export default class CCRegisterPage extends Component {
                                             <h1></h1>
                                             <Button value="Other">Other</Button>
                                         </Col>
-
                                     </Row>
                                 </ButtonGroup>
                                 <h4>{this.state.q10}</h4>

@@ -88,7 +88,7 @@ export default class CCRegisterPage extends Component {
 
 
     submitUserData = () => {
-//Validate Blank Fields
+        //Validate Blank Fields
         if (this.state.emaill == '' || this.state.password == '') {
 
             Swal.fire({
@@ -102,7 +102,7 @@ export default class CCRegisterPage extends Component {
 
 
         }
-//Validate Email is Available 
+        //Validate Email is Available 
         else if (this.props.dataFromApptoRegisterPage.find((user => user.Email == this.state.email))) {
             Swal.fire({
                 icon: 'error',
@@ -113,7 +113,7 @@ export default class CCRegisterPage extends Component {
                 window.location.reload(false)
             })
         }
-//Validate Confirm Password 
+        //Validate Confirm Password 
         else if (this.state.password != this.state.cPassword) {
             Swal.fire({
                 icon: 'error',
@@ -150,7 +150,7 @@ export default class CCRegisterPage extends Component {
     }
 
     postTosqlQues = () => {
-        alert("Post to Answer") 
+        alert("Post to Answer")
         ///validate blank fields
         if (this.state.q1 == '' || this.state.q2 == '' || this.state.q3 == '' || this.state.q4 == '' || this.state.q5 == '' || this.state.q6 == '' || this.state.q7 == '' || this.state.q8 == '' || this.state.q9 == '' || this.state.q10 == '' || this.state.q11 == '') {
 
@@ -228,7 +228,7 @@ export default class CCRegisterPage extends Component {
             referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
             body: JSON.stringify(newUser) // body data type must match "Content-Type" header
         }).then(response =>
-             this.clearForm(),
+            this.clearForm(),
             window.location.href = "http://localhost:3000/main_menu_page"
         );
     }
@@ -245,10 +245,10 @@ export default class CCRegisterPage extends Component {
             visibilityt: 'visible',
         }))
     }
-    
+
     render() {
         return (
-            <div className={classes.NewBLogCard}>
+            <div style={{ backgroundColor: '#1d21243b', height: '100%' }} className={classes.NewBLogCard}>
                 <Container>
                     <div className={classes.Container}>
                         <Button variant="secondary" size="sm" href="/" className="but"> BACK </Button>
@@ -312,7 +312,7 @@ export default class CCRegisterPage extends Component {
                                     <Button value="ATV">ATV</Button>&nbsp;&nbsp;
                                     <Button value="RZR">RZR</Button>&nbsp;&nbsp;
                                     <Button value="Motorcycle">Motorcycle</Button>&nbsp;&nbsp;
-                                    <Button onClick={this.OpenJoinOption} value="None">None of the Above</Button>
+                                    <Button onClick={this.OpenJoinOption} value="None"> None </Button>
                                 </ButtonGroup>
                                 <h2>{this.state.q4}</h2>
                                 <br></br><br></br><br></br>
@@ -378,22 +378,22 @@ export default class CCRegisterPage extends Component {
 
                                 <h4>I like to talk about these issues</h4>
                                 <ButtonGroup size="sm" variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q10: e.target.value })}>
-                  
-                                <Row>
-                                    <Col>
-                                    <Button value="Politics ">Politics</Button><br></br>
-                                    <Button value="Sport">Sport</Button>
-                                    <Button value="FamilyLife">Family Life</Button>&nbsp;&nbsp;
+
+                                    <Row>
+                                        <Col>
+                                            <Button value="Politics ">Politics</Button><br></br>
+                                            <Button value="Sport">Sport</Button>
+                                            <Button value="FamilyLife">Family Life</Button>&nbsp;&nbsp;
                                     <Button value="NightLife">NightLife</Button>
-                                    </Col>
-                                    <Col>
-                                    <Button value="Economy">Economy</Button>
-                                    <Button value="Studying">Studying</Button>
-                                    <Button value="Workplace">Workplace</Button>
-                                    <Button value="Other">Other</Button>
-                                    </Col>
-                           
-                                </Row>          
+                                        </Col>
+                                        <Col>
+                                            <Button value="Economy">Economy</Button>
+                                            <Button value="Studying">Studying</Button>
+                                            <Button value="Workplace">Workplace</Button>
+                                            <Button value="Other">Other</Button>
+                                        </Col>
+
+                                    </Row>
                                 </ButtonGroup>
                                 <h4>{this.state.q10}</h4>
                                 <br></br><br></br>

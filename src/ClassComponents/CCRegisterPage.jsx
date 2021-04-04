@@ -381,15 +381,21 @@ export default class CCRegisterPage extends Component {
 
                                     <Row>
                                         <Col>
-                                            <Button value="Politics ">Politics</Button><br></br>
+                                            <Button value="Politics ">Politics</Button>
+                                            <h1></h1>
                                             <Button value="Sport">Sport</Button>
-                                            <Button value="FamilyLife">Family Life</Button>&nbsp;&nbsp;
-                                    <Button value="NightLife">NightLife</Button>
+                                            <h1></h1>
+                                            <Button value="FamilyLife">Family Life</Button>
+                                            <h1></h1>
+                                            <Button value="NightLife">NightLife</Button>
                                         </Col>
                                         <Col>
                                             <Button value="Economy">Economy</Button>
+                                            <h1></h1>
                                             <Button value="Studying">Studying</Button>
+                                            <h1></h1>
                                             <Button value="Workplace">Workplace</Button>
+                                            <h1></h1>
                                             <Button value="Other">Other</Button>
                                         </Col>
 

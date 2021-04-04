@@ -29,7 +29,6 @@ export default class CCCreateNewTrip extends Component {
     };
 
     componentDidMount = () => { //GET all Trips from Trip_Cretia (SQL) onload
-
         console.log("in componentDidMount function");
         let apiUrl = `http://localhost:53281/api/NewTrip`;
 
@@ -54,27 +53,29 @@ export default class CCCreateNewTrip extends Component {
       }
 
 
-    checkValidationbtn = () => {
+    checkValidationbtn = (event) => {
         ///Validate that "Trip name" is Available.
+        console.log("check valid");
+        console.log(this.state.Trip_data_from_sql);
         if (this.state.Trip_data_from_sql.find((trip => trip.Name == this.state.trip_name))) {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: "Hey ! Trip Name : " + this.state.trip_name + " already in use !",
+                text: "Hey ! Trip Name : " + this.state.trip_name + " already exist ! Please Try another one",
                 Onclick: () => { Swal.clickConfirm() }
             }).then(() => {
                 window.location.reload(false)
             })
         }
-                ///Validate Blanks Fields.
-        if (this.state.trip_name == '' || this.state.trip_date == '' || this.state.vehicle_type == '' || this.state.trip_nights == '' || this.state.trip_area == ' ' || this.state.num_of_participants == '' || this.state.with_children == '' || this.state.match_percent == '') {
+        ///Validate Blanks Fields.
+        else if (this.state.trip_name == '' || this.state.trip_date == '' || this.state.vehicle_type == '' || this.state.trip_nights == '' || this.state.trip_area == ' ' || this.state.num_of_participants == '' || this.state.with_children == '' || this.state.match_percent == '') {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
                 text: "All fields should be filled",
                 Onclick: () => { Swal.clickConfirm() }
             }).then(() => {
-                window.location.reload(false)
+                event.preventDefault();
             })
         }
         else { this.publish() }
@@ -103,7 +104,7 @@ export default class CCCreateNewTrip extends Component {
             MatchPercent: this.state.match_percent
         }
 
-        let apiUrl = `http://localhost:54976/api/NewTrip`;
+        let apiUrl = `http://localhost:53281/api/NewTrip`;
         ////POST To TRIP_Criteria SQL TABLE
         fetch(apiUrl, {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -135,7 +136,7 @@ export default class CCCreateNewTrip extends Component {
     getmatch = () => {
         ///Getting all the Users
         console.log("in getmatch function");
-        let apiUrl = `http://localhost:54976/api/Questionnaire/getSpecific/${localStorage.getItem('user_email')}/${this.state.match_percent}`
+        let apiUrl = `http://localhost:53281/api/Questionnaire/getSpecific/${localStorage.getItem('user_email')}/${this.state.match_percent}`
 
         fetch(apiUrl)
             .then(response => response.json())
@@ -149,8 +150,7 @@ export default class CCCreateNewTrip extends Component {
             }).catch(function (error) {
                 console.log("Error getting document:", error);
             });
-        console.log("Temp Rec");
-        console.log(this.state.temparray);
+    
     }
 
 
@@ -221,66 +221,6 @@ export default class CCCreateNewTrip extends Component {
                 referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
                 // body: JSON.stringify(newTrip) // body data type must match "Content-Type" header
             })
-
-
-
-
-            // // var apiUrl = "http://proj.ruppin.ac.il/igroup49/test2/tar1/api/DealInCust/used/" + this.state.coupon_code;
-            // fetch(apiUrl, {
-            //   method: 'PUT',
-            //   headers: {
-            //     Accept: 'application/json',
-            //     'Content-Type': 'application/json',
-            //   },
-            //   body: JSON.stringify(newTrip)
-            // })
-            //   .then((response) => response.json())
-            //   .then((responseJson) => {
-            //     console.log(responseJson);
-            //   })
-            //   .catch((error) => {
-            //     alert(JSON.stringify(error));
-            //     console.error(error);
-            //   });
-        
-            // alert("You are submitting " + this.state.trip_name);
-          
-
-
-
-        // let apiUrl = `http://localhost:53281/api/NewTrip`;
-  
-        //   console.log('start');
-        //   fetch(apiUrl+"/"+this.state.trip_name,
-        //     {
-        //       method: 'PUT',
-        //       body: JSON.stringify(newTrip),
-        //       headers: new Headers({
-        //         'Content-Type': 'application/json; charset=UTF-8',
-        //         'Accept': 'application/json; charset=UTF-8'
-        //       })
-        //     })
-        //     .then(res => {
-        //       console.log('res=', res);
-        //       console.log('res.status', res.status);
-              
-        //       console.log('res.ok', res.ok);
-      
-        //       if (res.ok) {
-        //         console.log('put succeeded');
-        //       }
-      
-        //       return res.json()
-        //     })
-        //     .then(
-        //       (result) => {
-        //         console.log("fetch btnFetchGetTrips= ", result);
-        //       },
-        //       (error) => {
-        //         console.log("err post=", error);
-        //       });
-        //   console.log('end');
-        
 
     }
 

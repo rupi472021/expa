@@ -162,7 +162,7 @@ export default class CCRegisterPage extends Component {
                 LAnswer: this.state.answerList
             }
             ///post to questionnaire 
-            let apiUrl = `http://localhost:53281/api/Questionnaire`;
+            let apiUrl = `http://localhost:54976/api/Questionnaire`;
             console.log("New Answer const");
             console.log(newAnswer);
             ////POST
@@ -197,7 +197,7 @@ export default class CCRegisterPage extends Component {
             Lname: this.state.lname
         }
 
-        let apiUrl = `http://localhost:53281/api/User`;
+        let apiUrl = `http://localhost:54976/api/User`;
 
         ////POST
         fetch(apiUrl, {

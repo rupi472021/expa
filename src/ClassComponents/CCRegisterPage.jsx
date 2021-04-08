@@ -13,8 +13,6 @@ import RangeSlider from 'react-bootstrap-range-slider';
 import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
 import GoogleRegisterPage from '../ServiceComponents/GoogleRegisterPage';
 
-
-
 export default class CCRegisterPage extends Component {
 
     commentSection = React.createRef();
@@ -50,7 +48,8 @@ export default class CCRegisterPage extends Component {
             disabled: false,
             visibilityt: 'hidden',
             answerList: [],
-            image:"https://png.pngtree.com/png-clipart/20200701/original/pngtree-character-default-avatar-png-image_5407167.jpg"
+            image: "https://png.pngtree.com/png-clipart/20200701/original/pngtree-character-default-avatar-png-image_5407167.jpg",
+            source: ''
         }
     }
 
@@ -148,7 +147,6 @@ export default class CCRegisterPage extends Component {
             }).then(() => {
                 window.location.reload(false)
             })
-
         }
         else {
             this.state.answerList = [];
@@ -160,8 +158,8 @@ export default class CCRegisterPage extends Component {
                 LAnswer: this.state.answerList
             }
             ///post to questionnaire 
-            // let apiUrl = `http://localhost:53281/api/Questionnaire`;
-            let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/Questionnaire`;
+            let apiUrl = `http://localhost:54976/api/Questionnaire`;
+            //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/Questionnaire`;
 
             console.log("New Answer const");
             console.log(newAnswer);
@@ -190,13 +188,14 @@ export default class CCRegisterPage extends Component {
     handle = () => {
         const newUser = {
             Email: this.state.email,
-            Password: this.state.password,
             Fname: this.state.fname,
-            Lname: this.state.lname
+            Lname: this.state.lname,
+            Password: this.state.password,
+            Image: this.state.source,
         }
 
-        // let apiUrl = `http://localhost:53281/api/User`;
-        let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User`;
+        let apiUrl = `http://localhost:54976/api/User`;
+        //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User`;
 
 
         ////POST
@@ -213,12 +212,14 @@ export default class CCRegisterPage extends Component {
             redirect: 'follow', // manual, *follow, error
             referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
             body: JSON.stringify(newUser) // body data type must match "Content-Type" header
-        }).then(response =>
+        }).then(
             // this.clearForm(),
+
+            localStorage.setItem('user_lname', this.state.lname),
+            localStorage.setItem('user_image', this.state.source),
             localStorage.setItem('user_email', this.state.email),
             localStorage.setItem('user_fname', this.state.fname),
-            localStorage.setItem('user_lname', this.state.lname),
-            localStorage.setItem('user_image', this.state.image),
+
             window.location.href = "http://localhost:3000/main_menu_page"
 
         );
@@ -235,6 +236,16 @@ export default class CCRegisterPage extends Component {
         this.setState(prevState => ({
             visibilityt: 'visible',
         }))
+    }
+
+    handleCapture = (target) => {
+        if (target.files) {
+            if (target.files.length !== 0) {
+                const file = target.files[0];
+                const newUrl = URL.createObjectURL(file);
+                this.setState({ source: newUrl });
+            }
+        }
     }
 
     render() {
@@ -265,11 +276,15 @@ export default class CCRegisterPage extends Component {
                                         <TextField disabled={this.state.disabled} style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth name="Cpassword" label="Confirm" type="password" id="Cpassword" autoComplete="confirm-password" onChange={(e) => this.setState({ cPassword: e.target.value })} />
                                     </Col>
                                 </Row>
+                                <div>
+                                    <h5>Upload your Profile Image:</h5>
+                                    <img style={{ width: '30%' }} src={this.state.source} alt="" ></img>
+                                    <Input style={{ marginLeft: 75}} accept="image/*" id="icon-button-file" type="file" capture="environment" onChange={(image) => this.handleCapture(image.target)} />
+                                </div>
                                 <br></br>
                                 <Button fullWidth variant="info" size="lg" onClick={this.submitUserData} disabled={this.state.disabled} >Let's GO !</Button>
                                 <br></br><br></br><br></br><br></br>
                             </div>
-
                             {/* Questionnaire */}
                             <div id="part2" /*style={{ opacity: this.state.opacity}}*/>
                                 <h4>I am ...</h4>

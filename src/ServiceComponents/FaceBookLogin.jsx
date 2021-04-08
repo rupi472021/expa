@@ -29,7 +29,7 @@ export default class FaceBookLogin extends Component {
     saveUserDataInLocalStorge = (data) => {
 
         console.log("user facebook profile iamge is : " + data.picture.data.url)
-        localStorage.setItem('user_full_name', data.name); //save first name in LS
+        localStorage.setItem('user_fname', data.name); //save first name in LS
         localStorage.setItem('user_email', data.email); //save user's email in LS
         localStorage.setItem('user_image', data.picture.data.url); //save profile image in LS
         localStorage.setItem('social_media_name', data.graphDomain); //save the name "FacceBook" in LS

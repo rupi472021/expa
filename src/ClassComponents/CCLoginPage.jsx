@@ -14,6 +14,7 @@ import FaceBookLogin from '../ServiceComponents/FaceBookLogin';
 import classes from './BlogCard.module.css';
 import Box from '@material-ui/core/Box';
 import Swal from 'sweetalert2';
+import { CollectionsOutlined } from '@material-ui/icons';
 
 
 export default class CCLoginPage extends Component {
@@ -74,9 +75,12 @@ export default class CCLoginPage extends Component {
         console.log(this.props.dataFromApptoLoginPage) // show all data from Users table in the SQL from parent
 
         if (this.props.dataFromApptoLoginPage.find((user => user.Email == this.state.email) && (user => user.Password == this.state.password))) {
+
             localStorage.setItem('user_email', this.state.email)
-            localStorage.setItem('user_image', this.state.image)
-            localStorage.setItem('social_media_name', this.state.social_media_name)
+            localStorage.setItem('user_fname', this.props.dataFromApptoLoginPage[0].Fname)
+            localStorage.setItem('user_lname', this.props.dataFromApptoLoginPage[0].Lname)
+            //localStorage.setItem('social_media_name', this.state.social_media_name)
+            localStorage.setItem('user_image', this.props.dataFromApptoLoginPage[0].Image)
 
             Swal.fire({
                 position: 'center',
@@ -88,7 +92,7 @@ export default class CCLoginPage extends Component {
             }).then(() => {
                 window.location.href = "http://localhost:3000/main_menu_page"
                 // window.location.href = "http://proj.ruppin.ac.il/igroup47/prod/main_menu_page"
-                
+
             })
         }
         else {

@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 import RangeSlider from 'react-bootstrap-range-slider';
 import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
 import GoogleRegisterPage from '../ServiceComponents/GoogleRegisterPage';
+import $ from 'jquery';
 
 export default class CCRegisterPage extends Component {
 
@@ -186,6 +187,18 @@ export default class CCRegisterPage extends Component {
     }
 
     handle = () => {
+
+        var data = new FormData();
+        var files = $("#files").get(0).files;
+
+        // Add the uploaded file to the form data collection  
+        if (files.length > 0) {
+            for (let f = 0; f < files.length; f++) {
+                data.append("UploadedImage", files[f]);
+            }
+            data.append("name", "benny"); // append what ever data you want to send along with the files. See how you extract it in the controller.
+            this.setState({ source: data });
+        }
         const newUser = {
             Email: this.state.email,
             Fname: this.state.fname,
@@ -196,7 +209,6 @@ export default class CCRegisterPage extends Component {
 
         let apiUrl = `http://localhost:54976/api/User`;
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User`;
-
 
         ////POST
         fetch(apiUrl, {
@@ -213,6 +225,7 @@ export default class CCRegisterPage extends Component {
             referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
             body: JSON.stringify(newUser) // body data type must match "Content-Type" header
         }).then(
+            
             // this.clearForm(),
 
             localStorage.setItem('user_lname', this.state.lname),
@@ -220,8 +233,9 @@ export default class CCRegisterPage extends Component {
             localStorage.setItem('user_email', this.state.email),
             localStorage.setItem('user_fname', this.state.fname),
 
-            window.location.href = "http://localhost:3000/main_menu_page"
+            //window.location.href = "http://localhost:3000/main_menu_page"
 
+            console.log(newUser)
         );
     }
     // toggle = () => this.state.setOpen(!this.state.dropdownOpen);
@@ -238,15 +252,69 @@ export default class CCRegisterPage extends Component {
         }))
     }
 
-    handleCapture = (target) => {
-        if (target.files) {
-            if (target.files.length !== 0) {
-                const file = target.files[0];
-                const newUrl = URL.createObjectURL(file);
-                this.setState({ source: newUrl });
-            }
-        }
-    }
+    //     btnFile = (event) => {
+    //         console.log(event.target.files[0]);
+    //         var data = new FormData();
+    //         if (event.target.value.length > 0) {
+
+    //             let studOBJ = localStorage.getItem('student');
+    //             studOBJ = JSON.parse(studOBJ);
+
+    //             //this.setState({ selectedFile: event.target.files[0].name });
+    //             const file = event.target.files[0];
+    //             console.log(file);
+    //             const newUrl = URL.createObjectURL(file);
+    //             console.log(newUrl);
+    //             this.setState({ imgURL: newUrl })
+
+    //             data.append("UploadedImage", file);
+    //             data.append("name", studOBJ.Mail);
+
+    //             console.log("in post img function");
+    //             this.apiUrl = 'http://proj.ruppin.ac.il/igroup54/test2/A/tar5/api/students/uploadedFiles'
+    //             fetch(this.apiUrl,
+    //                 {
+    //                     method: 'POST',
+    //                     body: data,
+    //                     // headers: new Headers({
+    //                     //   // 'Content-Type': 'application/json; charset=UTF-8',
+    //                     //   // 'Accept': 'application/json; charset=UTF-8'
+    //                     // })
+    //                 })
+    //                 .then(res => {
+    //                     console.log('res=', res);
+
+    //                     if (res.status === 201) {
+    //                         console.log('uploadedFile created:)');
+    //                     }
+    //                     console.log('res.ok', res.ok);
+
+    //                     if (res.ok) {
+    //                         console.log('post succeeded');
+    //                     }
+
+    //                     return res.json()
+    //                 })
+    //                 .then(
+    //                     (result) => {
+    //                         console.log("fetch btnFetchuploadedFile= ", result);
+    //                         let imgNameInServer = result.split('\\').pop();
+    //                         console.log(imgNameInServer);
+    //                         this.setState({ urlimg: result, selectedFile: imgNameInServer })
+
+    //                     },
+    //                     (error) => {
+    //                         console.log("err post=", error);
+    //                     });
+    //             console.log('end');
+
+    //             //setSource(newUrl);
+    //         }
+    //         else {
+    //             this.setState({ selectedFile: null })
+    //         }
+    //     }
+    // }
 
     render() {
         return (
@@ -279,7 +347,7 @@ export default class CCRegisterPage extends Component {
                                 <div>
                                     <h5>Upload your Profile Image:</h5>
                                     <img style={{ width: '30%' }} src={this.state.source} alt="" ></img>
-                                    <Input style={{ marginLeft: 75}} accept="image/*" id="icon-button-file" type="file" capture="environment" onChange={(image) => this.handleCapture(image.target)} />
+                                    <Input accept="image/*" id="icon-button-file" type="file" capture="environment" onChange={this.btnFile} ref={fileInput => this.fileInput = fileInput} />                            
                                 </div>
                                 <br></br>
                                 <Button fullWidth variant="info" size="lg" onClick={this.submitUserData} disabled={this.state.disabled} >Let's GO !</Button>

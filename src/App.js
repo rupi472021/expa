@@ -1,13 +1,11 @@
 import './App.css';
 import { Switch, Route, withRouter } from 'react-router-dom';
-import CCResetPasswordPage from './ClassComponents/CCResetPasswordPage';
-import PictureUploader from './Components/PictureUploader';
 import CCRegisterPage from './ClassComponents/CCRegisterPage';
 import CCLoginPage from './ClassComponents/CCLoginPage';
 import CCCreateNewTrip from './ClassComponents/CCCreateNewTrip';
 import FCMainMenuPage from './FunctionComponents/FCMainMenuPage';
 import React, { Component } from 'react';
-import { responsiveFontSizes } from '@material-ui/core';
+import CCResetPasswordPage from './ClassComponents/CCResetPasswordPage';
 
 class App extends Component {
 
@@ -21,7 +19,7 @@ class App extends Component {
   componentDidMount = () => { //GET all Users from Users_expa (SQL) onload
 
     console.log("in componentDidMount function");
-     let apiUrl = `http://localhost:54976/api/User`;
+    let apiUrl = `http://localhost:54976/api/User`;
     //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User`;
 
 
@@ -56,7 +54,7 @@ class App extends Component {
             <CCRegisterPage dataFromApptoRegisterPage={this.state.data_from_sql} />
           </Route>
           <Route exact path="/forget_password_page" >
-            <CCResetPasswordPage />
+            <CCResetPasswordPage dataFromApptoResetPasswordPage={this.state.data_from_sql} />
           </Route>
           <Route exact path="/main_menu_page" >
             <FCMainMenuPage />

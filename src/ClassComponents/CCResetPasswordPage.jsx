@@ -1,89 +1,83 @@
-import React from 'react';
-import { AvForm, AvGroup, AvInput, AvFeedback } from 'availity-reactstrap-validation';
-import { Button, Label } from 'reactstrap';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { Component } from 'react'
+import { Form, FormGroup, Input, Label, Button } from 'reactstrap'
+import Swal from 'sweetalert2';
 
-export default class CCResetPasswordPage extends React.Component {
+export default class CCResetPasswordPage extends Component {
+
     constructor(props) {
-        super(props);
-
-        // bound functions
-        this.handleEmailChange = this.handleEmailChange.bind(this);
-        this.handleKeyPress = this.handleKeyPress.bind(this);
-        this.handleValidSubmit = this.handleValidSubmit.bind(this);
-
-        // component state
+        super(props)
         this.state = {
             email: '',
-        };
+            name: 'ben',
+            message: '123'
+        }
+        this.sendMail = this.sendMail.bind(this);
     }
 
-    // update state as email value changes
-    handleEmailChange(e) {
-        this.setState({ email: e.target.value });
-    }
+    Check = () => {
+        console.log(this.props.dataFromApptoResetPasswordPage) // show all data from Users table in the SQL from parent
 
-    // catch enter clicks
-    handleKeyPress(target) {
-        if (target.charCode === 13) {
-            this.handleValidSubmit();
+        if (this.props.dataFromApptoResetPasswordPage.find((user => user.Email == this.state.email))) {
+            var index = this.props.dataFromApptoResetPasswordPage.findIndex(user => user.Email == this.state.email)
+            console.log(index);
+            this.sendMail(index);
+        }
+        else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'This email does not exist in our Data Base!',
+                showConfirmButton: true,
+                position: 'center',
+                Onclick: () => { Swal.clickConfirm() }
+            }).then(() => {
+                //window.location.href = "http://localhost:3000"
+            })
         }
     }
 
-    // Handle submission once all form data is valid
-    handleValidSubmit() {
-        // const { resetPasswordFunction } = this.props;
-        // const formData = this.state;
-        // resetPasswordFunction(formData.email);
-        alert("Password was send to your email")
-    }
+    sendMail = (index) => {
 
-    ben = () =>{
-        alert("hi")
+        window.Email.send({
+            Host: "smtp.google.com",
+            Username: "expaapp2021@gmail.com",
+            Password: "095391DC1421931213BDE94909369A63964C",
+            To: this.state.email,
+            From: "expaapp2021@gmail.com",
+            Subject: "Password for ExPa App",
+            Body: "Hi " + this.props.dataFromApptoResetPasswordPage[index].Fname + " your password to ExPa App is: " + this.props.dataFromApptoResetPasswordPage[index].Password
+        }).then((message) => {
+            console.log(message)
+            if (message == "OK") {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Your Password has been sent',
+                    showConfirmButton: true,
+                    position: 'center',
+                    Onclick: () => { Swal.clickConfirm() }
+                }).then(() => {
+                    window.location.href = "http://localhost:3000"
+                })
+            }
+        }
+        )
     }
 
     render() {
         return (
-            <div style={{
-                borderTopColor: 'red',
-                borderLeftColor: 'red',
-                borderRightColor: 'red',
-                borderBottomColor: 'red',
-                borderWidth: 5,
-                fontWeight: 'bold',
-                alignItems: 'center',
-                backgroundColor: "#ffdf80",
-                position: 'absolute',
-                height: "100vh",
-            }}>
-                <div>
-                    <div>
-                        <p>
-                            If you‘d like to reset your password, please enter your email here
-                            and a link to do so will be sent to the address you enter.
-                        </p>
-                        <AvForm onValidSubmit={this.handleValidSubmit}>
-                            <AvGroup>
-                                <Label for="userEmail">Email: </Label>
-                                <AvInput
-                                    id="userEmail"
-                                    name="email"
-                                    onChange={this.handleEmailChange}
-                                    onKeyPress={this.handleKeyPress}
-                                    placeholder="noreply@example.com"
-                                    required
-                                    type="email"
-                                    value={this.state.email}
-                                />
-                                <AvFeedback>A valid email is required to reset your password</AvFeedback>
-                            </AvGroup>
-                            <Button>Reset Password</Button><br></br><br></br>
-                            <Button variant="primary" size="m" href="/" style={{background:"red",}}> Back </Button>
-                        </AvForm>
-                    </div>
+            <div style={{ backgroundImage: `url("https://image.freepik.com/free-vector/forgot-password-concept-illustration_114360-1123.jpg")`, height: '100vh', width: '50vh' }}>
+                <div><br></br><br></br>
+                    <h5 style={{ position: 'absolute', marginTop: -25 }}> Please enter your login email address and your password will wait for you in your inbox/spam </h5><br></br><br></br>
+                    <Form style={{ width: '75%', marginLeft: 50 }}>
+                        <FormGroup><br></br>
+                            <Label for="email"> Email:  </Label>
+                            <Input type="email" name="email" onChange={(e) => this.setState({ email: e.target.value })}></Input>
+                        </FormGroup>
+                    </Form>
+                    <div><Button onClick={this.Check}> Send </Button></div><br></br>
+                    <div><Button href="/" > Back </Button></div>
                 </div>
             </div>
-        );
+        )
     }
 }
-

@@ -322,7 +322,7 @@ export default class CCRegisterPage extends Component {
                 <Container>
                     <div className={classes.Container}>
                         <Button variant="secondary" size="sm" href="/" className="but"> BACK </Button>
-                        <div><Avatar alt="Remy Sharp" src="https://i.ibb.co/7S6XfNZ/circle-cropped.png" style={{ width: '15vh', height: '15vh', marginTop: '10px' }} /></div>
+                        <div><Avatar alt="Remy Sharp" src="https://i.ibb.co/GF9rjsr/circle-cropped.png" style={{ width: '15vh', height: '15vh', marginTop: '10px' }} /></div>
                         <h1 className="ExPa" > Create an Account </h1>
                         <form>
                             <div id="part1" >

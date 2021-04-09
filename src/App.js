@@ -6,6 +6,7 @@ import CCCreateNewTrip from './ClassComponents/CCCreateNewTrip';
 import FCMainMenuPage from './FunctionComponents/FCMainMenuPage';
 import React, { Component } from 'react';
 import CCResetPasswordPage from './ClassComponents/CCResetPasswordPage';
+import CCMyprofile from './ClassComponents/CCMyprofile';
 
 class App extends Component {
 
@@ -61,6 +62,9 @@ class App extends Component {
           </Route>
           <Route exact path="/main_menu_page/create_new_trip_page" >
             <CCCreateNewTrip />
+          </Route>
+          <Route exact path="/main_menu_page/my_profile" >
+            <CCMyprofile />
           </Route>
         </Switch>
       </div>

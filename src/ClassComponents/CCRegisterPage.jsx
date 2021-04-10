@@ -159,7 +159,7 @@ export default class CCRegisterPage extends Component {
                 LAnswer: this.state.answerList
             }
             ///post to questionnaire 
-            let apiUrl = `http://localhost:54976/api/Questionnaire`;
+            let apiUrl = `http://localhost:53281/api/Questionnaire`;
             //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/Questionnaire`;
 
             console.log("New Answer const");
@@ -189,16 +189,16 @@ export default class CCRegisterPage extends Component {
     handle = () => {
 
         var data = new FormData();
-        var files = $("#files").get(0).files;
+        // var files = $("#files").get(0).files;
 
-        // Add the uploaded file to the form data collection  
-        if (files.length > 0) {
-            for (let f = 0; f < files.length; f++) {
-                data.append("UploadedImage", files[f]);
-            }
-            data.append("name", "benny"); // append what ever data you want to send along with the files. See how you extract it in the controller.
-            this.setState({ source: data });
-        }
+        // // Add the uploaded file to the form data collection  
+        // if (files.length > 0) {
+        //     for (let f = 0; f < files.length; f++) {
+        //         data.append("UploadedImage", files[f]);
+        //     }
+        //     data.append("name", "benny"); // append what ever data you want to send along with the files. See how you extract it in the controller.
+        //     this.setState({ source: data });
+        // }
         const newUser = {
             Email: this.state.email,
             Fname: this.state.fname,
@@ -207,7 +207,7 @@ export default class CCRegisterPage extends Component {
             Image: this.state.source,
         }
 
-        let apiUrl = `http://localhost:54976/api/User`;
+        let apiUrl = `http://localhost:53281/api/User`;
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User`;
 
         ////POST
@@ -322,11 +322,11 @@ export default class CCRegisterPage extends Component {
                 <Container>
                     <div className={classes.Container}>
                         <Button variant="secondary" size="sm" href="/" className="but"> BACK </Button>
-                        <div><Avatar alt="Remy Sharp" src="https://i.ibb.co/7S6XfNZ/circle-cropped.png" style={{ width: '15vh', height: '15vh', marginTop: '10px' }} /></div>
+                        <div><Avatar alt="Remy Sharp" src="https://i.ibb.co/GF9rjsr/circle-cropped.png" style={{ width: '15vh', height: '15vh', marginTop: '10px' }} /></div>
                         <h1 className="ExPa" > Create an Account </h1>
                         <form>
                             <div id="part1" >
-                                Access with: <GoogleRegisterPage />
+                                Access with: <GoogleRegisterPage dataFromParent={this.props.dataFromApptoRegisterPage} />
                                 <TextField disabled={this.state.disabled} style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" onChange={(e) => this.setState({ email: e.target.value })} autoFocus />
                                 <Row>
                                     <Col>

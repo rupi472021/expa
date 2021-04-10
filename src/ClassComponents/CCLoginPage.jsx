@@ -30,6 +30,11 @@ export default class CCLoginPage extends Component {
         }
     };
 
+    componentDidMount = () => {
+        localStorage.clear();
+
+    }
+
     handleShow = () => {
         Swal.fire({
             title: 'ExPa Founders',

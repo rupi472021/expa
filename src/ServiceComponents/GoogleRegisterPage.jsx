@@ -1,6 +1,7 @@
 import React from 'react';
 import { GoogleLogin } from 'react-google-login';
 import Swal from 'sweetalert2'
+import CCRegisterPage from '../ClassComponents/CCRegisterPage';
 //refresh token
 //import { refreshTokenSetup } from '../utils/refreshTokenSetup';
 const clientId = '337989254519-c3ucmom5f9ubap04mfmv76am274hivnm.apps.googleusercontent.com';
@@ -9,15 +10,17 @@ export default function GoogleRegisterPage(props) {
 
     const onSuccess = (res) => {
 
-        // console.log('[Login Success from google] currentUser:', res.profileObj);
-        // localStorage.setItem('user_fname', res.profileObj.givenName); //save first name from Google in LS
-        // localStorage.setItem('user_lname', res.profileObj.familyName); //save last name from Google in LS
-        // localStorage.setItem('user_email', res.profileObj.email); //save user's email from Google in LS
-        // localStorage.setItem('user_image', res.profileObj.imageUrl); //save profile image from Google in LS
+        console.log('[Login Success from google] currentUser:', res.profileObj);
+        localStorage.setItem('user_fname', res.profileObj.givenName); //save first name from Google in LS
+        localStorage.setItem('user_lname', res.profileObj.familyName); //save last name from Google in LS
+        localStorage.setItem('user_email', res.profileObj.email); //save user's email from Google in LS
+        localStorage.setItem('user_image', res.profileObj.imageUrl); //save profile image from Google in LS
 
         checkIfUserExistsInSQL(res.profileObj)
 
     };
+
+
 
     const onFailure = (res) => {
         console.log('[Login Falied from google] res:', res);
@@ -26,12 +29,8 @@ export default function GoogleRegisterPage(props) {
 
     const checkIfUserExistsInSQL = (data) => {
 
-        localStorage.setItem('user_fname', data.givenName); //save first name from Google in LS
-        localStorage.setItem('user_lname', data.familyName); //save last name from Google in LS
-        localStorage.setItem('user_email', data.email); //save user's email from Google in LS
-        localStorage.setItem('user_image', data.imageUrl); //save profile image from Google in LS
 
-        if (props.dataFromParent.find((user => user.Email === data.email))) {
+        if (props.dataFromParent.find((user => user.Email === data.email))/* && props.queDatafromParent.find((user => user.Email === data.email))*/) {
             Swal.fire({
                 position: 'center',
                 icon: 'success',
@@ -43,21 +42,29 @@ export default function GoogleRegisterPage(props) {
                 window.location.href = "http://localhost:3000/main_menu_page"
             })
         }
-        else {
-            alert("sign me up");
+        // else if (props.dataFromParent.find((user => user.Email === data.email))) {
+        //     alert("should fill up ques");
 
-            // Swal.fire({
-            //     icon: 'error',
-            //     title: 'Oops...',
-            //     text: "Hi " + data.givenName + " if it's your first time in ExPa - please Sign Up!",
-            //     Onclick: () => { Swal.clickConfirm() }
-            // }).then(() => {
-            //     window.location.reload(false)
-            //     localStorage.clear();
-            // })
+
+        // }
+
+        else {
+            alert("should sign up")
+
+            window.scrollTo({ top: 530, behavior: 'smooth' });
+         
         }
     }
+    // const googlepushed = () => {
+    //     window.scrollTo({ top: 530, behavior: 'smooth' })
+    //     this.setState(prevState => ({
+    //         opacity: 1,
+    //         disabled: true,
+    //         backgroundColor: 'green'
 
+
+    //     }))
+    // }
     return (
         <div>
             <GoogleLogin
@@ -68,7 +75,13 @@ export default function GoogleRegisterPage(props) {
                 cookiePolicy={'single_host_origin'}
                 style={{ marginTop: '100px' }}
                 isSignedIn={false}
+            // render={renderProps => (
+            //     <button onClick={alert("jsadihjas")} >Google</button>
+            //   )}
+            //  render={onclick=>(() => alert("heyhey"))}
+
             />
+            {/* <CCRegisterPage googlepushed={localStorage.getItem('user_fname')}/> */}
         </div>
     );
 }

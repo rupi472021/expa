@@ -14,6 +14,7 @@ class App extends Component {
     super(props);
     this.state = {
       data_from_sql: '',
+      Ques_data_fromSQL:'',
     }
   };
 
@@ -42,6 +43,27 @@ class App extends Component {
         (error) => {
           console.log("err GET=", error);
         });
+
+
+        let apiUrl1 = `http://localhost:53281/api/Questionnaire`;
+        fetch(apiUrl1)
+        .then(res => {
+          console.log('res=', res);
+          console.log('res.status', res.status);
+          console.log('res.ok', res.ok);
+          return res.json()
+        })
+        .then(
+          (result) => {
+            console.log("GET Questionnaire data from SQL= ", result);
+            // result.map(st => console.log(st.Fname)); // all Fname in Users_Expa
+            this.setState({
+              Ques_data_fromSQL: result,
+            })
+          },
+          (error) => {
+            console.log("err GET=", error);
+          });
   }
 
   render() {
@@ -52,7 +74,7 @@ class App extends Component {
             <CCLoginPage dataFromApptoLoginPage={this.state.data_from_sql} />
           </Route>
           <Route exact path="/register" >
-            <CCRegisterPage dataFromApptoRegisterPage={this.state.data_from_sql} />
+            <CCRegisterPage dataFromApptoRegisterPage={this.state.data_from_sql} QuesDatafromApptoRegisterPage={this.state.Ques_data_fromSQL} />
           </Route>
           <Route exact path="/forget_password_page" >
             <CCResetPasswordPage dataFromApptoResetPasswordPage={this.state.data_from_sql} />

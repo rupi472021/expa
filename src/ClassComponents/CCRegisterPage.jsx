@@ -76,6 +76,7 @@ export default class CCRegisterPage extends Component {
 
 
     submitUserData = () => {
+     
         //Validate Blank Fields
         if (this.state.emaill == '' || this.state.password == '') {
 
@@ -326,7 +327,7 @@ export default class CCRegisterPage extends Component {
                         <h1 className="ExPa" > Create an Account </h1>
                         <form>
                             <div id="part1" >
-                                Access with: <GoogleRegisterPage dataFromParent={this.props.dataFromApptoRegisterPage} />
+                                Access with: <GoogleRegisterPage dataFromParent={this.props.dataFromApptoRegisterPage} {...this.state.fname=localStorage.getItem('user_fname')} {...this.state.lname=localStorage.getItem('user_lname')}{...this.state.email=localStorage.getItem('user_email')}{...this.state.source=localStorage.getItem('user_image')} onClick={this.submitUserData} />
                                 <TextField disabled={this.state.disabled} style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" onChange={(e) => this.setState({ email: e.target.value })} autoFocus />
                                 <Row>
                                     <Col>
@@ -485,7 +486,6 @@ export default class CCRegisterPage extends Component {
                                 </ButtonGroup>
                                 <h4>{this.state.q11}</h4>
                                 <br></br><br></br><br></br>
-
 
                                 <Button fullWidth variant="success" size="lg" onClick={this.postTosqlQues}>GET STARTED</Button>
 

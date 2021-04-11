@@ -9,11 +9,11 @@ export default function GoogleRegisterPage(props) {
 
     const onSuccess = (res) => {
 
-        console.log('[Login Success from google] currentUser:', res.profileObj);
-        localStorage.setItem('user_fname', res.profileObj.givenName); //save first name from Google in LS
-        localStorage.setItem('user_lname', res.profileObj.familyName); //save last name from Google in LS
-        localStorage.setItem('user_email', res.profileObj.email); //save user's email from Google in LS
-        localStorage.setItem('user_image', res.profileObj.imageUrl); //save profile image from Google in LS
+        // console.log('[Login Success from google] currentUser:', res.profileObj);
+        // localStorage.setItem('user_fname', res.profileObj.givenName); //save first name from Google in LS
+        // localStorage.setItem('user_lname', res.profileObj.familyName); //save last name from Google in LS
+        // localStorage.setItem('user_email', res.profileObj.email); //save user's email from Google in LS
+        // localStorage.setItem('user_image', res.profileObj.imageUrl); //save profile image from Google in LS
 
         checkIfUserExistsInSQL(res.profileObj)
 
@@ -26,8 +26,12 @@ export default function GoogleRegisterPage(props) {
 
     const checkIfUserExistsInSQL = (data) => {
 
-        if (props.dataFromParent.find((user => user.Email === data.email))) {
+        localStorage.setItem('user_fname', data.givenName); //save first name from Google in LS
+        localStorage.setItem('user_lname', data.familyName); //save last name from Google in LS
+        localStorage.setItem('user_email', data.email); //save user's email from Google in LS
+        localStorage.setItem('user_image', data.imageUrl); //save profile image from Google in LS
 
+        if (props.dataFromParent.find((user => user.Email === data.email))) {
             Swal.fire({
                 position: 'center',
                 icon: 'success',
@@ -41,7 +45,7 @@ export default function GoogleRegisterPage(props) {
         }
         else {
             alert("sign me up");
-            
+
             // Swal.fire({
             //     icon: 'error',
             //     title: 'Oops...',

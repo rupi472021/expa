@@ -72,10 +72,17 @@ export default class CCRegisterPage extends Component {
         localStorage.clear(); //clear local storge onload
         console.log(this.props.dataFromApptoRegisterPage);
 
+        // if(localStorage.getItem('user_email')==null){
+        //     alert("hey");
+        // }
+
     }
+
+    
 
 
     submitUserData = () => {
+     
         //Validate Blank Fields
         if (this.state.emaill == '' || this.state.password == '') {
 
@@ -119,8 +126,6 @@ export default class CCRegisterPage extends Component {
             this.setState(prevState => ({
                 opacity: 1,
                 disabled: true,
-
-
             }))
 
 
@@ -136,6 +141,19 @@ export default class CCRegisterPage extends Component {
         }
 
     }
+
+
+// googlepushed=(a)=>{
+//     alert(a);
+//     window.scrollTo({ top: 530, behavior: 'smooth' })
+//     this.setState(prevState => ({
+//         opacity: 1,
+//         disabled: true,
+//         backgroundColor:'green'
+
+
+//     }))
+// }
 
     postTosqlQues = () => {
         ///validate blank fields
@@ -159,7 +177,7 @@ export default class CCRegisterPage extends Component {
                 LAnswer: this.state.answerList
             }
             ///post to questionnaire 
-            let apiUrl = `http://localhost:54976/api/Questionnaire`;
+            let apiUrl = `http://localhost:53281/api/Questionnaire`;
             //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/Questionnaire`;
 
             console.log("New Answer const");
@@ -189,16 +207,16 @@ export default class CCRegisterPage extends Component {
     handle = () => {
 
         var data = new FormData();
-        var files = $("#files").get(0).files;
+        // var files = $("#files").get(0).files;
 
-        // Add the uploaded file to the form data collection  
-        if (files.length > 0) {
-            for (let f = 0; f < files.length; f++) {
-                data.append("UploadedImage", files[f]);
-            }
-            data.append("name", "benny"); // append what ever data you want to send along with the files. See how you extract it in the controller.
-            this.setState({ source: data });
-        }
+        // // Add the uploaded file to the form data collection  
+        // if (files.length > 0) {
+        //     for (let f = 0; f < files.length; f++) {
+        //         data.append("UploadedImage", files[f]);
+        //     }
+        //     data.append("name", "benny"); // append what ever data you want to send along with the files. See how you extract it in the controller.
+        //     this.setState({ source: data });
+        // }
         const newUser = {
             Email: this.state.email,
             Fname: this.state.fname,
@@ -207,7 +225,7 @@ export default class CCRegisterPage extends Component {
             Image: this.state.source,
         }
 
-        let apiUrl = `http://localhost:54976/api/User`;
+        let apiUrl = `http://localhost:53281/api/User`;
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User`;
 
         ////POST
@@ -324,9 +342,10 @@ export default class CCRegisterPage extends Component {
                         <Button variant="secondary" size="sm" href="/" className="but"> BACK </Button>
                         <div><Avatar alt="Remy Sharp" src="https://i.ibb.co/GF9rjsr/circle-cropped.png" style={{ width: '15vh', height: '15vh', marginTop: '10px' }} /></div>
                         <h1 className="ExPa" > Create an Account </h1>
+                        <h1>{this.state.email}</h1>
                         <form>
                             <div id="part1" >
-                                Access with: <GoogleRegisterPage />
+                                Access with: <GoogleRegisterPage email={this.state.email}  queDatafromParent={this.props.QuesDatafromApptoRegisterPage} dataFromParent={this.props.dataFromApptoRegisterPage} {...this.state.fname=localStorage.getItem('user_fname')} {...this.state.lname=localStorage.getItem('user_lname')}{...this.state.email=localStorage.getItem('user_email')}{...this.state.source=localStorage.getItem('user_image')}  />
                                 <TextField disabled={this.state.disabled} style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" onChange={(e) => this.setState({ email: e.target.value })} autoFocus />
                                 <Row>
                                     <Col>
@@ -485,7 +504,6 @@ export default class CCRegisterPage extends Component {
                                 </ButtonGroup>
                                 <h4>{this.state.q11}</h4>
                                 <br></br><br></br><br></br>
-
 
                                 <Button fullWidth variant="success" size="lg" onClick={this.postTosqlQues}>GET STARTED</Button>
 

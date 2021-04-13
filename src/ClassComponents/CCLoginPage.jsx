@@ -50,7 +50,7 @@ export default class CCLoginPage extends Component {
         return (
             <Typography variant="body2" color="textSecondary" align="center">
                 {'Copyright © '}
-                <Link color="inherit" onClick={this.handleShow}>
+                <Link style={{ fontWeight: 'bold' }} color="inherit" onClick={this.handleShow}>
                     ExPa Application
           </Link>
                 {new Date().getFullYear()}
@@ -127,15 +127,15 @@ export default class CCLoginPage extends Component {
                             <Button className={classes.ButtonSignIn} fullWidth variant="contained" color="Primary" size="large" onClick={this.signinbtn}> Log In </Button><br></br><br></br><br></br>
                             <Grid container>
                                 <Grid item xs>
-                                    <Link href="/forget_password_page" variant="body2"> Forgot password? </Link>
+                                    <Link style={{ fontWeight: 'bold', fontSize: 15 }} href="/forget_password_page" variant="body2"> Forgot password? </Link>
                                 </Grid>
-                                <Grid item>
-                                    <Link variant="body2" href="/Register" > Don't have an account? Sign Up </Link><br></br><br></br>
+                                <Grid item xs>
+                                    <Link style={{ fontWeight: 'bold', fontSize: 15 }} variant="body2" href="/Register" > Don't have an account? Sign Up </Link><br></br><br></br>
                                 </Grid>
                             </Grid>
                         </form>
                         <div style={{ width: '80%' }}>
-                            <p style={{ marginLeft: 50 }}> Quick access with </p>
+                            <p style={{ marginLeft: 50, fontWeight: 'bold' }}> Quick access with </p>
                         </div><br></br><br></br>
                         <div style={{ height: 70, width: '80%' }}>
                             <div style={{ marginRight: 100 }}>

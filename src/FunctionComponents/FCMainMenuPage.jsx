@@ -30,7 +30,7 @@ export default function FCMainMenuPage() {
         <div style={{ backgroundColor: '#1d21243b', height: '100vh', alignItems: 'center' }}>
             <div style={{ padding: 10 }}><Button variant="secondary" size="sm" onClick={backbtn}>BACK</Button></div>
             <div style={{ textAlign: 'center' }}><br></br>
-                <img src={localStorage.getItem('user_image')} alt={true} style={{ width: '40%', borderRadius: 65 }} /><br></br><br></br>
+                <img src={localStorage.getItem('user_image')} alt={true} style={{ width: '40%', borderRadius: 70, borderWidth: 5, borderStyle: 'solid' }} /><br></br><br></br>
                 <p>
                     <h5 style={{ marginLeft: 7 }}>Hi {localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}, Welcome To ExPa!</h5>
                 </p>

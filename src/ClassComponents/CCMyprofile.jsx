@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
+//import Table from '@material-ui/core/Table';
+import { Table } from 'react-bootstrap';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
@@ -9,11 +9,13 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Swal from 'sweetalert2';
+import { Dropdown } from 'semantic-ui-react'
 
 
 function createData(Questions, Answers) {
     return { Questions, Answers };
 }
+
 
 export default class CCMyprofile extends Component {
 
@@ -23,19 +25,26 @@ export default class CCMyprofile extends Component {
         this.state = {
             password: '',
             confirm_password: '',
+            q: [{ LAnswer: '1' }],
             rows: [],
+            q1: '',
+            q2: '',
+            q3: '',
+            q4: '',
+            q5: '',
+            q6: '',
+            q7: '',
+            q8: '',
+            q9: '',
+            q10: '',
+            q11: '',
         }
     };
 
 
     componentDidMount = () => {
 
-        Swal.fire(
-            'Change Password Section',
-            'In this section you can change your password and view your Questionnaire',
-            'question'
-        )
-
+        //Swal.fire('Change Password Section', 'In this section you can change your password and view your Questionnaire', 'question')
         console.log("in componentDidMount function");
 
         let apiUrl = `http://localhost:54976/api/Questionnaire?email=` + localStorage.getItem('user_email');
@@ -51,23 +60,66 @@ export default class CCMyprofile extends Component {
             .then(
                 (result) => {
                     console.log("GET all trips data from SQL= ", result);
+
+                    this.setState({ q: result })
+
                     //   result.map(st => console.log(st.Name)); // all Fname in Users_Expa
-                    this.setState({
-                        rows:
-                            [
-                                createData('I am...', result[0].LAnswer[0]),
-                                createData('My Age', result[0].LAnswer[1]),
-                                createData('I have Kids', result[0].LAnswer[2]),
-                                createData('I have...', result[0].LAnswer[3]),
-                                createData('I am Looking for...', result[0].LAnswer[4]),
-                                createData("I'd love to Travel With Those Ages", result[0].LAnswer[5]),
-                                createData('Being with other...', result[0].LAnswer[6]),
-                                createData('I Travel...', result[0].LAnswer[7]),
-                                createData('That Word Better Describes Me', result[0].LAnswer[8]),
-                                createData('I like to talk about these issues', result[0].LAnswer[9]),
-                                createData('Cigarette ?', result[0].LAnswer[10])
-                            ]
-                    })
+                    // this.setState({
+                    //     rows:
+                    //         [
+                    //             createData('I am...',
+                    //                 <select id="dropdown" onChange={(e) => this.setState({ q1: e.target.value })} >
+                    //                     <option value={result[0].LAnswer[0]} >{result[0].LAnswer[0]}</option>
+                    //                     <option value="Female" >Female</option>
+                    //                 </select>),
+                    //             createData('My Age', result[0].LAnswer[1]), ///q2
+                    //             createData('I have Kids',
+                    //                 <select id="dropdown" onChange={(e) => this.setState({ q3: e.target.value })} >
+                    //                     <option value={result[0].LAnswer[2]} >{result[0].LAnswer[2]}</option>
+                    //                     <option value="YES" >YES</option>
+                    //                 </select>),
+                    //             createData('I have...',
+                    //                 <select id="dropdown" onChange={(e) => this.setState({ q4: e.target.value })} >
+                    //                     <option value={result[0].LAnswer[2]} >{result[0].LAnswer[2]}</option>
+                    //                     <option value="YES" >YES</option>
+                    //                 </select>),
+                    //             createData('I am Looking for...',
+                    //                 <select id="dropdown" onChange={(e) => this.setState({ q5: e.target.value })} >
+                    //                     <option value={result[0].LAnswer[2]} >{result[0].LAnswer[2]}</option>
+                    //                     <option value="YES" >YES</option>
+                    //                 </select>),
+                    //             createData("I'd love to Travel With Those Ages",
+                    //                 <select id="dropdown" onChange={(e) => this.setState({ q6: e.target.value })} >
+                    //                     <option value={result[0].LAnswer[2]} >{result[0].LAnswer[2]}</option>
+                    //                     <option value="YES" >YES</option>
+                    //                 </select>),
+                    //             createData('Being with other...',
+                    //                 <select id="dropdown" onChange={(e) => this.setState({ q7: e.target.value })} >
+                    //                     <option value={result[0].LAnswer[2]} >{result[0].LAnswer[2]}</option>
+                    //                     <option value="YES" >YES</option>
+                    //                 </select>),
+                    //             createData('I Travel...',
+                    //                 <select id="dropdown" onChange={(e) => this.setState({ q8: e.target.value })} >
+                    //                     <option value={result[0].LAnswer[2]} >{result[0].LAnswer[2]}</option>
+                    //                     <option value="YES" >YES</option>
+                    //                 </select>),
+                    //             createData('That Word Better Describes Me',
+                    //                 <select id="dropdown" onChange={(e) => this.setState({ q9: e.target.value })} >
+                    //                     <option value={result[0].LAnswer[2]} >{result[0].LAnswer[2]}</option>
+                    //                     <option value="YES" >YES</option>
+                    //                 </select>),
+                    //             createData('I like to talk about these issues',
+                    //                 <select id="dropdown" onChange={(e) => this.setState({ q10: e.target.value })} >
+                    //                     <option value={result[0].LAnswer[2]} >{result[0].LAnswer[2]}</option>
+                    //                     <option value="YES" >YES</option>
+                    //                 </select>),
+                    //             createData('Cigarette ?',
+                    //                 <select id="dropdown" onChange={(e) => this.setState({ q11: e.target.value })} >
+                    //                     <option value={result[0].LAnswer[2]} >{result[0].LAnswer[2]}</option>
+                    //                     <option value="YES" >YES</option>
+                    //                 </select>)
+                    //         ]
+                    // })
                 },
                 (error) => {
                     console.log("err GET=", error);
@@ -143,7 +195,7 @@ export default class CCMyprofile extends Component {
 
     render() {
         return (
-            <div style={{ backgroundColor: '#1d21243b', height: '100vh' }}><br></br>
+            <div style={{ backgroundColor: '#1d21243b', height: '100%' }}><br></br>
                 <img src={localStorage.getItem('user_image')} alt={true} style={{ width: '40%', borderRadius: 70, borderWidth: 5, borderStyle: 'solid' }} /><br></br><br></br>
                 <Form>
                     <Form.Group controlId="formBasicEmail" style={{ width: '75%', marginLeft: 50 }} >
@@ -154,8 +206,75 @@ export default class CCMyprofile extends Component {
                         <Form.Label style={{ fontWeight: 'bold', fontSize: 20, textDecorationLine: 'underline' }} >Confirm Password</Form.Label>
                         <Form.Control style={{ borderRadius: 20, borderWidth: 5, borderStyle: 'solid' }} type="password" placeholder="Confirm Password" onChange={(e) => this.setState({ confirm_password: e.target.value })} />
                     </Form.Group>
-                    <h5>Watch your Questionnaire Below:</h5>
-                    <TableContainer component={Paper}>
+                </Form>
+                <h5>Watch your Questionnaire Below:</h5>
+                <Table striped bordered hover variant="dark">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Questions</th>
+                            <th>Answers</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>I am...</td>
+                            <td>{this.state.q[0].LAnswer[0]}</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>My Age</td>
+                            <td>{this.state.q[0].LAnswer[1]}</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Have Kids ?</td>
+                            <td>{this.state.q[0].LAnswer[2]}</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>I have...</td>
+                            <td>{this.state.q[0].LAnswer[3]}</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>I am Looking for...</td>
+                            <td>{this.state.q[0].LAnswer[4]}</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>I'd love to Travel With Those Ages</td>
+                            <td>{this.state.q[0].LAnswer[5]}</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>with other Partners in the same vehicle</td>
+                            <td>{this.state.q[0].LAnswer[6]}</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>I Travel...</td>
+                            <td>{this.state.q[0].LAnswer[7]}</td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>That Word Better Describes Me</td>
+                            <td>{this.state.q[0].LAnswer[8]}</td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>I like to talk about these issues</td>
+                            <td>{this.state.q[0].LAnswer[9]}</td>
+                        </tr>
+                        <tr>
+                            <td>11</td>
+                            <td>Cigarette ?</td>
+                            <td>{this.state.q[0].LAnswer[10]}</td>
+                        </tr>
+                    </tbody>
+                </Table>
+                {/* <TableContainer component={Paper}>
                         <Table style={{ minWidth: 200 }} size="small" aria-label="a dense table">
                             <TableHead>
                                 <TableRow>
@@ -172,12 +291,9 @@ export default class CCMyprofile extends Component {
                                 ))}
                             </TableBody>
                         </Table>
-                    </TableContainer>
-                </Form>
-                <div style={{ backgroundColor: '#1d21243b' }} >
+                    </TableContainer> */}
                     <Button variant="primary" type="button" onClick={this.checkPasswordValid}> Update </Button> {''}
                     <Button variant="secondary" onClick={this.backbtn} > Main Menu </Button>
-                </div>
             </div >
         )
     }

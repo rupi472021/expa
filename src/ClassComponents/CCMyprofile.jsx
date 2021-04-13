@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Table } from 'react-bootstrap';
 //import Table from '@material-ui/core/Table';
-import { Table } from 'react-bootstrap';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
@@ -11,11 +10,9 @@ import Paper from '@material-ui/core/Paper';
 import Swal from 'sweetalert2';
 import { Dropdown } from 'semantic-ui-react'
 
-
 function createData(Questions, Answers) {
     return { Questions, Answers };
 }
-
 
 export default class CCMyprofile extends Component {
 
@@ -44,7 +41,7 @@ export default class CCMyprofile extends Component {
 
     componentDidMount = () => {
 
-        //Swal.fire('Change Password Section', 'In this section you can change your password and view your Questionnaire', 'question')
+        Swal.fire('Change Password Section', 'In this section you can change your password and view your Questionnaire', 'question')
         console.log("in componentDidMount function");
 
         let apiUrl = `http://localhost:54976/api/Questionnaire?email=` + localStorage.getItem('user_email');
@@ -292,8 +289,8 @@ export default class CCMyprofile extends Component {
                             </TableBody>
                         </Table>
                     </TableContainer> */}
-                    <Button variant="primary" type="button" onClick={this.checkPasswordValid}> Update </Button> {''}
-                    <Button variant="secondary" onClick={this.backbtn} > Main Menu </Button>
+                <Button variant="primary" type="button" onClick={this.checkPasswordValid}> Update </Button> {''}
+                <Button variant="secondary" onClick={this.backbtn} > Main Menu </Button>
             </div >
         )
     }

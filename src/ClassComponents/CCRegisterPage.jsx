@@ -377,7 +377,7 @@ export default class CCRegisterPage extends Component {
                                 <h4>I am ...</h4>
                                 <ButtonGroup aria-label="contained primary button group">
                                     <Button variant={this.state.btnColor1} value="Male" onClick={(e) => this.setState({ q1: e.target.value, btnColor1: 'secondary' })}>Male</Button>&nbsp;
-                                    <Button variant={this.state.btnColor2} onClick={(e) => this.setState({ q1: e.target.value, btnColor2: 'secondary' })}>Female</Button>
+                                    <Button variant={this.state.btnColor2} value="Female" onClick={(e) => this.setState({ q1: e.target.value, btnColor2: 'secondary' })}>Female</Button>
                                 </ButtonGroup>
                                 <h4>{this.state.q1}</h4>
                                 <br></br><br></br><br></br>
@@ -471,7 +471,6 @@ export default class CCRegisterPage extends Component {
 
                                 <h4>I like to talk about these issues</h4>
                                 <ButtonGroup size="sm" variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q10: e.target.value })}>
-
                                     <Row>
                                         <Col>
                                             <Button value="Politics ">Politics</Button>

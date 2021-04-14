@@ -7,6 +7,7 @@ import FCMainMenuPage from './FunctionComponents/FCMainMenuPage';
 import React, { Component } from 'react';
 import CCResetPasswordPage from './ClassComponents/CCResetPasswordPage';
 import CCMyprofile from './ClassComponents/CCMyprofile';
+import CCMyTrip from './ClassComponents/CCMyTrip';
 
 class App extends Component {
 
@@ -21,7 +22,7 @@ class App extends Component {
   componentDidMount = () => { //GET all Users from Users_expa (SQL) onload
 
     console.log("in componentDidMount function");
-     let apiUrl = `http://localhost:54976/api/User`;
+     let apiUrl = `http://localhost:53281/api/User`;
     //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User`;
 
 
@@ -45,7 +46,7 @@ class App extends Component {
         });
 
 
-        let apiUrl1 = `http://localhost:54976/api/Questionnaire`;
+        let apiUrl1 = `http://localhost:53281/api/Questionnaire`;
         fetch(apiUrl1)
         .then(res => {
           console.log('res=', res);
@@ -87,6 +88,9 @@ class App extends Component {
           </Route>
           <Route exact path="/main_menu_page/my_profile" >
             <CCMyprofile />
+          </Route>
+          <Route exact path="/main_menu_page/my_trips" >
+            <CCMyTrip />
           </Route>
         </Switch>
       </div>

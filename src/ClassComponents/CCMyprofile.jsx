@@ -193,6 +193,7 @@ export default class CCMyprofile extends Component {
     render() {
         return (
             <div style={{ backgroundColor: '#1d21243b', height: '100%' }}><br></br>
+                <div><Button variant="secondary" size="sm" onClick={this.backbtn} className="but"> Main Menu </Button></div><br></br>
                 <img src={localStorage.getItem('user_image')} alt={true} style={{ width: '40%', borderRadius: 70, borderWidth: 5, borderStyle: 'solid' }} /><br></br><br></br>
                 <Form>
                     <Form.Group controlId="formBasicEmail" style={{ width: '75%', marginLeft: 50 }} >
@@ -290,7 +291,6 @@ export default class CCMyprofile extends Component {
                         </Table>
                     </TableContainer> */}
                 <Button variant="primary" type="button" onClick={this.checkPasswordValid}> Update </Button> {''}
-                <Button variant="secondary" onClick={this.backbtn} > Main Menu </Button>
             </div >
         )
     }

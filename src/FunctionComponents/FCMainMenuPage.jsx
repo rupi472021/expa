@@ -42,7 +42,7 @@ export default function FCMainMenuPage() {
                 </div>
                 <div style={{ marginTop: 125 }}>
                     <Button fullWidth href="/main_menu_page/my_profile" variant="primary" size="lg"> My Profile </Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <Button fullWidth disabled={true} variant="secondary" size="lg"  >My Trips</Button>
+                <Button fullWidth href="/main_menu_page/my_trips" variant="primary" size="lg"  >My Trips</Button>
 
                 </div>
             </div>

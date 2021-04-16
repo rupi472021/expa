@@ -155,7 +155,7 @@ export default class CCRegisterPage extends Component {
 //     }))
 // }
 
-    postTosqlQues = () => {
+    postTosqlQues = (event) => {
         ///validate blank fields
         if (this.state.q1 == '' || this.state.q2 == '' || this.state.q3 == '' || this.state.q4 == '' || this.state.q5 == '' || this.state.q6 == '' || this.state.q7 == '' || this.state.q8 == '' || this.state.q9 == '' || this.state.q10 == '' || this.state.q11 == '') {
             Swal.fire({
@@ -164,7 +164,9 @@ export default class CCRegisterPage extends Component {
                 text: "Some Details Are Missing",
                 Onclick: () => { Swal.clickConfirm() }
             }).then(() => {
-                window.location.reload(false)
+                // window.location.reload(false)
+                event.preventDefault();
+
             })
         }
         else {
@@ -222,7 +224,7 @@ export default class CCRegisterPage extends Component {
             Fname: this.state.fname,
             Lname: this.state.lname,
             Password: this.state.password,
-            Image: this.state.source,
+            // Image: this.state.source,
         }
 
         let apiUrl = `http://localhost:53281/api/User`;
@@ -251,7 +253,7 @@ export default class CCRegisterPage extends Component {
             localStorage.setItem('user_email', this.state.email),
             localStorage.setItem('user_fname', this.state.fname),
 
-            //window.location.href = "http://localhost:3000/main_menu_page"
+            // window.location.href = "http://localhost:3000/main_menu_page",
 
             console.log(newUser)
         );
@@ -342,10 +344,9 @@ export default class CCRegisterPage extends Component {
                         <Button variant="secondary" size="sm" href="/" className="but"> BACK </Button>
                         <div><Avatar alt="Remy Sharp" src="https://i.ibb.co/GF9rjsr/circle-cropped.png" style={{ width: '15vh', height: '15vh', marginTop: '10px' }} /></div>
                         <h1 className="ExPa" > Create an Account </h1>
-                        <h1>{this.state.email}</h1>
                         <form>
                             <div id="part1" >
-                                Access with: <GoogleRegisterPage email={this.state.email}  queDatafromParent={this.props.QuesDatafromApptoRegisterPage} dataFromParent={this.props.dataFromApptoRegisterPage} {...this.state.fname=localStorage.getItem('user_fname')} {...this.state.lname=localStorage.getItem('user_lname')}{...this.state.email=localStorage.getItem('user_email')}{...this.state.source=localStorage.getItem('user_image')}  />
+                                Access with: <GoogleRegisterPage /*email={this.state.email}*/  queDatafromParent={this.props.QuesDatafromApptoRegisterPage} dataFromParent={this.props.dataFromApptoRegisterPage}/* {...this.state.fname=localStorage.getItem('user_fname')} {...this.state.lname=localStorage.getItem('user_lname')}{...this.state.email=localStorage.getItem('user_email')}{...this.state.source=localStorage.getItem('user_image')} */ />
                                 <TextField disabled={this.state.disabled} style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" onChange={(e) => this.setState({ email: e.target.value })} autoFocus />
                                 <Row>
                                     <Col>

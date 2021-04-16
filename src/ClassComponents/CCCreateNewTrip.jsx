@@ -131,8 +131,9 @@ export default class CCCreateNewTrip extends Component {
                 showConfirmButton: true,
                 Onclick: () => { Swal.clickConfirm() }
             }).then(() => {
-                //window.location.href = "http://localhost:3000/main_menu_page"
                 this.getmatch();
+                // window.location.href = "http://localhost:3000/main_menu_page"
+
             })
         );
     }

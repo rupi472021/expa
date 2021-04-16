@@ -99,7 +99,6 @@ export default class CCLoginPage extends Component {
                 Onclick: () => { Swal.clickConfirm() }
             }).then(() => {
                 window.location.href = "http://localhost:3000/main_menu_page"
-                // window.location.href = "http://proj.ruppin.ac.il/igroup47/prod/main_menu_page"
             })
         }
         else {

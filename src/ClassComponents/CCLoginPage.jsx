@@ -68,7 +68,7 @@ export default class CCLoginPage extends Component {
                 text: "one detail or more are missing, please try again",
                 Onclick: () => { Swal.clickConfirm() }
             }).then(() => {
-                window.location.reload(false)
+                window.location.reload(false);
             })
         }
         else (this.handle());
@@ -81,23 +81,25 @@ export default class CCLoginPage extends Component {
 
         if (this.props.dataFromApptoLoginPage.find((user => user.Email == this.state.email) && (user => user.Password == this.state.password))) {
 
+            let index = this.props.dataFromApptoLoginPage.findIndex(obj => obj.Email === this.state.email);
+            console.log(index);
+
             localStorage.setItem('user_email', this.state.email)
-            localStorage.setItem('user_fname', this.props.dataFromApptoLoginPage[0].Fname)
-            localStorage.setItem('user_lname', this.props.dataFromApptoLoginPage[0].Lname)
+            localStorage.setItem('user_fname', this.props.dataFromApptoLoginPage[index].Fname)
+            localStorage.setItem('user_lname', this.props.dataFromApptoLoginPage[index].Lname)
             //localStorage.setItem('social_media_name', this.state.social_media_name)
-            localStorage.setItem('user_image', this.props.dataFromApptoLoginPage[0].Image)
+            localStorage.setItem('user_image', this.state.image)
 
             Swal.fire({
                 position: 'center',
                 icon: 'success',
-                title: 'Hi you loggin successfully to ExPa!',
+                title: 'Hi ' + this.props.dataFromApptoLoginPage[index].Fname + " " + this.props.dataFromApptoLoginPage[index].Lname + ' you loggin successfully to ExPa!',
                 imageHeight: 1500,
                 showConfirmButton: true,
                 Onclick: () => { Swal.clickConfirm() }
             }).then(() => {
                 window.location.href = "http://localhost:3000/main_menu_page"
                 // window.location.href = "http://proj.ruppin.ac.il/igroup47/prod/main_menu_page"
-
             })
         }
         else {

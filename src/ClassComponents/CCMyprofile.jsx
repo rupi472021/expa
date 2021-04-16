@@ -38,6 +38,7 @@ export default class CCMyprofile extends Component {
     componentDidMount = () => {
 
         Swal.fire('Hi ' + localStorage.getItem('user_fname') + " " + localStorage.getItem('user_lname') + "!", 'In this section you can change your password and view or edit your Questionnaire', 'question')
+
         console.log("in componentDidMount function");
 
         let apiUrl = `http://localhost:54976/api/Questionnaire?email=` + localStorage.getItem('user_email');
@@ -78,7 +79,7 @@ export default class CCMyprofile extends Component {
         console.log("in checkValidation function")
 
         if (this.state.password == '' && this.state.confirm_password == '' && (this.state.q1 != '' || this.state.q3 != '' || this.state.q4 != '' || this.state.q5 != '' || this.state.q6 != '' || this.state.q7 != '' || this.state.q8 != '' || this.state.q9 != '' || this.state.q10 != '' || this.state.q11 != '')) {
-            this.changeQuestionnairePUT();
+            this.changeQuestionnairePUT(); //this function PUT the Questionnaire only
         }
 
         else if (this.state.password == this.state.confirm_password && this.state.password != '' && this.state.confirm_password != '') {
@@ -91,12 +92,18 @@ export default class CCMyprofile extends Component {
             }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
-                    this.changePasswordPUT();
+                    this.changePasswordPUT();  //this function PUT the Password only
                 }
                 else if (result.isDenied) {
                     Swal.fire('Changes are not saved', '', 'info')
                 }
             })
+        }
+        else if (this.state.password == this.state.confirm_password && this.state.password != '' && this.state.confirm_password != '' && (this.state.q1 != '' || this.state.q3 != '' || this.state.q4 != '' || this.state.q5 != '' || this.state.q6 != '' || this.state.q7 != '' || this.state.q8 != '' || this.state.q9 != '' || this.state.q10 != '' || this.state.q11 != '')) {
+
+            this.changeQuestionnairePUT();
+            this.changePasswordPUT();
+
         }
 
         else {
@@ -126,7 +133,11 @@ export default class CCMyprofile extends Component {
             referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
             // body: JSON.stringify(newTrip) // body data type must match "Content-Type" header
         })
-        Swal.fire('Saved!', '', 'success')
+        Swal.fire('Saved!', '', 'success',).then((result) => {
+            if (result.isConfirmed) {
+                window.location.reload(false);
+            }
+        })
     }
 
     changeQuestionnairePUT = () => {

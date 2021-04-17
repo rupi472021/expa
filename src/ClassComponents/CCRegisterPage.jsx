@@ -382,13 +382,14 @@ export default class CCRegisterPage extends Component {
                                     </Col>
                                 </Row>
                                 <h5>Upload your Profile Image:</h5>
-                                <div style={{ marginLeft: 60 }}>
+                                <div>
                                     <img style={{ width: '40%', borderRadius: 70, borderWidth: 5, marginLeft: -50 }} src={this.state.imgURL} alt="" ></img>
-                                    <Input accept="image/*" id="icon-button-file" type="file" capture="environment" onChange={this.btnFile} ref={fileInput => this.fileInput = fileInput} />
                                 </div>
                                 <br></br>
+                                <Input style={{ marginLeft: 20 }} accept="image/*" id="icon-button-file" type="file" capture="environment" onChange={this.btnFile} ref={fileInput => this.fileInput = fileInput} />
+                                <br></br>
                                 <Button fullWidth variant="info" size="lg" onClick={this.submitUserData} disabled={this.state.disabled} >Let's GO !</Button>
-                                <br></br><br></br><br></br><br></br>
+                                <br></br><br></br>
                             </div>
                             {/* Questionnaire */}
                             <div id="part2" /*style={{ opacity: this.state.opacity}}*/>

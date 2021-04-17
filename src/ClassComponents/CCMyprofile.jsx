@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Form, Button, Table } from 'react-bootstrap';
+import { Input } from 'reactstrap';
 import Swal from 'sweetalert2';
-import { Dropdown } from 'semantic-ui-react'
-import { AlertTitle } from '@material-ui/lab';
+
 
 const options = [
     { key: 1, text: '', value: '' },
@@ -200,6 +200,7 @@ export default class CCMyprofile extends Component {
             <div style={{ backgroundColor: '#1d21243b', height: '100%' }}><br></br>
                 <div><Button variant="secondary" size="sm" onClick={this.backbtn} className="but"> Main Menu </Button></div><br></br>
                 <img src={localStorage.getItem('user_image')} alt={true} style={{ width: '40%', borderRadius: 70, borderWidth: 5, borderStyle: 'solid' }} /><br></br><br></br>
+                <Input style={{ marginLeft: 20 }} accept="image/*" id="icon-button-file" type="file" capture="environment" onChange={this.btnFile} ref={fileInput => this.fileInput = fileInput} />
                 <Form>
                     <Form.Group controlId="formBasicEmail" style={{ width: '75%', marginLeft: 50 }} >
                         <Form.Label style={{ fontWeight: 'bold', fontSize: 20, textDecorationLine: 'underline' }} > New Password </Form.Label>

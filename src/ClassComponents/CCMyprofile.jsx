@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
 import { Form, Button, Table } from 'react-bootstrap';
 import { Input } from 'reactstrap';
+import { MdCloudUpload } from "react-icons/md";
+import { BsPencil } from 'react-icons/bs';
 import Swal from 'sweetalert2';
-
-
-const options = [
-    { key: 1, text: '', value: '' },
-    { key: 2, text: 'Male', value: 2 },
-    { key: 3, text: 'Female', value: 3 },
-]
 
 export default class CCMyprofile extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            selectedFile: '',
+            urlimg: '',
+            imgURL: '',
+            profile_image: localStorage.getItem('user_image'),
             password: '',
             confirm_password: '',
             q: [{ LAnswer: '1' }],
@@ -35,7 +34,7 @@ export default class CCMyprofile extends Component {
 
     componentDidMount = () => {
 
-        Swal.fire('Hi ' + localStorage.getItem('user_fname') + " " + localStorage.getItem('user_lname') + "!", 'In this section you can change your password OR view and edit your Questionnaire', 'question')
+        //Swal.fire('Hi ' + localStorage.getItem('user_fname') + " " + localStorage.getItem('user_lname') + "!", 'In this section you can change your password OR view and edit your Questionnaire', 'question')
 
         console.log("in componentDidMount function");
 
@@ -195,13 +194,86 @@ export default class CCMyprofile extends Component {
         })
     }
 
+    fileSelectedHandler = (event) => {
+
+        console.log("in editProfileImage function");
+        console.log(event.target.files[0]);
+        var data = new FormData();
+        if (event.target.value.length > 0) {
+
+            let email = localStorage.getItem('user_email');
+            email = JSON.parse(email);
+
+            //this.setState({ selectedFile: event.target.files[0].name });
+            const file = event.target.files[0];
+            console.log(file);
+            const newUrl = URL.createObjectURL(file);
+            console.log(newUrl);
+            this.setState({ imgURL: newUrl})
+
+            data.append("UploadedImage", file);
+            data.append("name", email);
+
+            console.log("in post img function");
+
+            //this.apiUrl = `http://localhost:54976/api/User/uploadedFiles`;
+
+            this.apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User/uploadedFiles`;
+            //src={this.state.imgURL}
+
+            fetch(this.apiUrl,
+                {
+                    method: 'POST',
+                    body: data,
+                    // headers: new Headers({
+                    //   // 'Content-Type': 'application/json; charset=UTF-8',
+                    //   // 'Accept': 'application/json; charset=UTF-8'
+                    // })
+                })
+                .then(res => {
+                    console.log('res=', res);
+
+                    if (res.status === 201) {
+                        console.log('uploadedFile created:)');
+                    }
+                    console.log('res.ok', res.ok);
+
+                    if (res.ok) {
+                        console.log('post succeeded');
+                    }
+
+                    return res.json()
+                })
+                .then(
+                    (result) => {
+                        console.log("fetch btnFetchuploadedFile= ", result);
+                        let imgNameInServer = result.split('\\').pop();
+                        console.log(imgNameInServer);
+                        this.setState({
+                            urlimg: result,
+                            selectedFile: imgNameInServer,
+                        })
+                    },
+                    (error) => {
+                        console.log("err post=", error);
+                    });
+            console.log('end');
+
+            //setSource(newUrl);
+        }
+        else {
+            this.setState({ selectedFile: null })
+        }
+    }
+
     render() {
         return (
             <div style={{ backgroundColor: '#1d21243b', height: '100%' }}><br></br>
                 <div><Button variant="secondary" size="sm" onClick={this.backbtn} className="but"> Main Menu </Button></div><br></br>
-                <img src={localStorage.getItem('user_image')} alt={true} style={{ width: '40%', borderRadius: 70, borderWidth: 5, borderStyle: 'solid' }} /><br></br><br></br>
-                <Input style={{ marginLeft: 20 }} accept="image/*" id="icon-button-file" type="file" capture="environment" onChange={this.btnFile} ref={fileInput => this.fileInput = fileInput} />
-                <Form>
+                <img src={this.state.profile_image} alt={true} style={{ width: '45%', borderRadius: 100, borderWidth: 2, borderStyle: 'solid' }} /><br></br><br></br>
+                <input style={{ display: 'none' }} type="file" accept="image/*" id="icon-button-file" type="file" capture="environment" onChange={this.fileSelectedHandler} ref={fileInput => this.fileInput = fileInput} />
+                <h2><BsPencil style={{ marginRight: 150, marginTop: -120, marginLeft: 5 }} onClick={() => this.fileInput.click()} /></h2>
+                <Form style={{ marginTop: -40 }} >
                     <Form.Group controlId="formBasicEmail" style={{ width: '75%', marginLeft: 50 }} >
                         <Form.Label style={{ fontWeight: 'bold', fontSize: 20, textDecorationLine: 'underline' }} > New Password </Form.Label>
                         <Form.Control style={{ borderRadius: 20, borderWidth: 5, borderStyle: 'solid' }} type="password" placeholder="Enter your New Password" onChange={(ee) => this.setState({ password: ee.target.value })} />

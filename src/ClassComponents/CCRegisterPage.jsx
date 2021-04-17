@@ -257,12 +257,15 @@ export default class CCRegisterPage extends Component {
             localStorage.setItem('user_email', this.state.email),
             localStorage.setItem('user_fname', this.state.fname),
 
-            // window.location.href = "http://localhost:3000/main_menu_page",
 
-            console.log(newUser)
         );
+        this.MovingToMenu()
+
     }
-    // toggle = () => this.state.setOpen(!this.state.dropdownOpen);
+
+    MovingToMenu = () => {
+        window.location.href = "http://localhost:3000/main_menu_page"
+    }
 
     datafromgoogle = (d) => {
         alert(d);

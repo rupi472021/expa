@@ -1,3 +1,4 @@
+import { holdReady } from 'jquery';
 import React, { Component } from 'react'
 import { Button, CardColumns, Card } from 'react-bootstrap';
 import Swal from 'sweetalert2';
@@ -61,8 +62,12 @@ export default class CCMyTrip extends Component {
             <div>
                 <div><Button variant="secondary" size="sm" onClick={this.backbtn} className="but"> Main Menu </Button></div><br></br>
                 <h1>My Trips</h1>
+                {/* if (this.state.AllTripsBYEmail && this.state.AllTripsBYEmail.length) {
+                    <h1>hey</h1>
+                } */}
                 <CardColumns>
                     {
+                        // {this.state.AllTripsBYEmail?.length=0=>{<p>You dont have any </p>}}                    
                         this.state.AllTripsBYEmail?.length > 0 &&
                         this.state.AllTripsBYEmail?.map((item, key) => <FCCard name={item.Trip.Name} key={key} date={item.Trip.Date} time={item.Trip.Time} participants={item.Trip.Participants} area={item.Trip.Area} />)
                     }

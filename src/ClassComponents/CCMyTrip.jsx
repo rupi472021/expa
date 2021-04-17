@@ -17,7 +17,7 @@ export default class CCMyTrip extends Component {
     };
 
     componentDidMount = () => {
-        let apiUrl = `http://localhost:54976/api/NewTrip/getSpecific/${localStorage.getItem('user_email')}/`
+        let apiUrl = `http://localhost:53281/api/NewTrip/getSpecific/${localStorage.getItem('user_email')}/`
 
 
         fetch(apiUrl)
@@ -55,16 +55,46 @@ export default class CCMyTrip extends Component {
         })
     }
 
+    showMedia = (props) => {
+        return (
+
+            <div>
+                {
+                    props.AllTripsBYEmail.length < 1 &&
+                    <div>
+                        alert("zot ani")
+                    </div>
+                }
+            </div>
+
+        );
+        // if (this.state.AllTripsBYEmail.length < 1) {
+        //     alert(this.state.AllTripsBYEmail.length);
+
+        //     alert("dont have")
+        //     // Swal.fire({
+        //     //     title: 'You Dont Have any Trip Records Right Now !',
+        //     //     text: "Try To Create One",
+        //     //     icon: 'warning',
+        //     //     confirmButtonColor: '#3085d6',
+        //     //     cancelButtonColor: '#d33',
+        //     //     confirmButtonText: 'Yes'
+        //     // }).then((result) => {
+        //     //     if (result.isConfirmed) {
+        //     //         window.location.href = "http://localhost:3000/main_menu_page"
+        //     //     }
+        //     // })
+        // }
+    }
 
     render() {
         // const { AllTripsBYEmail } = this.state;
+
         return (
             <div>
                 <div><Button variant="secondary" size="sm" onClick={this.backbtn} className="but"> Main Menu </Button></div><br></br>
                 <h1>My Trips</h1>
-                {/* if (this.state.AllTripsBYEmail && this.state.AllTripsBYEmail.length) {
-                    <h1>hey</h1>
-                } */}
+
                 <CardColumns>
                     {
                         // {this.state.AllTripsBYEmail?.length=0=>{<p>You dont have any </p>}}                    
@@ -72,6 +102,9 @@ export default class CCMyTrip extends Component {
                         this.state.AllTripsBYEmail?.map((item, key) => <FCCard name={item.Trip.Name} key={key} date={item.Trip.Date} time={item.Trip.Time} participants={item.Trip.Participants} area={item.Trip.Area} />)
                     }
                 </CardColumns>
+                <div>
+                    {this.showMedia(this.state)}
+                </div>
             </div>
         )
     }

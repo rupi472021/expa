@@ -139,7 +139,7 @@ export default class CCLoginPage extends Component {
                             </Grid>
                         </form>
                         <div style={{ width: '80%' }}>
-                            <p style={{ marginLeft: 50, fontWeight: 'bold' }}> Quick access with </p>
+                            <p style={{ fontWeight: 'bold', textDecorationLine: 'underline' }}> Quick access with: </p>
                         </div><br></br><br></br>
                         <div style={{ height: 70, width: '80%' }}>
                             <div style={{ marginRight: 100 }}>

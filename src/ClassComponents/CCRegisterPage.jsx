@@ -50,7 +50,11 @@ export default class CCRegisterPage extends Component {
             visibilityt: 'hidden',
             answerList: [],
             image: "https://png.pngtree.com/png-clipart/20200701/original/pngtree-character-default-avatar-png-image_5407167.jpg",
-            source: ''
+            source: '',
+            imgURL: '',
+            selectedFile: 'false',
+            urlimg: '',
+
         }
     }
 
@@ -78,11 +82,11 @@ export default class CCRegisterPage extends Component {
 
     }
 
-    
+
 
 
     submitUserData = () => {
-     
+
         //Validate Blank Fields
         if (this.state.emaill == '' || this.state.password == '') {
 
@@ -143,17 +147,17 @@ export default class CCRegisterPage extends Component {
     }
 
 
-// googlepushed=(a)=>{
-//     alert(a);
-//     window.scrollTo({ top: 530, behavior: 'smooth' })
-//     this.setState(prevState => ({
-//         opacity: 1,
-//         disabled: true,
-//         backgroundColor:'green'
+    // googlepushed=(a)=>{
+    //     alert(a);
+    //     window.scrollTo({ top: 530, behavior: 'smooth' })
+    //     this.setState(prevState => ({
+    //         opacity: 1,
+    //         disabled: true,
+    //         backgroundColor:'green'
 
 
-//     }))
-// }
+    //     }))
+    // }
 
     postTosqlQues = (event) => {
         ///validate blank fields
@@ -179,7 +183,7 @@ export default class CCRegisterPage extends Component {
                 LAnswer: this.state.answerList
             }
             ///post to questionnaire 
-            let apiUrl = `http://localhost:53281/api/Questionnaire`;
+            let apiUrl = `http://localhost:54976/api/Questionnaire`;
             //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/Questionnaire`;
 
             console.log("New Answer const");
@@ -224,10 +228,10 @@ export default class CCRegisterPage extends Component {
             Fname: this.state.fname,
             Lname: this.state.lname,
             Password: this.state.password,
-            // Image: this.state.source,
+            Image: this.state.selectedFile,
         }
 
-        let apiUrl = `http://localhost:53281/api/User`;
+        let apiUrl = `http://localhost:54976/api/User`;
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User`;
 
         ////POST
@@ -245,7 +249,7 @@ export default class CCRegisterPage extends Component {
             referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
             body: JSON.stringify(newUser) // body data type must match "Content-Type" header
         }).then(
-            
+
             // this.clearForm(),
 
             localStorage.setItem('user_lname', this.state.lname),
@@ -272,69 +276,82 @@ export default class CCRegisterPage extends Component {
         }))
     }
 
-    //     btnFile = (event) => {
-    //         console.log(event.target.files[0]);
-    //         var data = new FormData();
-    //         if (event.target.value.length > 0) {
+    btnFile = (event) => {
 
-    //             let studOBJ = localStorage.getItem('student');
-    //             studOBJ = JSON.parse(studOBJ);
+        Swal.fire({
+            title: 'Sweet!',
+            text: 'Now we can see how you look',
+            imageUrl: 'https://clipart-best.com/img/smiley/smiley-clip-art-60.png',
+            imageWidth: 400,
+            imageHeight: 200,
+            imageAlt: 'Custom image',
+        })
 
-    //             //this.setState({ selectedFile: event.target.files[0].name });
-    //             const file = event.target.files[0];
-    //             console.log(file);
-    //             const newUrl = URL.createObjectURL(file);
-    //             console.log(newUrl);
-    //             this.setState({ imgURL: newUrl })
+        console.log(event.target.files[0]);
+        var data = new FormData();
+        if (event.target.value.length > 0) {
 
-    //             data.append("UploadedImage", file);
-    //             data.append("name", studOBJ.Mail);
+            let email = localStorage.getItem(this.state.email);
+            email = JSON.parse(email);
 
-    //             console.log("in post img function");
-    //             this.apiUrl = 'http://proj.ruppin.ac.il/igroup54/test2/A/tar5/api/students/uploadedFiles'
-    //             fetch(this.apiUrl,
-    //                 {
-    //                     method: 'POST',
-    //                     body: data,
-    //                     // headers: new Headers({
-    //                     //   // 'Content-Type': 'application/json; charset=UTF-8',
-    //                     //   // 'Accept': 'application/json; charset=UTF-8'
-    //                     // })
-    //                 })
-    //                 .then(res => {
-    //                     console.log('res=', res);
+            //this.setState({ selectedFile: event.target.files[0].name });
+            const file = event.target.files[0];
+            console.log(file);
+            const newUrl = URL.createObjectURL(file);
+            console.log(newUrl);
+            this.setState({ imgURL: newUrl })
 
-    //                     if (res.status === 201) {
-    //                         console.log('uploadedFile created:)');
-    //                     }
-    //                     console.log('res.ok', res.ok);
+            data.append("UploadedImage", file);
+            data.append("name", this.state.email);
 
-    //                     if (res.ok) {
-    //                         console.log('post succeeded');
-    //                     }
+            console.log("in post img function");
 
-    //                     return res.json()
-    //                 })
-    //                 .then(
-    //                     (result) => {
-    //                         console.log("fetch btnFetchuploadedFile= ", result);
-    //                         let imgNameInServer = result.split('\\').pop();
-    //                         console.log(imgNameInServer);
-    //                         this.setState({ urlimg: result, selectedFile: imgNameInServer })
+            //this.apiUrl = `http://localhost:54976/api/User/uploadedFiles`;
 
-    //                     },
-    //                     (error) => {
-    //                         console.log("err post=", error);
-    //                     });
-    //             console.log('end');
+            this.apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User/uploadedFiles`;
 
-    //             //setSource(newUrl);
-    //         }
-    //         else {
-    //             this.setState({ selectedFile: null })
-    //         }
-    //     }
-    // }
+            fetch(this.apiUrl,
+                {
+                    method: 'POST',
+                    body: data,
+                    // headers: new Headers({
+                    //   // 'Content-Type': 'application/json; charset=UTF-8',
+                    //   // 'Accept': 'application/json; charset=UTF-8'
+                    // })
+                })
+                .then(res => {
+                    console.log('res=', res);
+
+                    if (res.status === 201) {
+                        console.log('uploadedFile created:)');
+                    }
+                    console.log('res.ok', res.ok);
+
+                    if (res.ok) {
+                        console.log('post succeeded');
+                    }
+
+                    return res.json()
+                })
+                .then(
+                    (result) => {
+                        console.log("fetch btnFetchuploadedFile= ", result);
+                        let imgNameInServer = result.split('\\').pop();
+                        console.log(imgNameInServer);
+                        this.setState({ urlimg: result, selectedFile: imgNameInServer })
+
+                    },
+                    (error) => {
+                        console.log("err post=", error);
+                    });
+            console.log('end');
+
+            //setSource(newUrl);
+        }
+        else {
+            this.setState({ selectedFile: null })
+        }
+    }
 
     render() {
         return (
@@ -346,7 +363,7 @@ export default class CCRegisterPage extends Component {
                         <h1 className="ExPa" > Create an Account </h1>
                         <form>
                             <div id="part1" >
-                                Access with: <GoogleRegisterPage /*email={this.state.email}*/  queDatafromParent={this.props.QuesDatafromApptoRegisterPage} dataFromParent={this.props.dataFromApptoRegisterPage}/* {...this.state.fname=localStorage.getItem('user_fname')} {...this.state.lname=localStorage.getItem('user_lname')}{...this.state.email=localStorage.getItem('user_email')}{...this.state.source=localStorage.getItem('user_image')} */ />
+                                Access with: <GoogleRegisterPage /*email={this.state.email}*/ queDatafromParent={this.props.QuesDatafromApptoRegisterPage} dataFromParent={this.props.dataFromApptoRegisterPage}/* {...this.state.fname=localStorage.getItem('user_fname')} {...this.state.lname=localStorage.getItem('user_lname')}{...this.state.email=localStorage.getItem('user_email')}{...this.state.source=localStorage.getItem('user_image')} */ />
                                 <TextField disabled={this.state.disabled} style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" onChange={(e) => this.setState({ email: e.target.value })} autoFocus />
                                 <Row>
                                     <Col>
@@ -364,10 +381,10 @@ export default class CCRegisterPage extends Component {
                                         <TextField disabled={this.state.disabled} style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth name="Cpassword" label="Confirm" type="password" id="Cpassword" autoComplete="confirm-password" onChange={(e) => this.setState({ cPassword: e.target.value })} />
                                     </Col>
                                 </Row>
-                                <div>
-                                    <h5>Upload your Profile Image:</h5>
-                                    <img style={{ width: '30%' }} src={this.state.source} alt="" ></img>
-                                    <Input accept="image/*" id="icon-button-file" type="file" capture="environment" onChange={this.btnFile} ref={fileInput => this.fileInput = fileInput} />                            
+                                <h5>Upload your Profile Image:</h5>
+                                <div style={{ marginLeft: 60 }}>
+                                    <img style={{ width: '40%', borderRadius: 70, borderWidth: 5, marginLeft: -50 }} src={this.state.imgURL} alt="" ></img>
+                                    <Input accept="image/*" id="icon-button-file" type="file" capture="environment" onChange={this.btnFile} ref={fileInput => this.fileInput = fileInput} />
                                 </div>
                                 <br></br>
                                 <Button fullWidth variant="info" size="lg" onClick={this.submitUserData} disabled={this.state.disabled} >Let's GO !</Button>

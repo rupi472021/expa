@@ -88,7 +88,10 @@ export default class CCLoginPage extends Component {
             localStorage.setItem('user_fname', this.props.dataFromApptoLoginPage[index].Fname)
             localStorage.setItem('user_lname', this.props.dataFromApptoLoginPage[index].Lname)
             //localStorage.setItem('social_media_name', this.state.social_media_name)
-            localStorage.setItem('user_image', this.state.image)
+            if (this.props.dataFromApptoLoginPage[index].Image == 'false') {
+                localStorage.setItem('user_image', "https://png.pngtree.com/png-clipart/20200701/original/pngtree-character-default-avatar-png-image_5407167.jpg")
+            }
+            else (localStorage.setItem('user_image', "http://proj.ruppin.ac.il/igroup47/prod/uploadedFiles/" + this.state.email + ".png"))
 
             Swal.fire({
                 position: 'center',

@@ -33,11 +33,9 @@ export default class CCMyprofile extends Component {
         }
     };
 
-
-
     componentDidMount = () => {
 
-        Swal.fire('Hi ' + localStorage.getItem('user_fname') + " " + localStorage.getItem('user_lname') + "!", 'In this section you can change your password and view or edit your Questionnaire', 'question')
+        Swal.fire('Hi ' + localStorage.getItem('user_fname') + " " + localStorage.getItem('user_lname') + "!", 'In this section you can change your password OR view and edit your Questionnaire', 'question')
 
         console.log("in componentDidMount function");
 
@@ -79,10 +77,16 @@ export default class CCMyprofile extends Component {
         console.log("in checkValidation function")
 
         if (this.state.password == '' && this.state.confirm_password == '' && (this.state.q1 != '' || this.state.q3 != '' || this.state.q4 != '' || this.state.q5 != '' || this.state.q6 != '' || this.state.q7 != '' || this.state.q8 != '' || this.state.q9 != '' || this.state.q10 != '' || this.state.q11 != '')) {
+
+            console.log("changeQuestionnairePUT")
             this.changeQuestionnairePUT(); //this function PUT the Questionnaire only
+
         }
 
-        else if (this.state.password == this.state.confirm_password && this.state.password != '' && this.state.confirm_password != '') {
+        else if (this.state.password == this.state.confirm_password && this.state.password != '') {
+
+            console.log("changePasswordPUT")
+
             Swal.fire({
                 title: 'Do you want to save the changes?',
                 showDenyButton: true,
@@ -98,12 +102,6 @@ export default class CCMyprofile extends Component {
                     Swal.fire('Changes are not saved', '', 'info')
                 }
             })
-        }
-        else if (this.state.password == this.state.confirm_password && this.state.password != '' && this.state.confirm_password != '' && (this.state.q1 != '' || this.state.q3 != '' || this.state.q4 != '' || this.state.q5 != '' || this.state.q6 != '' || this.state.q7 != '' || this.state.q8 != '' || this.state.q9 != '' || this.state.q10 != '' || this.state.q11 != '')) {
-
-            this.changeQuestionnairePUT();
-            this.changePasswordPUT();
-
         }
 
         else {

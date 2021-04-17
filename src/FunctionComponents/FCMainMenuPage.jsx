@@ -1,10 +1,7 @@
 import React from 'react'
 import Swal from 'sweetalert2';
-import { ButtonGroup, DropdownButton, Form, Image, ProgressBar, Col, Dropdown } from 'react-bootstrap';
-import DropdownItem from 'react-bootstrap/esm/DropdownItem';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 
 export default function FCMainMenuPage() {
 
@@ -25,6 +22,8 @@ export default function FCMainMenuPage() {
             }
         })
     }
+
+//'http://proj.ruppin.ac.il/igroup47/prod/uploadedFiles/fadida@fadi.com.png'
 
     return (
         <div style={{ backgroundColor: '#1d21243b', height: '100vh', alignItems: 'center' }}>

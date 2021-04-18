@@ -16,7 +16,6 @@ import classes from './BlogCard.module.css';
 import Box from '@material-ui/core/Box';
 import Swal from 'sweetalert2';
 
-
 export default class CCLoginPage extends Component {
 
     constructor(props) {
@@ -124,33 +123,27 @@ export default class CCLoginPage extends Component {
                     <CssBaseline />
                     <div className={classes.Container} >
                         <br></br><br></br>
-                        <Avatar alt="Remy Sharp" src="https://i.ibb.co/GF9rjsr/circle-cropped.png" style={{ width: '20vh', height: '20vh', marginTop: '10px' }} />
+                        {/* https://i.ibb.co/dGdXgZn/circle-cropped.png */}
+                        <Avatar alt="Remy Sharp" src="https://i.ibb.co/hDyjsJX/1618776403339.png" style={{ width: '35vh', height: '35vh', marginTop: -50, borderRadius: 1 }} />
                         <br></br>
-                        <form>
+                        <form style={{ marginTop: -25 }}>
                             <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus onChange={(e) => this.setState({ email: e.target.value })} />
                             <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password" onChange={(a) => this.setState({ password: a.target.value })} />
                             {/* <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" /> */}
                             <br></br><br></br>
-                            <Button variant="dark" style={{boxShadow:'0 0 10px  #141414',width: '100%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '20px' }} onClick={this.signinbtn} fullWidth size="lg" >Log In</Button><br></br><br></br><br></br>
-
+                            <Button variant="dark" style={{ boxShadow: '0 0 10px  #141414', width: '100%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '20px' }} onClick={this.signinbtn} fullWidth size="lg" >Log In</Button><br></br><br></br><br></br>
                             <Grid container>
                                 <Grid item xs>
-                                <Button variant="warning" style={{width: '90%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '15px' }} href="/forget_password_page" fullWidth size="sm" > Forgot Password</Button>
-
-                                    {/* <Link style={{ fontWeight: 'bold', fontSize: 15 }} href="/forget_password_page" variant="body2"> Forgot password? </Link> */}
+                                    <Button variant="warning" style={{ width: '90%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '15px' }} href="/forget_password_page" fullWidth size="sm" > Forgot Password</Button>
                                 </Grid>
                                 <Grid item xs>
-                                <Button variant="warning" style={{width: '90%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '15px' }} href="/Register" fullWidth size="sm" > Sign Up</Button><br></br>
-
-                                    {/* <Link style={{ fontWeight: 'bold', fontSize: 15 }} variant="body2" href="/Register" > Don't have an account? Sign Up </Link><br></br><br></br> */}
+                                    <Button variant="warning" style={{ width: '90%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '15px' }} href="/Register" fullWidth size="sm" > Sign Up</Button><br></br>
                                 </Grid>
                             </Grid>
                         </form>
                         <br></br><br></br><br></br>
-                        <div style={{ width: '80%' }}>
-                            {/* <p style={{ fontWeight: 'bold', textDecorationLine: 'underline' }}> Quick access with: </p> */}
-                            <p style={{width: '60%', fontWeight: 'bold', fontSize: '15px',marginLeft:'55px' }}> Quick Access With </p>
-
+                        <div style={{ width: '80%', marginBottom: '-50px' }}>
+                            <p style={{ width: '60%', fontWeight: 'bold', fontSize: '15px', marginLeft: '55px', marginTop: '-45px' }}> Quick Access With </p>
                         </div><br></br><br></br>
                         <div style={{ height: 70, width: '80%' }}>
                             <div style={{ marginRight: 100 }}>
@@ -159,11 +152,11 @@ export default class CCLoginPage extends Component {
                             <div style={{ marginLeft: 120, marginTop: -50 }}>
                                 <FaceBookLogin dataFromParent={this.props.dataFromApptoLoginPage} />
                             </div>
-                            <Box style={{ marginLeft: 50 }} m={1}>{this.Copyright()}</Box>
+                            <Box style={{ marginLeft: 1 }} m={1}>{this.Copyright()}</Box>
                         </div>
                     </div>
                 </Container>
-            </div>
+            </div >
         )
     }
 }

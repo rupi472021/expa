@@ -1,6 +1,5 @@
 import React from 'react'
 import Swal from 'sweetalert2';
-//import Button from 'react-bootstrap/Button';
 import { Button } from 'reactstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -28,7 +27,7 @@ export default function FCMainMenuPage() {
 
     return (
         <div style={{ backgroundColor: '#1d21243b', height: '100vh', alignItems: 'center' }}>
-            <div style={{ padding: 10 }}><Button size="sm" onClick={backbtn}>BACK</Button></div>
+            <div style={{ padding: 5 }}><Button size="sm" onClick={backbtn}>BACK</Button></div>
             <div style={{ textAlign: 'center' }}><br></br>
                 <img src={localStorage.getItem('user_image')} alt={true} style={{ width: '45%', borderRadius: 100, borderWidth: 2, borderStyle: 'solid' }} /><br></br><br></br>
                 <p>

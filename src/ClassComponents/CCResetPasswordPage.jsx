@@ -49,15 +49,29 @@ export default class CCResetPasswordPage extends Component {
         }).then((message) => {
             console.log(message)
             if (message == "OK") {
+
                 Swal.fire({
-                    icon: 'success',
-                    title: 'Your Password has been sent',
+                    title: 'Password has sent!',
+                    text: 'Your Password is wating for you in your mail',
+                    imageUrl: 'https://previews.123rf.com/images/ratoca/ratoca1212/ratoca121200313/16970362-fly-email.jpg',
+                    imageWidth: 400,
+                    imageHeight: 200,
+                    imageAlt: 'Custom image',
                     showConfirmButton: true,
                     position: 'center',
                     Onclick: () => { Swal.clickConfirm() }
                 }).then(() => {
                     window.location.href = "http://localhost:3000"
                 })
+                // Swal.fire({
+                //     icon: 'success',
+                //     title: 'Your Password is wating for you in your mail :)',
+                //     showConfirmButton: true,
+                //     position: 'center',
+                //     Onclick: () => { Swal.clickConfirm() }
+                // }).then(() => {
+                //     //window.location.href = "http://localhost:3000"
+                // })
             }
         }
         )
@@ -65,17 +79,21 @@ export default class CCResetPasswordPage extends Component {
 
     render() {
         return (
-            <div style={{ backgroundImage: `url("https://image.freepik.com/free-vector/forgot-password-concept-illustration_114360-1123.jpg")`, height: '100vh', width: '50vh' }}>
+            <div style={{ backgroundImage: `url("https://image.freepik.com/free-vector/forgot-password-concept-illustration_114360-1123.jpg")`, height: '100vh' }}>
                 <div><br></br><br></br>
-                    <h5 style={{ position: 'absolute', marginTop: -25 }}> Please enter your login email address and your password will wait for you in your inbox/spam </h5><br></br><br></br>
+                    <h5 style={{ position: 'absolute', marginTop: -25 }}>
+                        Please enter your login email address and your password will wait for you in your inbox/spam
+                    </h5><br></br><br></br>
                     <Form style={{ width: '75%', marginLeft: 50 }}>
                         <FormGroup><br></br>
-                            <Label for="email"> Email:  </Label>
+                            <Label for="email"> <h4>Email:</h4> </Label>
                             <Input type="email" name="email" onChange={(e) => this.setState({ email: e.target.value })}></Input>
                         </FormGroup>
                     </Form>
-                    <div><Button onClick={this.Check}> Send </Button></div><br></br>
-                    <div><Button href="/" > Back </Button></div>
+                    <div style={{}}>
+                        <Button style={{ marginLeft: 140, marginTop: 250 }} color="success" onClick={this.Check}> Send </Button><br></br><br></br>
+                        <Button style={{ marginRight: 40, marginTop: -112 }} color="info" href="/" > Back </Button>
+                    </div>
                 </div>
             </div>
         )

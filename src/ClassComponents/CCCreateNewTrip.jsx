@@ -24,35 +24,35 @@ export default class CCCreateNewTrip extends Component {
             tempemail: '',
             visibility: 'hidden',
             disable: true,
-            Trip_data_from_sql:[],
+            Trip_data_from_sql: [],
         }
     };
 
     componentDidMount = () => { //GET all Trips from Trip_Cretia (SQL) onload
         console.log("in componentDidMount function");
 
-         let apiUrl = `http://localhost:53281/api/NewTrip`;
+        let apiUrl = `http://localhost:54976/api/NewTrip`;
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
         fetch(apiUrl)
-          .then(res => {
-            console.log('res=', res);
-            console.log('res.status', res.status);
-            console.log('res.ok', res.ok);
-            return res.json()
-          })
-          .then(
-            (result) => {
-              console.log("GET all trips data from SQL= ", result);
-            //   result.map(st => console.log(st.Name)); // all Fname in Users_Expa
-              this.setState({
-                Trip_data_from_sql: result,
-              })
-            },
-            (error) => {
-              console.log("err GET=", error);
-            });
-      }
+            .then(res => {
+                console.log('res=', res);
+                console.log('res.status', res.status);
+                console.log('res.ok', res.ok);
+                return res.json()
+            })
+            .then(
+                (result) => {
+                    console.log("GET all trips data from SQL= ", result);
+                    //   result.map(st => console.log(st.Name)); // all Fname in Users_Expa
+                    this.setState({
+                        Trip_data_from_sql: result,
+                    })
+                },
+                (error) => {
+                    console.log("err GET=", error);
+                });
+    }
 
 
     checkValidationbtn = (event) => {
@@ -106,7 +106,7 @@ export default class CCCreateNewTrip extends Component {
             MatchPercent: this.state.match_percent
         }
 
-         let apiUrl = `http://localhost:53281/api/NewTrip`;
+        let apiUrl = `http://localhost:54976/api/NewTrip`;
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
         ////POST To TRIP_Criteria SQL TABLE
@@ -141,7 +141,7 @@ export default class CCCreateNewTrip extends Component {
     getmatch = () => {
         ///Getting all the Users
         console.log("in getmatch function");
-         let apiUrl = `http://localhost:53281/api/Questionnaire/getSpecific/${localStorage.getItem('user_email')}/${this.state.match_percent}`
+        let apiUrl = `http://localhost:54976/api/Questionnaire/getSpecific/${localStorage.getItem('user_email')}/${this.state.match_percent}`
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/Questionnaire/getSpecific/${localStorage.getItem('user_email')}/${this.state.match_percent}`
 
         fetch(apiUrl)
@@ -156,7 +156,7 @@ export default class CCCreateNewTrip extends Component {
             }).catch(function (error) {
                 console.log("Error getting document:", error);
             });
-    
+
     }
 
     backbtn = () => {
@@ -192,7 +192,7 @@ export default class CCCreateNewTrip extends Component {
     }
 
     editTripDetails = () => {
-        
+
         const input = this.state.trip_date;
         const [date, time] = input.split('T');
 
@@ -210,24 +210,24 @@ export default class CCCreateNewTrip extends Component {
         }
 
 
-            // event.preventDefault(); 
-             let apiUrl = `http://localhost:53281/api/NewTrip/`+this.state.trip_name+"/"+this.state.match_percent+"/"+this.state.with_children;
-            //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip/`+this.state.trip_name+"/"+this.state.match_percent+"/"+this.state.with_children;
+        // event.preventDefault(); 
+        let apiUrl = `http://localhost:54976/api/NewTrip/` + this.state.trip_name + "/" + this.state.match_percent + "/" + this.state.with_children;
+        //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip/`+this.state.trip_name+"/"+this.state.match_percent+"/"+this.state.with_children;
 
-            fetch(apiUrl, {
-                method: 'PUT', // *GET, POST, PUT, DELETE, etc.
-                mode: 'cors', // no-cors, *cors, same-origin
-                cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-                credentials: 'same-origin', // include, *same-origin, omit
-                headers: {
-                    'Content-Type': 'application/json'
-                    // 'Content-type': 'application/json; charset=UTF-8', //very important to add the 'charset=UTF-8'!!!!
-                    // 'Accept': 'application/json; charset=UTF-8'
-                },
-                redirect: 'follow', // manual, *follow, error
-                referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-                // body: JSON.stringify(newTrip) // body data type must match "Content-Type" header
-            })
+        fetch(apiUrl, {
+            method: 'PUT', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, *cors, same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json'
+                // 'Content-type': 'application/json; charset=UTF-8', //very important to add the 'charset=UTF-8'!!!!
+                // 'Accept': 'application/json; charset=UTF-8'
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+            // body: JSON.stringify(newTrip) // body data type must match "Content-Type" header
+        })
     }
 
 
@@ -238,29 +238,34 @@ export default class CCCreateNewTrip extends Component {
                 <div><Button variant="secondary" size="sm" onClick={this.backbtn} className="but"> Main Menu </Button></div>
                 <div>
                     <div><br></br>
-                    Hey {localStorage.getItem('user_fname')}! Choose Your Preference For the Perfect Trip!
-                </div><br></br>
+                        <h4 style={{ textDecorationLine: 'underline', fontWeight: "bold" }}>
+                            Hey {localStorage.getItem('user_fname')}! Choose Your Preference For the Perfect Trip!
+                        </h4>
+                    </div><br></br>
                     <Form>
-                        <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="dense" required fullWidth id="tripname" label="Trip Name" name="tripname" autoComplete="tripname" onChange={(e) => this.setState({ trip_name: e.target.value })} autoFocus />
-                        Trip Start Date {'&'} Time:
-                        <TextField type="datetime-local" style={{ backgroundColor: 'white' }} variant="outlined" margin="dense" required fullWidth id="tripname" name="date" autoComplete="date" onChange={(d) => this.setState({ trip_date: JSON.stringify(d.target.value) })} autoFocus />
-                        {/* <Form.Group controlId="formBasicDate">
-                            <Form.Label>Trip Start Date and Time:</Form.Label>
-                            <Form.Control style={{ width: '75%', marginLeft: 50 }} type="datetime-local" timeFormat="YYYY-MM-DD HH:mm" onChange={(a) => this.setState({ trip_date: JSON.stringify(a.target.value) })} />
-                        </Form.Group> */}
+                        <Form.Group controlId="formBasicEmail" style={{ width: '75%', marginLeft: 50 }} >
+                            <Form.Control style={{ borderRadius: 20 }} type="text" placeholder="Trip Name*" onChange={(e) => this.setState({ trip_name: e.target.value })} autoFocus /><br></br>
+                            <Form.Label style={{ fontWeight: 'bold', fontSize: 20, textDecorationLine: 'underline' }} > Trip Start Date {'&'} Time:</Form.Label>
+                            <Form.Control style={{ borderRadius: 20 }} type="datetime-local" onChange={(d) => this.setState({ trip_date: JSON.stringify(d.target.value) })} autoFocus />
+                        </Form.Group>
                         <Form>
-                            Number of Nights:
-                        {['radio'].map((type) => (
-                            <div key={`inline-${type}`} className="mb-3"><div></div>
-                                <Form.Check value="0" onChange={(zero) => this.setState({ trip_nights: zero.target.value })} inline label="0" type={type} id="0" />
-                                <Form.Check value="1" onChange={(one) => this.setState({ trip_nights: one.target.value })} inline label="1" type={type} id={`inline-${type}-1`} />
-                                <Form.Check value="2" onChange={(two) => this.setState({ trip_nights: two.target.value })} inline label="2" type={type} id={`inline-${type}-2`} />
-                                <Form.Check value="3" onChange={(three) => this.setState({ trip_nights: three.target.value })} inline label="3" type={type} id={`inline-${type}-3`} />
-                            </div>
-                        ))}
+                            <h6 style={{ textDecorationLine: 'underline', fontWeight: "bold" }}>Number of Nights:</h6>
+                            {['radio'].map((type) => (
+                                <div key={`inline-${type}`} className="mb-3"><div></div>
+                                    <Form.Check value="0" onChange={(zero) => this.setState({ trip_nights: zero.target.value })} inline label="0" type={type} id="0" />
+                                    <Form.Check value="1" onChange={(one) => this.setState({ trip_nights: one.target.value })} inline label="1" type={type} id={`inline-${type}-1`} />
+                                    <Form.Check value="2" onChange={(two) => this.setState({ trip_nights: two.target.value })} inline label="2" type={type} id={`inline-${type}-2`} />
+                                    <Form.Check value="3" onChange={(three) => this.setState({ trip_nights: three.target.value })} inline label="3" type={type} id={`inline-${type}-3`} />
+                                </div>
+                            ))}
                         </Form>
                         <Form>
-                            <div>Trip Area:</div>
+                            <div>
+                                <h6 style={{ textDecorationLine: 'underline', fontWeight: "bold" }}>
+                                    Number of Nights:
+                                    Trip Area:
+                                </h6>
+                            </div>
                             {['radio'].map((type) => (
                                 <div key={`inline-${type}`} className="mb-3"><br></br>
                                     <Form.Check value="North" onChange={(North) => this.setState({ trip_area: North.target.value })} inline label="North" type={type} id="0" />
@@ -271,11 +276,19 @@ export default class CCCreateNewTrip extends Component {
                             ))}
                         </Form>
                         <Form.Group controlId="formBasicName">
-                            <Form.Label> Number of Participants:</Form.Label>
+                            <Form.Label>
+                                <h6 style={{ textDecorationLine: 'underline', fontWeight: "bold" }}>
+                                    Number of Participants:
+                                </h6>
+                            </Form.Label>
                             <Form.Control style={{ width: '50%', marginLeft: 100 }} type="number" placeholder="Number of Participants" size='small' onChange={(number) => this.setState({ num_of_participants: number.target.value })} />
                         </Form.Group>
                     </Form>
-                    <div> Trip's Vehicle Type: </div>
+                    <div>
+                        <h6 style={{ textDecorationLine: 'underline', fontWeight: "bold" }}>
+                            Trip's Vehicle Type:
+                        </h6>
+                    </div>
                     <DropdownButton defult="D" title={this.state.vehicle_type}>
                         <Dropdown.Item onClick={(ATV) => this.setState({ vehicle_type: ATV.target.value })} as="button" value="ATV"> ATV </Dropdown.Item>
                         <Dropdown.Item onClick={(JEEP) => this.setState({ vehicle_type: JEEP.target.value })} as="button" value="JEEP"> JEEP </Dropdown.Item>
@@ -283,22 +296,19 @@ export default class CCCreateNewTrip extends Component {
                         <Dropdown.Item onClick={(Motorcycle) => this.setState({ vehicle_type: Motorcycle.target.value })} as="button" value="Motorcycle"> Motorcycle </Dropdown.Item>
                         <Dropdown.Item onClick={(Other) => this.setState({ vehicle_type: Other.target.value })} as="button" value="Other"> Other </Dropdown.Item>
                     </DropdownButton><br></br>
-                    <div> Childrens ? <br></br>
-                    <Checkbox value="yes" onChange={(yes) => this.setState({ with_children: yes.target.value })} /> Yes
+                    <div>
+                        <h6 style={{ textDecorationLine: 'underline', fontWeight: "bold" }}>
+                            Do You Have Childrens ?
+                        </h6>
+                        <Checkbox value="yes" onChange={(yes) => this.setState({ with_children: yes.target.value })} /> Yes
                     <Checkbox value="no" onChange={(no) => this.setState({ with_children: no.target.value })} /> No
-                    </div>
-                    <h6>I want At least {this.state.match_percent}% match with my ExPa Partners!</h6>
+                    </div><br></br>
+                    <h6 style={{ textDecorationLine: 'underline' }}>I want At least {this.state.match_percent}% match with my ExPa Partners!</h6>
                     <RangeSlider value={this.state.match_percent} onChange={(match) => this.setState({ match_percent: match.target.value })} />
-                    {/* <Checkbox value="50" onChange={(fifty) => this.setState({ match_percent: fifty.target.value })} /> 50% and above
-                    <Checkbox value="70" onChange={(seventy) => this.setState({ match_percent: seventy.target.value })} /> 70% and above
-                    <br></br>
-                    <Checkbox value="90" onChange={(ninety) => this.setState({ match_percent: ninety.target.value })} /> 90% and above
-                    <Checkbox value="0" onChange={(none) => this.setState({ match_percent: none.target.value })} /> don't care */}
                     <br></br>
                     <Button disabled={this.state.disable} variant="primary" type="button" onClick={this.editTripDetails} > Edit Trip </Button>
                     <br></br><br></br>
                     <Button variant="primary" type="button" onClick={this.checkValidationbtn} > Publish Trip </Button>
-
                 </div >
             </div>
         )

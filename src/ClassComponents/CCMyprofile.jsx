@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Form, Button, Table } from 'react-bootstrap';
-import { Input } from 'reactstrap';
+import { Form, Table } from 'react-bootstrap';
+import { Input, Button } from 'reactstrap';
 import { MdCloudUpload } from "react-icons/md";
 import { BsPencil } from 'react-icons/bs';
 import Swal from 'sweetalert2';
@@ -10,6 +10,7 @@ export default class CCMyprofile extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            profile_email: localStorage.getItem('user_email'),
             selectedFile: '',
             urlimg: '',
             imgURL: '',
@@ -34,11 +35,11 @@ export default class CCMyprofile extends Component {
 
     componentDidMount = () => {
 
-        //Swal.fire('Hi ' + localStorage.getItem('user_fname') + " " + localStorage.getItem('user_lname') + "!", 'In this section you can change your password OR view and edit your Questionnaire', 'question')
+        Swal.fire('Hi ' + localStorage.getItem('user_fname') + " " + localStorage.getItem('user_lname') + "!", 'In this section you can change your password OR view and edit your Questionnaire', 'question')
 
         console.log("in componentDidMount function");
 
-        let apiUrl = `http://localhost:53281/api/Questionnaire?email=` + localStorage.getItem('user_email');
+        let apiUrl = `http://localhost:54976/api/Questionnaire?email=` + localStorage.getItem('user_email');
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/Questionnaire/getSpecificQuestionnaire`;
 
         fetch(apiUrl)
@@ -114,7 +115,7 @@ export default class CCMyprofile extends Component {
 
     changePasswordPUT = () => {
 
-        let apiUrl = `http://localhost:53281/api/User/` + localStorage.getItem('user_email') + "/" + this.state.password;
+        let apiUrl = `http://localhost:54976/api/User/` + localStorage.getItem('user_email') + "/" + this.state.password;
 
         fetch(apiUrl, {
             method: 'PUT', // *GET, POST, PUT, DELETE, etc.
@@ -152,7 +153,7 @@ export default class CCMyprofile extends Component {
                 console.log("you click on Save Button")
 
                 //PUT to Questionnaire:
-                let apiUrl = `http://localhost:53281/api/Questionnaire/` + localStorage.getItem('user_email') + "/" + this.state.q1 + "/" + this.state.q3 + "/" + this.state.q4 + "/" + this.state.q5 + "/" + this.state.q6 + "/" + this.state.q7 + "/" + this.state.q8 + "/" + this.state.q9 + "/" + this.state.q10 + "/" + this.state.q11;
+                let apiUrl = `http://localhost:54976/api/Questionnaire/` + localStorage.getItem('user_email') + "/" + this.state.q1 + "/" + this.state.q3 + "/" + this.state.q4 + "/" + this.state.q5 + "/" + this.state.q6 + "/" + this.state.q7 + "/" + this.state.q8 + "/" + this.state.q9 + "/" + this.state.q10 + "/" + this.state.q11;
                 //let apiUrl = `http://localhost:54976/api/Questionnaire/benmshulam@gmail.com/1/3/4/5/6/7/8/9/10/11`;
                 //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip/`+this.state.trip_name+"/"+this.state.match_percent+"/"+this.state.with_children;
 
@@ -198,18 +199,19 @@ export default class CCMyprofile extends Component {
 
         console.log("in editProfileImage function");
         console.log(event.target.files[0]);
+        console.log(event.target.value.length);
+
         var data = new FormData();
+
         if (event.target.value.length > 0) {
 
             let email = localStorage.getItem('user_email');
-            email = JSON.parse(email);
 
-            //this.setState({ selectedFile: event.target.files[0].name });
             const file = event.target.files[0];
             console.log(file);
             const newUrl = URL.createObjectURL(file);
             console.log(newUrl);
-            this.setState({ imgURL: newUrl})
+            this.setState({ imgURL: newUrl, profile_image: newUrl })
 
             data.append("UploadedImage", file);
             data.append("name", email);
@@ -269,18 +271,18 @@ export default class CCMyprofile extends Component {
     render() {
         return (
             <div style={{ backgroundColor: '#1d21243b', height: '100%' }}><br></br>
-                <div><Button variant="secondary" size="sm" onClick={this.backbtn} className="but"> Main Menu </Button></div><br></br>
+                {/* <div><Button variant="secondary" size="sm" onClick={this.backbtn} className="but"> Main Menu </Button></div><br></br> */}
                 <img src={this.state.profile_image} alt={true} style={{ width: '45%', borderRadius: 100, borderWidth: 2, borderStyle: 'solid' }} /><br></br><br></br>
-                <input style={{ display: 'none' }} type="file" accept="image/*" id="icon-button-file" type="file" capture="environment" onChange={this.fileSelectedHandler} ref={fileInput => this.fileInput = fileInput} />
+                <input style={{ display: 'none' }} type="file" id="icon-button-file" accept="image/*" id="icon-button-file" capture="environment" onChange={this.fileSelectedHandler} ref={fileInput => this.fileInput = fileInput} />
                 <h2><BsPencil style={{ marginRight: 150, marginTop: -120, marginLeft: 5 }} onClick={() => this.fileInput.click()} /></h2>
                 <Form style={{ marginTop: -40 }} >
                     <Form.Group controlId="formBasicEmail" style={{ width: '75%', marginLeft: 50 }} >
                         <Form.Label style={{ fontWeight: 'bold', fontSize: 20, textDecorationLine: 'underline' }} > New Password </Form.Label>
-                        <Form.Control style={{ borderRadius: 20, borderWidth: 5, borderStyle: 'solid' }} type="password" placeholder="Enter your New Password" onChange={(ee) => this.setState({ password: ee.target.value })} />
+                        <Form.Control style={{ borderRadius: 20, borderWidth: 2 }} type="password" placeholder="Enter your New Password" onChange={(ee) => this.setState({ password: ee.target.value })} />
                     </Form.Group>
                     <Form.Group controlId="formBasicPassword" style={{ width: '75%', marginLeft: 50 }} >
                         <Form.Label style={{ fontWeight: 'bold', fontSize: 20, textDecorationLine: 'underline' }} >Confirm Password</Form.Label>
-                        <Form.Control style={{ borderRadius: 20, borderWidth: 5, borderStyle: 'solid' }} type="password" placeholder="Confirm Password" onChange={(e) => this.setState({ confirm_password: e.target.value })} />
+                        <Form.Control style={{ borderRadius: 20, borderWidth: 2 }} type="password" placeholder="Confirm Password" onChange={(e) => this.setState({ confirm_password: e.target.value })} />
                     </Form.Group>
                 </Form>
                 <h6>Watch and Edit your Questionnaire Below:</h6>
@@ -425,8 +427,8 @@ export default class CCMyprofile extends Component {
                         </tr>
                     </tbody>
                 </Table>
-                <Button variant="primary" type="button" onClick={this.checkValidation}> Update </Button> {''}
-                <Button variant="secondary" onClick={this.backbtn}> Main Menu </Button>
+                <Button color="success" type="button" onClick={this.checkValidation}> Update </Button> {''}
+                <Button color="warning" onClick={this.backbtn}> Main Menu </Button>
             </div >
         )
     }

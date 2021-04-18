@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Form, Button, Table } from 'react-bootstrap';
-import { Input } from 'reactstrap';
+import { Form, Table } from 'react-bootstrap';
+import { Input, Button } from 'reactstrap';
 import { MdCloudUpload } from "react-icons/md";
 import { BsPencil } from 'react-icons/bs';
 import Swal from 'sweetalert2';
@@ -205,8 +205,8 @@ export default class CCMyprofile extends Component {
 
         if (event.target.value.length > 0) {
 
-             let email = localStorage.getItem('user_email');
-             
+            let email = localStorage.getItem('user_email');
+
             const file = event.target.files[0];
             console.log(file);
             const newUrl = URL.createObjectURL(file);
@@ -427,8 +427,8 @@ export default class CCMyprofile extends Component {
                         </tr>
                     </tbody>
                 </Table>
-                <Button variant="primary" type="button" onClick={this.checkValidation}> Update </Button> {''}
-                <Button variant="secondary" onClick={this.backbtn}> Main Menu </Button>
+                <Button color="success" type="button" onClick={this.checkValidation}> Update </Button> {''}
+                <Button color="warning" onClick={this.backbtn}> Main Menu </Button>
             </div >
         )
     }

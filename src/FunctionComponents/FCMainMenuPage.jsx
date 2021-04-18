@@ -36,12 +36,20 @@ export default function FCMainMenuPage() {
             </div>
             <div>
                 <div style={{ marginTop: 100 }}>
-                    <Button fullWidth disabled={true} style={{ alignItems: "center" }} size="lg"  >Join Trip</Button><br></br><br></br><br></br>
-                    <Button fullWidth color="success" style={{ alignItems: "center" }} size="lg" href='/main_menu_page/create_new_trip_page'>New Trip</Button>
+                
+                    {/* <Button fullWidth disabled={true} style={{ alignItems: "center" }} size="lg"  >Join Trip</Button><br></br><br></br><br></br> */}
+                    <Button style={{ width: '60%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold' }} disabled={true} size="lg" >Join Trip</Button><br></br><br></br>
+
+                    {/* <Button fullWidth color="info" style={{ alignItems: "center" }} size="lg" href='/main_menu_page/create_new_trip_page'>New Trip</Button> */}
+                    <Button style={{ width: '60%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold' }} fullWidth color="info" size="lg" href='/main_menu_page/create_new_trip_page' >New Trip</Button>
+
                 </div>
-                <div style={{ marginTop: 125 }}>
-                    <Button color="info" fullWidth href="/main_menu_page/my_profile" size="lg"> My Profile </Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <Button color="info" fullWidth href="/main_menu_page/my_trips" size="lg"  >My Trips</Button>
+                <div style={{ marginTop: 150 }}>
+                <Button style={{ width: '40%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold' }} fullWidth color="info" size="lg" href="/main_menu_page/my_profile" >My Profile</Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <Button style={{ width: '40%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold' }} fullWidth color="info" size="lg" href="/main_menu_page/my_trips" >My Trips</Button>
+
+                    {/* <Button color="info" fullWidth href="/main_menu_page/my_profile" size="lg"> My Profile </Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <Button color="info" fullWidth href="/main_menu_page/my_trips" size="lg"  >My Trips</Button> */}
                 </div>
             </div>
         </div>

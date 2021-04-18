@@ -3,6 +3,8 @@ import { Form, Table } from 'react-bootstrap';
 import { Button } from 'reactstrap';
 import { GrCamera } from 'react-icons/gr';
 import Swal from 'sweetalert2';
+import TextField from '@material-ui/core/TextField';
+
 
 export default class CCMyprofile extends Component {
 
@@ -38,7 +40,7 @@ export default class CCMyprofile extends Component {
 
         console.log("in componentDidMount function");
 
-        let apiUrl = `http://localhost:54976/api/Questionnaire?email=` + localStorage.getItem('user_email');
+        let apiUrl = `http://localhost:53281/api/Questionnaire?email=` + localStorage.getItem('user_email');
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/Questionnaire/getSpecificQuestionnaire`;
 
         fetch(apiUrl)
@@ -114,7 +116,7 @@ export default class CCMyprofile extends Component {
 
     changePasswordPUT = () => {
 
-        let apiUrl = `http://localhost:54976/api/User/` + localStorage.getItem('user_email') + "/" + this.state.password;
+        let apiUrl = `http://localhost:53281/api/User/` + localStorage.getItem('user_email') + "/" + this.state.password;
 
         fetch(apiUrl, {
             method: 'PUT', // *GET, POST, PUT, DELETE, etc.
@@ -152,7 +154,7 @@ export default class CCMyprofile extends Component {
                 console.log("you click on Save Button")
 
                 //PUT to Questionnaire:
-                let apiUrl = `http://localhost:54976/api/Questionnaire/` + localStorage.getItem('user_email') + "/" + this.state.q1 + "/" + this.state.q3 + "/" + this.state.q4 + "/" + this.state.q5 + "/" + this.state.q6 + "/" + this.state.q7 + "/" + this.state.q8 + "/" + this.state.q9 + "/" + this.state.q10 + "/" + this.state.q11;
+                let apiUrl = `http://localhost:53281/api/Questionnaire/` + localStorage.getItem('user_email') + "/" + this.state.q1 + "/" + this.state.q3 + "/" + this.state.q4 + "/" + this.state.q5 + "/" + this.state.q6 + "/" + this.state.q7 + "/" + this.state.q8 + "/" + this.state.q9 + "/" + this.state.q10 + "/" + this.state.q11;
                 //let apiUrl = `http://localhost:54976/api/Questionnaire/benmshulam@gmail.com/1/3/4/5/6/7/8/9/10/11`;
                 //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip/`+this.state.trip_name+"/"+this.state.match_percent+"/"+this.state.with_children;
 
@@ -269,22 +271,28 @@ export default class CCMyprofile extends Component {
 
     render() {
         return (
+
             <div style={{ backgroundColor: '#1d21243b', height: '100%' }}><br></br>
+                        <Button color="secondary" size="sm" onClick={this.backbtn}> Main Menu </Button><br></br><br></br>
                 {/* <div><Button variant="secondary" size="sm" onClick={this.backbtn} className="but"> Main Menu </Button></div><br></br> */}
                 <img src={this.state.profile_image} alt={true} style={{ width: '45%', borderRadius: 100, borderWidth: 2, borderStyle: 'solid' }} /><br></br><br></br>
                 <input style={{ display: 'none' }} type="file" id="icon-button-file" accept="image/*" id="icon-button-file" capture="environment" onChange={this.fileSelectedHandler} ref={fileInput => this.fileInput = fileInput} />
                 <h2><GrCamera style={{ marginRight: -120, marginTop: -120, marginLeft: 5 }} onClick={() => this.fileInput.click()} /></h2>
                 <Form style={{ marginTop: -40 }} >
                     <Form.Group controlId="formBasicEmail" style={{ width: '75%', marginLeft: 50 }} >
-                        <Form.Label style={{ fontWeight: 'bold', fontSize: 20, textDecorationLine: 'underline' }} > New Password </Form.Label>
-                        <Form.Control style={{ borderRadius: 20, borderWidth: 2 }} type="password" placeholder="Enter your New Password" onChange={(ee) => this.setState({ password: ee.target.value })} />
+                        <TextField className="TextField" disabled={this.state.disabled} style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="New Passowrd" label="Please Enter New Passowrd" name="Password" autoComplete="New Passowrd" onChange={(e) => this.setState({ email: e.target.value })} autoFocus />
+                        {/* <Button style={{ width: '70%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold', fontSize: '20px' }} fullWidth variant="warning" size="sm" disabled='false' >New Password </Button><br></br> */}
+                        {/* <Form.Label style={{ fontWeight: 'bold', fontSize: 20, textDecorationLine: 'underline' }} > New Password </Form.Label> */}
+                        {/* <Form.Control style={{ borderRadius: 20, borderWidth: 2 }} type="password" placeholder="Enter your New Password" onChange={(ee) => this.setState({ password: ee.target.value })} /> */}
                     </Form.Group>
                     <Form.Group controlId="formBasicPassword" style={{ width: '75%', marginLeft: 50 }} >
-                        <Form.Label style={{ fontWeight: 'bold', fontSize: 20, textDecorationLine: 'underline' }} >Confirm Password</Form.Label>
-                        <Form.Control style={{ borderRadius: 20, borderWidth: 2 }} type="password" placeholder="Confirm Password" onChange={(e) => this.setState({ confirm_password: e.target.value })} />
+                        <TextField className="TextField" disabled={this.state.disabled} style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="confirm" label="Please Confirm Password" name="confirmPassword" autoComplete="Confirm Password" onChange={(e) => this.setState({ email: e.target.value })} autoFocus />
+                        {/* <Button style={{ width: '70%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold', fontSize: '20px' }} fullWidth variant="warning" size="sm" disabled='false' >Confirm Password </Button><br></br> */}
+                        {/* <Form.Label style={{ fontWeight: 'bold', fontSize: 20, textDecorationLine: 'underline' }} >Confirm Password</Form.Label> */}
+                        {/* <Form.Control style={{ borderRadius: 20, borderWidth: 2 }} type="password" placeholder="Confirm Password" onChange={(e) => this.setState({ confirm_password: e.target.value })} /> */}
                     </Form.Group>
                 </Form>
-                <h6>Watch and Edit your Questionnaire Below:</h6>
+                <h6>Edit your Questionnaire Answers Below:</h6>
                 <Table striped bordered hover variant="dark">
                     <thead>
                         <tr>
@@ -426,8 +434,9 @@ export default class CCMyprofile extends Component {
                         </tr>
                     </tbody>
                 </Table>
-                <Button color="success" type="button" onClick={this.checkValidation}> Update </Button> {''}
-                <Button color="warning" onClick={this.backbtn}> Main Menu </Button>
+                {/* <Button color="success" type="button" onClick={this.checkValidation}> Update </Button> {''} */}
+                <Button style={{ marginBottom:'10px',width: '80%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold' }} fullWidth color="success" size="lg" onClick={this.checkValidation}>Update</Button>
+
             </div >
         )
     }

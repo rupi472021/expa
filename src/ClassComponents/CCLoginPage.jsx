@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -14,7 +15,6 @@ import FaceBookLogin from '../ServiceComponents/FaceBookLogin';
 import classes from './BlogCard.module.css';
 import Box from '@material-ui/core/Box';
 import Swal from 'sweetalert2';
-import { CollectionsOutlined } from '@material-ui/icons';
 
 
 export default class CCLoginPage extends Component {
@@ -123,25 +123,34 @@ export default class CCLoginPage extends Component {
                 <Container>
                     <CssBaseline />
                     <div className={classes.Container} >
+                        <br></br><br></br>
                         <Avatar alt="Remy Sharp" src="https://i.ibb.co/GF9rjsr/circle-cropped.png" style={{ width: '20vh', height: '20vh', marginTop: '10px' }} />
+                        <br></br>
                         <form>
                             <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus onChange={(e) => this.setState({ email: e.target.value })} />
                             <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password" onChange={(a) => this.setState({ password: a.target.value })} />
                             {/* <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" /> */}
                             <br></br><br></br>
-                            <Button className={classes.ButtonSignIn} fullWidth variant="contained" color="Primary" size="large" onClick={this.signinbtn}> Log In </Button><br></br><br></br><br></br>
+                            <Button variant="dark" style={{boxShadow:'0 0 10px  #141414',width: '100%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '20px' }} onClick={this.signinbtn} fullWidth size="lg" >Log In</Button><br></br><br></br><br></br>
+
                             <Grid container>
                                 <Grid item xs>
-                                    <Link style={{ fontWeight: 'bold', fontSize: 15 }} href="/forget_password_page" variant="body2"> Forgot password? </Link>
+                                <Button variant="warning" style={{width: '90%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '15px' }} href="/forget_password_page" fullWidth size="sm" > Forgot Password</Button>
+
+                                    {/* <Link style={{ fontWeight: 'bold', fontSize: 15 }} href="/forget_password_page" variant="body2"> Forgot password? </Link> */}
                                 </Grid>
                                 <Grid item xs>
-                                    <Link style={{ fontWeight: 'bold', fontSize: 15 }} variant="body2" href="/Register" > Don't have an account? Sign Up </Link><br></br><br></br>
+                                <Button variant="warning" style={{width: '90%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '15px' }} href="/Register" fullWidth size="sm" > Sign Up</Button><br></br>
+
+                                    {/* <Link style={{ fontWeight: 'bold', fontSize: 15 }} variant="body2" href="/Register" > Don't have an account? Sign Up </Link><br></br><br></br> */}
                                 </Grid>
                             </Grid>
                         </form>
-                        <br></br><br></br>
+                        <br></br><br></br><br></br>
                         <div style={{ width: '80%' }}>
-                            <p style={{ fontWeight: 'bold', textDecorationLine: 'underline' }}> Quick access with: </p>
+                            {/* <p style={{ fontWeight: 'bold', textDecorationLine: 'underline' }}> Quick access with: </p> */}
+                            <p style={{width: '60%', fontWeight: 'bold', fontSize: '15px',marginLeft:'55px' }}> Quick Access With </p>
+
                         </div><br></br><br></br>
                         <div style={{ height: 70, width: '80%' }}>
                             <div style={{ marginRight: 100 }}>

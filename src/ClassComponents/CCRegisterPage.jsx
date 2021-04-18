@@ -48,9 +48,9 @@ export default class CCRegisterPage extends Component {
             visibilityt: 'hidden',
             answerList: [],
             image: "https://png.pngtree.com/png-clipart/20200701/original/pngtree-character-default-avatar-png-image_5407167.jpg",
-            source: '',
+            source: 'https://png.pngtree.com/png-clipart/20200701/original/pngtree-character-default-avatar-png-image_5407167.jpg',
             imgURL: 'https://png.pngtree.com/png-clipart/20200701/original/pngtree-character-default-avatar-png-image_5407167.jpg',
-            selectedFile: 'false',
+            selectedFile: 'https://png.pngtree.com/png-clipart/20200701/original/pngtree-character-default-avatar-png-image_5407167.jpg',
             urlimg: '',
 
         }
@@ -118,7 +118,7 @@ export default class CCRegisterPage extends Component {
         }
         else {
 
-            window.scrollTo({ top: 680, behavior: 'smooth' })
+            window.scrollTo({ top: 700, behavior: 'smooth' })
             this.setState(prevState => ({
                 opacity: 1,
                 disabled: true,
@@ -210,7 +210,7 @@ export default class CCRegisterPage extends Component {
             // this.clearForm(),
 
             localStorage.setItem('user_lname', this.state.lname),
-            localStorage.setItem('user_image', this.state.source),
+            localStorage.setItem('user_image', this.state.selectedFile),
             localStorage.setItem('user_email', this.state.email),
             localStorage.setItem('user_fname', this.state.fname),
 
@@ -308,7 +308,7 @@ export default class CCRegisterPage extends Component {
             <div style={{ backgroundColor: '#1d21243b', height: '100%' }} className={classes.NewBLogCard}>
                 <Container>
                     <div className={classes.Container}>
-                        <Button variant="secondary" size="sm" href="/" className="but"> BACK </Button>
+                        <Button variant="secondary" size="sm" href="/" className="but"> BACK </Button><br></br>
                         <div><Avatar alt="Remy Sharp" src="https://i.ibb.co/GF9rjsr/circle-cropped.png" style={{ width: '15vh', height: '15vh', marginTop: '10px' }} /></div>
                         <h1 className="ExPa"> Create an Account </h1>
                         <form>
@@ -336,12 +336,14 @@ export default class CCRegisterPage extends Component {
 
                                 <Button style={{ width: '80%', borderRadius: 20, borderWidth: 5,fontWeight:'bold' }} fullWidth variant="info" size="lg" onClick={this.submitUserData} disabled={this.state.disabled} >Let's GO !</Button>
                                 <br></br><br></br><br></br><br></br>
-                                <Input style={{ marginLeft: '100px' }} accept="image/*" id="icon-button-file" type="file" capture="environment" onChange={this.btnFile} ref={fileInput => this.fileInput = fileInput} />
-                                <br></br>
                                 <h5>Choose Your Profile Picture</h5>
                                 <div>
                                     <img style={{ width: '40%', borderRadius: 70, borderWidth: 5 }} src={this.state.imgURL} alt="" ></img>
                                 </div>
+                                <br></br>
+
+                                <Input style={{ marginLeft: '10px' }} accept="image/*" id="icon-button-file" type="file" capture="environment" onChange={this.btnFile} ref={fileInput => this.fileInput = fileInput} />
+
                                 <br></br><br></br>
                             </div>
 

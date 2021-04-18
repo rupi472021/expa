@@ -39,7 +39,7 @@ export default class CCMyprofile extends Component {
 
         console.log("in componentDidMount function");
 
-        let apiUrl = `http://localhost:54976/api/Questionnaire?email=` + localStorage.getItem('user_email');
+        let apiUrl = `http://localhost:53281/api/Questionnaire?email=` + localStorage.getItem('user_email');
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/Questionnaire/getSpecificQuestionnaire`;
 
         fetch(apiUrl)

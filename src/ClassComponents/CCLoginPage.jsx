@@ -88,7 +88,7 @@ export default class CCLoginPage extends Component {
             localStorage.setItem('user_fname', this.props.dataFromApptoLoginPage[index].Fname)
             localStorage.setItem('user_lname', this.props.dataFromApptoLoginPage[index].Lname)
             //localStorage.setItem('social_media_name', this.state.social_media_name)
-            if (this.props.dataFromApptoLoginPage[index].Image == 'false') {
+            if (this.props.dataFromApptoLoginPage[index].Image == 'https://png.pngtree.com/png-clipart/20200701/original/pngtree-character-default-avatar-png-image_5407167.jpg') {
                 localStorage.setItem('user_image', "https://png.pngtree.com/png-clipart/20200701/original/pngtree-character-default-avatar-png-image_5407167.jpg")
             }
             else (localStorage.setItem('user_image', "http://proj.ruppin.ac.il/igroup47/prod/uploadedFiles/" + this.state.email + ".png"))
@@ -127,7 +127,8 @@ export default class CCLoginPage extends Component {
                         <form>
                             <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus onChange={(e) => this.setState({ email: e.target.value })} />
                             <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password" onChange={(a) => this.setState({ password: a.target.value })} />
-                            <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
+                            {/* <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" /> */}
+                            <br></br><br></br>
                             <Button className={classes.ButtonSignIn} fullWidth variant="contained" color="Primary" size="large" onClick={this.signinbtn}> Log In </Button><br></br><br></br><br></br>
                             <Grid container>
                                 <Grid item xs>
@@ -138,6 +139,7 @@ export default class CCLoginPage extends Component {
                                 </Grid>
                             </Grid>
                         </form>
+                        <br></br><br></br>
                         <div style={{ width: '80%' }}>
                             <p style={{ fontWeight: 'bold', textDecorationLine: 'underline' }}> Quick access with: </p>
                         </div><br></br><br></br>

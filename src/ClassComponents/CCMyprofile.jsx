@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Table } from 'react-bootstrap';
 import { Button } from 'reactstrap';
-import { BsPencil } from 'react-icons/bs';
+import { GrCamera } from 'react-icons/gr';
 import Swal from 'sweetalert2';
 
 export default class CCMyprofile extends Component {
@@ -273,7 +273,7 @@ export default class CCMyprofile extends Component {
                 {/* <div><Button variant="secondary" size="sm" onClick={this.backbtn} className="but"> Main Menu </Button></div><br></br> */}
                 <img src={this.state.profile_image} alt={true} style={{ width: '45%', borderRadius: 100, borderWidth: 2, borderStyle: 'solid' }} /><br></br><br></br>
                 <input style={{ display: 'none' }} type="file" id="icon-button-file" accept="image/*" id="icon-button-file" capture="environment" onChange={this.fileSelectedHandler} ref={fileInput => this.fileInput = fileInput} />
-                <h2><BsPencil style={{ marginRight: 150, marginTop: -120, marginLeft: 5 }} onClick={() => this.fileInput.click()} /></h2>
+                <h2><GrCamera style={{ marginRight: -120, marginTop: -120, marginLeft: 5 }} onClick={() => this.fileInput.click()} /></h2>
                 <Form style={{ marginTop: -40 }} >
                     <Form.Group controlId="formBasicEmail" style={{ width: '75%', marginLeft: 50 }} >
                         <Form.Label style={{ fontWeight: 'bold', fontSize: 20, textDecorationLine: 'underline' }} > New Password </Form.Label>

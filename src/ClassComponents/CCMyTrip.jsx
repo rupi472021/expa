@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { Button, CardColumns, Card } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import FCCard from '../FunctionComponents/FCCard';
+import '../MyStyle.css';
 
 
 export default class CCMyTrip extends Component {
@@ -37,8 +38,6 @@ export default class CCMyTrip extends Component {
 
     }
 
-
-
     backbtn = () => {
         Swal.fire({
             title: 'Are you sure?',
@@ -55,25 +54,6 @@ export default class CCMyTrip extends Component {
         })
     }
 
-    showMedia = (ken) => {
-     
-        if (ken.length < 1) {
-            // alert(this.state.AllTripsBYEmail.length);
-
-            Swal.fire({
-                title: 'You Dont Have any Trip Records Right Now !',
-                text: "Try To Create One",
-                icon: 'warning',
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = "http://localhost:3000/main_menu_page"
-                }
-            })
-        }
-    }
 
     render() {
         // const { AllTripsBYEmail } = this.state;
@@ -81,8 +61,8 @@ export default class CCMyTrip extends Component {
         return (
             <div>
                 <div><Button variant="secondary" size="sm" onClick={this.backbtn} className="but"> Main Menu </Button></div><br></br>
-                <h1>My Trips</h1>
-
+                <Button style={{ width: '90%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold', fontSize: '40px' }} fullWidth variant="info" size="lg" disabled='false' >My Trips</Button>
+                <br></br><br></br>
                 <CardColumns>
                     {
                         // {this.state.AllTripsBYEmail?.length=0=>{<p>You dont have any </p>}}                    
@@ -91,13 +71,9 @@ export default class CCMyTrip extends Component {
                     }
                 </CardColumns>
                 <div>
-                    
-                 {this.state.AllTripsBYEmail?.length == 0 && <h2>hey You Dont have any active/previous trips</h2>}
-                   
-                    
+                    {this.state.AllTripsBYEmail?.length == 0 &&  <Button style={{ width: '90%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold', fontSize: '20px' }} fullWidth variant="warning" size="sm" disabled='false' >Sorry..You Don't Have Any Previous/OnAir Trips </Button>}
                 </div>
             </div>
         )
     }
 }
-                 {/* {this.showMedia(this.state.AllTripsBYEmail)}  */}

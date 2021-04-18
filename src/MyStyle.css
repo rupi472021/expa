@@ -1,5 +1,8 @@
 
-     .but {
+    html{
+        background-color:#1d21243b;
+    }
+    .but {
         margin-top: 10px;
         opacity: 0.74;
     }

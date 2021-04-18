@@ -7,7 +7,7 @@ export default function FCCard(props) {
         <div>
         
                 <Card bg="info" style={{borderRadius:'40px',marginLeft:'20px',marginRight:'20px'}}>
-                    {/* <Card.Img  variant="top" src="holder.js/100px160" /> */}
+                    <Card.Img style={{marginLeft:'118px',marginTop:'20px',width: '37%',height:'120px', borderRadius: 35, borderWidth: 5}}  variant="top" src="http://suindependent.com/wp-content/uploads/2018/01/Winter-Jamboree-3.jpg" />
                     <Card.Body>
                         <Card.Title style={{fontWeight:'bold',fontSize:'30px'}}>{props.name}</Card.Title>
                         <Card.Text >

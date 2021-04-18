@@ -32,28 +32,17 @@ export default function FCMainMenuPage() {
             <div style={{ textAlign: 'center' }}><br></br>
                 <img src={localStorage.getItem('user_image')} alt={true} style={{ width: '45%', borderRadius: 100, borderWidth: 2, borderStyle: 'solid' }} /><br></br><br></br><br></br>
                 <p>
-                    {/* <h5 style={{ marginLeft: 7 }}>Hi {localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}, Welcome To ExPa!</h5> */}
-                    {/* <Button style={{ boxShadow:'0 0 50px 10px #141414',marginLeft: 7,width: '90%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '22px' }} fullWidth color="info" size="sm" disabled='false' >Hi {localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}, Welcome To ExPa!</Button> */}
-                    {/* <Button style={{marginLeft: 7,width: '90%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '22px' }} fullWidth color="light" size="sm" disabled='false' >{localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}, Welcome To ExPa!</Button> */}
-                    <h1 style={{ width: '100%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '28px'}} className="ExPa">{localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}, Welcome To ExPa!</h1>
-
+                    <h1 style={{ width: '100%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '28px' }} className="ExPa">{localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}, Welcome To ExPa!</h1>
                 </p>
             </div>
             <div>
-                <div style={{ marginTop: 100 }}>
-                    {/* <Button fullWidth disabled={true} style={{ alignItems: "center" }} size="lg"  >Join Trip</Button><br></br><br></br><br></br> */}
+                <div style={{ marginTop: 60 }}>
                     <Button style={{ width: '60%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold' }} disabled={true} size="lg" >Join Trip</Button><br></br><br></br>
-
-                    {/* <Button fullWidth color="info" style={{ alignItems: "center" }} size="lg" href='/main_menu_page/create_new_trip_page'>New Trip</Button> */}
                     <Button style={{ width: '60%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold' }} fullWidth color="warning" size="lg" href='/main_menu_page/create_new_trip_page' >New Trip</Button>
-
                 </div>
-                <div style={{ marginTop: 130 }}>
-                <Button style={{ width: '40%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold' }} fullWidth color="warning" size="lg" href="/main_menu_page/my_profile" >My Profile</Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <Button style={{ width: '40%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold' }} fullWidth color="warning" size="lg" href="/main_menu_page/my_trips" >My Trips</Button>
-
-                    {/* <Button color="info" fullWidth href="/main_menu_page/my_profile" size="lg"> My Profile </Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <Button color="info" fullWidth href="/main_menu_page/my_trips" size="lg"  >My Trips</Button> */}
+                <div style={{ marginTop: 90 }}>
+                    <Button style={{ width: '40%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold' }} fullWidth color="warning" size="lg" href="/main_menu_page/my_profile" >My Profile</Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <Button style={{ width: '40%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold' }} fullWidth color="warning" size="lg" href="/main_menu_page/my_trips" >My Trips</Button>
                 </div>
             </div>
         </div>

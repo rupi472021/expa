@@ -31,6 +31,8 @@
     "react": "^17.0.1",
     "react-addons-css-transition-group": "^15.6.2",
     "react-alert": "^7.0.2",
+    "react-arc-text": "^1.0.5",
+    "react-arc-text-fixed": "0.0.0-development",
     "react-bootstrap": "^1.5.2",
     "react-bootstrap-buttons": "^1.0.0",
     "react-bootstrap-dropdown": "^0.3.0",

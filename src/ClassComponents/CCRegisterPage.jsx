@@ -22,7 +22,7 @@ export default class CCRegisterPage extends Component {
         super(props);
         this.datafromgoogle = this.datafromgoogle.bind(this);
         this.state = {
-            opacity: 1,
+            opacity: 0.4,
             email: '',
             fname: '',
             lname: '',
@@ -44,14 +44,12 @@ export default class CCRegisterPage extends Component {
             q9: '',
             q10: '',
             q11: '',
-            btnColor1: 'primary',
-            btnColor2: 'primary',
             disabled: false,
             visibilityt: 'hidden',
             answerList: [],
             image: "https://png.pngtree.com/png-clipart/20200701/original/pngtree-character-default-avatar-png-image_5407167.jpg",
             source: '',
-            imgURL: '',
+            imgURL: 'https://png.pngtree.com/png-clipart/20200701/original/pngtree-character-default-avatar-png-image_5407167.jpg',
             selectedFile: 'false',
             urlimg: '',
 
@@ -76,9 +74,6 @@ export default class CCRegisterPage extends Component {
         localStorage.clear(); //clear local storge onload
         console.log(this.props.dataFromApptoRegisterPage);
 
-        // if(localStorage.getItem('user_email')==null){
-        //     alert("hey");
-        // }
 
     }
 
@@ -121,41 +116,15 @@ export default class CCRegisterPage extends Component {
                 window.location.reload(false);
             })
         }
-
         else {
 
-            window.scrollTo({ top: 530, behavior: 'smooth' })
+            window.scrollTo({ top: 630, behavior: 'smooth' })
             this.setState(prevState => ({
                 opacity: 1,
                 disabled: true,
             }))
-
-
-            // Swal.fire({
-            //     position: 'top-down',
-            //     icon: 'success',
-            //     title: 'Hi you loggin successfully to ExPa!',
-            //     imageHeight: 1500,
-            //     showConfirmButton: true,
-            // })
-
-            // this.handle();
         }
-
     }
-
-
-    // googlepushed=(a)=>{
-    //     alert(a);
-    //     window.scrollTo({ top: 530, behavior: 'smooth' })
-    //     this.setState(prevState => ({
-    //         opacity: 1,
-    //         disabled: true,
-    //         backgroundColor:'green'
-
-
-    //     }))
-    // }
 
     postTosqlQues = (event) => {
         ///validate blank fields
@@ -211,16 +180,6 @@ export default class CCRegisterPage extends Component {
     handle = () => {
 
         var data = new FormData();
-        // var files = $("#files").get(0).files;
-
-        // // Add the uploaded file to the form data collection  
-        // if (files.length > 0) {
-        //     for (let f = 0; f < files.length; f++) {
-        //         data.append("UploadedImage", files[f]);
-        //     }
-        //     data.append("name", "benny"); // append what ever data you want to send along with the files. See how you extract it in the controller.
-        //     this.setState({ source: data });
-        // }
         const newUser = {
             Email: this.state.email,
             Fname: this.state.fname,
@@ -281,7 +240,7 @@ export default class CCRegisterPage extends Component {
 
         Swal.fire({
             title: 'Sweet!',
-            text: 'Now we can see how you look',
+            text: "It's Getting Better!",
             imageUrl: 'https://clipart-best.com/img/smiley/smiley-clip-art-60.png',
             imageWidth: 400,
             imageHeight: 200,
@@ -307,7 +266,7 @@ export default class CCRegisterPage extends Component {
 
             console.log("in post img function");
 
-            //this.apiUrl = `http://localhost:54976/api/User/uploadedFiles`;
+            //this.apiUrl = `http://localhost:53281/api/User/uploadedFiles`;
 
             this.apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User/uploadedFiles`;
 
@@ -346,8 +305,6 @@ export default class CCRegisterPage extends Component {
                         console.log("err post=", error);
                     });
             console.log('end');
-
-            //setSource(newUrl);
         }
         else {
             this.setState({ selectedFile: null })
@@ -361,11 +318,11 @@ export default class CCRegisterPage extends Component {
                     <div className={classes.Container}>
                         <Button variant="secondary" size="sm" href="/" className="but"> BACK </Button>
                         <div><Avatar alt="Remy Sharp" src="https://i.ibb.co/GF9rjsr/circle-cropped.png" style={{ width: '15vh', height: '15vh', marginTop: '10px' }} /></div>
-                        <h1 className="ExPa" > Create an Account </h1>
+                        <h1 className="ExPa"> Create an Account </h1>
                         <form>
                             <div id="part1" >
-                                Access with: <GoogleRegisterPage /*email={this.state.email}*/ queDatafromParent={this.props.QuesDatafromApptoRegisterPage} dataFromParent={this.props.dataFromApptoRegisterPage}/* {...this.state.fname=localStorage.getItem('user_fname')} {...this.state.lname=localStorage.getItem('user_lname')}{...this.state.email=localStorage.getItem('user_email')}{...this.state.source=localStorage.getItem('user_image')} */ />
-                                <TextField disabled={this.state.disabled} style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" onChange={(e) => this.setState({ email: e.target.value })} autoFocus />
+                                Access with: <GoogleRegisterPage  /*email={this.state.email}*/ queDatafromParent={this.props.QuesDatafromApptoRegisterPage} dataFromParent={this.props.dataFromApptoRegisterPage}/* {...this.state.fname=localStorage.getItem('user_fname')} {...this.state.lname=localStorage.getItem('user_lname')}{...this.state.email=localStorage.getItem('user_email')}{...this.state.source=localStorage.getItem('user_image')} */ />
+                                <TextField className="TextField" disabled={this.state.disabled} style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" onChange={(e) => this.setState({ email: e.target.value })} autoFocus />
                                 <Row>
                                     <Col>
                                         <TextField disabled={this.state.disabled} style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="fname" label="First Name" name="fname" autoComplete="First Name" onChange={(e) => this.setState({ fname: e.target.value })} autoFocus />
@@ -382,86 +339,88 @@ export default class CCRegisterPage extends Component {
                                         <TextField disabled={this.state.disabled} style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth name="Cpassword" label="Confirm" type="password" id="Cpassword" autoComplete="confirm-password" onChange={(e) => this.setState({ cPassword: e.target.value })} />
                                     </Col>
                                 </Row>
-                                <h5>Upload your Profile Image:</h5>
+                                <br></br>
+                                <h5>Choose Your Profile Picture</h5>
                                 <div>
-                                    <img style={{ width: '40%', borderRadius: 70, borderWidth: 5, marginLeft: -50 }} src={this.state.imgURL} alt="" ></img>
+                                    <img style={{ width: '40%', borderRadius: 70, borderWidth: 5 }} src={this.state.imgURL} alt="" ></img>
                                 </div>
                                 <br></br>
-                                <Input style={{ marginLeft: 20 }} accept="image/*" id="icon-button-file" type="file" capture="environment" onChange={this.btnFile} ref={fileInput => this.fileInput = fileInput} />
+                                <Input style={{ marginLeft: '100px' }} accept="image/*" id="icon-button-file" type="file" capture="environment" onChange={this.btnFile} ref={fileInput => this.fileInput = fileInput} />
                                 <br></br>
-                                <Button fullWidth variant="info" size="lg" onClick={this.submitUserData} disabled={this.state.disabled} >Let's GO !</Button>
+                                <Button style={{ width: '80%', borderRadius: 20, borderWidth: 5,fontWeight:'bold' }} fullWidth variant="info" size="lg" onClick={this.submitUserData} disabled={this.state.disabled} >Let's GO !</Button>
                                 <br></br><br></br>
                             </div>
+
                             {/* Questionnaire */}
-                            <div id="part2" /*style={{ opacity: this.state.opacity}}*/>
+                            <div id="part2" style={{ opacity: this.state.opacity }} >
                                 <h4>I am ...</h4>
                                 <ButtonGroup aria-label="contained primary button group">
-                                    <Button variant={this.state.btnColor1} value="Male" onClick={(e) => this.setState({ q1: e.target.value, btnColor1: 'secondary' })}>Male</Button>&nbsp;
-                                    <Button variant={this.state.btnColor2} value="Female" onClick={(e) => this.setState({ q1: e.target.value, btnColor2: 'secondary' })}>Female</Button>
+                                    <Button disabled={!this.state.disabled} value="Male" onClick={(e) => this.setState({ q1: e.target.value, btnColor1: 'secondary' })}>Male</Button>&nbsp;
+                                    <Button disabled={!this.state.disabled} value="Female" onClick={(e) => this.setState({ q1: e.target.value, btnColor2: 'secondary' })}>Female</Button>
                                 </ButtonGroup>
-                                <h4>{this.state.q1}</h4>
+                                {/* <h4>{this.state.q1}</h4> */}
                                 <br></br><br></br><br></br>
 
 
 
                                 <h4>I am {this.state.q2} Years Old</h4>
-                                <RangeSlider value={this.state.q2} onChange={(e) => this.setState({ q2: e.target.value })} />
-                                <h4>{this.state.q2}</h4>
+                                <RangeSlider disabled={!this.state.disabled} value={this.state.q2} onChange={(e) => this.setState({ q2: e.target.value })} />
+                                {/* <h4>{this.state.q2}</h4> */}
                                 <br></br>
 
 
                                 <h4>I have Kids </h4>
                                 <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q3: e.target.value })}>
-                                    <Button value="YES">YES</Button>&nbsp;&nbsp;
-                                    <Button value="NO">NO</Button>&nbsp;&nbsp;
+                                    <Button disabled={!this.state.disabled} value="YES">YES</Button>&nbsp;&nbsp;
+                                    <Button disabled={!this.state.disabled} value="NO">NO</Button>&nbsp;&nbsp;
                                 </ButtonGroup>
-                                <h4>{this.state.q3}</h4>
+                                {/* <h4>{this.state.q3}</h4> */}
                                 <br></br><br></br><br></br>
 
 
                                 <h4>I have ...</h4>
                                 <ButtonGroup size="sm" variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q4: e.target.value })}>
-                                    <Button value="Jeep">Jeep</Button>&nbsp;&nbsp;
-                                    <Button value="ATV">ATV</Button>&nbsp;&nbsp;
-                                    <Button value="RZR">RZR</Button>&nbsp;&nbsp;
-                                    <Button value="Motorcycle">Motorcycle</Button>&nbsp;&nbsp;
-                                    <Button onClick={this.OpenJoinOption} value="None"> None </Button>
+                                    <Button disabled={!this.state.disabled} value="Jeep">Jeep</Button>&nbsp;&nbsp;
+                                    <Button disabled={!this.state.disabled} value="ATV">ATV</Button>&nbsp;&nbsp;
+                                    <Button disabled={!this.state.disabled} value="RZR">RZR</Button>&nbsp;&nbsp;
+                                    <Button disabled={!this.state.disabled} value="Motorcycle">Motorcycle</Button>&nbsp;&nbsp;
+                                    <Button disabled={!this.state.disabled} onClick={this.OpenJoinOption} value="None"> None </Button>
                                 </ButtonGroup>
-                                <h2>{this.state.q4}</h2>
+                                {/* <h2>{this.state.q4}</h2> */}
                                 <br></br><br></br><br></br>
 
 
 
                                 <h4>I am Looking for...</h4>
                                 <ButtonGroup size="sm" variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q5: e.target.value })}>
-                                    <Button value="oneTime">One-Time Partners Trip </Button>&nbsp;&nbsp;
-                                    <Button value="short">Partners To Travel With in The Short Term</Button>&nbsp;&nbsp;
-                                    <Button value="long">Partners To Travel With in The Long Term</Button>&nbsp;&nbsp;
+                                    <Button disabled={!this.state.disabled} value="oneTime">One-Time Partners Trip </Button>&nbsp;&nbsp;
+                                    <Button disabled={!this.state.disabled} value="short">Partners To Travel With in The Short Term</Button>&nbsp;&nbsp;
+                                    <Button disabled={!this.state.disabled} value="long">Partners To Travel With in The Long Term</Button>&nbsp;&nbsp;
                                 </ButtonGroup>
-                                <h4>{this.state.q5}</h4>
+                                {/* <h4>{this.state.q5}</h4> */}
                                 <br></br><br></br><br></br>
 
 
                                 <h4>I'd love to Travel With Those Ages </h4>
                                 <ButtonGroup size="sm" variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q6: e.target.value })}>
-                                    <Button value="16-21">16 - 21</Button>&nbsp;&nbsp;
-                                    <Button value="22-30">22 - 30</Button>&nbsp;&nbsp;
-                                    <Button value="31-40">31 - 40</Button>&nbsp;&nbsp;
-                                    <Button value="41-55">41 - 55</Button>&nbsp;&nbsp;
-                                    <Button value="56-65">56 - 65</Button>&nbsp;&nbsp;
+                                    <Button disabled={!this.state.disabled} value="16-21">16 - 21</Button>&nbsp;&nbsp;
+                                    <Button disabled={!this.state.disabled} value="22-30">22 - 30</Button>&nbsp;&nbsp;
+                                    <Button disabled={!this.state.disabled} value="31-40">31 - 40</Button>&nbsp;&nbsp;
+                                    <Button disabled={!this.state.disabled} value="41-55">41 - 55</Button>&nbsp;&nbsp;
+                                    <Button disabled={!this.state.disabled} value="56-65">56 - 65</Button>&nbsp;&nbsp;
                                 </ButtonGroup>
-                                <h4>{this.state.q6}</h4>
+                                {/* <h4>{this.state.q6}</h4> */}
                                 <br></br><br></br><br></br>
 
 
                                 <div /*style={{ visibility: this.state.visibilityt }}*/>
                                     <h4>I have no problem being with other Partners in the same vehicle </h4>
                                     <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q7: e.target.value })}>
-                                        <Button value="YES">Right! Sharing Is Caring </Button>&nbsp;&nbsp;
-                                    <Button value="NO">Ahh Sorry... It's not for me</Button>&nbsp;&nbsp;
+                                        <Button disabled={!this.state.disabled} value="YES">Right! Sharing Is Caring </Button>&nbsp;&nbsp;
+                                    <Button disabled={!this.state.disabled} value="NO">Ahh Sorry... It's not for me</Button>&nbsp;&nbsp;
                                 </ButtonGroup>
                                 </div>
-                                <h4>{this.state.q7}</h4>
+                                {/* <h4>{this.state.q7}</h4> */}
                                 <br></br><br></br><br></br>
 
 
@@ -470,22 +429,22 @@ export default class CCRegisterPage extends Component {
                                 <h4>(1 being the lowest frequency and 5 being the highest frequency) </h4>
 
                                 <ButtonGroup size="sm" variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q8: e.target.value })}>
-                                    <Button value="1">1</Button>&nbsp;&nbsp;
-                                    <Button value="2">2</Button>&nbsp;&nbsp;
-                                    <Button value="3">3</Button>&nbsp;&nbsp;
-                                    <Button value="4">4</Button>&nbsp;&nbsp;
-                                    <Button value="5">5</Button>&nbsp;&nbsp;
+                                    <Button disabled={!this.state.disabled} value="1">1</Button>&nbsp;&nbsp;
+                                    <Button disabled={!this.state.disabled} value="2">2</Button>&nbsp;&nbsp;
+                                    <Button disabled={!this.state.disabled} value="3">3</Button>&nbsp;&nbsp;
+                                    <Button disabled={!this.state.disabled} value="4">4</Button>&nbsp;&nbsp;
+                                    <Button disabled={!this.state.disabled} value="5">5</Button>&nbsp;&nbsp;
                                 </ButtonGroup>
-                                <h4>{this.state.q8}</h4>
+                                {/* <h4>{this.state.q8}</h4> */}
                                 <br></br><br></br><br></br>
 
 
                                 <h4>That Word Better Describes Me</h4>
                                 <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q9: e.target.value })}>
-                                    <Button value="affable ">Affable</Button>&nbsp;&nbsp;
-                                    <Button value="troglodyte ">Troglodyte</Button>&nbsp;&nbsp;
+                                    <Button disabled={!this.state.disabled} value="affable ">Affable</Button>&nbsp;&nbsp;
+                                    <Button disabled={!this.state.disabled} value="troglodyte ">Troglodyte</Button>&nbsp;&nbsp;
                                 </ButtonGroup>
-                                <h4>{this.state.q9}</h4>
+                                {/* <h4>{this.state.q9}</h4> */}
                                 <br></br><br></br><br></br>
 
 
@@ -493,38 +452,38 @@ export default class CCRegisterPage extends Component {
                                 <ButtonGroup size="sm" variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q10: e.target.value })}>
                                     <Row>
                                         <Col>
-                                            <Button value="Politics ">Politics</Button>
+                                            <Button disabled={!this.state.disabled} value="Politics ">Politics</Button>
                                             <h1></h1>
-                                            <Button value="Sport">Sport</Button>
+                                            <Button disabled={!this.state.disabled} value="Sport">Sport</Button>
                                             <h1></h1>
-                                            <Button value="FamilyLife">Family Life</Button>
+                                            <Button disabled={!this.state.disabled} value="FamilyLife">Family Life</Button>
                                             <h1></h1>
-                                            <Button value="NightLife">NightLife</Button>
+                                            <Button disabled={!this.state.disabled} value="NightLife">NightLife</Button>
                                         </Col>
                                         <Col>
-                                            <Button value="Economy">Economy</Button>
+                                            <Button disabled={!this.state.disabled} value="Economy">Economy</Button>
                                             <h1></h1>
-                                            <Button value="Studying">Studying</Button>
+                                            <Button disabled={!this.state.disabled} value="Studying">Studying</Button>
                                             <h1></h1>
-                                            <Button value="Workplace">Workplace</Button>
+                                            <Button disabled={!this.state.disabled} value="Workplace">Workplace</Button>
                                             <h1></h1>
-                                            <Button value="Other">Other</Button>
+                                            <Button disabled={!this.state.disabled} value="Other">Other</Button>
                                         </Col>
                                     </Row>
                                 </ButtonGroup>
-                                <h4>{this.state.q10}</h4>
+                                {/* <h4>{this.state.q10}</h4> */}
                                 <br></br><br></br>
 
 
                                 <h4>Cigarette ? </h4>
                                 <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q11: e.target.value })}>
-                                    <Button value="yes">I Smoke</Button>&nbsp;&nbsp;
-                                    <Button value="no">Not For ME</Button>&nbsp;&nbsp;
+                                    <Button disabled={!this.state.disabled} value="yes">I Smoke</Button>&nbsp;&nbsp;
+                                    <Button disabled={!this.state.disabled} value="no">Not For ME</Button>&nbsp;&nbsp;
                                 </ButtonGroup>
-                                <h4>{this.state.q11}</h4>
+                                {/* <h4>{this.state.q11}</h4> */}
                                 <br></br><br></br><br></br>
 
-                                <Button fullWidth variant="success" size="lg" onClick={this.postTosqlQues}>GET STARTED</Button>
+                                <Button style={{ width: '80%', borderRadius: 20, borderWidth: 5,fontWeight:'bold' }} disabled={!this.state.disabled} fullWidth variant="success" size="lg" onClick={this.postTosqlQues}>GET STARTED</Button>
 
                             </div>
                         </form>

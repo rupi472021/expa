@@ -1,11 +1,12 @@
 
-    .but {
+     .but {
         margin-top: 10px;
         opacity: 0.74;
     }
 
     .ExPa{
         font-size: 20px;
+        font-weight:bold;
     }
 
     .paper {
@@ -22,7 +23,6 @@
      } */
        .TextField {
           background-color:white;
-         border-radius: 5px;
          /* width: 50%;  */
         }  */
     
@@ -62,4 +62,4 @@
     p{
         /* font-size: 10px; */
         margin-bottom: -50px;
-    }
+    } 

@@ -40,6 +40,7 @@ export default function FCMainMenuPage() {
                     <Button style={{ width: '60%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold' }} disabled={true} size="lg" >Join Trip</Button><br></br><br></br>
                     <Button style={{ width: '60%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold' }} fullWidth color="warning" size="lg" href='/main_menu_page/create_new_trip_page' >New Trip</Button>
                 </div>
+                <br></br><br></br>
                 <div style={{ marginTop: 90 }}>
                     <Button style={{ width: '40%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold' }} fullWidth color="warning" size="lg" href="/main_menu_page/my_profile" >My Profile</Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <Button style={{ width: '40%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold' }} fullWidth color="warning" size="lg" href="/main_menu_page/my_trips" >My Trips</Button>

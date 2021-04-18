@@ -13,6 +13,8 @@ import RangeSlider from 'react-bootstrap-range-slider';
 import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
 import GoogleRegisterPage from '../ServiceComponents/GoogleRegisterPage';
 import { GrCamera } from 'react-icons/gr';
+import { FcMultipleCameras } from 'react-icons/fc';
+import { FaCameraRetro } from 'react-icons/fa';
 
 export default class CCRegisterPage extends Component {
 
@@ -342,7 +344,7 @@ export default class CCRegisterPage extends Component {
                                 </div>
                                 <br></br>
                                 <input style={{ display: 'none' }} type="file" accept="image/*" id="icon-button-file" capture="environment" onChange={this.btnFile} ref={fileInput => this.fileInput = fileInput} />
-                                <h2><GrCamera style={{ marginRight: -100, marginTop: -120, marginLeft: 5 }} onClick={() => this.fileInput.click()} /></h2>
+                                <h2><FaCameraRetro style={{ marginRight: -100, marginTop: -120, marginLeft: 5 }} onClick={() => this.fileInput.click()} /></h2>
                             </div>
                             {/* Questionnaire */}
                             <div id="part2" style={{ opacity: this.state.opacity }} >

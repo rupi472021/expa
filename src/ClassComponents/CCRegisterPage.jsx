@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 import RangeSlider from 'react-bootstrap-range-slider';
 import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
 import GoogleRegisterPage from '../ServiceComponents/GoogleRegisterPage';
-import $ from 'jquery';
+import { GrCamera } from 'react-icons/gr';
 
 export default class CCRegisterPage extends Component {
 
@@ -150,7 +150,7 @@ export default class CCRegisterPage extends Component {
                 LAnswer: this.state.answerList
             }
             ///post to questionnaire 
-            let apiUrl = `http://localhost:53281/api/Questionnaire`;
+            let apiUrl = `http://localhost:54976/api/Questionnaire`;
             //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/Questionnaire`;
 
             console.log("New Answer const");
@@ -188,7 +188,7 @@ export default class CCRegisterPage extends Component {
             Image: this.state.selectedFile,
         }
 
-        let apiUrl = `http://localhost:53281/api/User`;
+        let apiUrl = `http://localhost:54976/api/User`;
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User`;
 
         ////POST
@@ -258,7 +258,7 @@ export default class CCRegisterPage extends Component {
 
             console.log("in post img function");
 
-            //this.apiUrl = `http://localhost:53281/api/User/uploadedFiles`;
+            //this.apiUrl = `http://localhost:54976/api/User/uploadedFiles`;
 
             this.apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User/uploadedFiles`;
 
@@ -334,19 +334,16 @@ export default class CCRegisterPage extends Component {
                                 </Row>
                                 <br></br><br></br>
 
-                                <Button style={{ width: '80%', borderRadius: 20, borderWidth: 5,fontWeight:'bold' }} fullWidth variant="info" size="lg" onClick={this.submitUserData} disabled={this.state.disabled} >Let's GO !</Button>
+                                <Button style={{ width: '80%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold' }} fullWidth variant="info" size="lg" onClick={this.submitUserData} disabled={this.state.disabled} >Let's GO !</Button>
                                 <br></br><br></br><br></br><br></br>
                                 <h5>Choose Your Profile Picture</h5>
                                 <div>
                                     <img style={{ width: '40%', borderRadius: 70, borderWidth: 5 }} src={this.state.imgURL} alt="" ></img>
                                 </div>
                                 <br></br>
-
-                                <Input style={{ marginLeft: '10px' }} accept="image/*" id="icon-button-file" type="file" capture="environment" onChange={this.btnFile} ref={fileInput => this.fileInput = fileInput} />
-
-                                <br></br><br></br>
+                                <input style={{ display: 'none' }} type="file" accept="image/*" id="icon-button-file" capture="environment" onChange={this.btnFile} ref={fileInput => this.fileInput = fileInput} />
+                                <h2><GrCamera style={{ marginRight: -100, marginTop: -120, marginLeft: 5 }} onClick={() => this.fileInput.click()} /></h2>
                             </div>
-
                             {/* Questionnaire */}
                             <div id="part2" style={{ opacity: this.state.opacity }} >
                                 <h4>I am ...</h4>
@@ -479,7 +476,7 @@ export default class CCRegisterPage extends Component {
                                 {/* <h4>{this.state.q11}</h4> */}
                                 <br></br><br></br><br></br>
 
-                                <Button style={{ width: '80%', borderRadius: 20, borderWidth: 5,fontWeight:'bold' }} disabled={!this.state.disabled} fullWidth variant="success" size="lg" onClick={this.postTosqlQues}>GET STARTED</Button>
+                                <Button style={{ width: '80%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold' }} disabled={!this.state.disabled} fullWidth variant="success" size="lg" onClick={this.postTosqlQues}>GET STARTED</Button>
 
                             </div>
                         </form>

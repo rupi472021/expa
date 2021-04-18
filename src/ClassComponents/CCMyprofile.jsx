@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Table } from 'react-bootstrap';
-import { Input, Button } from 'reactstrap';
-import { MdCloudUpload } from "react-icons/md";
+import { Button } from 'reactstrap';
 import { BsPencil } from 'react-icons/bs';
 import Swal from 'sweetalert2';
 
@@ -39,7 +38,7 @@ export default class CCMyprofile extends Component {
 
         console.log("in componentDidMount function");
 
-        let apiUrl = `http://localhost:53281/api/Questionnaire?email=` + localStorage.getItem('user_email');
+        let apiUrl = `http://localhost:54976/api/Questionnaire?email=` + localStorage.getItem('user_email');
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/Questionnaire/getSpecificQuestionnaire`;
 
         fetch(apiUrl)

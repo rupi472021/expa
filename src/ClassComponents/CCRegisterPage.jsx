@@ -209,11 +209,10 @@ export default class CCRegisterPage extends Component {
 
             // this.clearForm(),
 
-            localStorage.setItem('user_lname', this.state.lname),
-            localStorage.setItem('user_image', this.state.selectedFile),
-            localStorage.setItem('user_email', this.state.email),
-            localStorage.setItem('user_fname', this.state.fname),
-
+            // localStorage.setItem('user_lname', this.state.lname),
+            // localStorage.setItem('user_image', this.state.selectedFile),
+            // localStorage.setItem('user_email', this.state.email),
+            // localStorage.setItem('user_fname', this.state.fname),
 
         );
         this.MovingToMenu()
@@ -221,7 +220,22 @@ export default class CCRegisterPage extends Component {
     }
 
     MovingToMenu = () => {
+
+        if (this.state.selectedFile == 'https://png.pngtree.com/png-clipart/20200701/original/pngtree-character-default-avatar-png-image_5407167.jpg') {
+            localStorage.setItem('user_lname', this.state.lname);
+            localStorage.setItem('user_image', this.state.selectedFile);
+            localStorage.setItem('user_email', this.state.email);
+            localStorage.setItem('user_fname', this.state.fname);
+        }
+        else {
+            localStorage.setItem('user_lname', this.state.lname);
+            localStorage.setItem('user_image', 'http://proj.ruppin.ac.il/igroup47/prod/uploadedFiles/' + this.state.email + ".png");
+            localStorage.setItem('user_email', this.state.email);
+            localStorage.setItem('user_fname', this.state.fname);
+        }
+
         window.location.href = "http://localhost:3000/main_menu_page"
+
     }
 
     datafromgoogle = (d) => {
@@ -311,12 +325,12 @@ export default class CCRegisterPage extends Component {
                         <Button variant="secondary" size="sm" href="/" className="but"> BACK </Button><br></br>
                         <div><Avatar alt="Remy Sharp" src="https://i.ibb.co/GF9rjsr/circle-cropped.png" style={{ width: '15vh', height: '15vh', marginTop: '10px' }} /></div>
                         <h1></h1>
-                        <h1 style={{ marginLeft: 7,width: '90%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '35px'}} className="ExPa"> Create an Account </h1><br></br>
+                        <h1 style={{ marginLeft: 7, width: '90%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '35px' }} className="ExPa"> Create an Account </h1><br></br>
                         {/* <Button style={{ boxShadow:'0 0 50px 10px #141414',marginLeft: 7,width: '90%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '22px' }} fullWidth color="info" size="sm" disabled='false' >Create an Account</Button> */}
 
                         <form>
                             <div id="part1" >
-                            <p style={{ width: '40%',  fontWeight: 'bold', fontSize: '15px',marginLeft:'115px' }}>Access With </p><br></br><br></br><h1></h1>
+                                <p style={{ width: '40%', fontWeight: 'bold', fontSize: '15px', marginLeft: '115px' }}>Access With </p><br></br><br></br><h1></h1>
 
                                 <GoogleRegisterPage  /*email={this.state.email}*/ queDatafromParent={this.props.QuesDatafromApptoRegisterPage} dataFromParent={this.props.dataFromApptoRegisterPage}/* {...this.state.fname=localStorage.getItem('user_fname')} {...this.state.lname=localStorage.getItem('user_lname')}{...this.state.email=localStorage.getItem('user_email')}{...this.state.source=localStorage.getItem('user_image')} */ />
                                 <br></br>

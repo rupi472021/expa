@@ -118,7 +118,7 @@ export default class CCRegisterPage extends Component {
         }
         else {
 
-            window.scrollTo({ top: 630, behavior: 'smooth' })
+            window.scrollTo({ top: 680, behavior: 'smooth' })
             this.setState(prevState => ({
                 opacity: 1,
                 disabled: true,
@@ -150,7 +150,7 @@ export default class CCRegisterPage extends Component {
                 LAnswer: this.state.answerList
             }
             ///post to questionnaire 
-            let apiUrl = `http://localhost:54976/api/Questionnaire`;
+            let apiUrl = `http://localhost:53281/api/Questionnaire`;
             //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/Questionnaire`;
 
             console.log("New Answer const");
@@ -188,7 +188,7 @@ export default class CCRegisterPage extends Component {
             Image: this.state.selectedFile,
         }
 
-        let apiUrl = `http://localhost:54976/api/User`;
+        let apiUrl = `http://localhost:53281/api/User`;
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User`;
 
         ////POST
@@ -226,14 +226,6 @@ export default class CCRegisterPage extends Component {
 
     datafromgoogle = (d) => {
         alert(d);
-    }
-
-
-    OpenJoinOption = () => {
-        alert("bling")
-        this.setState(prevState => ({
-            visibilityt: 'visible',
-        }))
     }
 
     btnFile = (event) => {
@@ -322,6 +314,7 @@ export default class CCRegisterPage extends Component {
                         <form>
                             <div id="part1" >
                                 Access with: <GoogleRegisterPage  /*email={this.state.email}*/ queDatafromParent={this.props.QuesDatafromApptoRegisterPage} dataFromParent={this.props.dataFromApptoRegisterPage}/* {...this.state.fname=localStorage.getItem('user_fname')} {...this.state.lname=localStorage.getItem('user_lname')}{...this.state.email=localStorage.getItem('user_email')}{...this.state.source=localStorage.getItem('user_image')} */ />
+                                <br></br>
                                 <TextField className="TextField" disabled={this.state.disabled} style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" onChange={(e) => this.setState({ email: e.target.value })} autoFocus />
                                 <Row>
                                     <Col>
@@ -339,15 +332,16 @@ export default class CCRegisterPage extends Component {
                                         <TextField disabled={this.state.disabled} style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth name="Cpassword" label="Confirm" type="password" id="Cpassword" autoComplete="confirm-password" onChange={(e) => this.setState({ cPassword: e.target.value })} />
                                     </Col>
                                 </Row>
+                                <br></br><br></br>
+
+                                <Button style={{ width: '80%', borderRadius: 20, borderWidth: 5,fontWeight:'bold' }} fullWidth variant="info" size="lg" onClick={this.submitUserData} disabled={this.state.disabled} >Let's GO !</Button>
+                                <br></br><br></br><br></br><br></br>
+                                <Input style={{ marginLeft: '100px' }} accept="image/*" id="icon-button-file" type="file" capture="environment" onChange={this.btnFile} ref={fileInput => this.fileInput = fileInput} />
                                 <br></br>
                                 <h5>Choose Your Profile Picture</h5>
                                 <div>
                                     <img style={{ width: '40%', borderRadius: 70, borderWidth: 5 }} src={this.state.imgURL} alt="" ></img>
                                 </div>
-                                <br></br>
-                                <Input style={{ marginLeft: '100px' }} accept="image/*" id="icon-button-file" type="file" capture="environment" onChange={this.btnFile} ref={fileInput => this.fileInput = fileInput} />
-                                <br></br>
-                                <Button style={{ width: '80%', borderRadius: 20, borderWidth: 5,fontWeight:'bold' }} fullWidth variant="info" size="lg" onClick={this.submitUserData} disabled={this.state.disabled} >Let's GO !</Button>
                                 <br></br><br></br>
                             </div>
 
@@ -384,7 +378,7 @@ export default class CCRegisterPage extends Component {
                                     <Button disabled={!this.state.disabled} value="ATV">ATV</Button>&nbsp;&nbsp;
                                     <Button disabled={!this.state.disabled} value="RZR">RZR</Button>&nbsp;&nbsp;
                                     <Button disabled={!this.state.disabled} value="Motorcycle">Motorcycle</Button>&nbsp;&nbsp;
-                                    <Button disabled={!this.state.disabled} onClick={this.OpenJoinOption} value="None"> None </Button>
+                                    <Button disabled={!this.state.disabled} value="None"> None </Button>
                                 </ButtonGroup>
                                 {/* <h2>{this.state.q4}</h2> */}
                                 <br></br><br></br><br></br>

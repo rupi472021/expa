@@ -1,6 +1,7 @@
 import React from 'react'
 import Swal from 'sweetalert2';
-import Button from 'react-bootstrap/Button';
+//import Button from 'react-bootstrap/Button';
+import { Button } from 'reactstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function FCMainMenuPage() {
@@ -27,7 +28,7 @@ export default function FCMainMenuPage() {
 
     return (
         <div style={{ backgroundColor: '#1d21243b', height: '100vh', alignItems: 'center' }}>
-            <div style={{ padding: 10 }}><Button variant="secondary" size="sm" onClick={backbtn}>BACK</Button></div>
+            <div style={{ padding: 10 }}><Button size="sm" onClick={backbtn}>BACK</Button></div>
             <div style={{ textAlign: 'center' }}><br></br>
                 <img src={localStorage.getItem('user_image')} alt={true} style={{ width: '45%', borderRadius: 100, borderWidth: 2, borderStyle: 'solid' }} /><br></br><br></br>
                 <p>
@@ -36,13 +37,12 @@ export default function FCMainMenuPage() {
             </div>
             <div>
                 <div style={{ marginTop: 100 }}>
-                    <Button fullWidth disabled={true} style={{ alignItems: "center" }} variant="secondary" size="lg"  >Join Trip</Button><br></br><br></br><br></br>
-                    <Button fullWidth style={{ alignItems: "center" }} variant="primary" size="lg" href='/main_menu_page/create_new_trip_page'>New Trip</Button>
+                    <Button fullWidth disabled={true} style={{ alignItems: "center" }} size="lg"  >Join Trip</Button><br></br><br></br><br></br>
+                    <Button fullWidth color="success" style={{ alignItems: "center" }} size="lg" href='/main_menu_page/create_new_trip_page'>New Trip</Button>
                 </div>
                 <div style={{ marginTop: 125 }}>
-                    <Button fullWidth href="/main_menu_page/my_profile" variant="primary" size="lg"> My Profile </Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <Button fullWidth href="/main_menu_page/my_trips" variant="primary" size="lg"  >My Trips</Button>
-
+                    <Button color="info" fullWidth href="/main_menu_page/my_profile" size="lg"> My Profile </Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <Button color="info" fullWidth href="/main_menu_page/my_trips" size="lg"  >My Trips</Button>
                 </div>
             </div>
         </div>

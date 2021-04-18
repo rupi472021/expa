@@ -48,9 +48,9 @@ export default class CCLoginPage extends Component {
 
     Copyright = () => { // footer page in the LoginPage
         return (
-            <Typography variant="body2" color="textSecondary" align="center">
+            <Typography variant="body2" color="textSecondary" align="center" style={{ fontWeight: 'bold' }}>
                 {'Copyright © '}
-                <Link style={{ fontWeight: 'bold' }} color="inherit" onClick={this.handleShow}>
+                <Link color="inherit" onClick={this.handleShow}>
                     ExPa Application
           </Link>
                 {new Date().getFullYear()}

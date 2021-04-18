@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Button, DropdownButton, Dropdown } from 'react-bootstrap';
+import { Form, Button, DropdownButton, Dropdown, ButtonGroup } from 'react-bootstrap';
 import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
 import Swal from 'sweetalert2';
@@ -31,7 +31,7 @@ export default class CCCreateNewTrip extends Component {
     componentDidMount = () => { //GET all Trips from Trip_Cretia (SQL) onload
         console.log("in componentDidMount function");
 
-        let apiUrl = `http://localhost:54976/api/NewTrip`;
+        let apiUrl = `http://localhost:53281/api/NewTrip`;
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
         fetch(apiUrl)
@@ -106,7 +106,7 @@ export default class CCCreateNewTrip extends Component {
             MatchPercent: this.state.match_percent
         }
 
-        let apiUrl = `http://localhost:54976/api/NewTrip`;
+        let apiUrl = `http://localhost:53281/api/NewTrip`;
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
         ////POST To TRIP_Criteria SQL TABLE
@@ -141,7 +141,7 @@ export default class CCCreateNewTrip extends Component {
     getmatch = () => {
         ///Getting all the Users
         console.log("in getmatch function");
-        let apiUrl = `http://localhost:54976/api/Questionnaire/getSpecific/${localStorage.getItem('user_email')}/${this.state.match_percent}`
+        let apiUrl = `http://localhost:53281/api/Questionnaire/getSpecific/${localStorage.getItem('user_email')}/${this.state.match_percent}`
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/Questionnaire/getSpecific/${localStorage.getItem('user_email')}/${this.state.match_percent}`
 
         fetch(apiUrl)
@@ -211,7 +211,7 @@ export default class CCCreateNewTrip extends Component {
 
 
         // event.preventDefault(); 
-        let apiUrl = `http://localhost:54976/api/NewTrip/` + this.state.trip_name + "/" + this.state.match_percent + "/" + this.state.with_children;
+        let apiUrl = `http://localhost:53281/api/NewTrip/` + this.state.trip_name + "/" + this.state.match_percent + "/" + this.state.with_children;
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip/`+this.state.trip_name+"/"+this.state.match_percent+"/"+this.state.with_children;
 
         fetch(apiUrl, {
@@ -238,77 +238,70 @@ export default class CCCreateNewTrip extends Component {
                 <div><Button variant="secondary" size="sm" onClick={this.backbtn} className="but"> Main Menu </Button></div>
                 <div>
                     <div><br></br>
-                        <h4 style={{ textDecorationLine: 'underline', fontWeight: "bold" }}>
-                            Hey {localStorage.getItem('user_fname')}! Choose Your Preference For the Perfect Trip!
+                        <h4 style={{ fontWeight: "bold", width: '90%', boxShadow: '0px 50px 150px 10px yellow', fontSize: '30px', backgroundColor: 'gold', borderRadius: '15px', marginLeft: '21px' }}>
+                            Hey {localStorage.getItem('user_fname')}
+                        </h4>
+                        <h4 style={{ fontWeight: "bold" }}>
+                            Choose Your Preference For Your Perfect Trip
                         </h4>
                     </div><br></br>
                     <Form>
                         <Form.Group controlId="formBasicEmail" style={{ width: '75%', marginLeft: 50 }} >
                             <Form.Control style={{ borderRadius: 20 }} type="text" placeholder="Trip Name*" onChange={(e) => this.setState({ trip_name: e.target.value })} autoFocus /><br></br>
-                            <Form.Label style={{ fontWeight: 'bold', fontSize: 20, textDecorationLine: 'underline' }} > Trip Start Date {'&'} Time:</Form.Label>
+                            <Form.Label style={{ fontWeight: 'bold', fontSize: 20 }} > When ?</Form.Label>
                             <Form.Control style={{ borderRadius: 20 }} type="datetime-local" onChange={(d) => this.setState({ trip_date: JSON.stringify(d.target.value) })} autoFocus />
                         </Form.Group>
                         <Form>
-                            <h6 style={{ textDecorationLine: 'underline', fontWeight: "bold" }}>Number of Nights:</h6>
-                            {['radio'].map((type) => (
-                                <div key={`inline-${type}`} className="mb-3"><div></div>
-                                    <Form.Check value="0" onChange={(zero) => this.setState({ trip_nights: zero.target.value })} inline label="0" type={type} id="0" />
-                                    <Form.Check value="1" onChange={(one) => this.setState({ trip_nights: one.target.value })} inline label="1" type={type} id={`inline-${type}-1`} />
-                                    <Form.Check value="2" onChange={(two) => this.setState({ trip_nights: two.target.value })} inline label="2" type={type} id={`inline-${type}-2`} />
-                                    <Form.Check value="3" onChange={(three) => this.setState({ trip_nights: three.target.value })} inline label="3" type={type} id={`inline-${type}-3`} />
-                                </div>
-                            ))}
+                            <Form.Label style={{ fontWeight: 'bold', fontSize: 20 }} > Nights ? </Form.Label><br></br>
+                            <ButtonGroup size="sm" variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ trip_nights: e.target.value })}>
+                                <Button value="0">0</Button>&nbsp;&nbsp;
+                                    <Button value="1">1</Button>&nbsp;&nbsp;
+                                    <Button value="2">2</Button>&nbsp;&nbsp;
+                                    <Button value="3">3</Button>&nbsp;&nbsp;
+                                </ButtonGroup>
+                            <h1>{this.state.with_children}</h1>
+                            <br></br>
+
                         </Form>
                         <Form>
-                            <div>
-                                <h6 style={{ textDecorationLine: 'underline', fontWeight: "bold" }}>
-                                    Number of Nights:
-                                    Trip Area:
-                                </h6>
-                            </div>
-                            {['radio'].map((type) => (
-                                <div key={`inline-${type}`} className="mb-3"><br></br>
-                                    <Form.Check value="North" onChange={(North) => this.setState({ trip_area: North.target.value })} inline label="North" type={type} id="0" />
-                                    <Form.Check value="South" onChange={(South) => this.setState({ trip_area: South.target.value })} inline label="South" type={type} id={`inline-${type}-1`} />
-                                    <Form.Check value="East" onChange={(East) => this.setState({ trip_area: East.target.value })} inline label="East" type={type} id={`inline-${type}-2`} />
-                                    <Form.Check value="West" onChange={(West) => this.setState({ trip_area: West.target.value })} inline label="West" type={type} id={`inline-${type}-3`} />
-                                </div>
-                            ))}
+                            <Form.Label style={{ fontWeight: 'bold', fontSize: 20 }} > Where ? </Form.Label><br></br>
+                            <ButtonGroup size="sm" variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ trip_area: e.target.value })}>
+                                <Button value="North">North</Button>&nbsp;&nbsp;
+                                    <Button value="South">South</Button>&nbsp;&nbsp;
+                                    <Button value="East">East</Button>&nbsp;&nbsp;
+                                    <Button value="West">West</Button>&nbsp;&nbsp;
+                                </ButtonGroup>
                         </Form>
+                        <br></br>
                         <Form.Group controlId="formBasicName">
-                            <Form.Label>
-                                <h6 style={{ textDecorationLine: 'underline', fontWeight: "bold" }}>
-                                    Number of Participants:
-                                </h6>
-                            </Form.Label>
-                            <Form.Control style={{ width: '50%', marginLeft: 100 }} type="number" placeholder="Number of Participants" size='small' onChange={(number) => this.setState({ num_of_participants: number.target.value })} />
+                            <Form.Label style={{ fontWeight: 'bold', fontSize: 20 }} > How Many Partners ? </Form.Label><br></br>
+                            <Form.Control style={{ borderRadius: 10, width: '20%', marginLeft: 166 }} type="number" placeholder="Number of Participants" size='small' onChange={(number) => this.setState({ num_of_participants: number.target.value })} />
                         </Form.Group>
                     </Form>
-                    <div>
-                        <h6 style={{ textDecorationLine: 'underline', fontWeight: "bold" }}>
-                            Trip's Vehicle Type:
-                        </h6>
-                    </div>
-                    <DropdownButton defult="D" title={this.state.vehicle_type}>
-                        <Dropdown.Item onClick={(ATV) => this.setState({ vehicle_type: ATV.target.value })} as="button" value="ATV"> ATV </Dropdown.Item>
-                        <Dropdown.Item onClick={(JEEP) => this.setState({ vehicle_type: JEEP.target.value })} as="button" value="JEEP"> JEEP </Dropdown.Item>
-                        <Dropdown.Item onClick={(RZR) => this.setState({ vehicle_type: RZR.target.value })} as="button" value="RZR"> RZR </Dropdown.Item>
-                        <Dropdown.Item onClick={(Motorcycle) => this.setState({ vehicle_type: Motorcycle.target.value })} as="button" value="Motorcycle"> Motorcycle </Dropdown.Item>
-                        <Dropdown.Item onClick={(Other) => this.setState({ vehicle_type: Other.target.value })} as="button" value="Other"> Other </Dropdown.Item>
-                    </DropdownButton><br></br>
-                    <div>
-                        <h6 style={{ textDecorationLine: 'underline', fontWeight: "bold" }}>
-                            Do You Have Childrens ?
-                        </h6>
-                        <Checkbox value="yes" onChange={(yes) => this.setState({ with_children: yes.target.value })} /> Yes
-                    <Checkbox value="no" onChange={(no) => this.setState({ with_children: no.target.value })} /> No
-                    </div><br></br>
-                    <h6 style={{ textDecorationLine: 'underline' }}>I want At least {this.state.match_percent}% match with my ExPa Partners!</h6>
+
+                    <Form.Label style={{ fontWeight: 'bold', fontSize: 20 }} > Vehicle Type ? </Form.Label><br></br>
+                    <ButtonGroup size="sm" variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ vehicle_type: e.target.value })}>
+                        <Button value="Jeep">Jeep</Button>&nbsp;&nbsp;
+                                    <Button value="ATV">ATV</Button>&nbsp;&nbsp;
+                                    <Button value="RZR">RZR</Button>&nbsp;&nbsp;
+                                    <Button value="Motorcycle">Motorcycle</Button>&nbsp;&nbsp;
+                                    <Button value="None"> None </Button>
+                    </ButtonGroup>
+
+                    <br></br><br></br>
+                    <Form.Label style={{ fontWeight: 'bold', fontSize: 20 }} > With Children ? </Form.Label><br></br>
+                    <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ with_children: e.target.value })}>
+                        <Button value="YES">YES</Button>&nbsp;&nbsp;
+                                    <Button value="NO">NO</Button>&nbsp;&nbsp;
+                                </ButtonGroup>
+
+                    <br></br><br></br>
+                    <Form.Label style={{ fontWeight: 'bold', fontSize: 20 }} >I want At least {this.state.match_percent}% match with my ExPa Partners!</Form.Label><br></br>
                     <RangeSlider value={this.state.match_percent} onChange={(match) => this.setState({ match_percent: match.target.value })} />
                     <br></br>
-                    <Button disabled={this.state.disable} variant="primary" type="button" onClick={this.editTripDetails} > Edit Trip </Button>
-                    <br></br><br></br>
-                    <Button variant="primary" type="button" onClick={this.checkValidationbtn} > Publish Trip </Button>
+                    <Button disabled={this.state.disable} variant="secondary" type="button" onClick={this.editTripDetails} > Edit Trip </Button>
+                    <br></br><h1></h1>
+                    <Button style={{marginBottom:'10px'}} variant="success" type="button" onClick={this.checkValidationbtn} > Publish Trip </Button>
                 </div >
             </div>
         )

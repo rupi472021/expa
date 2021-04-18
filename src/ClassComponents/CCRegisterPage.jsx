@@ -188,7 +188,7 @@ export default class CCRegisterPage extends Component {
             Image: this.state.selectedFile,
         }
 
-        let apiUrl = `http://localhost:54976/api/User`;
+        let apiUrl = `http://localhost:53281/api/User`;
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User`;
 
         ////POST

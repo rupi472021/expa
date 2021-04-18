@@ -118,7 +118,7 @@ export default class CCRegisterPage extends Component {
         }
         else {
 
-            window.scrollTo({ top: 700, behavior: 'smooth' })
+            window.scrollTo({ top: 750, behavior: 'smooth' })
             this.setState(prevState => ({
                 opacity: 1,
                 disabled: true,

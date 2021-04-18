@@ -316,7 +316,7 @@ export default class CCRegisterPage extends Component {
 
                         <form>
                             <div id="part1" >
-                            <p style={{ boxShadow:'0 0 100px  white',width: '40%', borderRadius: 5, borderWidth: 5, fontWeight: 'bold', fontSize: '15px',backgroundColor:'#1d21243b',marginLeft:'115px' }}>Access With </p><br></br><br></br><br></br>
+                            <p style={{ width: '40%',  fontWeight: 'bold', fontSize: '15px',marginLeft:'115px' }}>Access With </p><br></br><br></br><h1></h1>
 
                                 <GoogleRegisterPage  /*email={this.state.email}*/ queDatafromParent={this.props.QuesDatafromApptoRegisterPage} dataFromParent={this.props.dataFromApptoRegisterPage}/* {...this.state.fname=localStorage.getItem('user_fname')} {...this.state.lname=localStorage.getItem('user_lname')}{...this.state.email=localStorage.getItem('user_email')}{...this.state.source=localStorage.getItem('user_image')} */ />
                                 <br></br>

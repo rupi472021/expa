@@ -113,7 +113,6 @@ export default class CCLoginPage extends Component {
                 window.location.reload(false)
             })
         }
-
     }
 
     render() {

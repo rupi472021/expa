@@ -37,6 +37,7 @@ export default function FCMainMenuPage() {
                     <h1 style={{ width: '100%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '28px' }} className="ExPa">{localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}, Welcome To ExPa!</h1>
                 </p>
             </div>
+            <br></br><br></br>
             <div>
                 <div style={{ marginTop: 60 }}>
                     <Button style={{ width: '60%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold' }} disabled={true} size="lg" >Join Trip</Button><br></br><br></br>

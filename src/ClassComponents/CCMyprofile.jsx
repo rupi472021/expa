@@ -273,9 +273,9 @@ export default class CCMyprofile extends Component {
         return (
 
             <div style={{ backgroundColor: '#1d21243b', height: '100%' }}><br></br>
-                        <Button color="secondary" size="sm" onClick={this.backbtn}> Main Menu </Button><br></br><br></br>
+                <Button color="secondary" size="sm" onClick={this.backbtn}> Main Menu </Button><br></br><br></br>
                 {/* <div><Button variant="secondary" size="sm" onClick={this.backbtn} className="but"> Main Menu </Button></div><br></br> */}
-                <img src={this.state.profile_image} alt={true} style={{ width: '45%', borderRadius: 100, borderWidth: 2, borderStyle: 'solid' }} /><br></br><br></br>
+                <img src={this.state.profile_image} alt={true} style={{ width: '45%', height: 200, borderRadius: 100, borderWidth: 2, borderStyle: 'solid' }} /><br></br><br></br>
                 <input style={{ display: 'none' }} type="file" id="icon-button-file" accept="image/*" id="icon-button-file" capture="environment" onChange={this.fileSelectedHandler} ref={fileInput => this.fileInput = fileInput} />
                 <h2><GrCamera style={{ marginRight: -120, marginTop: -120, marginLeft: 5 }} onClick={() => this.fileInput.click()} /></h2>
                 <Form style={{ marginTop: -40 }} >
@@ -435,7 +435,7 @@ export default class CCMyprofile extends Component {
                     </tbody>
                 </Table>
                 {/* <Button color="success" type="button" onClick={this.checkValidation}> Update </Button> {''} */}
-                <Button style={{ marginBottom:'10px',width: '80%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold' }} fullWidth color="success" size="lg" onClick={this.checkValidation}>Update</Button>
+                <Button style={{ marginBottom: '10px', width: '80%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold' }} fullWidth color="success" size="lg" onClick={this.checkValidation}>Update</Button>
 
             </div >
         )

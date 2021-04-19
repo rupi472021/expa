@@ -332,7 +332,7 @@ export default class CCRegisterPage extends Component {
                             <div id="part1" >
                                 <p style={{ width: '40%', fontWeight: 'bold', fontSize: '15px', marginLeft: '115px' }}>Access With </p><br></br><br></br><h1></h1>
 
-                                <GoogleRegisterPage  /*email={this.state.email}*/ queDatafromParent={this.props.QuesDatafromApptoRegisterPage} dataFromParent={this.props.dataFromApptoRegisterPage}/* {...this.state.fname=localStorage.getItem('user_fname')} {...this.state.lname=localStorage.getItem('user_lname')}{...this.state.email=localStorage.getItem('user_email')}{...this.state.source=localStorage.getItem('user_image')} */ />
+                                <GoogleRegisterPage queDatafromParent={this.props.QuesDatafromApptoRegisterPage} dataFromParent={this.props.dataFromApptoRegisterPage}/* {...this.state.fname=localStorage.getItem('user_fname')} {...this.state.lname=localStorage.getItem('user_lname')}{...this.state.email=localStorage.getItem('user_email')}{...this.state.source=localStorage.getItem('user_image')} */ />
                                 <br></br>
                                 <TextField className="TextField" disabled={this.state.disabled} style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" onChange={(e) => this.setState({ email: e.target.value })} autoFocus />
                                 <Row>
@@ -353,7 +353,7 @@ export default class CCRegisterPage extends Component {
                                 </Row>
                                 <br></br><br></br>
 
-                                <Button style={{ width: '80%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold' }} fullWidth variant="warning" size="lg" onClick={this.submitUserData} disabled={this.state.disabled} >Let's GO !</Button>
+                                <Button style={{ width: '80%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold', marginTop: -60 }} fullWidth variant="warning" size="lg" onClick={this.submitUserData} disabled={this.state.disabled} >Let's GO !</Button>
                                 <br></br><br></br><br></br><br></br>
                                 <h5>Choose Your Profile Picture</h5>
                                 <div>

@@ -27,6 +27,9 @@ export default class CCLoginPage extends Component {
             image: 'https://png.pngtree.com/png-clipart/20200701/original/pngtree-character-default-avatar-png-image_5407167.jpg',
             data_from_sql: '',
         }
+
+        this.url = "https://www.mboxdrive.com/Record (online-voice-recorder.com).mp3";
+        this.audio = new Audio(this.url);
     };
 
     componentDidMount = () => {
@@ -110,9 +113,20 @@ export default class CCLoginPage extends Component {
                 text: "one detail or more are wrong, if it's your first time in ExPa - Sign Up!",
                 Onclick: () => { Swal.clickConfirm() }
             }).then(() => {
-                window.location.reload(false)
+
+                this.play();
+                //window.location.reload(false)
             })
         }
+    }
+
+    play = () => {
+        this.setState({
+            play: true,
+            pause: false
+        });
+        console.log(this.audio);
+        this.audio.play();
     }
 
     render() {

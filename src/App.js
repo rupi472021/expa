@@ -15,14 +15,14 @@ class App extends Component {
     super(props);
     this.state = {
       data_from_sql: '',
-      Ques_data_fromSQL:'',
+      Ques_data_fromSQL: '',
     }
   };
 
   componentDidMount = () => { //GET all Users from Users_expa (SQL) onload
 
     console.log("in componentDidMount function");
-     let apiUrl = `http://localhost:53281/api/User`;
+    let apiUrl = `http://localhost:54976/api/User`;
     //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User`;
 
 
@@ -46,25 +46,25 @@ class App extends Component {
         });
 
 
-        let apiUrl1 = `http://localhost:53281/api/Questionnaire`;
-        fetch(apiUrl1)
-        .then(res => {
-          console.log('res=', res);
-          console.log('res.status', res.status);
-          console.log('res.ok', res.ok);
-          return res.json()
-        })
-        .then(
-          (result) => {
-            console.log("GET Questionnaire data from SQL= ", result);
-            // result.map(st => console.log(st.Fname)); // all Fname in Users_Expa
-            this.setState({
-              Ques_data_fromSQL: result,
-            })
-          },
-          (error) => {
-            console.log("err GET=", error);
-          });
+    let apiUrl1 = `http://localhost:54976/api/Questionnaire`;
+    fetch(apiUrl1)
+      .then(res => {
+        console.log('res=', res);
+        console.log('res.status', res.status);
+        console.log('res.ok', res.ok);
+        return res.json()
+      })
+      .then(
+        (result) => {
+          console.log("GET Questionnaire data from SQL= ", result);
+          // result.map(st => console.log(st.Fname)); // all Fname in Users_Expa
+          this.setState({
+            Ques_data_fromSQL: result,
+          })
+        },
+        (error) => {
+          console.log("err GET=", error);
+        });
   }
 
   render() {

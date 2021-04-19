@@ -2,6 +2,20 @@
     html{
         background-color:#1d21243b;
     }
+
+
+
+    .blackButton{
+        background-color: black;
+        color: white;
+      }
+      
+      .whiteButton{
+        background-color: white;
+        color: black;
+      }
+
+
     .but {
         margin-top: 10px;
         opacity: 0.74;

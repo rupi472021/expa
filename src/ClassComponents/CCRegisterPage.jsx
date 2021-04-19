@@ -16,6 +16,7 @@ import { GrCamera } from 'react-icons/gr';
 
 export default class CCRegisterPage extends Component {
 
+
     commentSection = React.createRef();
 
     constructor(props) {
@@ -52,6 +53,9 @@ export default class CCRegisterPage extends Component {
             imgURL: 'https://png.pngtree.com/png-clipart/20200701/original/pngtree-character-default-avatar-png-image_5407167.jpg',
             selectedFile: 'https://png.pngtree.com/png-clipart/20200701/original/pngtree-character-default-avatar-png-image_5407167.jpg',
             urlimg: '',
+            btnColor1: 'primary',
+
+
         }
     }
 
@@ -149,7 +153,7 @@ export default class CCRegisterPage extends Component {
                 LAnswer: this.state.answerList
             }
             ///post to questionnaire 
-            let apiUrl = `http://localhost:54976/api/Questionnaire`;
+            let apiUrl = `http://localhost:53281/api/Questionnaire`;
             //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/Questionnaire`;
 
             console.log("New Answer const");
@@ -187,7 +191,7 @@ export default class CCRegisterPage extends Component {
             Image: this.state.selectedFile,
         }
 
-        let apiUrl = `http://localhost:54976/api/User`;
+        let apiUrl = `http://localhost:53281/api/User`;
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User`;
 
         ////POST
@@ -327,13 +331,17 @@ export default class CCRegisterPage extends Component {
         }
     }
 
+ 
+
+
     render() {
+
         return (
             <div style={{ backgroundColor: '#1d21243b', height: '100%' }} className={classes.NewBLogCard}>
                 <Container>
                     <div className={classes.Container}>
                         <Button variant="secondary" size="sm" href="/" className="but"> BACK </Button><br></br>
-                        <div><Avatar alt="Remy Sharp" src="https://i.ibb.co/GF9rjsr/circle-cropped.png" style={{ width: '15vh', height: '15vh', marginTop: '10px' }} /></div>
+                        <div><Avatar alt="Remy Sharp" src="https://i.ibb.co/GF9rjsr/circle-cropped.png" style={{ width: '20vh', height: '20vh', marginTop: '10px' }} /></div>
                         <h1></h1>
                         <h1 style={{ marginLeft: 7, width: '90%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '35px' }} className="ExPa"> Create an Account </h1><br></br>
                         {/* <Button style={{ boxShadow:'0 0 50px 10px #141414',marginLeft: 7,width: '90%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '22px' }} fullWidth color="info" size="sm" disabled='false' >Create an Account</Button> */}
@@ -376,9 +384,9 @@ export default class CCRegisterPage extends Component {
                             {/* Questionnaire */}
                             <div id="part2" style={{ opacity: this.state.opacity }} >
                                 <h4>I am ...</h4>
-                                <ButtonGroup aria-label="contained primary button group">
-                                    <Button disabled={!this.state.disabled} value="Male" onClick={(male) => this.setState({ q1: male.target.value })} >Male</Button>&nbsp;
-                                    <Button disabled={!this.state.disabled} value="Female" onClick={(female) => this.setState({ q1: female.target.value })}>Female</Button>
+                                <ButtonGroup aria-label="contained primary button group" onClick={(e) => this.setState({ q1: e.target.value })} >
+                                    <Button disabled={!this.state.disabled} value="Male" >Male</Button>&nbsp;
+                                    <Button disabled={!this.state.disabled} value="Female">Female</Button>
                                 </ButtonGroup>
                                 {/* <h4>{this.state.q1}</h4> */}
                                 <br></br><br></br><br></br>

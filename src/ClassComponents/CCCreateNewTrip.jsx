@@ -31,7 +31,7 @@ export default class CCCreateNewTrip extends Component {
     componentDidMount = () => { //GET all Trips from Trip_Cretia (SQL) onload
         console.log("in componentDidMount function");
 
-        let apiUrl = `http://localhost:54976/api/NewTrip`;
+        let apiUrl = `http://localhost:53281/api/NewTrip`;
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
         fetch(apiUrl)
@@ -106,7 +106,7 @@ export default class CCCreateNewTrip extends Component {
             MatchPercent: this.state.match_percent
         }
 
-        let apiUrl = `http://localhost:54976/api/NewTrip`;
+        let apiUrl = `http://localhost:53281/api/NewTrip`;
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
         ////POST To TRIP_Criteria SQL TABLE

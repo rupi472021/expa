@@ -275,7 +275,7 @@ export default class CCCreateNewTrip extends Component {
                         <br></br>
                         <Form.Group controlId="formBasicName">
                             <Form.Label style={{ fontWeight: 'bold', fontSize: 20 }} > How Many Partners ? </Form.Label><br></br>
-                            <Form.Control style={{ borderRadius: 10, width: '20%', marginLeft: 166 }} type="number" placeholder="Number of Participants" size='small' onChange={(number) => this.setState({ num_of_participants: number.target.value })} />
+                            <Form.Control style={{ borderRadius: 10, width: '50%', marginLeft: 93 }} type="number" placeholder="Number of Participants" size='small' onChange={(number) => this.setState({ num_of_participants: number.target.value })} />
                         </Form.Group>
                     </Form>
 

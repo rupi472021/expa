@@ -28,8 +28,8 @@ export default class CCLoginPage extends Component {
             data_from_sql: '',
         }
 
-        this.url = "https://www.mboxdrive.com/Record (online-voice-recorder.com).mp3";
-        this.audio = new Audio(this.url);
+        // this.url = "https://www.mboxdrive.com/Record (online-voice-recorder.com).mp3";
+        // this.audio = new Audio(this.url);
     };
 
     componentDidMount = () => {
@@ -114,20 +114,20 @@ export default class CCLoginPage extends Component {
                 Onclick: () => { Swal.clickConfirm() }
             }).then(() => {
 
-                this.play();
-                //window.location.reload(false)
+                //this.play(); //play audio record
+                window.location.reload(false)
             })
         }
     }
 
-    play = () => {
-        this.setState({
-            play: true,
-            pause: false
-        });
-        console.log(this.audio);
-        this.audio.play();
-    }
+    // play = () => {
+    //     this.setState({
+    //         play: true,
+    //         pause: false
+    //     });
+    //     console.log(this.audio);
+    //     this.audio.play();
+    // }
 
     render() {
         return (

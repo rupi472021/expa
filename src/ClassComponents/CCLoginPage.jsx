@@ -6,7 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
+//import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
@@ -15,6 +15,8 @@ import FaceBookLogin from '../ServiceComponents/FaceBookLogin';
 import classes from './BlogCard.module.css';
 import Box from '@material-ui/core/Box';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
+
 
 export default class CCLoginPage extends Component {
 
@@ -28,8 +30,8 @@ export default class CCLoginPage extends Component {
             data_from_sql: '',
         }
 
-        // this.url = "https://www.mboxdrive.com/Record (online-voice-recorder.com).mp3";
-        // this.audio = new Audio(this.url);
+        //  this.url = "https://www.mboxdrive.com/Record (online-voice-recorder.com).mp3";
+        //  this.audio = new Audio(this.url);
     };
 
     componentDidMount = () => {
@@ -120,14 +122,14 @@ export default class CCLoginPage extends Component {
         }
     }
 
-    // play = () => {
-    //     this.setState({
-    //         play: true,
-    //         pause: false
+    //  play = () => {
+    //      this.setState({
+    //          play: true,
+    //          pause: false
     //     });
-    //     console.log(this.audio);
-    //     this.audio.play();
-    // }
+    //      console.log(this.audio);
+    //      this.audio.play();
+    //  }
 
     render() {
         return (
@@ -147,7 +149,7 @@ export default class CCLoginPage extends Component {
                             <Button variant="dark" style={{ boxShadow: '0 0 10px  #141414', width: '100%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '20px' }} onClick={this.signinbtn} fullWidth size="lg" >Log In</Button><br></br><br></br><br></br>
                             <Grid container>
                                 <Grid item xs>
-                                    <Button variant="warning" style={{ width: '90%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '15px' }} href="/forget_password_page" fullWidth size="sm" > Forgot Password</Button>
+                                    <Button variant="warning" style={{ width: '90%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '15px' }} fullWidth size="sm" ><Link style={{ color: 'black' }} to="/forget_password_page">Forgot Password</Link></Button>
                                 </Grid>
                                 <Grid item xs>
                                     <Button variant="warning" style={{ width: '90%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '15px' }} href="/Register" fullWidth size="sm" > Sign Up</Button><br></br>

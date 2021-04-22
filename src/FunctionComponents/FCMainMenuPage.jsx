@@ -2,7 +2,23 @@ import React from 'react'
 import Swal from 'sweetalert2';
 import { Button } from 'reactstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import shadows from '@material-ui/core/styles/shadows';
+import { CgProfile } from 'react-icons/cg';
+import { GiJeep } from 'react-icons/gi';
+import { IoIosCreate } from 'react-icons/io';
+import { GiThreeFriends } from 'react-icons/gi';
+import { AiOutlineRollback } from 'react-icons/ai';
+import { GoPlus } from 'react-icons/go';
+import { BiSearchAlt2 } from 'react-icons/bi';
+import { RiUserSettingsLine } from 'react-icons/ri';
+
+
+
+
+
+
+
+
+
 
 export default function FCMainMenuPage() {
 
@@ -26,10 +42,13 @@ export default function FCMainMenuPage() {
 
     //'http://proj.ruppin.ac.il/igroup47/prod/uploadedFiles/fadida@fadi.com.png'
 
+
+
     return (
         <div style={{ backgroundColor: '#1d21243b', height: '100vh', alignItems: 'center' }}>
-            <div style={{ padding: 5 }}><Button size="sm" onClick={backbtn}>BACK</Button></div>
-            <div style={{ textAlign: 'center' }}><br></br>
+            <AiOutlineRollback onClick={backbtn} size={50} style={{ marginLeft: 320 }}></AiOutlineRollback>
+            {/* <div style={{ padding: 5 }}><Button size="sm" onClick={backbtn}>BACK</Button></div> */}
+            <div style={{ textAlign: 'center', marginTop: -50 }}><br></br>
                 <div style={{ height: '200px' }}>
                     <img src={localStorage.getItem('user_image')} alt={true} style={{ width: '45%', height: '90%', borderRadius: 100, borderWidth: 2, borderStyle: 'solid' }} /><br></br><br></br><br></br>
                 </div>
@@ -40,16 +59,19 @@ export default function FCMainMenuPage() {
             <br></br><br></br>
             <div>
                 <div style={{ marginTop: 20 }}>
-                    <Button style={{ width: '60%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold' }} disabled={true} size="lg" >Join Trip</Button><br></br><br></br>
-                    <Button style={{ width: '60%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold' }} fullWidth color="warning" size="lg" href='/main_menu_page/create_new_trip_page' >New Trip</Button>
+                    {/* <Button style={{ width: '60%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold' }} disabled={true} size="lg" >Join Trip</Button><br></br><br></br> */}
+                    <h6 style={{ marginRight: 250 }}><BiSearchAlt2 size={70} onClick={() => alert("not ready yet")} ></BiSearchAlt2><br></br> searchTrip</h6>
+                    <h6 style={{ marginRight: -250, marginTop: -90 }}><GoPlus size={70} onClick={() => window.location.href = "/main_menu_page/create_new_trip_page"}></GoPlus><br></br>newTrip</h6>
+                    {/* <Button style={{ width: '60%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold' }} fullWidth color="warning" size="lg" href='/main_menu_page/create_new_trip_page' >New Trip</Button> */}
                 </div>
                 <br></br><br></br><br></br><br></br>
                 <div style={{ marginTop: -20 }}>
-                    <Button style={{ width: '40%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold' }} fullWidth color="warning" size="lg" href="/main_menu_page/my_profile" >My Profile</Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <Button style={{ width: '40%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold' }} fullWidth color="warning" size="lg" href="/main_menu_page/my_trips" >My Trips</Button>
+                    <h6 style={{ marginRight: 250 }}><RiUserSettingsLine style={{ marginRight: 10 }} size={70} onClick={() => window.location.href = "/main_menu_page/my_profile"} >  </RiUserSettingsLine> myProfile</h6>
+                    <h6 style={{ marginLeft: 250, marginTop: -120 }}><GiJeep style={{ marginTop: 20 }} size={70} onClick={() => window.location.href = "/main_menu_page/my_trips"} ></GiJeep> myTrips</h6>
+                    {/* <Button style={{ width: '40%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold' }} fullWidth color="warning" size="lg" href="/main_menu_page/my_profile" >My Profile</Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <Button style={{ width: '40%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold' }} fullWidth color="warning" size="lg" href="/main_menu_page/my_trips" >My Trips</Button> */}
                 </div>
             </div>
         </div>
     )
 }
-

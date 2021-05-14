@@ -4,6 +4,7 @@ import { Button } from 'reactstrap';
 import { GrCamera } from 'react-icons/gr';
 import Swal from 'sweetalert2';
 import TextField from '@material-ui/core/TextField';
+import { AiOutlineRollback } from 'react-icons/ai';
 
 
 export default class CCMyprofile extends Component {
@@ -273,7 +274,8 @@ export default class CCMyprofile extends Component {
         return (
 
             <div style={{ backgroundColor: '#1d21243b', height: '100%' }}><br></br>
-                <Button color="secondary" size="sm" onClick={this.backbtn}> Main Menu </Button><br></br><br></br>
+                <AiOutlineRollback onClick={this.backbtn} size={50} style={{ marginLeft: 320 }}></AiOutlineRollback>
+                {/* <Button color="secondary" size="sm" onClick={this.backbtn}> Main Menu </Button><br></br><br></br> */}
                 {/* <div><Button variant="secondary" size="sm" onClick={this.backbtn} className="but"> Main Menu </Button></div><br></br> */}
                 <img src={this.state.profile_image} alt={true} style={{ width: '45%', height: 200, borderRadius: 100, borderWidth: 2, borderStyle: 'solid' }} /><br></br><br></br>
                 <input style={{ display: 'none' }} type="file" id="icon-button-file" accept="image/*" id="icon-button-file" capture="environment" onChange={this.fileSelectedHandler} ref={fileInput => this.fileInput = fileInput} />

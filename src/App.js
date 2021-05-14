@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 import CCResetPasswordPage from './ClassComponents/CCResetPasswordPage';
 import CCMyprofile from './ClassComponents/CCMyprofile';
 import CCMyTrip from './ClassComponents/CCMyTrip';
+import CCSearchPage from './ClassComponents/CCSearchPage';
 
 class App extends Component {
 
@@ -91,6 +92,9 @@ class App extends Component {
           </Route>
           <Route exact path="/main_menu_page/my_trips" >
             <CCMyTrip />
+          </Route>
+          <Route exact path="/main_menu_page/search_trip_page" >
+            <CCSearchPage />
           </Route>
         </Switch>
       </div>

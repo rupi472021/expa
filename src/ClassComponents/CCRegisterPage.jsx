@@ -283,6 +283,7 @@ export default class CCRegisterPage extends Component {
 
             data.append("UploadedImage", file);
             data.append("name", this.state.email);
+            console.log(data);
 
             console.log("in post img function");
 

@@ -12,8 +12,6 @@ export default class CCMyTrip extends Component {
         super(props);
         this.state = {
             AllTripsBYEmail: [],
-
-
         }
     };
 

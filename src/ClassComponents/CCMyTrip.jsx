@@ -1,6 +1,5 @@
-import { holdReady } from 'jquery';
 import React, { Component } from 'react'
-import { Button, CardColumns, Card } from 'react-bootstrap';
+import { Button, CardColumns } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import FCCard from '../FunctionComponents/FCCard';
 import '../MyStyle.css';
@@ -69,7 +68,7 @@ export default class CCMyTrip extends Component {
                     }
                 </CardColumns>
                 <div>
-                    {this.state.AllTripsBYEmail?.length == 0 &&  <Button style={{ width: '90%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold', fontSize: '20px' }} fullWidth variant="warning" size="sm" disabled='false' >Sorry..You Don't Have Any Previous/OnAir Trips </Button>}
+                    {this.state.AllTripsBYEmail?.length === 0 &&  <Button style={{ width: '90%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold', fontSize: '20px' }} fullWidth variant="warning" size="sm" disabled='false' >Sorry..You Don't Have Any Previous/OnAir Trips </Button>}
                 </div>
             </div>
         )

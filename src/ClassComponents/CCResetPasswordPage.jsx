@@ -17,8 +17,8 @@ export default class CCResetPasswordPage extends Component {
     Check = () => {
         console.log(this.props.dataFromApptoResetPasswordPage) // show all data from Users table in the SQL from parent
 
-        if (this.props.dataFromApptoResetPasswordPage.find((user => user.Email == this.state.email))) {
-            var index = this.props.dataFromApptoResetPasswordPage.findIndex(user => user.Email == this.state.email)
+        if (this.props.dataFromApptoResetPasswordPage.find((user => user.Email === this.state.email))) {
+            var index = this.props.dataFromApptoResetPasswordPage.findIndex(user => user.Email === this.state.email)
             console.log(index);
             this.sendMail(index);
         }
@@ -48,7 +48,7 @@ export default class CCResetPasswordPage extends Component {
             Body: "Hi " + this.props.dataFromApptoResetPasswordPage[index].Fname + " your password to ExPa App is: " + this.props.dataFromApptoResetPasswordPage[index].Password
         }).then((message) => {
             console.log(message)
-            if (message == "OK") {
+            if (message === "OK") {
 
                 Swal.fire({
                     title: 'Password has sent!',

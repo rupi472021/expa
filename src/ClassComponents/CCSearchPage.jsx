@@ -16,6 +16,8 @@ export default class CCSearchPage extends Component {
             AllTrips: [],
             SortTrips: [],
             ShowTrips: [],
+            area: '',
+            vehicle: '',
             AreaChange: false,
             VehicleTypqChange: false,
 
@@ -57,8 +59,8 @@ export default class CCSearchPage extends Component {
 
         if (this.state.VehicleTypqChange === false & (e.target.value === 'North' || e.target.value === 'South' || e.target.value === 'East' || e.target.value === 'West' || e.target.value === 'All Areas')) {
 
-            console.log("first if")
-            this.setState({ AreaChange: true, SortTrips: [] })
+            console.log("condition number 1")
+            this.setState({ AreaChange: true, SortTrips: [], area: e.target.value })
 
             if (e.target.value === "All Areas") {
                 console.log("uri")
@@ -79,39 +81,58 @@ export default class CCSearchPage extends Component {
         }
         if (this.state.AreaChange === false & (e.target.value === 'All Types' || e.target.value === 'JEEP' || e.target.value === 'ATV' || e.target.value === 'RZR' || e.target.value === 'Motorcycle' || e.target.value === 'None')) {
 
-            console.log("in else this.state.AreaChange === false")
-            this.setState({ VehicleTypqChange: true, SortTrips: [] })
+            console.log("condition number 2")
+            this.setState({ SortTrips: [], vehicle: e.target.value })
 
-            if (this.state.AreaChange === false) {
-                if (e.target.value === "All Types") {
-                    console.log("uri2")
-                    this.setState({ ShowTrips: this.state.AllTrips, VehicleTypqChange: false })
-                }
-                else {
-                    for (let index = 0; index < this.state.AllTrips.length; index++) {
+            if (e.target.value === "All Types") {
+                console.log("uri2")
+                this.setState({ ShowTrips: this.state.AllTrips, VehicleTypqChange: false })
+            }
+            else {
+                for (let index = 0; index < this.state.AllTrips.length; index++) {
 
-                        if (this.state.AllTrips[index].Trip.VehicleType === e.target.value) {
-                            this.state.SortTrips.push(this.state.AllTrips[index])
-                        }
+                    if (this.state.AllTrips[index].Trip.VehicleType === e.target.value) {
+                        this.state.SortTrips.push(this.state.AllTrips[index])
                     }
-                    console.log(this.state.SortTrips);
-                    this.setState({ ShowTrips: this.state.SortTrips })
                 }
+                console.log(this.state.SortTrips);
+                this.setState({ ShowTrips: this.state.SortTrips, VehicleTypqChange: true })
             }
         }
-        else if (this.state.AreaChange === true & (e.target.value === 'All Types' || e.target.value === 'JEEP' || e.target.value === 'ATV' || e.target.value === 'RZR' || e.target.value === 'Motorcycle' || e.target.value === 'None')) {
+        if (this.state.AreaChange === true & (e.target.value === 'All Types' || e.target.value === 'JEEP' || e.target.value === 'ATV' || e.target.value === 'RZR' || e.target.value === 'Motorcycle' || e.target.value === 'None')) {
+
+            console.log("condition number 3")
+            this.setState({ VehicleTypqChange: true, SortTrips: [] })
 
             console.log("this.state.AreaChange === true & this.state.VehicleTypqChange === true")
-            for (let index = 0; index < this.state.ShowTrips.length; index++) {
+            for (let index = 0; index < this.state.AllTrips.length; index++) {
 
-                if (this.state.ShowTrips[index].Trip.VehicleType === e.target.value) {
-                    this.state.SortTrips.push(this.state.ShowTrips[index])
+                if (this.state.AllTrips[index].Trip.VehicleType === e.target.value && this.state.AllTrips[index].Trip.Area === this.state.area) {
+                    this.state.SortTrips.push(this.state.AllTrips[index])
                 }
             }
+
             console.log(this.state.SortTrips);
             this.setState({ ShowTrips: this.state.SortTrips })
 
         }
+
+        else if (this.state.VehicleTypqChange === true & (e.target.value === 'North' || e.target.value === 'South' || e.target.value === 'East' || e.target.value === 'West')) {
+
+            console.log("condition number 4")
+            this.setState({ SortTrips: [] })
+
+            for (let index = 0; index < this.state.AllTrips.length; index++) {
+
+                if (this.state.AllTrips[index].Trip.Area === e.target.value && this.state.AllTrips[index].Trip.VehicleType === this.state.vehicle) {
+                    this.state.SortTrips.push(this.state.AllTrips[index])
+                }
+            }
+
+            console.log(this.state.SortTrips);
+            this.setState({ ShowTrips: this.state.SortTrips })
+        }
+
     }
 
     backbtn = () => {

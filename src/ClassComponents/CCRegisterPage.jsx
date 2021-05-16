@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
-import { Form, Button, ButtonGroup, DropdownButton, Image, ProgressBar, Col, Dropdown } from 'react-bootstrap';
+import { Button, ButtonGroup, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
 import Avatar from '@material-ui/core/Avatar';
-import { ButtonDropdown, DropdownMenu, DropdownToggle, Input, Row, UncontrolledButtonDropdown } from 'reactstrap';
+import { Row } from 'reactstrap';
 import classes from './BlogCard.module.css';
 import '../MyStyle.css';
-import Autocomplete from '@material-ui/lab/Autocomplete';
 import Swal from 'sweetalert2';
 import RangeSlider from 'react-bootstrap-range-slider';
 import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
@@ -84,7 +83,7 @@ export default class CCRegisterPage extends Component {
     submitUserData = () => {
 
         //Validate Blank Fields
-        if (this.state.emaill == '' || this.state.password == '') {
+        if (this.state.emaill === '' || this.state.password === '') {
 
             Swal.fire({
                 icon: 'error',
@@ -98,7 +97,7 @@ export default class CCRegisterPage extends Component {
 
         }
         //Validate Email is Available 
-        else if (this.props.dataFromApptoRegisterPage.find((user => user.Email == this.state.email))) {
+        else if (this.props.dataFromApptoRegisterPage.find((user => user.Email === this.state.email))) {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -109,7 +108,7 @@ export default class CCRegisterPage extends Component {
             })
         }
         //Validate Confirm Password 
-        else if (this.state.password != this.state.cPassword) {
+        else if (this.state.password !== this.state.cPassword) {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -131,7 +130,7 @@ export default class CCRegisterPage extends Component {
 
     postTosqlQues = (event) => {
         ///validate blank fields
-        if (this.state.q1 == '' || this.state.q2 == '' || this.state.q3 == '' || this.state.q4 == '' || this.state.q5 == '' || this.state.q6 == '' || this.state.q7 == '' || this.state.q8 == '' || this.state.q9 == '' || this.state.q10 == '' || this.state.q11 == '') {
+        if (this.state.q1 === '' || this.state.q2 === '' || this.state.q3 === '' || this.state.q4 === '' || this.state.q5 === '' || this.state.q6 === '' || this.state.q7 === '' || this.state.q8 === '' || this.state.q9 === '' || this.state.q10 === '' || this.state.q11 === '') {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -224,7 +223,7 @@ export default class CCRegisterPage extends Component {
 
     MovingToMenu = () => {
 
-        if (this.state.selectedFile == 'https://png.pngtree.com/png-clipart/20200701/original/pngtree-character-default-avatar-png-image_5407167.jpg') {
+        if (this.state.selectedFile === 'https://png.pngtree.com/png-clipart/20200701/original/pngtree-character-default-avatar-png-image_5407167.jpg') {
             localStorage.setItem('user_lname', this.state.lname);
             localStorage.setItem('user_image', this.state.selectedFile);
             localStorage.setItem('user_email', this.state.email);
@@ -343,14 +342,12 @@ export default class CCRegisterPage extends Component {
                     <div className={classes.Container}>
                         <Button variant="secondary" size="sm" href="/" className="but"> BACK </Button><br></br>
                         <div><Avatar alt="Remy Sharp" src="https://i.ibb.co/GF9rjsr/circle-cropped.png" style={{ width: '20vh', height: '20vh', marginTop: '10px' }} /></div>
-                        <h1></h1>
                         <h1 style={{ marginLeft: 7, width: '90%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '35px' }} className="ExPa"> Create an Account </h1><br></br>
                         {/* <Button style={{ boxShadow:'0 0 50px 10px #141414',marginLeft: 7,width: '90%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '22px' }} fullWidth color="info" size="sm" disabled='false' >Create an Account</Button> */}
 
                         <form>
                             <div id="part1" style={{ marginTop: -35 }}>
-                                <p style={{ width: '40%', fontWeight: 'bold', fontSize: '15px', marginLeft: '115px' }}>Access With </p><br></br><br></br><h1></h1>
-
+                                <p style={{ width: '40%', fontWeight: 'bold', fontSize: '15px', marginLeft: '115px' }}>Access With </p><br></br><br></br><br></br>
                                 <GoogleRegisterPage queDatafromParent={this.props.QuesDatafromApptoRegisterPage} dataFromParent={this.props.dataFromApptoRegisterPage}/* {...this.state.fname=localStorage.getItem('user_fname')} {...this.state.lname=localStorage.getItem('user_lname')}{...this.state.email=localStorage.getItem('user_email')}{...this.state.source=localStorage.getItem('user_image')} */ />
                                 <br></br>
                                 <TextField className="TextField" disabled={this.state.disabled} style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" onChange={(e) => this.setState({ email: e.target.value })} autoFocus />
@@ -382,22 +379,18 @@ export default class CCRegisterPage extends Component {
                                 <input style={{ display: 'none' }} type="file" accept="image/*" id="icon-button-file" capture="environment" onChange={this.btnFile} ref={fileInput => this.fileInput = fileInput} />
                                 <h2><GrCamera style={{ marginRight: -100, marginTop: -120, marginLeft: 5 }} onClick={() => this.fileInput.click()} /></h2>
                             </div>
-                            {/* Questionnaire */}
                             <div id="part2" style={{ opacity: this.state.opacity }} >
-                                <h4>I am ...</h4>
+                                <h4>I am...</h4>
                                 <ButtonGroup aria-label="contained primary button group" onClick={(e) => this.setState({ q1: e.target.value })} >
                                     <Button disabled={!this.state.disabled} value="Male" >Male</Button>&nbsp;
                                     <Button disabled={!this.state.disabled} value="Female">Female</Button>
                                 </ButtonGroup>
                                 {/* <h4>{this.state.q1}</h4> */}
                                 <br></br><br></br><br></br>
-
                                 <h4>I am {this.state.q2} Years Old</h4>
                                 <RangeSlider disabled={!this.state.disabled} value={this.state.q2} onChange={(e) => this.setState({ q2: e.target.value })} />
                                 {/* <h4>{this.state.q2}</h4> */}
                                 <br></br>
-
-
                                 <h4>I have Kids </h4>
                                 <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q3: e.target.value })}>
                                     <Button disabled={!this.state.disabled} value="YES">YES</Button>&nbsp;&nbsp;

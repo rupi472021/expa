@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, CardColumns, Card } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 
 
 export default function FCCard(props) {

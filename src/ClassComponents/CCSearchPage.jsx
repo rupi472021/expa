@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import { CardColumns } from 'react-bootstrap';
-import FCSearchCard from '../FunctionComponents/FCSearchCard';
 import { AiOutlineRollback } from 'react-icons/ai';
 import Swal from 'sweetalert2';
+import MediaCard from '../FunctionComponents/FCardMaterialUi';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
 
 export default class CCSearchPage extends Component {
 
@@ -13,6 +16,10 @@ export default class CCSearchPage extends Component {
             AllTrips: [],
             SortTrips: [],
             ShowTrips: [],
+            area: '',
+            vehicle: '',
+            AreaChange: false,
+            VehicleTypqChange: false,
 
         }
     };
@@ -39,57 +46,93 @@ export default class CCSearchPage extends Component {
         console.log(this.state.AllTrips);
         this.setState({ ShowTrips: this.state.AllTrips })
 
+        console.log("AreaChange: " + this.state.AreaChange)
+        console.log("VehicleTypqChange: " + this.state.VehicleTypqChange)
 
     }
 
-    AreaSort = (e) => {
+    Sort = (e) => {
 
-        console.log("in AreaSort function");
+        console.log("in Sort function");
         console.log(e.target.value);
         console.log(this.state.AllTrips)
-        this.state.SortTrips = [];
 
-        if (e.target.value == "Area") {
-            console.log("uri")
-            this.setState({ ShowTrips: this.state.AllTrips })
+        if (this.state.VehicleTypqChange === false & (e.target.value === 'North' || e.target.value === 'South' || e.target.value === 'East' || e.target.value === 'West' || e.target.value === 'All Areas')) {
+
+            console.log("condition number 1")
+            this.setState({ AreaChange: true, SortTrips: [], area: e.target.value })
+
+            if (e.target.value === "All Areas") {
+                console.log("uri")
+                this.setState({ ShowTrips: this.state.AllTrips, AreaChange: false })
+            }
+            else if (e.target.value === 'North' || e.target.value === 'South' || e.target.value === 'East' || e.target.value === 'West') {
+
+                for (let index = 0; index < this.state.AllTrips.length; index++) {
+
+                    if (this.state.AllTrips[index].Trip.Area === e.target.value) {
+                        console.log(this.state.AllTrips[index].Trip.Area)
+                        this.state.SortTrips.push(this.state.AllTrips[index])
+                    }
+                }
+                console.log(this.state.SortTrips);
+                this.setState({ ShowTrips: this.state.SortTrips })
+            }
         }
-        else {
+        if (this.state.AreaChange === false & (e.target.value === 'All Types' || e.target.value === 'JEEP' || e.target.value === 'ATV' || e.target.value === 'RZR' || e.target.value === 'Motorcycle' || e.target.value === 'None')) {
+
+            console.log("condition number 2")
+            this.setState({ SortTrips: [], vehicle: e.target.value })
+
+            if (e.target.value === "All Types") {
+                console.log("uri2")
+                this.setState({ ShowTrips: this.state.AllTrips, VehicleTypqChange: false })
+            }
+            else {
+                for (let index = 0; index < this.state.AllTrips.length; index++) {
+
+                    if (this.state.AllTrips[index].Trip.VehicleType === e.target.value) {
+                        this.state.SortTrips.push(this.state.AllTrips[index])
+                    }
+                }
+                console.log(this.state.SortTrips);
+                this.setState({ ShowTrips: this.state.SortTrips, VehicleTypqChange: true })
+            }
+        }
+        if (this.state.AreaChange === true & (e.target.value === 'All Types' || e.target.value === 'JEEP' || e.target.value === 'ATV' || e.target.value === 'RZR' || e.target.value === 'Motorcycle' || e.target.value === 'None')) {
+
+            console.log("condition number 3")
+            this.setState({ VehicleTypqChange: true, SortTrips: [] })
+
+            console.log("this.state.AreaChange === true & this.state.VehicleTypqChange === true")
             for (let index = 0; index < this.state.AllTrips.length; index++) {
 
-                if (this.state.AllTrips[index].Trip.Area == e.target.value) {
-                    console.log(this.state.AllTrips[index].Trip.Area)
+                if (this.state.AllTrips[index].Trip.VehicleType === e.target.value && this.state.AllTrips[index].Trip.Area === this.state.area) {
                     this.state.SortTrips.push(this.state.AllTrips[index])
                 }
-
             }
+
+            console.log(this.state.SortTrips);
+            this.setState({ ShowTrips: this.state.SortTrips })
+
+        }
+
+        else if (this.state.VehicleTypqChange === true & (e.target.value === 'North' || e.target.value === 'South' || e.target.value === 'East' || e.target.value === 'West')) {
+
+            console.log("condition number 4")
+            this.setState({ SortTrips: [] })
+
+            for (let index = 0; index < this.state.AllTrips.length; index++) {
+
+                if (this.state.AllTrips[index].Trip.Area === e.target.value && this.state.AllTrips[index].Trip.VehicleType === this.state.vehicle) {
+                    this.state.SortTrips.push(this.state.AllTrips[index])
+                }
+            }
+
             console.log(this.state.SortTrips);
             this.setState({ ShowTrips: this.state.SortTrips })
         }
-    }
 
-    VehicleTypeSort = (e) => {
-
-        console.log("in VehicleTypeSort function");
-        console.log(e.target.value);
-        console.log(this.state.AllTrips)
-        this.state.SortTrips = [];
-
-        if (e.target.value == "Vehicle") {
-            console.log("uri2")
-            this.setState({ ShowTrips: this.state.AllTrips })
-        }
-        else {
-            for (let index = 0; index < this.state.AllTrips.length; index++) {
-
-                if (this.state.AllTrips[index].Trip.VehicleType == e.target.value) {
-                    this.state.SortTrips.push(this.state.AllTrips[index])
-                }
-
-            }
-
-            console.log(this.state.SortTrips);
-            this.setState({ ShowTrips: this.state.SortTrips })
-        }
     }
 
     backbtn = () => {
@@ -103,7 +146,6 @@ export default class CCSearchPage extends Component {
             confirmButtonText: 'Yes'
         }).then((result) => {
             if (result.isConfirmed) {
-                localStorage.clear();
                 window.location.href = "http://localhost:3000/main_menu_page"
                 // window.location.href = "http://proj.ruppin.ac.il/igroup47/prod/"       
             }
@@ -117,7 +159,7 @@ export default class CCSearchPage extends Component {
                     <AiOutlineRollback onClick={this.backbtn} size={30} style={{ marginLeft: 320 }}></AiOutlineRollback>
                     <h3>Search the best trip for you!</h3><br></br>
 
-                    <select id="dropdown" onChange={this.AreaSort} >
+                    {/* <select id="dropdown" onChange={this.AreaSort} >
                         <option value="Area" >Area</option>
                         <option value="North">North</option>
                         <option value="South">South</option>
@@ -132,19 +174,53 @@ export default class CCSearchPage extends Component {
                         <option value="RZR">RZR</option>
                         <option value="Motorcycle">Motorcycle</option>
                         <option value="None">None</option>
-                    </select>
+                    </select> */}
 
+                    <FormControl style={{ marginRight: 75 }}>
+                        <InputLabel htmlFor="age-native-simple">Area</InputLabel>
+                        <Select
+                            native
+                            onChange={this.Sort}
+                            inputProps={{
+                                name: 'age',
+                                id: 'age-native-simple',
+                            }}
+                        >
+                            <option value="All Areas"> All Areas</option>
+                            <option value="North">North</option>
+                            <option value="South">South</option>
+                            <option value="East">East</option>
+                            <option value="West">West</option>
+                        </Select>
+                    </FormControl>
+                    <FormControl>
+                        <InputLabel htmlFor="age-native-simple">Vehicle</InputLabel>
+                        <Select
+                            native
+                            onChange={this.Sort}
+                            inputProps={{
+                                name: 'age',
+                                id: 'age-native-simple',
+                            }}
+                        >
+                            <option value="All Types"> All Types</option>
+                            <option value="JEEP">JEEP</option>
+                            <option value="ATV">ATV</option>
+                            <option value="RZR">RZR</option>
+                            <option value="Motorcycle">Motorcycle</option>
+                            <option value="None">None</option>
+                        </Select>
+                    </FormControl>
                 </div>
                 <br></br>
                 <CardColumns>
                     {
-                        // {this.state.AllTripsBYEmail?.length=0=>{<p>You dont have any </p>}}                    
                         this.state.ShowTrips?.length > 0 &&
-                        this.state.ShowTrips?.map((item, key) => <FCSearchCard name={item.Trip.Name} key={key} date={item.Trip.Date} time={item.Trip.Time} participants={item.Trip.Participants} area={item.Trip.Area} vehicle={item.Trip.VehicleType} />)
+                        this.state.ShowTrips?.map((item, key) => <MediaCard name={item.Trip.Name} key={key} date={item.Trip.Date} time={item.Trip.Time} participants={item.Trip.Participants} area={item.Trip.Area} vehicle={item.Trip.VehicleType} />)
                     }
                 </CardColumns>
-
             </div>
         )
     }
 }
+

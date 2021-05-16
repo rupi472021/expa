@@ -1,7 +1,6 @@
 import React from 'react';
 import { GoogleLogin } from 'react-google-login';
 import Swal from 'sweetalert2'
-import CCRegisterPage from '../ClassComponents/CCRegisterPage';
 //refresh token
 //import { refreshTokenSetup } from '../utils/refreshTokenSetup';
 const clientId = '337989254519-c3ucmom5f9ubap04mfmv76am274hivnm.apps.googleusercontent.com';

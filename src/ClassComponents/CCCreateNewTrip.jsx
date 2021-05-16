@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Button, DropdownButton, Dropdown, ButtonGroup } from 'react-bootstrap';
-import Checkbox from '@material-ui/core/Checkbox';
-import TextField from '@material-ui/core/TextField';
+import { Form, Button, ButtonGroup } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import RangeSlider from 'react-bootstrap-range-slider';
 
@@ -59,7 +57,7 @@ export default class CCCreateNewTrip extends Component {
         ///Validate that "Trip name" is Available.
         console.log("check valid");
         console.log(this.state.Trip_data_from_sql);
-        if (this.state.Trip_data_from_sql.find((trip => trip.Name == this.state.trip_name))) {
+        if (this.state.Trip_data_from_sql.find((trip => trip.Name === this.state.trip_name))) {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -70,7 +68,7 @@ export default class CCCreateNewTrip extends Component {
             })
         }
         ///Validate Blanks Fields.
-        else if (this.state.trip_name == '' || this.state.trip_date == '' || this.state.vehicle_type == '' || this.state.trip_nights == '' || this.state.trip_area == ' ' || this.state.num_of_participants == '' || this.state.with_children == '' || this.state.match_percent == '') {
+        else if (this.state.trip_name ==='' || this.state.trip_date === '' || this.state.vehicle_type === '' || this.state.trip_nights === '' || this.state.trip_area === ' ' || this.state.num_of_participants === '' || this.state.with_children === '' || this.state.match_percent === '') {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -209,7 +207,6 @@ export default class CCCreateNewTrip extends Component {
             MatchPercent: this.state.match_percent
         }
 
-
         // event.preventDefault(); 
         let apiUrl = `http://localhost:53281/api/NewTrip/` + this.state.trip_name + "/" + this.state.match_percent + "/" + this.state.with_children;
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip/`+this.state.trip_name+"/"+this.state.match_percent+"/"+this.state.with_children;
@@ -300,7 +297,7 @@ export default class CCCreateNewTrip extends Component {
                     <RangeSlider value={this.state.match_percent} onChange={(match) => this.setState({ match_percent: match.target.value })} />
                     <br></br>
                     <Button disabled={this.state.disable} variant="secondary" type="button" onClick={this.editTripDetails} > Edit Trip </Button>
-                    <br></br><h1></h1>
+                    <br></br><br></br>
                     <Button style={{marginBottom:'10px'}} variant="success" type="button" onClick={this.checkValidationbtn} > Publish Trip </Button>
                 </div >
             </div>

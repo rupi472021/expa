@@ -4,8 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Avatar from '@material-ui/core/Avatar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 //import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -65,7 +63,7 @@ export default class CCLoginPage extends Component {
 
     signinbtn = () => {
 
-        if (this.state.emaill == '' || this.state.password == '') {
+        if (this.state.emaill === '' || this.state.password === '') {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -83,7 +81,7 @@ export default class CCLoginPage extends Component {
         console.log("in handle function");
         console.log(this.props.dataFromApptoLoginPage) // show all data from Users table in the SQL from parent
 
-        if (this.props.dataFromApptoLoginPage.find((user => user.Email == this.state.email) && (user => user.Password == this.state.password))) {
+        if (this.props.dataFromApptoLoginPage.find((user => user.Email === this.state.email) && (user => user.Password === this.state.password))) {
 
             let index = this.props.dataFromApptoLoginPage.findIndex(obj => obj.Email === this.state.email);
             console.log(index);
@@ -92,7 +90,7 @@ export default class CCLoginPage extends Component {
             localStorage.setItem('user_fname', this.props.dataFromApptoLoginPage[index].Fname)
             localStorage.setItem('user_lname', this.props.dataFromApptoLoginPage[index].Lname)
             //localStorage.setItem('social_media_name', this.state.social_media_name)
-            if (this.props.dataFromApptoLoginPage[index].Image == 'https://png.pngtree.com/png-clipart/20200701/original/pngtree-character-default-avatar-png-image_5407167.jpg') {
+            if (this.props.dataFromApptoLoginPage[index].Image === 'https://png.pngtree.com/png-clipart/20200701/original/pngtree-character-default-avatar-png-image_5407167.jpg') {
                 localStorage.setItem('user_image', "https://png.pngtree.com/png-clipart/20200701/original/pngtree-character-default-avatar-png-image_5407167.jpg")
             }
             else (localStorage.setItem('user_image', "http://proj.ruppin.ac.il/igroup47/prod/uploadedFiles/" + this.state.email + ".png"))

@@ -49,7 +49,6 @@ export default class CCTripPage extends Component {
         })
     }
 
-
     render() {
         return (
             <div style={{ backgroundColor: '#1d21243b', height: '100%' }}>
@@ -88,7 +87,7 @@ export default class CCTripPage extends Component {
                         <Button value="YES">YES</Button>&nbsp;&nbsp;
                                 <Button value="NO">NO</Button>&nbsp;&nbsp;
                             </ButtonGroup>
-
+                          
                     <br></br><br></br>
                 </div >
 

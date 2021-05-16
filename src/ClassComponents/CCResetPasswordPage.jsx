@@ -49,7 +49,6 @@ export default class CCResetPasswordPage extends Component {
         }).then((message) => {
             console.log(message)
             if (message == "OK") {
-
                 Swal.fire({
                     title: 'Password has sent!',
                     text: 'Your Password is wating for you in your mail',

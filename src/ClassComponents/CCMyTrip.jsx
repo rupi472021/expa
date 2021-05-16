@@ -16,7 +16,7 @@ export default class CCMyTrip extends Component {
     };
 
     componentDidMount = () => {
-        let apiUrl = `http://localhost:54976/api/NewTrip/getSpecific/${localStorage.getItem('user_email')}/`
+        let apiUrl = `http://localhost:53281/api/NewTrip/getSpecific/${localStorage.getItem('user_email')}/`
 
 
         fetch(apiUrl)

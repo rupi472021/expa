@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Button, CardColumns } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import FCCard from '../FunctionComponents/FCCard';
+import MediaCard from '../FunctionComponents/FCardMaterialUi';
 import '../MyStyle.css';
 
 
@@ -15,7 +16,7 @@ export default class CCMyTrip extends Component {
     };
 
     componentDidMount = () => {
-        let apiUrl = `http://localhost:53281/api/NewTrip/getSpecific/${localStorage.getItem('user_email')}/`
+        let apiUrl = `http://localhost:54976/api/NewTrip/getSpecific/${localStorage.getItem('user_email')}/`
 
 
         fetch(apiUrl)

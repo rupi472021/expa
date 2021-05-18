@@ -24,9 +24,8 @@ class App extends Component {
   componentDidMount = () => { //GET all Users from Users_expa (SQL) onload
 
     console.log("in componentDidMount function");
-    let apiUrl = `http://localhost:53281/api/User`;
+    let apiUrl = `http://localhost:54976/api/User`;
     //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User`;
-
 
     fetch(apiUrl)
       .then(res => {
@@ -48,7 +47,7 @@ class App extends Component {
         });
 
 
-    let apiUrl1 = `http://localhost:53281/api/Questionnaire`;
+    let apiUrl1 = `http://localhost:54976/api/Questionnaire`;
     fetch(apiUrl1)
       .then(res => {
         console.log('res=', res);

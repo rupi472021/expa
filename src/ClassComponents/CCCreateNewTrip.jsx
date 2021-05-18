@@ -104,7 +104,7 @@ export default class CCCreateNewTrip extends Component {
             MatchPercent: this.state.match_percent
         }
 
-        let apiUrl = `http://localhost:53281/api/NewTrip`;
+        let apiUrl = `http://localhost:54976/api/NewTrip`;
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
         ////POST To TRIP_Criteria SQL TABLE
@@ -139,7 +139,7 @@ export default class CCCreateNewTrip extends Component {
     getmatch = () => {
         ///Getting all the Users
         console.log("in getmatch function");
-        let apiUrl = `http://localhost:53281/api/Questionnaire/getSpecific/${localStorage.getItem('user_email')}/${this.state.match_percent}`
+        let apiUrl = `http://localhost:54976/api/Questionnaire/getSpecific/${localStorage.getItem('user_email')}/${this.state.match_percent}`
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/Questionnaire/getSpecific/${localStorage.getItem('user_email')}/${this.state.match_percent}`
 
         fetch(apiUrl)
@@ -208,7 +208,7 @@ export default class CCCreateNewTrip extends Component {
         }
 
         // event.preventDefault(); 
-        let apiUrl = `http://localhost:53281/api/NewTrip/` + this.state.trip_name + "/" + this.state.match_percent + "/" + this.state.with_children;
+        let apiUrl = `http://localhost:54976/api/NewTrip/` + this.state.trip_name + "/" + this.state.match_percent + "/" + this.state.with_children;
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip/`+this.state.trip_name+"/"+this.state.match_percent+"/"+this.state.with_children;
 
         fetch(apiUrl, {

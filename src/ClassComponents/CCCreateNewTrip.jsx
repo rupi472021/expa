@@ -108,13 +108,8 @@ export default class CCCreateNewTrip extends Component {
             WithChildren: this.state.with_children,
             MatchPercent: this.state.match_percent
         }
-<<<<<<< Updated upstream
-
-        let apiUrl = `http://localhost:54976/api/NewTrip`;
-=======
         this.setState({ tempObject: newTrip });
         let apiUrl = `http://localhost:53281/api/NewTrip`;
->>>>>>> Stashed changes
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
         ////POST To TRIP_Criteria SQL TABLE

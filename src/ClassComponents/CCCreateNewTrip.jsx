@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Form, Button, ButtonGroup } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import RangeSlider from 'react-bootstrap-range-slider';
+import CCTripPage from './CCTripPage';
 
 export default class CCCreateNewTrip extends Component {
 
@@ -29,7 +30,9 @@ export default class CCCreateNewTrip extends Component {
     componentDidMount = () => { //GET all Trips from Trip_Cretia (SQL) onload
         console.log("in componentDidMount function");
 
-        let apiUrl = `http://localhost:54976/api/NewTrip`;
+        // let apiUrl = `http://localhost:53281/api/NewTrip`;
+        let apiUrl = `http://localhost:53281/api/NewTrip/getAll`;
+
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
         fetch(apiUrl)
@@ -68,7 +71,7 @@ export default class CCCreateNewTrip extends Component {
             })
         }
         ///Validate Blanks Fields.
-        else if (this.state.trip_name ==='' || this.state.trip_date === '' || this.state.vehicle_type === '' || this.state.trip_nights === '' || this.state.trip_area === ' ' || this.state.num_of_participants === '' || this.state.with_children === '' || this.state.match_percent === '') {
+        else if (this.state.trip_name === '' || this.state.trip_date === '' || this.state.vehicle_type === '' || this.state.trip_nights === '' || this.state.trip_area === ' ' || this.state.num_of_participants === '' || this.state.with_children === '' || this.state.match_percent === '') {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -83,6 +86,8 @@ export default class CCCreateNewTrip extends Component {
 
 
     publish = () => {
+        localStorage.setItem('trip_name',this.state.trip_name); //save trip name 
+
         //alert("in publish function")
         this.setState(prevState => ({
             disable: false,
@@ -103,8 +108,13 @@ export default class CCCreateNewTrip extends Component {
             WithChildren: this.state.with_children,
             MatchPercent: this.state.match_percent
         }
+<<<<<<< Updated upstream
 
         let apiUrl = `http://localhost:54976/api/NewTrip`;
+=======
+        this.setState({ tempObject: newTrip });
+        let apiUrl = `http://localhost:53281/api/NewTrip`;
+>>>>>>> Stashed changes
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
         ////POST To TRIP_Criteria SQL TABLE
@@ -130,7 +140,6 @@ export default class CCCreateNewTrip extends Component {
                 Onclick: () => { Swal.clickConfirm() }
             }).then(() => {
                 this.getmatch();
-                window.location.href = "http://localhost:3000/trip_page"
 
             })
         );
@@ -150,7 +159,9 @@ export default class CCCreateNewTrip extends Component {
                 console.log(data);
                 data.forEach((item) => {
                     this.state.temparray.push({ tempemail: item.Email, match: item.Match / 23 * 100 });
+
                 })
+                window.location.href = "http://localhost:3000/trip_page"
             }).catch(function (error) {
                 console.log("Error getting document:", error);
             });
@@ -232,6 +243,8 @@ export default class CCCreateNewTrip extends Component {
     render() {
         return (
             <div style={{ backgroundColor: '#1d21243b', height: '100%' }}>
+                {/* <CCTripPage fromCreateTrip={this.state.tempObject} /> */}
+
                 <div><Button variant="secondary" size="sm" onClick={this.backbtn} className="but"> Main Menu </Button></div>
                 <div>
                     <div><br></br>
@@ -298,7 +311,7 @@ export default class CCCreateNewTrip extends Component {
                     <br></br>
                     <Button disabled={this.state.disable} variant="secondary" type="button" onClick={this.editTripDetails} > Edit Trip </Button>
                     <br></br><br></br>
-                    <Button style={{marginBottom:'10px'}} variant="success" type="button" onClick={this.checkValidationbtn} > Publish Trip </Button>
+                    <Button style={{ marginBottom: '10px' }} variant="success" type="button" onClick={this.checkValidationbtn} > Publish Trip </Button>
                 </div >
             </div>
         )

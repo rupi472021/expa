@@ -36,7 +36,10 @@ export default class CCSearchPage extends Component {
             .then(data => {
                 //this.state.temparray=[];
                 console.log(data);
-                data.forEach((item) => {
+                console.log("user email from LocalStorge: " + localStorage.getItem('user_email'));
+                const filterArr = data.filter(item => item.Admin_email !== localStorage.getItem('user_email'));
+                console.log(filterArr);
+                filterArr.forEach((item) => {
                     this.state.AllTrips.push({ Trip: item });
                 })
             }).catch(function (error) {
@@ -44,10 +47,10 @@ export default class CCSearchPage extends Component {
             });
         console.log("this.state.alltrips....");
         console.log(this.state.AllTrips);
-        this.setState({ ShowTrips: this.state.AllTrips })
-
-        console.log("AreaChange: " + this.state.AreaChange)
-        console.log("VehicleTypqChange: " + this.state.VehicleTypqChange)
+        this.setState({ ShowTrips: this.state.AllTrips });
+        
+        console.log("AreaChange: " + this.state.AreaChange);
+        console.log("VehicleTypqChange: " + this.state.VehicleTypqChange);
 
     }
 

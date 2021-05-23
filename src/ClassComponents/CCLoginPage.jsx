@@ -34,14 +34,13 @@ export default class CCLoginPage extends Component {
 
     componentDidMount = () => {
         localStorage.clear();
-
     }
 
     handleShow = () => {
         Swal.fire({
             title: 'ExPa Founders',
             text: 'Ben Meshulam & Daniel Brand',
-            imageUrl: 'https://i.ibb.co/2Pg5WtY/ben-daniel.png',
+            imageUrl: 'https://i.ibb.co/4WDcBMW/ben-daniel.png',
             imageWidth: 1000,
             imageHeight: 250,
             imageAlt: 'Custom image',
@@ -50,9 +49,9 @@ export default class CCLoginPage extends Component {
 
     Copyright = () => { // footer page in the LoginPage
         return (
-            <Typography variant="body2" color="textSecondary" align="center" style={{ fontWeight: 'bold' }}>
+            <Typography variant="body2" color="textSecondary" align="center" style={{ fontWeight: 'bold', color: 'black' }}>
                 {'Copyright © '}
-                <Link color="inherit" onClick={this.handleShow}>
+                <Link style={{ fontWeight: 'bold', fontColor: 'black' }} onClick={this.handleShow}>
                     ExPa Application
           </Link>
                 {new Date().getFullYear()}

@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import FCCard from '../FunctionComponents/FCCard';
 import MediaCard from '../FunctionComponents/FCardMaterialUi';
 import '../MyStyle.css';
+import MediaCard2 from '../FunctionComponents/FCardMaterialUi2';
 
 
 export default class CCMyTrip extends Component {
@@ -64,8 +65,8 @@ export default class CCMyTrip extends Component {
                 <CardColumns>
                     {
                         // {this.state.AllTripsBYEmail?.length=0=>{<p>You dont have any </p>}}                    
-                        this.state.AllTripsBYEmail?.length > 0 &&
-                        this.state.AllTripsBYEmail?.map((item, key) => <FCCard name={item.Trip.Name} key={key} date={item.Trip.Date} time={item.Trip.Time} participants={item.Trip.Participants} area={item.Trip.Area} />)
+                        this.state.AllTripsBYEmail?.length > 0 && 
+                        this.state.AllTripsBYEmail?.map((item, key) => <MediaCard2 name={item.Trip.Name} key={key} date={item.Trip.Date} time={item.Trip.Time} participants={item.Trip.Participants} area={item.Trip.Area} />)
                     }
                 </CardColumns>
                 <div>

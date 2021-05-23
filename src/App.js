@@ -10,6 +10,9 @@ import CCMyprofile from './ClassComponents/CCMyprofile';
 import CCMyTrip from './ClassComponents/CCMyTrip';
 import CCSearchPage from './ClassComponents/CCSearchPage';
 import CCTripPage from './ClassComponents/CCTripPage';
+import firebase from './firebase';
+
+
 
 class App extends Component {
 
@@ -24,6 +27,20 @@ class App extends Component {
   componentDidMount = () => { //GET all Users from Users_expa (SQL) onload
 
     console.log("in componentDidMount function");
+
+    const messaging = firebase.messaging();
+    messaging.requestPermission().then(() => {
+      console.log("Notifications allowed");
+      return messaging.getToken();
+    })
+      .then(token => {
+        console.log("Token Is : " + token);
+      })
+      .catch(err => {
+        console.log("No permission to send push", err);
+      });
+
+
     let apiUrl = `http://localhost:54976/api/User`;
     //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User`;
 
@@ -97,7 +114,7 @@ class App extends Component {
             <CCSearchPage />
           </Route>
           <Route exact path="/trip_page" >
-            <CCTripPage/>
+            <CCTripPage />
           </Route>
         </Switch>
       </div>

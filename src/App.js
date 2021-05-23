@@ -39,8 +39,9 @@ class App extends Component {
       .catch(err => {
         console.log("No permission to send push", err);
       });
-
-
+      messaging.onMessage((payload) => {
+        console.log(payload)
+      });
     let apiUrl = `http://localhost:54976/api/User`;
     //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User`;
 

@@ -18,6 +18,14 @@ const config = {
   // appId: "1:907248346701:web:8c3af016e64c5ebf1c9e04"
 }
 
-firebase.initializeApp(config)
+firebase.initializeApp(config);
+const messaging = firebase.messaging();
+
+export const onMessageListener = () =>
+  new Promise((resolve) => {
+    messaging.onMessage((payload) => {
+      resolve(payload);
+    });
+});
 
 export default firebase;

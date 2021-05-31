@@ -11,8 +11,7 @@ import CCMyTrip from './ClassComponents/CCMyTrip';
 import CCSearchPage from './ClassComponents/CCSearchPage';
 import CCTripPage from './ClassComponents/CCTripPage';
 import firebase from './firebase';
-
-
+import { Notifications } from 'react-push-notification';
 
 class App extends Component {
 
@@ -26,8 +25,6 @@ class App extends Component {
 
   componentDidMount = () => { //GET all Users from Users_expa (SQL) onload
 
-    console.log("in componentDidMount function");
-
     const messaging = firebase.messaging();
     messaging.requestPermission().then(() => {
       console.log("Notifications allowed");
@@ -39,9 +36,13 @@ class App extends Component {
       .catch(err => {
         console.log("No permission to send push", err);
       });
-      messaging.onMessage((payload) => {
-        console.log(payload)
-      });
+    messaging.onMessage((payload) => { //אם שלחו הועדה- היא מאזינה
+      console.log(payload);
+      //console.log(payload.data.notification)
+    });
+
+    console.log("in componentDidMount function");
+
     let apiUrl = `http://localhost:54976/api/User`;
     //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User`;
 
@@ -89,6 +90,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Notifications />
         <Switch>
           <Route exact path="/" >
             <CCLoginPage dataFromApptoLoginPage={this.state.data_from_sql} />

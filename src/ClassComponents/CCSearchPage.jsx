@@ -7,6 +7,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 
+
 export default class CCSearchPage extends Component {
 
     constructor(props) {
@@ -48,7 +49,7 @@ export default class CCSearchPage extends Component {
         console.log("this.state.alltrips....");
         console.log(this.state.AllTrips);
         this.setState({ ShowTrips: this.state.AllTrips });
-        
+
         console.log("AreaChange: " + this.state.AreaChange);
         console.log("VehicleTypqChange: " + this.state.VehicleTypqChange);
 

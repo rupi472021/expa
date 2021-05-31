@@ -7,7 +7,6 @@ import { GoPlus } from 'react-icons/go';
 import { BiSearchAlt2 } from 'react-icons/bi';
 import { RiUserSettingsLine } from 'react-icons/ri';
 
-
 export default function FCMainMenuPage() {
 
     const backbtn = () => {
@@ -56,7 +55,7 @@ export default function FCMainMenuPage() {
 
                     {/* <img src="https://img.icons8.com/fluent/48/000000/add-user-group-woman-man.png"/> */}
                     <img style={{ marginRight: 250 }} src="https://img.icons8.com/bubbles/50/000000/edit-user.png" onClick={() => window.location.href = "/main_menu_page/my_profile"} />
-                    <img style={{ marginLeft: 0 }} src="https://img.icons8.com/color/48/000000/binoculars.png" onClick={() => window.location.href = "/main_menu_page/my_trips"}/>
+                    <img style={{ marginLeft: 0 }} src="https://img.icons8.com/color/48/000000/binoculars.png" onClick={() => window.location.href = "/main_menu_page/my_trips"} />
 
                     {/* <h6 style={{ marginRight: 250 }}><RiUserSettingsLine style={{ marginRight: 10 }} size={70} onClick={() => window.location.href = "/main_menu_page/my_profile"} >  </RiUserSettingsLine> myProfile</h6>
                     <h6 style={{ marginLeft: 250, marginTop: -120 }}><GiJeep style={{ marginTop: 20 }} size={70} onClick={() => window.location.href = "/main_menu_page/my_trips"} ></GiJeep> myTrips</h6> */}

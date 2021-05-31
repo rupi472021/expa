@@ -31,7 +31,7 @@ export default class CCCreateNewTrip extends Component {
         console.log("in componentDidMount function");
 
         // let apiUrl = `http://localhost:53281/api/NewTrip`;
-        let apiUrl = `http://localhost:53281/api/NewTrip/getAll`;
+        let apiUrl = `http://localhost:54976/api/NewTrip/getAll`;
 
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
@@ -86,7 +86,7 @@ export default class CCCreateNewTrip extends Component {
 
 
     publish = () => {
-        localStorage.setItem('trip_name',this.state.trip_name); //save trip name 
+        localStorage.setItem('trip_name', this.state.trip_name); //save trip name 
 
         //alert("in publish function")
         this.setState(prevState => ({
@@ -109,7 +109,7 @@ export default class CCCreateNewTrip extends Component {
             MatchPercent: this.state.match_percent
         }
         this.setState({ tempObject: newTrip });
-        let apiUrl = `http://localhost:53281/api/NewTrip`;
+        let apiUrl = `http://localhost:54976/api/NewTrip`;
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
         ////POST To TRIP_Criteria SQL TABLE
@@ -152,11 +152,15 @@ export default class CCCreateNewTrip extends Component {
                 //this.state.temparray=[];
                 console.log("Relevant Users Algoritem -  data from sql:")
                 console.log(data);
+                let dataLength = data.length;
+                console.log("dataLength: " + dataLength);
                 data.forEach((item) => {
                     this.state.temparray.push({ tempemail: item.Email, match: item.Match / 23 * 100 });
 
                 })
-                window.location.href = "http://localhost:3000/trip_page"
+                if (dataLength == 0) { alert("you don't have any match for now") }
+                else { alert("Sweet, you have " + dataLength + " matchs!") }
+                //window.location.href = "http://localhost:3000/trip_page"
             }).catch(function (error) {
                 console.log("Error getting document:", error);
             });

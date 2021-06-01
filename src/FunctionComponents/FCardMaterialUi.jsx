@@ -8,8 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { orange } from '@material-ui/core/colors';
-import addNotification from 'react-push-notification';
-import firebase from '../firebase';
+
 
 const ColorButton = withStyles((theme) => ({
     root: {
@@ -45,30 +44,37 @@ export default function MediaCard(props) {
 
     async function firebaseNotification() {
 
-        var headers = {
-            "Authorization": "key=AAAA0zw3Jk0:APA91bFQ-pTU1AITIoyAShNxSl8naD667ilNfyXDlqEwLFjXcLiBxG6psIHEz7Xyo_ksJgvwAKHRpdYUzRb_THciRuGIyOYSCNEDXvbkqHh9-H0uAhCQpvopg2Y65e_tOrb8tTTcDVpc",
-            "Content-Type": "application/json",
-        };
+        let apiUrl = 'https://fcm.googleapis.com/fcm/send';
 
         // Modified
         var payload = {
             "notification": {
-                "title": "CWMS",
-                "body": "from google apps scritpt"
+                "title": "Join Trip Request",
+                "body": "Hi, someone want to join your trip!"
             },
             "to": "cGYfww4gwdBs5zz__4yq5P:APA91bF5GNfoYUn-SjMIgUGfrV8iKoiv7MlhumohqlPaChhsa0k77QYHMNP0fo8SwfNH2lZkSNt0GUIQIZCRcY6UfZojWYS5BEDhk6-h7bOkAErPNDOnK6CeVa_GuUtERXkJV0F9AaU2"
         }
 
-        // Modified
-        var options = {
-            method: "POST",
-            contentType: "application/json",
-            headers: headers,
-            payload: JSON.stringify(payload) // <--- Modified
-        }
+        fetch(apiUrl, {
+            method: 'POST',
+            body: JSON.stringify(payload),
+            headers: new Headers({
+                "Authorization": "key=AAAA0zw3Jk0:APA91bFQ-pTU1AITIoyAShNxSl8naD667ilNfyXDlqEwLFjXcLiBxG6psIHEz7Xyo_ksJgvwAKHRpdYUzRb_THciRuGIyOYSCNEDXvbkqHh9-H0uAhCQpvopg2Y65e_tOrb8tTTcDVpc",
+                'Content-type': 'application/json; charset=UTF-8' //very important to add the 'charset=UTF-8'!!!!
+            })
+        })
+            .then(res => {
+                console.log('res=', res);
+                return res.json()
+            })
+            .then(
+                (result) => {
+                    console.log("fetch POST= ", result);
+                },
+                (error) => {
+                    console.log("err post=", error);
+                });
 
-        var response = await fetch("https://fcm.googleapis.com/fcm/send", options);
-        console.log(response);
     }
 
 

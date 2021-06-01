@@ -11,7 +11,10 @@ import CCMyTrip from './ClassComponents/CCMyTrip';
 import CCSearchPage from './ClassComponents/CCSearchPage';
 import CCTripPage from './ClassComponents/CCTripPage';
 import firebase from './firebase';
-import { Notifications } from 'react-push-notification';
+import { store } from 'react-notifications-component';
+import ReactNotification from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
+
 
 class App extends Component {
 
@@ -36,9 +39,23 @@ class App extends Component {
       .catch(err => {
         console.log("No permission to send push", err);
       });
-    messaging.onMessage((payload) => { //אם שלחו הועדה- היא מאזינה
-      console.log(payload);
-      //console.log(payload.data.notification)
+    messaging.onMessage((payload) => { //אם שלחו הודעה- היא מאזינה
+
+      console.log("notification title: " + payload.notification.title);
+      console.log("notification body: " + payload.notification.body);
+
+      store.addNotification({
+        title: payload.notification.title + '!',
+        message: payload.notification.body,
+        type: "warning",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 5000,
+        }
+      });
     });
 
     console.log("in componentDidMount function");
@@ -90,7 +107,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Notifications />
+        <ReactNotification />
         <Switch>
           <Route exact path="/" >
             <CCLoginPage dataFromApptoLoginPage={this.state.data_from_sql} />

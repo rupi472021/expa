@@ -41,7 +41,7 @@ export default class CCMyprofile extends Component {
 
         console.log("in componentDidMount function");
 
-        let apiUrl = `http://localhost:54976/api/Questionnaire?email=` + localStorage.getItem('user_email');
+        let apiUrl = `http://localhost:51566/api/Questionnaire?email=` + localStorage.getItem('user_email');
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/Questionnaire/getSpecificQuestionnaire`;
 
         fetch(apiUrl)
@@ -117,7 +117,7 @@ export default class CCMyprofile extends Component {
 
     changePasswordPUT = () => {
 
-        let apiUrl = `http://localhost:54976/api/User/` + localStorage.getItem('user_email') + "/" + this.state.password;
+        let apiUrl = `http://localhost:51566/api/User/` + localStorage.getItem('user_email') + "/" + this.state.password;
 
         fetch(apiUrl, {
             method: 'PUT', // *GET, POST, PUT, DELETE, etc.
@@ -155,7 +155,7 @@ export default class CCMyprofile extends Component {
                 console.log("you click on Save Button")
 
                 //PUT to Questionnaire:
-                let apiUrl = `http://localhost:54976/api/Questionnaire/` + localStorage.getItem('user_email') + "/" + this.state.q1 + "/" + this.state.q3 + "/" + this.state.q4 + "/" + this.state.q5 + "/" + this.state.q6 + "/" + this.state.q7 + "/" + this.state.q8 + "/" + this.state.q9 + "/" + this.state.q10 + "/" + this.state.q11;
+                let apiUrl = `http://localhost:51566/api/Questionnaire/` + localStorage.getItem('user_email') + "/" + this.state.q1 + "/" + this.state.q3 + "/" + this.state.q4 + "/" + this.state.q5 + "/" + this.state.q6 + "/" + this.state.q7 + "/" + this.state.q8 + "/" + this.state.q9 + "/" + this.state.q10 + "/" + this.state.q11;
                 //let apiUrl = `http://localhost:54976/api/Questionnaire/benmshulam@gmail.com/1/3/4/5/6/7/8/9/10/11`;
                 //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip/`+this.state.trip_name+"/"+this.state.match_percent+"/"+this.state.with_children;
 
@@ -220,7 +220,7 @@ export default class CCMyprofile extends Component {
 
             console.log("in post img function");
 
-            //this.apiUrl = `http://localhost:54976/api/User/uploadedFiles`;
+            //this.apiUrl = `http://localhost:51566/api/User/uploadedFiles`;
 
             this.apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User/uploadedFiles`;
             //src={this.state.imgURL}

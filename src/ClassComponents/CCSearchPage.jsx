@@ -30,7 +30,7 @@ export default class CCSearchPage extends Component {
 
         console.log("in componentDidMount search page")
 
-        let apiUrl = `http://localhost:54976/api/NewTrip`
+        let apiUrl = `http://localhost:51566/api/NewTrip`
 
         fetch(apiUrl)
             .then(response => response.json())

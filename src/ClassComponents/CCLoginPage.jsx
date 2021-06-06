@@ -79,7 +79,7 @@ export default class CCLoginPage extends Component {
 
         console.log("in handle function");
         console.log(this.props.dataFromApptoLoginPage) // show all data from Users table in the SQL from parent
-
+        
         if (this.props.dataFromApptoLoginPage.find((user => user.Email === this.state.email) && (user => user.Password === this.state.password))) {
 
             let index = this.props.dataFromApptoLoginPage.findIndex(obj => obj.Email === this.state.email);

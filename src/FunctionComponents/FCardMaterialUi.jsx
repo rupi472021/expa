@@ -8,6 +8,9 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { orange } from '@material-ui/core/colors';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 
 
 const ColorButton = withStyles((theme) => ({
@@ -25,6 +28,10 @@ const useStyles = makeStyles((theme) => ({
         maxWidth: 345,
         marginLeft: 15,
         borderRadius: '50px',
+        width: '100%',
+        '& > * + *': {
+            marginTop: theme.spacing(2),
+        },
     },
     media: {
         height: 140,
@@ -40,19 +47,32 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MediaCard(props) {
 
+    const [open, setOpen] = React.useState(false);
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
+
     const classes = useStyles();
 
     async function firebaseNotification() {
+
+        setOpen(true);
 
         let apiUrl = 'https://fcm.googleapis.com/fcm/send';
 
         // Modified
         var payload = {
+
             "notification": {
                 "title": "Join Trip Request",
                 "body": "Hi, someone want to join your trip!"
             },
-            "to": "cGYfww4gwdBs5zz__4yq5P:APA91bF5GNfoYUn-SjMIgUGfrV8iKoiv7MlhumohqlPaChhsa0k77QYHMNP0fo8SwfNH2lZkSNt0GUIQIZCRcY6UfZojWYS5BEDhk6-h7bOkAErPNDOnK6CeVa_GuUtERXkJV0F9AaU2"
+            //"to": "dgqauZkWN73p1jcqain40b:APA91bFDw6KkJil-u7pv94swTafEtw0KhZHOR1ioInxTvruIA4pYlumFse3orF1C8VUZnXbiE62h7m_0nGnyoFL7oUZrLqWOHVDESWjWPuFmOtrLCihmagbEF0hoWAEjOvKOcjNLk0Uj"
         }
 
         fetch(apiUrl, {
@@ -74,12 +94,29 @@ export default function MediaCard(props) {
                 (error) => {
                     console.log("err post=", error);
                 });
-
     }
 
 
     return (
         <div>
+            <Snackbar
+                style={{ marginBottom: 600 }}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                }}
+                open={open}
+                autoHideDuration={6000}
+                onClose={handleClose}
+                message="The request was sent to the trip admin"
+                action={
+                    <React.Fragment>
+                        <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
+                            <CloseIcon fontSize="small" />
+                        </IconButton>
+                    </React.Fragment>
+                }
+            />
             <Card className={classes.root}>
                 <CardActionArea>
                     <CardMedia className={classes.media} image="http://suindependent.com/wp-content/uploads/2018/01/Winter-Jamboree-3.jpg" title="Contemplative Reptile" />

@@ -53,6 +53,17 @@ export default class CCSearchPage extends Component {
         console.log("AreaChange: " + this.state.AreaChange);
         console.log("VehicleTypqChange: " + this.state.VehicleTypqChange);
 
+
+        let apiUrl1 = `http://localhost:51566/api/Token`
+
+        fetch(apiUrl1)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            }).catch(function (error) {
+                console.log("Error getting document:", error);
+            });
+
     }
 
     Sort = (e) => {

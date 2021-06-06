@@ -12,8 +12,11 @@ import CCSearchPage from './ClassComponents/CCSearchPage';
 import CCTripPage from './ClassComponents/CCTripPage';
 import firebase from './firebase';
 import { store } from 'react-notifications-component';
-import ReactNotification from 'react-notifications-component'
-import 'react-notifications-component/dist/theme.css'
+import ReactNotification from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
+import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+import { Alert, AlertTitle } from '@material-ui/lab';
 
 
 class App extends Component {
@@ -21,8 +24,10 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data_from_sql: '',
       Ques_data_fromSQL: '',
+      snackBarStatus: false,
+      payloadTtile: '',
+      payloadBody: '',
     }
   };
 
@@ -35,6 +40,8 @@ class App extends Component {
     })
       .then(token => {
         console.log("Token Is : " + token);
+        console.log("Token length : " + token.length);
+        this.setState({ token_num: token });
       })
       .catch(err => {
         console.log("No permission to send push", err);
@@ -44,18 +51,30 @@ class App extends Component {
       console.log("notification title: " + payload.notification.title);
       console.log("notification body: " + payload.notification.body);
 
-      store.addNotification({
-        title: payload.notification.title + '!',
-        message: payload.notification.body,
-        type: "warning",
-        insert: "top",
-        container: "top-right",
-        animationIn: ["animate__animated", "animate__fadeIn"],
-        animationOut: ["animate__animated", "animate__fadeOut"],
-        dismiss: {
-          duration: 5000,
-        }
-      });
+      this.setState({
+        snackBarStatus: true,
+        payloadTtile: payload.notification.title,
+        payloadBody: payload.notification.body
+      })
+
+      // store.addNotification({
+      //   title: payload.notification.title + '!',
+      //   message: payload.notification.body,
+      //   type: "warning",
+      //   insert: "top",
+      //   container: "top-right",
+      //   animationIn: ["animate__animated", "animate__fadeIn"],
+      //   animationOut: ["animate__animated", "animate__fadeOut"],
+      //   dismiss: {
+      //     duration: 5000,
+      //   },
+      //   slidingExit: {
+      //     duration: 800,
+      //     timingFunction: 'ease-out',
+      //     delay: 0
+      //   }
+      // });
+
     });
 
     console.log("in componentDidMount function");
@@ -102,18 +121,37 @@ class App extends Component {
         (error) => {
           console.log("err GET=", error);
         });
+
   }
 
   render() {
     return (
       <div className="App">
-        <ReactNotification />
+        <Snackbar
+          style={{ marginBottom: 600 }}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+          open={this.state.snackBarStatus}
+          autoHideDuration={1000}
+          onClick={() => this.setState({ snackBarStatus: false })}
+          message={this.state.payloadTtile}
+          action={
+            <React.Fragment>
+              <Button color="secondary" size="small" onClick={() => this.setState({ snackBarStatus: false })}> VIEW </Button>
+              <Button color="secondary" size="small" onClick={() => alert("this user joined your trip!")}> ACCEPT </Button>
+              <Button color="secondary" size="small" onClick={() => alert("maybe next trip!")}> DENIED </Button>
+            </React.Fragment>
+          }
+        />
+        {/* <ReactNotification /> */}
         <Switch>
           <Route exact path="/" >
             <CCLoginPage dataFromApptoLoginPage={this.state.data_from_sql} />
           </Route>
           <Route exact path="/register" >
-            <CCRegisterPage dataFromApptoRegisterPage={this.state.data_from_sql} QuesDatafromApptoRegisterPage={this.state.Ques_data_fromSQL} />
+            <CCRegisterPage dataFromApptoRegisterPage={this.state.data_from_sql} QuesDatafromApptoRegisterPage={this.state.Ques_data_fromSQL} Token={this.state.token_num} />
           </Route>
           <Route exact path="/forget_password_page" >
             <CCResetPasswordPage dataFromApptoResetPasswordPage={this.state.data_from_sql} />

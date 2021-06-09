@@ -15,7 +15,7 @@ import Info from '@material-ui/icons/Info';
 const useStyles = makeStyles({
   root: {
     width: 500,
-    
+
   },
 });
 
@@ -26,6 +26,7 @@ export default function FCSimpleBottomNavigation() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
     // alert(event.target.newValue);
+    alert(newValue)
   };
 
   return (

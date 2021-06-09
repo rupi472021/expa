@@ -24,7 +24,7 @@
     "emailjs-com": "^2.6.4",
     "express": "^4.17.1",
     "feather-icons": "^4.28.0",
-    "firebase": "^8.6.2",
+    "firebase": "^8.6.3",
     "fontsource-roboto": "^4.0.0",
     "googleapis": "^71.0.0",
     "history": "^5.0.0",

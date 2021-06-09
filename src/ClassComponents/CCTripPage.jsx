@@ -10,6 +10,10 @@ import RestoreIcon from '@material-ui/icons/Restore';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import FCSimpleBottomNavigation from '../FunctionComponents/FCSimpleBottomNavigation';
+import { Container, Row, Col, Table } from 'reactstrap';
+import TextField from '@material-ui/core/TextField';
+import FCEditList from '../FunctionComponents/FCEditList';
+
 
 
 
@@ -28,6 +32,8 @@ export default class CCTripPage extends Component {
             value: '',
             setValue: '',
             TripsByName: [],
+            opacity: 0.9,
+            disabled: true,
         }
     };
 
@@ -95,13 +101,64 @@ export default class CCTripPage extends Component {
 
 
                         <FCSimpleBottomNavigation />
+                        <br></br>
+                        <Container>
+                            <Row>
+                                <Col style={{ backgroundColor: 'yellow', borderRadius: '10px' }}>
+                                    <h1></h1>
+                                    <h4 style={{ fontWeight: "bold", marginRight: '30px', boxShadow: '0px 50px 150px 10px yellow', fontSize: '20px', backgroundColor: 'gold', borderRadius: '15px', marginLeft: '21px' }}>
+                                        Equip List
+                                        </h4>
+                                    <Table striped bordered hover variant="dark" style={{ opacity: this.state.opacity }}>
+                                        <thead>
+                                            {/* <tr>
+                                                <th>Who Bring What </th>
+                                            </tr> */}
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                {/* <td><TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" name="email" autoComplete="email" autoFocus onChange={(e) => this.setState({ email: e.target.value })} /></td> */}
+                                                <h5>Gas</h5>
+                                                <td>
+                                                    <select id="dropdown" disabled={this.state.disabled}  /*onChange={(e) => this.setState({ q9: e.target.value })}*/>
+                                                        <option value="Will be the trip Participants">Affable</option>
+                                                        <option value="Will be the trip Participants">Troglodyte</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                {/* <td><TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" name="email" autoComplete="email" autoFocus onChange={(e) => this.setState({ email: e.target.value })} /></td> */}
+                                                <h5>Water</h5>
+                                                <td>
+                                                    <select id="dropdown" disabled={this.state.disabled} /*onChange={(e) => this.setState({ q9: e.target.value })}*/>
+                                                        <option value="Will be the trip Participants">Yoni</option>
+                                                        <option value="Will be the trip Participants">Troglodyte</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                {/* <td><TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" name="email" autoComplete="email" autoFocus onChange={(e) => this.setState({ email: e.target.value })} /></td> */}
+                                                <h5>Tent</h5>
+                                                <td>
+                                                    <select id="dropdown" disabled={this.state.disabled} /*onChange={(e) => this.setState({ q9: e.target.value })}*/>
+                                                        <option value="Will be the trip Participants">Yoni</option>
+                                                        <option value="Will be the trip Participants">Troglodyte</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
 
-                        <div style={{ fontWeight: "bold" }}>
-                            Choose Your Preference For Your Perfect Trip
-                    </div>
+                                        </tbody>
+
+                                    </Table>
+                                    {/* <Button variant="info" size="md" onClick={this.test} className="edit">שדגיח</Button> */}
+                                    <FCEditList />
+                                    <h1></h1>
+                                </Col>
+                                <Col>2 of 2</Col>
+                            </Row>
+
+                        </Container>
                     </div><br></br>
-
-
 
                     <br></br><br></br>
                     <Button variant="secondary" size="sm" onClick={this.test} className="but"> check what print </Button>

@@ -60,7 +60,7 @@ class App extends Component {
 
     console.log("in componentDidMount function");
 
-    let apiUrl = `http://localhost:54976/api/User`;
+    let apiUrl = `http://localhost:53281/api/User`;
     //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User`;
 
     fetch(apiUrl)
@@ -83,7 +83,7 @@ class App extends Component {
         });
 
 
-    let apiUrl1 = `http://localhost:54976/api/Questionnaire`;
+    let apiUrl1 = `http://localhost:53281/api/Questionnaire`;
     fetch(apiUrl1)
       .then(res => {
         console.log('res=', res);

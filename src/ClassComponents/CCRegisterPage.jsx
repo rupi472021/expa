@@ -53,8 +53,7 @@ export default class CCRegisterPage extends Component {
             selectedFile: 'https://png.pngtree.com/png-clipart/20200701/original/pngtree-character-default-avatar-png-image_5407167.jpg',
             urlimg: '',
             btnColor1: 'primary',
-
-
+            token: this.props.Token,
         }
     }
 
@@ -74,8 +73,7 @@ export default class CCRegisterPage extends Component {
 
         window.scrollTo(0, 0);
         localStorage.clear(); //clear local storge onload
-        console.log(this.props.dataFromApptoRegisterPage);
-
+        console.log(this.props.Token);
 
     }
 
@@ -152,7 +150,7 @@ export default class CCRegisterPage extends Component {
                 LAnswer: this.state.answerList
             }
             ///post to questionnaire 
-            let apiUrl = `http://localhost:54976/api/Questionnaire`;
+            let apiUrl = `http://localhost:51566/api/Questionnaire`;
             //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/Questionnaire`;
 
             console.log("New Answer const");
@@ -182,6 +180,7 @@ export default class CCRegisterPage extends Component {
     handle = () => {
 
         var data = new FormData();
+
         const newUser = {
             Email: this.state.email,
             Fname: this.state.fname,
@@ -190,11 +189,12 @@ export default class CCRegisterPage extends Component {
             Image: this.state.selectedFile,
         }
 
-        let apiUrl = `http://localhost:54976/api/User`;
+        let apiUrl1 = `http://localhost:51566/api/User`;
+
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User`;
 
         ////POST
-        fetch(apiUrl, {
+        fetch(apiUrl1, {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, *cors, same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -217,8 +217,46 @@ export default class CCRegisterPage extends Component {
             // localStorage.setItem('user_fname', this.state.fname),
 
         );
-        this.MovingToMenu()
+        this.postToken();
+    }
 
+
+    postToken = () => {
+
+        let apiUrl2 = `http://localhost:51566/api/Token`;
+        //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/Token`;
+
+        const newToken = {
+            Email: this.state.email,
+            Token_number: this.props.Token
+        }
+
+        ////POST
+        fetch(apiUrl2, {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, *cors, same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json'
+                // 'Content-type': 'application/json; charset=UTF-8', //very important to add the 'charset=UTF-8'!!!!
+                // 'Accept': 'application/json; charset=UTF-8'
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+            body: JSON.stringify(newToken) // body data type must match "Content-Type" header
+        }).then(
+
+            // this.clearForm(),
+
+            // localStorage.setItem('user_lname', this.state.lname),
+            // localStorage.setItem('user_image', this.state.selectedFile),
+            // localStorage.setItem('user_email', this.state.email),
+            // localStorage.setItem('user_fname', this.state.fname),
+
+        );
+        console.log(newToken);
+        this.MovingToMenu();
     }
 
     MovingToMenu = () => {
@@ -286,7 +324,7 @@ export default class CCRegisterPage extends Component {
 
             console.log("in post img function");
 
-            //this.apiUrl = `http://localhost:54976/api/User/uploadedFiles`;
+            //this.apiUrl = `http://localhost:51566/api/User/uploadedFiles`;
 
             this.apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User/uploadedFiles`;
 

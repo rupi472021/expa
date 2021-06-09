@@ -8,6 +8,9 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { orange } from '@material-ui/core/colors';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 
 
 const ColorButton = withStyles((theme) => ({
@@ -25,6 +28,10 @@ const useStyles = makeStyles((theme) => ({
         maxWidth: 345,
         marginLeft: 15,
         borderRadius: '50px',
+        width: '100%',
+        '& > * + *': {
+            marginTop: theme.spacing(2),
+        },
     },
     media: {
         height: 140,
@@ -40,19 +47,47 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MediaCard(props) {
 
+    const [open, setOpen] = React.useState(false);
+    const tokensArray = props.tokensArray;
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
+
     const classes = useStyles();
 
-    async function firebaseNotification() {
+    async function chekcIndex() {
+
+        console.log("the admin of this trip is : " + props.admin)
+        console.log(tokensArray);
+
+        const findAdminToken = tokensArray.find(item => item.Email === props.admin);
+        if (findAdminToken == undefined) {
+            alert("this admin doesn't have a token number, please contact support")
+        }
+        else (firebaseNotification(findAdminToken.Token_number));
+    }
+
+
+    async function firebaseNotification(t) {
+
+        setOpen(true);
+        console.log("admin token is: " + t);
 
         let apiUrl = 'https://fcm.googleapis.com/fcm/send';
 
         // Modified
         var payload = {
+
             "notification": {
                 "title": "Join Trip Request",
                 "body": "Hi, someone want to join your trip!"
             },
-            "to": "cGYfww4gwdBs5zz__4yq5P:APA91bF5GNfoYUn-SjMIgUGfrV8iKoiv7MlhumohqlPaChhsa0k77QYHMNP0fo8SwfNH2lZkSNt0GUIQIZCRcY6UfZojWYS5BEDhk6-h7bOkAErPNDOnK6CeVa_GuUtERXkJV0F9AaU2"
+            "to": t
         }
 
         fetch(apiUrl, {
@@ -74,12 +109,28 @@ export default function MediaCard(props) {
                 (error) => {
                     console.log("err post=", error);
                 });
-
     }
-
 
     return (
         <div>
+            <Snackbar
+                style={{ marginBottom: 600 }}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                }}
+                open={open}
+                autoHideDuration={6000}
+                onClose={handleClose}
+                message="The request was sent to the trip admin"
+                action={
+                    <React.Fragment>
+                        <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
+                            <CloseIcon fontSize="small" />
+                        </IconButton>
+                    </React.Fragment>
+                }
+            />
             <Card className={classes.root}>
                 <CardActionArea>
                     <CardMedia className={classes.media} image="http://suindependent.com/wp-content/uploads/2018/01/Winter-Jamboree-3.jpg" title="Contemplative Reptile" />
@@ -87,14 +138,14 @@ export default function MediaCard(props) {
                         <Typography gutterBottom variant="h5" component="h2"> Trip Name: {props.name} </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
                             Area: {props.area}<br></br>
-                        Vehicle Type: {props.vehicle}<br></br>
-                        At: {props.date} On {props.time}<br></br>
-                        With: {props.participants} Partners
-          </Typography>
+                            Vehicle Type: {props.vehicle}<br></br>
+                            At: {props.date} On {props.time}<br></br>
+                            With: {props.participants} Partners<br></br>
+                        </Typography>
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
-                    <ColorButton onClick={firebaseNotification} variant="contained" color="primary" className={classes.margin}> Ask to join! </ColorButton>
+                    <ColorButton onClick={chekcIndex} variant="contained" color="primary" className={classes.margin}> Ask to join! </ColorButton>
                     {/* <Button className={classes.button} size="large" color="primary"> Ask to join! </Button> */}
                 </CardActions>
             </Card><br></br>

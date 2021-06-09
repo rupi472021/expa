@@ -21,7 +21,6 @@ export default class CCSearchPage extends Component {
             vehicle: '',
             AreaChange: false,
             VehicleTypqChange: false,
-
         }
     };
 
@@ -52,6 +51,18 @@ export default class CCSearchPage extends Component {
 
         console.log("AreaChange: " + this.state.AreaChange);
         console.log("VehicleTypqChange: " + this.state.VehicleTypqChange);
+
+
+        let apiUrl1 = `http://localhost:51566/api/Token`
+
+        fetch(apiUrl1)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                this.setState({ tokensArray: data })
+            }).catch(function (error) {
+                console.log("Error getting document:", error);
+            });
 
     }
 
@@ -136,7 +147,6 @@ export default class CCSearchPage extends Component {
             console.log(this.state.SortTrips);
             this.setState({ ShowTrips: this.state.SortTrips })
         }
-
     }
 
     backbtn = () => {
@@ -162,24 +172,6 @@ export default class CCSearchPage extends Component {
                 <div><br></br>
                     <AiOutlineRollback onClick={this.backbtn} size={30} style={{ marginLeft: 320 }}></AiOutlineRollback>
                     <h3>Search the best trip for you!</h3><br></br>
-
-                    {/* <select id="dropdown" onChange={this.AreaSort} >
-                        <option value="Area" >Area</option>
-                        <option value="North">North</option>
-                        <option value="South">South</option>
-                        <option value="East">East</option>
-                        <option value="West">West</option>
-                    </select>{' '}
-
-                    <select id="dropdown" onChange={this.VehicleTypeSort} >
-                        <option value="Vehicle">Vehicle Type</option>
-                        <option value="JEEP">JEEP</option>
-                        <option value="ATV">ATV</option>
-                        <option value="RZR">RZR</option>
-                        <option value="Motorcycle">Motorcycle</option>
-                        <option value="None">None</option>
-                    </select> */}
-
                     <FormControl style={{ marginRight: 75 }}>
                         <InputLabel htmlFor="age-native-simple">Area</InputLabel>
                         <Select
@@ -220,7 +212,7 @@ export default class CCSearchPage extends Component {
                 <CardColumns>
                     {
                         this.state.ShowTrips?.length > 0 &&
-                        this.state.ShowTrips?.map((item, key) => <MediaCard name={item.Trip.Name} key={key} date={item.Trip.Date} time={item.Trip.Time} participants={item.Trip.Participants} area={item.Trip.Area} vehicle={item.Trip.VehicleType} />)
+                        this.state.ShowTrips?.map((item) => <MediaCard admin={item.Trip.Admin_email} name={item.Trip.Name} date={item.Trip.Date} time={item.Trip.Time} participants={item.Trip.Participants} area={item.Trip.Area} vehicle={item.Trip.VehicleType} tokensArray={this.state.tokensArray} />)
                     }
                 </CardColumns>
             </div>

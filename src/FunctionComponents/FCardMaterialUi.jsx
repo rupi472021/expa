@@ -48,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
 export default function MediaCard(props) {
 
     const [open, setOpen] = React.useState(false);
+    const tokensArray = props.tokensArray;
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -59,9 +60,23 @@ export default function MediaCard(props) {
 
     const classes = useStyles();
 
-    async function firebaseNotification() {
+    async function chekcIndex() {
+
+        console.log("the admin of this trip is : " + props.admin)
+        console.log(tokensArray);
+
+        const findAdminToken = tokensArray.find(item => item.Email === props.admin);
+        if (findAdminToken == undefined) {
+            alert("this admin doesn't have a token number, please contact support")
+        }
+        else (firebaseNotification(findAdminToken.Token_number));
+    }
+
+
+    async function firebaseNotification(t) {
 
         setOpen(true);
+        console.log("admin token is: " + t);
 
         let apiUrl = 'https://fcm.googleapis.com/fcm/send';
 
@@ -72,7 +87,7 @@ export default function MediaCard(props) {
                 "title": "Join Trip Request",
                 "body": "Hi, someone want to join your trip!"
             },
-            //"to": "dgqauZkWN73p1jcqain40b:APA91bFDw6KkJil-u7pv94swTafEtw0KhZHOR1ioInxTvruIA4pYlumFse3orF1C8VUZnXbiE62h7m_0nGnyoFL7oUZrLqWOHVDESWjWPuFmOtrLCihmagbEF0hoWAEjOvKOcjNLk0Uj"
+            "to": t
         }
 
         fetch(apiUrl, {
@@ -95,7 +110,6 @@ export default function MediaCard(props) {
                     console.log("err post=", error);
                 });
     }
-
 
     return (
         <div>
@@ -124,14 +138,14 @@ export default function MediaCard(props) {
                         <Typography gutterBottom variant="h5" component="h2"> Trip Name: {props.name} </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
                             Area: {props.area}<br></br>
-                        Vehicle Type: {props.vehicle}<br></br>
-                        At: {props.date} On {props.time}<br></br>
-                        With: {props.participants} Partners
-          </Typography>
+                            Vehicle Type: {props.vehicle}<br></br>
+                            At: {props.date} On {props.time}<br></br>
+                            With: {props.participants} Partners<br></br>
+                        </Typography>
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
-                    <ColorButton onClick={firebaseNotification} variant="contained" color="primary" className={classes.margin}> Ask to join! </ColorButton>
+                    <ColorButton onClick={chekcIndex} variant="contained" color="primary" className={classes.margin}> Ask to join! </ColorButton>
                     {/* <Button className={classes.button} size="large" color="primary"> Ask to join! </Button> */}
                 </CardActions>
             </Card><br></br>

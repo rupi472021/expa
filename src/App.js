@@ -11,13 +11,10 @@ import CCMyTrip from './ClassComponents/CCMyTrip';
 import CCSearchPage from './ClassComponents/CCSearchPage';
 import CCTripPage from './ClassComponents/CCTripPage';
 import firebase from './firebase';
-import { store } from 'react-notifications-component';
-import ReactNotification from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
-import { Alert, AlertTitle } from '@material-ui/lab';
-
+import Modal from './Modal.js';
 
 class App extends Component {
 
@@ -27,7 +24,18 @@ class App extends Component {
       Ques_data_fromSQL: '',
       snackBarStatus: false,
       payloadTtile: '',
+      show: false
     }
+    this.showModal = this.showModal.bind(this);
+    this.hideModal = this.hideModal.bind(this);
+  };
+
+  showModal = () => {
+    this.setState({ show: true });
+  };
+
+  hideModal = () => {
+    this.setState({ show: false });
   };
 
   componentDidMount = () => { //GET all Users from Users_expa (SQL) onload
@@ -57,14 +65,16 @@ class App extends Component {
 
       console.log(a[0]) //the email of the requester
       console.log(a[1]) // trip name
-
-
+      console.log(a[2]) // the name of the requester
+      console.log(a[3]) // the image of the requester
 
       this.setState({
         snackBarStatus: true,
         payloadTtile: payload.notification.title,
         payloadBodyEmail: a[0],
-        payloadBodyTripName: a[1]
+        payloadBodyTripName: a[1],
+        payloadBodyRequester: a[2],
+        payloadBodyRequesterImge: a[3]
       })
 
       // store.addNotification({
@@ -193,6 +203,20 @@ class App extends Component {
     })
   }
 
+  accpetUserFunctionFromModal = () => {
+
+    alert("you have a new participant in your trip!")
+    this.setState({ show: false });
+
+  }
+
+  deniedUserFunctionFromModal = () => {
+
+    alert("maybe next trip")
+    this.setState({ show: false });
+
+  }
+
   render() {
     return (
       <div className="App">
@@ -208,12 +232,13 @@ class App extends Component {
           message={this.state.payloadTtile}
           action={
             <React.Fragment>
-              <Button color="secondary" size="small" onClick={() => this.setState({ snackBarStatus: false })}> VIEW </Button>
+              <Button color="secondary" size="small" onClick={this.showModal}> VIEW </Button>
               <Button color="secondary" size="small" onClick={this.accpetUserFunction}> ACCEPT </Button>
               <Button color="secondary" size="small" onClick={this.deniedUserFunction}> DENIED </Button>
             </React.Fragment>
           }
         />
+        <Modal handleDENIED={this.deniedUserFunctionFromModal} handleACCEPT={this.accpetUserFunctionFromModal} show={this.state.show} handleClose={this.hideModal} name={this.state.payloadBodyRequester} email={this.state.payloadBodyEmail} img={this.state.payloadBodyRequesterImge}> </Modal>
         {/* <ReactNotification /> */}
         <Switch>
           <Route exact path="/" >

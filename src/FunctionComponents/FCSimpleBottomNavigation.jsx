@@ -14,7 +14,7 @@ import Info from '@material-ui/icons/Info';
 
 const useStyles = makeStyles({
   root: {
-    width: 500,
+    // width: '100%',
 
   },
 });
@@ -31,12 +31,11 @@ export default function FCSimpleBottomNavigation() {
 
   return (
 
-    <BottomNavigation value={value} onChange={handleChange} className={classes.root}>
+    <BottomNavigation  value={value} onChange={handleChange} className={classes.root}>
       <BottomNavigationAction label="Recents" value="recents" icon={<RestoreIcon />} />
       <BottomNavigationAction label="Favorites" value="favorites" icon={<FavoriteIcon />} />
       <BottomNavigationAction label="Nearby" value="nearby" icon={<LocationOnIcon />} />
       <BottomNavigationAction label="Info" value="info" icon={<Info />} />
-      <BottomNavigationAction label="Participants" value="participants" icon={<PeopleAlt />} />
 
     </BottomNavigation>
   );

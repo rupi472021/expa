@@ -51,9 +51,37 @@ const EquipList =
                                         </select>
                                     </td>
                                 </tr>
-
+                                <tr>
+                                    {/* <td><TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" name="email" autoComplete="email" autoFocus onChange={(e) => this.setState({ email: e.target.value })} /></td> */}
+                                    <h5>Gas</h5>
+                                    <td>
+                                        <select id="dropdown" /*onChange={(e) => this.setState({ q9: e.target.value })}*/>
+                                            <option value="Will be the trip Participants">Affable</option>
+                                            <option value="Will be the trip Participants">Troglodyte</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    {/* <td><TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" name="email" autoComplete="email" autoFocus onChange={(e) => this.setState({ email: e.target.value })} /></td> */}
+                                    <h5>Water</h5>
+                                    <td>
+                                        <select id="dropdown" /*onChange={(e) => this.setState({ q9: e.target.value })}*/>
+                                            <option value="Will be the trip Participants">Yoni</option>
+                                            <option value="Will be the trip Participants">Troglodyte</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    {/* <td><TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" name="email" autoComplete="email" autoFocus onChange={(e) => this.setState({ email: e.target.value })} /></td> */}
+                                    <h5>Tent</h5>
+                                    <td>
+                                        <select id="dropdown"  /*onChange={(e) => this.setState({ q9: e.target.value })}*/>
+                                            <option value="Will be the trip Participants">Yoni</option>
+                                            <option value="Will be the trip Participants">Troglodyte</option>
+                                        </select>
+                                    </td>
+                                </tr>
                             </tbody>
-
                         </Table>
                         <Button variant="info" size="md"  className="edit"> Edit List </Button>
                         <h1></h1>

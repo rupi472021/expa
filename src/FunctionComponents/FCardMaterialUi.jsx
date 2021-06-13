@@ -87,7 +87,7 @@ export default function MediaCard(props) {
                 "title": localStorage.getItem('user_fname') + " Asks to join " + props.name + " trip",
                 "body": localStorage.getItem('user_email') + "," + props.name
             },
-            "to": "dgqauZkWN73p1jcqain40b:APA91bGNyTuTt9ue3RJ6zWrrAQ3iQ1aqklRCCD2hnaGwehTMf_hilayceQYKLGeZ7A_DEXPsMfsh1PlXOOBPo3xOAxSSvwQ_58zvwsAc2UkDfYJHe9r5cePLJ0cTRwV-HgzLhPWlChNg"
+            "to": t
         }
 
         fetch(apiUrl, {

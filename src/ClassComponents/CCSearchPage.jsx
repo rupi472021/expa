@@ -39,7 +39,7 @@ export default class CCSearchPage extends Component {
                 console.log("user email from LocalStorge: " + localStorage.getItem('user_email'));
                 const filterArr = data.filter(item => item.Admin_email !== localStorage.getItem('user_email'));
                 console.log(filterArr);
-                data.forEach((item) => {
+                filterArr.forEach((item) => {
                     this.state.AllTrips.push({ Trip: item });
                 })
             }).catch(function (error) {

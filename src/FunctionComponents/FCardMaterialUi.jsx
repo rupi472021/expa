@@ -85,7 +85,7 @@ export default function MediaCard(props) {
 
             "notification": {
                 "title": localStorage.getItem('user_fname') + " Asks to join " + props.name + " trip",
-                "body": localStorage.getItem('user_email') + "," + props.name
+                "body": localStorage.getItem('user_email') + "," + props.name + "," + localStorage.getItem('user_fname') + " " + localStorage.getItem('user_lname') + "," + localStorage.getItem('user_image')
             },
             "to": t
         }
@@ -113,7 +113,7 @@ export default function MediaCard(props) {
 
     return (
         <div>
-            {/* <Snackbar
+            <Snackbar
                 style={{ marginBottom: 600 }}
                 anchorOrigin={{
                     vertical: 'bottom',
@@ -130,7 +130,7 @@ export default function MediaCard(props) {
                         </IconButton>
                     </React.Fragment>
                 }
-            /> */}
+            />
             <Card className={classes.root}>
                 <CardActionArea>
                     <CardMedia className={classes.media} image="http://suindependent.com/wp-content/uploads/2018/01/Winter-Jamboree-3.jpg" title="Contemplative Reptile" />
@@ -140,13 +140,12 @@ export default function MediaCard(props) {
                             Area: {props.area}<br></br>
                             Vehicle Type: {props.vehicle}<br></br>
                             At: {props.date} On {props.time}<br></br>
-                            With: {props.participants} Partners<br></br>
+                            With: {props.participants} Partners
                         </Typography>
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
                     <ColorButton onClick={chekcIndex} variant="contained" color="primary" className={classes.margin}> Ask to join! </ColorButton>
-                    {/* <Button className={classes.button} size="large" color="primary"> Ask to join! </Button> */}
                 </CardActions>
             </Card><br></br>
         </div>

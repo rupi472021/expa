@@ -14,8 +14,7 @@ import FCSimpleBottomNavigation from '../FunctionComponents/FCSimpleBottomNaviga
 import { Container, Row, Col, Table } from 'reactstrap';
 import TextField from '@material-ui/core/TextField';
 import FCEditList from '../FunctionComponents/FCEditList';
-import Weathers from '../Element/EWeather';
-
+//import Weathers from '../Element/EWeather';
 
 
 const useStyles = makeStyles((theme) => ({

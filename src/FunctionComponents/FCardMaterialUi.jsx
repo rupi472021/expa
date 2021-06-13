@@ -84,7 +84,7 @@ export default function MediaCard(props) {
         var payload = {
 
             "notification": {
-                "title": localStorage.getItem('user_fname') + " Asks to join " + props.name + " trip",
+                "title": localStorage.getItem('user_fname') + " Asks to join Your " + props.name + " trip",
                 "body": localStorage.getItem('user_email') + "," + props.name
             },
             "to": t

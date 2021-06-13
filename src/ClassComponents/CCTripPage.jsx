@@ -36,6 +36,7 @@ export default class CCTripPage extends Component {
             value: '',
             setValue: '',
             TripsByName: [],
+            ParticipantsArray:[],
             opacity: 0.6,
             disabled: true,
             showComponent: false,
@@ -46,7 +47,7 @@ export default class CCTripPage extends Component {
             Check4: '',
             Check5: '',
             Check6: '',
-
+            NumOfPartners: 1,
 
         };
         this._onButtonClick = this._onButtonClick.bind(this);
@@ -77,7 +78,32 @@ export default class CCTripPage extends Component {
 
         console.log("this.state.TripsByName....");
         console.log(this.state.TripsByName);
-        console.log(this.state.tempName)
+        console.log(this.state.tempName);
+
+        this.getParticipantTripDate();
+    }
+
+    getParticipantTripDate(){
+
+        let apiUrl = `http://localhost:53281/api/User/getParticiByName/${localStorage.getItem('trip_name')}/`
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                // console.log("The trip for this trip name -  trips data from sql")
+                console.log(data);
+                data.forEach((item) => {
+                    // console.log("item us");
+                    // console.log(item.Date);
+                    this.state.ParticipantsArray.push({ Partner: item });
+                    this.setState({ email: item.Email, fname: item.Fname, lname: item.Lname, image: item.Image});
+                })
+            }).catch(function (error) {
+                console.log("Error getting document:", error);
+            });
+
+            console.log("this.state.ParticipantsArray....");
+        console.log(this.state.ParticipantsArray);
+
     }
 
     _onButtonClick() {
@@ -98,19 +124,18 @@ export default class CCTripPage extends Component {
         });
     }
 
-    
+
     CloseEditList = () => {
         this.setState({
-            showChecklistComponent:false
+            showChecklistComponent: false
         });
     }
 
 
     test = () => {
-        this.setState({ tempName: this.state.TripsByName[0].Trip.Name });
-        console.log("this is temp name");
-        console.log(this.state.tempName)
-        alert(this.state.tempName);
+      
+        alert(this.state.ParticipantsArray.length);
+        
     }
 
     backbtn = () => {
@@ -124,7 +149,7 @@ export default class CCTripPage extends Component {
             confirmButtonText: 'Yes'
         }).then((result) => {
             if (result.isConfirmed) {
-                localStorage.clear();
+                // localStorage.clear();
                 window.location.href = "http://localhost:3000/main_menu_page"
                 // window.location.href = "http://proj.ruppin.ac.il/igroup47/prod/"       
             }
@@ -152,7 +177,7 @@ export default class CCTripPage extends Component {
 
                             <Button variant="info" onClick={this._onButtonClick}>Info</Button>
                             <Button size="sm" variant="warning">Weather</Button>
-                            <Button size="sm" >Sign in</Button>
+                            <Button size="sm" >{this.state.ParticipantsArray.length} / {this.state.participants}</Button>
                             <Button size="sm" variant="secondary">Sign in</Button>
                         </nav>
                         {/* <h1>{this.state.name}</h1> */}
@@ -236,7 +261,7 @@ export default class CCTripPage extends Component {
                                 <Table striped bordered hover variant="dark" >
 
                                     <tbody>
-                                        <td><TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" name="email" autoComplete="email" autoFocus /></td>
+                                        {/* <td><TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" name="email" autoComplete="email" autoFocus /></td> */}
 
                                         <tr>
                                             <h5>Water</h5>
@@ -310,7 +335,7 @@ export default class CCTripPage extends Component {
                                 </Table>
                             </Modal.Body>
                             <Modal.Footer>
-                                <Button variant="secondary" onClick={()=> this.setState({ showChecklistComponent: false })}  >Close</Button>
+                                <Button variant="secondary" onClick={() => this.setState({ showChecklistComponent: false })}  >Close</Button>
                                 <Button style={{ alignItems: 'center' }} variant="primary">Save Changes</Button>
                             </Modal.Footer>
                         </Modal> : null

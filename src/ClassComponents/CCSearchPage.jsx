@@ -29,7 +29,7 @@ export default class CCSearchPage extends Component {
 
         console.log("in componentDidMount search page")
 
-        let apiUrl = `http://localhost:53281/api/NewTrip`
+        let apiUrl = `http://localhost:51566/api/NewTrip`
 
         fetch(apiUrl)
             .then(response => response.json())
@@ -39,7 +39,7 @@ export default class CCSearchPage extends Component {
                 console.log("user email from LocalStorge: " + localStorage.getItem('user_email'));
                 const filterArr = data.filter(item => item.Admin_email !== localStorage.getItem('user_email'));
                 console.log(filterArr);
-                filterArr.forEach((item) => {
+                data.forEach((item) => {
                     this.state.AllTrips.push({ Trip: item });
                 })
             }).catch(function (error) {

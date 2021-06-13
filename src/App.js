@@ -27,7 +27,6 @@ class App extends Component {
       Ques_data_fromSQL: '',
       snackBarStatus: false,
       payloadTtile: '',
-      payloadBody: '',
     }
   };
 
@@ -48,13 +47,24 @@ class App extends Component {
       });
     messaging.onMessage((payload) => { //אם שלחו הודעה- היא מאזינה
 
+      console.log(payload);
+
       console.log("notification title: " + payload.notification.title);
       console.log("notification body: " + payload.notification.body);
+      console.log(payload.notification.body);
+
+      const a = payload.notification.body.split(',');
+
+      console.log(a[0]) //the email of the requester
+      console.log(a[1]) // trip name
+
+
 
       this.setState({
         snackBarStatus: true,
         payloadTtile: payload.notification.title,
-        payloadBody: payload.notification.body
+        payloadBodyEmail: a[0],
+        payloadBodyTripName: a[1]
       })
 
       // store.addNotification({
@@ -79,7 +89,7 @@ class App extends Component {
 
     console.log("in componentDidMount function");
 
-    let apiUrl = `http://localhost:53281/api/User`;
+    let apiUrl = `http://localhost:51566/api/User`;
     //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User`;
 
     fetch(apiUrl)
@@ -102,7 +112,7 @@ class App extends Component {
         });
 
 
-    let apiUrl1 = `http://localhost:53281/api/Questionnaire`;
+    let apiUrl1 = `http://localhost:51566/api/Questionnaire`;
     fetch(apiUrl1)
       .then(res => {
         console.log('res=', res);
@@ -121,14 +131,73 @@ class App extends Component {
         (error) => {
           console.log("err GET=", error);
         });
+  }
 
+  accpetUserFunction = () => {
+
+    console.log("you will accept " + this.state.payloadBodyEmail + " for this trip: " + this.state.payloadBodyTripName)
+
+    let apiUrl = `http://localhost:51566/api/ParticipantsInTrip`;
+
+    const Participant = {
+      TripName: this.state.payloadBodyTripName,
+      AdminEmail: localStorage.getItem('user_email'),
+      ParticipantEmail: this.state.payloadBodyEmail,
+      Active: true
+    }
+
+    ////POST To Participants_in_Trip SQL TABLE
+    fetch(apiUrl, {
+      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      mode: 'cors', // no-cors, *cors, same-origin
+      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: 'same-origin', // include, *same-origin, omit
+      headers: {
+        'Content-Type': 'application/json'
+        // 'Content-type': 'application/json; charset=UTF-8', //very important to add the 'charset=UTF-8'!!!!
+        // 'Accept': 'application/json; charset=UTF-8'
+      },
+      redirect: 'follow', // manual, *follow, error
+      referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+      body: JSON.stringify(Participant) // body data type must match "Content-Type" header
+    })
+  }
+
+  deniedUserFunction = () => {
+
+    console.log("you will accept " + this.state.payloadBodyEmail + " for this trip: " + this.state.payloadBodyTripName)
+
+    let apiUrl = `http://localhost:51566/api/ParticipantsInTrip`;
+
+    const Participant = {
+      TripName: this.state.payloadBodyTripName,
+      AdminEmail: localStorage.getItem('user_email'),
+      ParticipantEmail: this.state.payloadBodyEmail,
+      Active: false
+    }
+
+    ////POST To Participants_in_Trip SQL TABLE
+    fetch(apiUrl, {
+      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      mode: 'cors', // no-cors, *cors, same-origin
+      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: 'same-origin', // include, *same-origin, omit
+      headers: {
+        'Content-Type': 'application/json'
+        // 'Content-type': 'application/json; charset=UTF-8', //very important to add the 'charset=UTF-8'!!!!
+        // 'Accept': 'application/json; charset=UTF-8'
+      },
+      redirect: 'follow', // manual, *follow, error
+      referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+      body: JSON.stringify(Participant) // body data type must match "Content-Type" header
+    })
   }
 
   render() {
     return (
       <div className="App">
         <Snackbar
-          style={{ marginBottom: 600 }}
+          style={{ marginBottom: 575 }}
           anchorOrigin={{
             vertical: 'bottom',
             horizontal: 'left',
@@ -140,8 +209,8 @@ class App extends Component {
           action={
             <React.Fragment>
               <Button color="secondary" size="small" onClick={() => this.setState({ snackBarStatus: false })}> VIEW </Button>
-              <Button color="secondary" size="small" onClick={() => alert("this user joined your trip!")}> ACCEPT </Button>
-              <Button color="secondary" size="small" onClick={() => alert("maybe next trip!")}> DENIED </Button>
+              <Button color="secondary" size="small" onClick={this.accpetUserFunction}> ACCEPT </Button>
+              <Button color="secondary" size="small" onClick={this.deniedUserFunction}> DENIED </Button>
             </React.Fragment>
           }
         />

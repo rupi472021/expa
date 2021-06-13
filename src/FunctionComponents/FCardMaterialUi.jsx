@@ -84,10 +84,10 @@ export default function MediaCard(props) {
         var payload = {
 
             "notification": {
-                "title": "Join Trip Request",
-                "body": "Hi, someone want to join your trip!"
+                "title": localStorage.getItem('user_fname') + " Asks to join " + props.name + " trip",
+                "body": localStorage.getItem('user_email') + "," + props.name
             },
-            "to": t
+            "to": "dgqauZkWN73p1jcqain40b:APA91bGNyTuTt9ue3RJ6zWrrAQ3iQ1aqklRCCD2hnaGwehTMf_hilayceQYKLGeZ7A_DEXPsMfsh1PlXOOBPo3xOAxSSvwQ_58zvwsAc2UkDfYJHe9r5cePLJ0cTRwV-HgzLhPWlChNg"
         }
 
         fetch(apiUrl, {
@@ -113,7 +113,7 @@ export default function MediaCard(props) {
 
     return (
         <div>
-            <Snackbar
+            {/* <Snackbar
                 style={{ marginBottom: 600 }}
                 anchorOrigin={{
                     vertical: 'bottom',
@@ -130,7 +130,7 @@ export default function MediaCard(props) {
                         </IconButton>
                     </React.Fragment>
                 }
-            />
+            /> */}
             <Card className={classes.root}>
                 <CardActionArea>
                     <CardMedia className={classes.media} image="http://suindependent.com/wp-content/uploads/2018/01/Winter-Jamboree-3.jpg" title="Contemplative Reptile" />

@@ -49,10 +49,10 @@ export default function MediaCard2(props) {
                         <Typography gutterBottom variant="h5" component="h2"> Trip Name: {props.name} </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
                             Area: {props.area}<br></br>
-                        Vehicle Type: {props.vehicle}<br></br>
-                        At: {props.date} On {props.time}<br></br>
-                        With: {props.participants} Partners
-          </Typography>
+                            Vehicle Type: {props.vehicle}<br></br>
+                            At: {props.date} On {props.time}<br></br>
+                            With: {props.participants} Partners
+                        </Typography>
                     </CardContent>
                 </CardActionArea>
                 <CardActions>

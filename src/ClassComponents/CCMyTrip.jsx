@@ -27,7 +27,7 @@ export default class CCMyTrip extends Component {
 
     componentDidMount = () => {
 
-        let apiUrl = `http://localhost:51566/api/NewTrip/`
+        let apiUrl = `http://localhost:53281/api/NewTrip/`
 
         fetch(apiUrl)
             .then(response => response.json())
@@ -45,7 +45,7 @@ export default class CCMyTrip extends Component {
         console.log(this.state.AllTripsFromSql);
 
 
-        let apiUrl1 = `http://localhost:51566/api/ParticipantsInTrip/getSpecific/${localStorage.getItem('user_email')}/`
+        let apiUrl1 = `http://localhost:53281/api/ParticipantsInTrip/getSpecific/${localStorage.getItem('user_email')}/`
 
         fetch(apiUrl1)
             .then(response => response.json())
@@ -144,7 +144,7 @@ export default class CCMyTrip extends Component {
             <div>
                 <div><Button variant="secondary" size="sm" onClick={this.backbtn} className="but"> Main Menu </Button></div><br></br>
                 <Button style={{ width: '90%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold', fontSize: '40px' }} fullWidth variant="info" size="lg" disabled='false' >My Trips</Button><br></br><br></br>
-                <InputLabel htmlFor="age-native-simple">What do you want to see?</InputLabel>
+                {/* <InputLabel htmlFor="age-native-simple">What do you want to see?</InputLabel> */}
                 <Select
                     native
                     onChange={this.Sort}
@@ -153,9 +153,9 @@ export default class CCMyTrip extends Component {
                         id: 'age-native-simple',
                     }}
                 >
-                    <option value="PleaseChoose"> Please choose</option>
-                    <option value="byMe">Trips where I am the Admin</option>
-                    <option value="participate">Trips I participate in</option>
+                    <option value="PleaseChoose"> Watch Your Trips </option>
+                    <option value="byMe">I'm the Trip Admin</option>
+                    <option value="participate"> I'm a Partner </option>
                 </Select>
                 <br></br><br></br>
                 <CardColumns>

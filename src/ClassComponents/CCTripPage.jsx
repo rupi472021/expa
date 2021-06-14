@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { AiOutlineRollback } from 'react-icons/ai';
 import Swal from 'sweetalert2';
-import { Form, Button, DropdownButton, Dropdown, ButtonGroup, ProgressBar, CardColumns, Modal } from 'react-bootstrap';
+import { Form, Button, DropdownButton, Dropdown, ButtonGroup, ProgressBar, CardColumns, Modal, Card } from 'react-bootstrap';
 import MediaCard from '../FunctionComponents/FCardMaterialUi';
 import MediaCard2 from '../FunctionComponents/FCardMaterialUi2';
 import { makeStyles } from '@material-ui/core/styles';
@@ -15,7 +15,7 @@ import { Container, Row, Col, Table } from 'reactstrap';
 import TextField from '@material-ui/core/TextField';
 import FCEditList from '../FunctionComponents/FCEditList';
 //import Weathers from '../Element/EWeather';
-
+import Select from '@material-ui/core/Select';
 
 const useStyles = makeStyles((theme) => ({
     margin: {
@@ -41,9 +41,10 @@ export default class CCTripPage extends Component {
             disabled: true,
             showComponent: false,
             showChecklistComponent: false,
-            Check1: '',
-            Check2: '',
-            Check3: '',
+            showParticipantsComponent: false,
+            // Check1: '',
+            // Check2: '',
+            // Check3: '',
             Check4: '',
             Check5: '',
             Check6: '',
@@ -52,7 +53,7 @@ export default class CCTripPage extends Component {
         };
         this._onButtonClick = this._onButtonClick.bind(this);
         this._EditListButtonClick = this._EditListButtonClick.bind(this);
-
+        this._ViewParticipantsButtonClick = this._ViewParticipantsButtonClick.bind(this);
 
     };
 
@@ -60,7 +61,7 @@ export default class CCTripPage extends Component {
 
 
     componentDidMount = () => {
-        let apiUrl = `http://localhost:51566/api/NewTrip/getripByName/${localStorage.getItem('trip_name')}/`
+        let apiUrl = `http://localhost:53281/api/NewTrip/getripByName/${localStorage.getItem('trip_name')}/`
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
@@ -85,7 +86,7 @@ export default class CCTripPage extends Component {
 
     getParticipantTripDate() {
 
-        let apiUrl = `http://localhost:51566/api/User/getParticiByName/${localStorage.getItem('trip_name')}/`
+        let apiUrl = `http://localhost:53281/api/User/getParticiByName/${localStorage.getItem('trip_name')}/`
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
@@ -118,16 +119,20 @@ export default class CCTripPage extends Component {
         });
     }
 
-    _closeEditlist() {
+    _ViewParticipantsButtonClick() {
         this.setState({
-            showChecklistComponent: false,
+            showParticipantsComponent: true,
         });
     }
 
 
+
+
     CloseEditList = () => {
         this.setState({
-            showChecklistComponent: false
+            showChecklistComponent: false,
+            showComponent: false,
+            showParticipantsComponent: false
         });
     }
 
@@ -174,16 +179,15 @@ export default class CCTripPage extends Component {
 
 
                         <nav class="navbar navbar-inverse" style={{ backgroundColor: 'grey' }}>
-
-                            <Button variant="info" onClick={this._onButtonClick}>Info</Button>
                             <Button size="sm" variant="warning">Weather</Button>
-                            <Button size="sm" >{this.state.ParticipantsArray.length} / {this.state.participants}</Button>
-                            <Button size="sm" variant="secondary">Sign in</Button>
+                            <Button variant="info" onClick={this._onButtonClick}>Info</Button>
+                            <Button size="sm" onClick={this._ViewParticipantsButtonClick}>{this.state.ParticipantsArray.length + 1} / {this.state.participants}</Button>
+                            {/* <Button size="sm" variant="secondary">Sign in</Button> */}
                         </nav>
                         {/* <h1>{this.state.name}</h1> */}
 
                         {/* <FCSimpleBottomNavigation /> */}
-                        <div><ProgressBar animated striped variant="success" now={(this.state.ParticipantsArray.length / this.state.participants)*100} label="Participants Capacity" /></div>
+                        <div><ProgressBar animated striped variant="success" now={(this.state.ParticipantsArray.length / this.state.participants) * 100} label="Participants Capacity" /></div>
                         <br></br>
                         <Container>
                             <Row>
@@ -200,22 +204,29 @@ export default class CCTripPage extends Component {
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                {/* <td><TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" name="email" autoComplete="email" autoFocus onChange={(e) => this.setState({ email: e.target.value })} /></td> */}
-                                                <h5>Gas</h5>
+                                                <h5>Water</h5>
                                                 <td>
-                                                    <select id="dropdown" disabled={this.state.disabled}  /*onChange={(e) => this.setState({ q9: e.target.value })}*/>
-                                                        <option value="Will be the trip Participants">Affable</option>
-                                                        <option value="Will be the trip Participants">Troglodyte</option>
+                                                    <select id="dropdown" disabled={this.state.disabled} onChange={(e) => this.setState({ Check1: e.target.value })}>
+                                                        <option value=""></option>
+                                                        <option value={localStorage.getItem('user_email')}>{localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}</option>
+                                                        {
+                                                            this.state.ParticipantsArray?.length > 0 &&
+                                                            this.state.ParticipantsArray?.map((item, key) => <option value={item.Partner.Email}>{item.Partner.Fname} {item.Partner.Lname}</option>)
+                                                        }
                                                     </select>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 {/* <td><TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" name="email" autoComplete="email" autoFocus onChange={(e) => this.setState({ email: e.target.value })} /></td> */}
-                                                <h5>Water</h5>
+                                                <h5>Gas</h5>
                                                 <td>
-                                                    <select id="dropdown" disabled={this.state.disabled} /*onChange={(e) => this.setState({ q9: e.target.value })}*/>
-                                                        <option value="Will be the trip Participants">Yoni</option>
-                                                        <option value="Will be the trip Participants">Troglodyte</option>
+                                                    <select id="dropdown" disabled={this.state.disabled} onChange={(e) => this.setState({ Check2: e.target.value })}>
+                                                        <option value=""></option>
+                                                        <option value={localStorage.getItem('user_email')}>{localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}</option>
+                                                        {
+                                                            this.state.ParticipantsArray?.length > 0 &&
+                                                            this.state.ParticipantsArray?.map((item, key) => <option value={item.Partner.Email}>{item.Partner.Fname} {item.Partner.Lname}</option>)
+                                                        }
                                                     </select>
                                                 </td>
                                             </tr>
@@ -223,9 +234,13 @@ export default class CCTripPage extends Component {
                                                 {/* <td><TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" name="email" autoComplete="email" autoFocus onChange={(e) => this.setState({ email: e.target.value })} /></td> */}
                                                 <h5>Tent</h5>
                                                 <td>
-                                                    <select id="dropdown" disabled={this.state.disabled} /*onChange={(e) => this.setState({ q9: e.target.value })}*/>
-                                                        <option value="Will be the trip Participants">Yoni</option>
-                                                        <option value="Will be the trip Participants">Troglodyte</option>
+                                                    <select id="dropdown" disabled={this.state.disabled} onChange={(e) => this.setState({ Check3: e.target.value })}>
+                                                        <option value=""></option>
+                                                        <option value={localStorage.getItem('user_email')}>{localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}</option>
+                                                        {
+                                                            this.state.ParticipantsArray?.length > 0 &&
+                                                            this.state.ParticipantsArray?.map((item, key) => <option value={item.Partner.Email}>{item.Partner.Fname} {item.Partner.Lname}</option>)
+                                                        }
                                                     </select>
                                                 </td>
                                             </tr>
@@ -267,9 +282,12 @@ export default class CCTripPage extends Component {
                                             <h5>Water</h5>
                                             <td>
                                                 <select onChange={(e) => this.setState({ Check1: e.target.value })}>
-                                                    <option value={this.state.Check1}></option>
-                                                    <option value="1">Affable</option>
-                                                    <option value="2">Troglodyte</option>
+                                                    <option></option>
+                                                    <option value={localStorage.getItem('user_email')}>{localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}</option>
+                                                    {
+                                                        this.state.ParticipantsArray?.length > 0 &&
+                                                        this.state.ParticipantsArray?.map((item, key) => <option value={item.Partner.Email}>{item.Partner.Fname} {item.Partner.Lname}</option>)
+                                                    }
                                                 </select>
                                             </td>
                                         </tr>
@@ -278,9 +296,12 @@ export default class CCTripPage extends Component {
                                             <h5>Gas</h5>
                                             <td>
                                                 <select id="dropdown" onChange={(e) => this.setState({ Check2: e.target.value })}>
-                                                    <option value={this.state.Check2}></option>
-                                                    <option value="Will be the trip Participants">Yoni</option>
-                                                    <option value="Will be the trip Participants">Troglodyte</option>
+                                                    <option value=""></option>
+                                                    <option value={localStorage.getItem('user_email')}>{localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}</option>
+                                                    {
+                                                        this.state.ParticipantsArray?.length > 0 &&
+                                                        this.state.ParticipantsArray?.map((item, key) => <option value={item.Partner.Email}>{item.Partner.Fname} {item.Partner.Lname}</option>)
+                                                    }
                                                 </select>
                                             </td>
                                         </tr>
@@ -289,9 +310,12 @@ export default class CCTripPage extends Component {
                                             <h5>Tent</h5>
                                             <td>
                                                 <select id="dropdown" onChange={(e) => this.setState({ Check3: e.target.value })}>
-                                                    <option value={this.state.Check3}></option>
-                                                    <option value="Will be the trip Participants">Yoni</option>
-                                                    <option value="Will be the trip Participants">Troglodyte</option>
+                                                    <option value=""></option>
+                                                    <option value={localStorage.getItem('user_email')}>{localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}</option>
+                                                    {
+                                                        this.state.ParticipantsArray?.length > 0 &&
+                                                        this.state.ParticipantsArray?.map((item, key) => <option value={item.Partner.Email}>{item.Partner.Fname} {item.Partner.Lname}</option>)
+                                                    }
                                                 </select>
                                             </td>
                                         </tr>
@@ -300,9 +324,12 @@ export default class CCTripPage extends Component {
                                             <h5>Kitchen supplies</h5>
                                             <td>
                                                 <select id="dropdown" onChange={(e) => this.setState({ Check4: e.target.value })}>
-                                                    <option value={this.state.Check4}></option>
-                                                    <option value="Will be the trip Participants">Affable</option>
-                                                    <option value="Will be the trip Participants">Troglodyte</option>
+                                                    <option value=""></option>
+                                                    <option value={localStorage.getItem('user_email')}>{localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}</option>
+                                                    {
+                                                        this.state.ParticipantsArray?.length > 0 &&
+                                                        this.state.ParticipantsArray?.map((item, key) => <option value={item.Partner.Email}>{item.Partner.Fname} {item.Partner.Lname}</option>)
+                                                    }
                                                 </select>
                                             </td>
                                         </tr>
@@ -311,9 +338,12 @@ export default class CCTripPage extends Component {
                                             <h5>Emergency and hygiene supplies</h5>
                                             <td>
                                                 <select id="dropdown" onChange={(e) => this.setState({ Check5: e.target.value })}>
-                                                    <option value={this.state.Check5}></option>
-                                                    <option value="Will be the trip Participants">Yoni</option>
-                                                    <option value="Will be the trip Participants">Troglodyte</option>
+                                                    <option value=""></option>
+                                                    <option value={localStorage.getItem('user_email')}>{localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}</option>
+                                                    {
+                                                        this.state.ParticipantsArray?.length > 0 &&
+                                                        this.state.ParticipantsArray?.map((item, key) => <option value={item.Partner.Email}>{item.Partner.Fname} {item.Partner.Lname}</option>)
+                                                    }
                                                 </select>
                                             </td>
                                         </tr>
@@ -322,9 +352,12 @@ export default class CCTripPage extends Component {
                                             <h5>Small repair kit</h5>
                                             <td>
                                                 <select id="dropdown" onChange={(e) => this.setState({ Check6: e.target.value })}>
-                                                    <option value={this.state.Check6}></option>
-                                                    <option value="Will be the trip Participants">Yoni</option>
-                                                    <option value="Will be the trip Participants">Troglodyte</option>
+                                                    <option value=""></option>
+                                                    <option value={localStorage.getItem('user_email')}>{localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}</option>
+                                                    {
+                                                        this.state.ParticipantsArray?.length > 0 &&
+                                                        this.state.ParticipantsArray?.map((item, key) => <option value={item.Partner.Email}>{item.Partner.Fname} {item.Partner.Lname}</option>)
+                                                    }
                                                 </select>
                                             </td>
                                         </tr>
@@ -335,8 +368,8 @@ export default class CCTripPage extends Component {
                                 </Table>
                             </Modal.Body>
                             <Modal.Footer>
-                                <Button variant="secondary" onClick={() => this.setState({ showChecklistComponent: false })}  >Close</Button>
                                 <Button style={{ alignItems: 'center' }} variant="primary">Save Changes</Button>
+                                <Button variant="secondary" onClick={() => this.setState({ showChecklistComponent: false })}  >Close</Button>
                             </Modal.Footer>
                         </Modal> : null
                     }
@@ -349,14 +382,78 @@ export default class CCTripPage extends Component {
                     {/* Showing Trip Card */}
                     {this.state.showComponent ?
 
-                        <CardColumns>
-                            {
-                                // {this.state.AllTripsBYEmail?.length=0=>{<p>You dont have any </p>}}                    
-                                this.state.TripsByName?.length > 0 &&
-                                this.state.TripsByName?.map((item, key) => <MediaCard2 name={this.state.name} key={key} date={this.state.date} time={this.state.time} participants={this.state.participants} area={this.state.area} />)
-                            }
-                        </CardColumns> : null
+                        <Modal
+                            show={this.state.showComponent}
+                            onHide={this.CloseEditList}
+                            backdrop="static"
+                            keyboard={false}
+                        >
+                            <Modal.Header closeButton>
+                                {/* <Modal.Title>Travel Checklist</Modal.Title> */}
+                            </Modal.Header>
+                            <Modal.Body>
+                                <CardColumns>
+                                    {
+                                        // {this.state.AllTripsBYEmail?.length=0=>{<p>You dont have any </p>}}                    
+                                        this.state.TripsByName?.length > 0 &&
+                                        this.state.TripsByName?.map((item, key) => <MediaCard2 style={{ backgroundColor: 'yellow' }} name={this.state.name} key={key} date={this.state.date} time={this.state.time} participants={this.state.participants} area={this.state.area} />)
+                                    }
+                                </CardColumns>
+
+                            </Modal.Body>
+                            <Modal.Footer>
+                                {/* <Button variant="secondary" onClick={() => this.setState({ showComponent: false })}  >Close</Button>
+                                <Button style={{ alignItems: 'center' }} variant="primary">Save Changes</Button> */}
+                            </Modal.Footer>
+                        </Modal> : null
                     }
+
+
+                    <br></br><br></br>
+
+                    {/* Showing Participants Card */}
+                    {this.state.showParticipantsComponent ?
+
+                        <Modal
+                            show={this.state.showParticipantsComponent}
+                            onHide={this.CloseEditList}
+                            backdrop="static"
+                            keyboard={false}
+                        >
+                            <Modal.Header closeButton>
+                                {/* <Modal.Title>Travel Checklist</Modal.Title> */}
+                            </Modal.Header>
+                            <Modal.Body>
+                                <CardColumns>
+                                    {
+                                        // {this.state.AllTripsBYEmail?.length=0=>{<p>You dont have any </p>}}                    
+                                        this.state.ParticipantsArray?.length > 0 &&
+                                        this.state.ParticipantsArray?.map((item, key) => <Card>
+                                            <Card.Img variant="top" src={item.Partner.Image} />
+                                            <Card.Body>
+                                                <Card.Title>{item.Partner.Fname} {item.Partner.Lname}</Card.Title>
+                                                <Card.Text>
+                                                    This is a wider card with supporting text below as a natural lead-in to
+                                                    additional content. This content is a little bit longer.
+                                                </Card.Text>
+                                            </Card.Body>
+                                            <Card.Footer>
+                                                {/* <small className="text-muted">Last updated 3 mins ago</small> */}
+                                            </Card.Footer>
+                                        </Card>)
+                                    }
+                                </CardColumns>
+
+                            </Modal.Body>
+                            <Modal.Footer>
+                                {/* <Button variant="secondary" onClick={() => this.setState({ showComponent: false })}  >Close</Button>
+            <Button style={{ alignItems: 'center' }} variant="primary">Save Changes</Button> */}
+                            </Modal.Footer>
+                        </Modal> : null
+                    }
+
+
+
 
 
                     <Button variant="secondary" size="sm" onClick={this.test} className="but"> check what print </Button>

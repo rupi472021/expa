@@ -183,7 +183,7 @@ export default class CCTripPage extends Component {
                         {/* <h1>{this.state.name}</h1> */}
 
                         {/* <FCSimpleBottomNavigation /> */}
-                        <div><ProgressBar animated striped variant="success" now={90} label="Participants Capacity" /></div>
+                        <div><ProgressBar animated striped variant="success" now={(this.state.ParticipantsArray.length / this.state.participants)*100} label="Participants Capacity" /></div>
                         <br></br>
                         <Container>
                             <Row>
@@ -235,7 +235,7 @@ export default class CCTripPage extends Component {
                                     </Table>
                                     {/* <Button variant="info" size="md" onClick={this.test} className="edit">שדגיח</Button> */}
                                     {/* <FCEditList dataFromTripPage={this.state.TripsByName} /> */}
-                                    <Button variant="info" onClick={this._EditListButtonClick}>Info</Button>
+                                    <Button variant="info" onClick={this._EditListButtonClick}>Edit List</Button>
 
                                     <h1></h1>
                                 </Col>

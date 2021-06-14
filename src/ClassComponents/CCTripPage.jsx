@@ -456,7 +456,7 @@ export default class CCTripPage extends Component {
 
 
 
-                    <Button variant="secondary" size="sm" onClick={this.test} className="but"> check what print </Button>
+                    <Button variant="secondary" size="sm" onClick={this.test} className="but"> check whats print </Button>
                 </div >
 
             </div>

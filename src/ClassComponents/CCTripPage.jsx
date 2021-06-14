@@ -36,7 +36,7 @@ export default class CCTripPage extends Component {
             value: '',
             setValue: '',
             TripsByName: [],
-            ParticipantsArray:[],
+            ParticipantsArray: [],
             opacity: 0.6,
             disabled: true,
             showComponent: false,
@@ -60,7 +60,7 @@ export default class CCTripPage extends Component {
 
 
     componentDidMount = () => {
-        let apiUrl = `http://localhost:53281/api/NewTrip/getripByName/${localStorage.getItem('trip_name')}/`
+        let apiUrl = `http://localhost:51566/api/NewTrip/getripByName/${localStorage.getItem('trip_name')}/`
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
@@ -83,9 +83,9 @@ export default class CCTripPage extends Component {
         this.getParticipantTripDate();
     }
 
-    getParticipantTripDate(){
+    getParticipantTripDate() {
 
-        let apiUrl = `http://localhost:53281/api/User/getParticiByName/${localStorage.getItem('trip_name')}/`
+        let apiUrl = `http://localhost:51566/api/User/getParticiByName/${localStorage.getItem('trip_name')}/`
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
@@ -95,13 +95,13 @@ export default class CCTripPage extends Component {
                     // console.log("item us");
                     // console.log(item.Date);
                     this.state.ParticipantsArray.push({ Partner: item });
-                    this.setState({ email: item.Email, fname: item.Fname, lname: item.Lname, image: item.Image});
+                    this.setState({ email: item.Email, fname: item.Fname, lname: item.Lname, image: item.Image });
                 })
             }).catch(function (error) {
                 console.log("Error getting document:", error);
             });
 
-            console.log("this.state.ParticipantsArray....");
+        console.log("this.state.ParticipantsArray....");
         console.log(this.state.ParticipantsArray);
 
     }
@@ -133,9 +133,9 @@ export default class CCTripPage extends Component {
 
 
     test = () => {
-      
+
         alert(this.state.ParticipantsArray.length);
-        
+
     }
 
     backbtn = () => {
@@ -163,7 +163,7 @@ export default class CCTripPage extends Component {
                 {/* <h1>{this.state.TripsByName[0].Trip.Name}</h1> */}
 
                 <div><Button variant="secondary" size="sm" onClick={this.backbtn} className="but"> Main Menu </Button></div>
-                {Weathers}
+                {/* {Weathers} */}
 
                 <div>
 

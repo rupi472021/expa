@@ -1,4 +1,5 @@
 import './App.css';
+// import "@coreui/dist/css/coreui.min.css";
 import { Switch, Route, withRouter } from 'react-router-dom';
 import CCRegisterPage from './ClassComponents/CCRegisterPage';
 import CCLoginPage from './ClassComponents/CCLoginPage';
@@ -15,6 +16,8 @@ import 'react-notifications-component/dist/theme.css';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import Modal from './Modal.js';
+import '@coreui/coreui/dist/css/coreui.min.css';
+
 
 class App extends Component {
 

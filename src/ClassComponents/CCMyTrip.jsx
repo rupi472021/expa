@@ -96,7 +96,7 @@ export default class CCMyTrip extends Component {
         if (e.target.value === "byMe") {
 
             console.log("you choose trips by me");
-            const TripsByMe = this.state.AllTripsFromSql.filter(f => f.Trip.Admin_email === "benmshulam@gmail.com")
+            const TripsByMe = this.state.AllTripsFromSql.filter(f => f.Trip.Admin_email === localStorage.getItem('user_email'))
             console.log(TripsByMe);
 
             this.setState({

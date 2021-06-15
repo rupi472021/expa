@@ -31,7 +31,7 @@ export default class CCCreateNewTrip extends Component {
         console.log("in componentDidMount function");
 
         // let apiUrl = `http://localhost:51566/api/NewTrip`;
-        let apiUrl = `http://localhost:53281/api/NewTrip/getAll`;
+        let apiUrl = `http://localhost:51566/api/NewTrip/getAll`;
 
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
@@ -218,7 +218,7 @@ export default class CCCreateNewTrip extends Component {
         }
 
         // event.preventDefault(); 
-        let apiUrl = `http://localhost:53281/api/NewTrip/` + this.state.trip_name + "/" + this.state.match_percent + "/" + this.state.with_children;
+        let apiUrl = `http://localhost:51566/api/NewTrip/` + this.state.trip_name + "/" + this.state.match_percent + "/" + this.state.with_children;
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip/`+this.state.trip_name+"/"+this.state.match_percent+"/"+this.state.with_children;
 
         fetch(apiUrl, {

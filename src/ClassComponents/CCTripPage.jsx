@@ -178,37 +178,42 @@ export default class CCTripPage extends Component {
     render() {
 
         return (
-            <div style={{ backgroundColor: '#1d21243b', height: '100%' }}>
+            /*style={{ backgroundColor: '#1d21243b', height: '100%' }}*/
+            <div  style={{ fontWeight: "bold", boxShadow: '10px 70px 300px 50px  yellow', fontSize: '30px', borderRadius: '15px'}}>
                 {/* <h1>{this.state.TripsByName[0].Trip.Name}</h1> */}
 
-                <div><Button variant="secondary" size="sm" onClick={this.backbtn} className="but"> Main Menu </Button></div><h1></h1>
+               <Button  variant="secondary" size="sm" onClick={this.backbtn} className="but"> Main Menu </Button><h1></h1>
                 {/* {Weathers} */}
 
                 <div>
                     <div>
-                        <nav class="navbar navbar-inverse" style={{ backgroundColor: 'grey' }}>
+                        <nav  class="navbar navbar-inverse" style={{ backgroundColor: 'grey' }}>
                             <Button size="sm" variant="warning" onClick={this._onWeatherButtonClick}><b>Weather</b></Button>
                             <Button size="sm" variant="info" onClick={this._onButtonClick}><b>Info</b></Button>
-                            <Button size="sm" onClick={this._ViewParticipantsButtonClick}><b>{this.state.ParticipantsArray.length + 1} / {this.state.participants}</b></Button>
+                            <Button variant="danger" size="sm" onClick={this._ViewParticipantsButtonClick}><b>{this.state.ParticipantsArray.length + 1} / {this.state.participants}</b></Button>
                             <BiCamera size={40} ></BiCamera>
                         </nav>
                         <div><ProgressBar animated striped variant="success" now={(this.state.ParticipantsArray.length / this.state.participants) * 100} label="Participants Capacity" /></div>
 
-                        
-                        <h3 style={{  boxShadow: '0px 50px 150px 10px yellow', fontSize: '15px', backgroundColor: 'gold', borderRadius: '15px' }}>
-                            Trip Name : <b>{this.state.name}</b>  At : {this.state.date} Admin: {localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}
-                        </h3>
+
+                        <nav class="navbar navbar-inverse" style={{ backgroundColor: 'grey' }}>
+                            <h3 style={{ boxShadow: '0px 50px 150px 10px yellow', fontSize: '14px', backgroundColor: 'gold', borderRadius: '2px' }}>&nbsp;&nbsp;AT: <b>{this.state.date}</b>&nbsp;&nbsp;</h3>
+                            <h3 style={{ boxShadow: '0px 50px 150px 10px yellow', fontSize: '14px', backgroundColor: 'gold', borderRadius: '2px' }}>&nbsp;&nbsp; Name: <b>{this.state.name}</b>&nbsp;&nbsp;</h3>
+                            <h3 style={{ boxShadow: '0px 50px 150px 10px yellow', fontSize: '14px', backgroundColor: 'gold', borderRadius: '2px' }}>&nbsp;&nbsp;Admin: <b>{localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}&nbsp;&nbsp;</b></h3>
+                        </nav>
+
+
+
                         {/* <h1>{this.state.name}</h1> */}
 
                         {/* <FCSimpleBottomNavigation /> */}
-                        <br></br>
                         <Container>
                             <Row>
-                                <Col style={{ backgroundColor: 'yellow', borderRadius: '10px' }}>
+                                <Col style={{ boxShadow: '0px 0px 150px 10px yellow', fontSize: '14px', borderRadius: '10px' }}>
                                     <h1></h1>
-                                    <h4 style={{ fontWeight: "bold", marginRight: '30px', boxShadow: '0px 50px 150px 10px yellow', fontSize: '20px', backgroundColor: 'gold', borderRadius: '15px', marginLeft: '21px' }}>
+                                    <h5 style={{ fontWeight: "bold", marginRight: '30px', boxShadow: '0px 50px 150px 10px yellow', fontSize: '15px', backgroundColor: 'gold', borderRadius: '15px', marginLeft: '21px' }}>
                                         Travel Checklist
-                                    </h4>
+                                    </h5>
                                     <Table striped bordered hover variant="dark" style={{ opacity: this.state.opacity }}>
                                         <thead>
                                             {/* <tr>
@@ -217,7 +222,7 @@ export default class CCTripPage extends Component {
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <h5>Water</h5>
+                                                <h6>Water</h6>
                                                 <td>
                                                     <select id="dropdown" disabled={this.state.disabled} onChange={(e) => this.setState({ Check1: e.target.value })}>
                                                         <option value=""></option>
@@ -231,7 +236,7 @@ export default class CCTripPage extends Component {
                                             </tr>
                                             <tr>
                                                 {/* <td><TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" name="email" autoComplete="email" autoFocus onChange={(e) => this.setState({ email: e.target.value })} /></td> */}
-                                                <h5>Gas</h5>
+                                                <h6>Gas</h6>
                                                 <td>
                                                     <select id="dropdown" disabled={this.state.disabled} onChange={(e) => this.setState({ Check2: e.target.value })}>
                                                         <option value=""></option>
@@ -245,9 +250,37 @@ export default class CCTripPage extends Component {
                                             </tr>
                                             <tr>
                                                 {/* <td><TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" name="email" autoComplete="email" autoFocus onChange={(e) => this.setState({ email: e.target.value })} /></td> */}
-                                                <h5>Tent</h5>
+                                                <h6>Tent</h6>
                                                 <td>
                                                     <select id="dropdown" disabled={this.state.disabled} onChange={(e) => this.setState({ Check3: e.target.value })}>
+                                                        <option value=""></option>
+                                                        <option value={localStorage.getItem('user_email')}>{localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}</option>
+                                                        {
+                                                            this.state.ParticipantsArray?.length > 0 &&
+                                                            this.state.ParticipantsArray?.map((item, key) => <option value={item.Partner.Email}>{item.Partner.Fname} {item.Partner.Lname}</option>)
+                                                        }
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                {/* <td><TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" name="email" autoComplete="email" autoFocus onChange={(e) => this.setState({ email: e.target.value })} /></td> */}
+                                                <h6>a</h6>
+                                                <td>
+                                                    <select id="dropdown" disabled={this.state.disabled} onChange={(e) => this.setState({ Check4: e.target.value })}>
+                                                        <option value=""></option>
+                                                        <option value={localStorage.getItem('user_email')}>{localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}</option>
+                                                        {
+                                                            this.state.ParticipantsArray?.length > 0 &&
+                                                            this.state.ParticipantsArray?.map((item, key) => <option value={item.Partner.Email}>{item.Partner.Fname} {item.Partner.Lname}</option>)
+                                                        }
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                {/* <td><TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" name="email" autoComplete="email" autoFocus onChange={(e) => this.setState({ email: e.target.value })} /></td> */}
+                                                <h6>b</h6>
+                                                <td>
+                                                    <select id="dropdown" disabled={this.state.disabled} onChange={(e) => this.setState({ Check5: e.target.value })}>
                                                         <option value=""></option>
                                                         <option value={localStorage.getItem('user_email')}>{localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}</option>
                                                         {
@@ -267,12 +300,11 @@ export default class CCTripPage extends Component {
 
                                     <h1></h1>
                                 </Col>
-                                <Col>2 of 2</Col>
+                                <Col style={{ boxShadow: '0px 0px 150px 10px ', fontSize: '14px', borderRadius: '10px',borderColor:'black' }}><br></br><br></br><br></br><br></br><br></br><br></br><div>MAP TRIP COMPONENT<br></br>In Progress . . .</div></Col>
                             </Row>
 
                         </Container>
-                    </div><br></br>
-
+                    </div>
 
                     {/* Showing Checklist  */}
                     {this.state.showChecklistComponent ?
@@ -374,8 +406,6 @@ export default class CCTripPage extends Component {
                                                 </select>
                                             </td>
                                         </tr>
-
-
                                     </tbody>
 
                                 </Table>
@@ -390,7 +420,6 @@ export default class CCTripPage extends Component {
 
 
 
-                    <br></br><br></br>
 
                     {/* Showing Trip Card */}
                     {this.state.showComponent ?
@@ -422,7 +451,6 @@ export default class CCTripPage extends Component {
                     }
 
 
-                    <br></br><br></br>
 
                     {/* Showing Participants Card */}
                     {this.state.showParticipantsComponent ?
@@ -490,12 +518,7 @@ export default class CCTripPage extends Component {
                         </Modal> : null
                     }
 
-
-
-
-                    <Button variant="secondary" size="sm" onClick={this.test} className="but"> check whats print </Button>
                 </div >
-
             </div>
 
         )

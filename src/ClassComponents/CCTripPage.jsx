@@ -185,7 +185,7 @@ export default class CCTripPage extends Component {
                <Button  variant="secondary" size="sm" onClick={this.backbtn} className="but"> Main Menu </Button><h1></h1>
                 {/* {Weathers} */}
 
-                <div>
+                <div style={{ fontWeight: "bold", boxShadow: '10px 70px 300px 50px  yellow', fontSize: '30px', borderRadius: '15px'}}>
                     <div>
                         <nav  class="navbar navbar-inverse" style={{ backgroundColor: 'grey' }}>
                             <Button size="sm" variant="warning" onClick={this._onWeatherButtonClick}><b>Weather</b></Button>
@@ -305,6 +305,7 @@ export default class CCTripPage extends Component {
 
                         </Container>
                     </div>
+                    <div style={{ boxShadow: '0px 0px 150px 10px yellow', borderRadius: '10px' }}><br></br><br></br><br></br>Admin Chat<br></br><br></br><br></br></div>
 
                     {/* Showing Checklist  */}
                     {this.state.showChecklistComponent ?
@@ -423,7 +424,6 @@ export default class CCTripPage extends Component {
 
                     {/* Showing Trip Card */}
                     {this.state.showComponent ?
-
                         <Modal
                             show={this.state.showComponent}
                             onHide={this.CloseEditList}
@@ -454,7 +454,6 @@ export default class CCTripPage extends Component {
 
                     {/* Showing Participants Card */}
                     {this.state.showParticipantsComponent ?
-
                         <Modal
                             show={this.state.showParticipantsComponent}
                             onHide={this.CloseEditList}
@@ -497,7 +496,6 @@ export default class CCTripPage extends Component {
 
                     {/* Showing Weather Component */}
                     {this.state.showWeatherComponent ?
-
                         <Modal
                             show={this.state.showWeatherComponent}
                             onHide={this.CloseEditList}

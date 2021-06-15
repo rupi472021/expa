@@ -16,6 +16,10 @@ import TextField from '@material-ui/core/TextField';
 import FCEditList from '../FunctionComponents/FCEditList';
 //import Weathers from '../Element/EWeather';
 import Select from '@material-ui/core/Select';
+import { BiCamera } from "react-icons/bi";
+
+
+
 
 const useStyles = makeStyles((theme) => ({
     margin: {
@@ -42,6 +46,7 @@ export default class CCTripPage extends Component {
             showComponent: false,
             showChecklistComponent: false,
             showParticipantsComponent: false,
+            showWeatherComponent: false,
             // Check1: '',
             // Check2: '',
             // Check3: '',
@@ -54,6 +59,8 @@ export default class CCTripPage extends Component {
         this._onButtonClick = this._onButtonClick.bind(this);
         this._EditListButtonClick = this._EditListButtonClick.bind(this);
         this._ViewParticipantsButtonClick = this._ViewParticipantsButtonClick.bind(this);
+        this._onWeatherButtonClick = this._onWeatherButtonClick.bind(this);
+
 
     };
 
@@ -125,6 +132,12 @@ export default class CCTripPage extends Component {
         });
     }
 
+    _onWeatherButtonClick() {
+        this.setState({
+            showWeatherComponent: true,
+        });
+    }
+
 
 
 
@@ -132,7 +145,8 @@ export default class CCTripPage extends Component {
         this.setState({
             showChecklistComponent: false,
             showComponent: false,
-            showParticipantsComponent: false
+            showParticipantsComponent: false,
+            showWeatherComponent: false,
         });
     }
 
@@ -167,27 +181,26 @@ export default class CCTripPage extends Component {
             <div style={{ backgroundColor: '#1d21243b', height: '100%' }}>
                 {/* <h1>{this.state.TripsByName[0].Trip.Name}</h1> */}
 
-                <div><Button variant="secondary" size="sm" onClick={this.backbtn} className="but"> Main Menu </Button></div>
+                <div><Button variant="secondary" size="sm" onClick={this.backbtn} className="but"> Main Menu </Button></div><h1></h1>
                 {/* {Weathers} */}
 
                 <div>
-
-                    <div><br></br>
-                        <h4 style={{ fontWeight: "bold", width: '90%', boxShadow: '0px 50px 150px 10px yellow', fontSize: '30px', backgroundColor: 'gold', borderRadius: '15px', marginLeft: '21px' }}>
-                            Trip Name : {this.state.name}
-                        </h4>
-
-
+                    <div>
                         <nav class="navbar navbar-inverse" style={{ backgroundColor: 'grey' }}>
-                            <Button size="sm" variant="warning">Weather</Button>
-                            <Button variant="info" onClick={this._onButtonClick}>Info</Button>
-                            <Button size="sm" onClick={this._ViewParticipantsButtonClick}>{this.state.ParticipantsArray.length + 1} / {this.state.participants}</Button>
-                            {/* <Button size="sm" variant="secondary">Sign in</Button> */}
+                            <Button size="sm" variant="warning" onClick={this._onWeatherButtonClick}><b>Weather</b></Button>
+                            <Button size="sm" variant="info" onClick={this._onButtonClick}><b>Info</b></Button>
+                            <Button size="sm" onClick={this._ViewParticipantsButtonClick}><b>{this.state.ParticipantsArray.length + 1} / {this.state.participants}</b></Button>
+                            <BiCamera size={40} ></BiCamera>
                         </nav>
+                        <div><ProgressBar animated striped variant="success" now={(this.state.ParticipantsArray.length / this.state.participants) * 100} label="Participants Capacity" /></div>
+
+                        
+                        <h3 style={{  boxShadow: '0px 50px 150px 10px yellow', fontSize: '15px', backgroundColor: 'gold', borderRadius: '15px' }}>
+                            Trip Name : <b>{this.state.name}</b>  At : {this.state.date} Admin: {localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}
+                        </h3>
                         {/* <h1>{this.state.name}</h1> */}
 
                         {/* <FCSimpleBottomNavigation /> */}
-                        <div><ProgressBar animated striped variant="success" now={(this.state.ParticipantsArray.length / this.state.participants) * 100} label="Participants Capacity" /></div>
                         <br></br>
                         <Container>
                             <Row>
@@ -452,6 +465,30 @@ export default class CCTripPage extends Component {
                         </Modal> : null
                     }
 
+
+
+                    {/* Showing Weather Component */}
+                    {this.state.showWeatherComponent ?
+
+                        <Modal
+                            show={this.state.showWeatherComponent}
+                            onHide={this.CloseEditList}
+                            backdrop="static"
+                            keyboard={false}
+                        >
+                            <Modal.Header closeButton>
+                                <Modal.Title>In Progress . . .</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+
+
+                            </Modal.Body>
+                            <Modal.Footer>
+                                {/* <Button variant="secondary" onClick={() => this.setState({ showComponent: false })}  >Close</Button>
+<Button style={{ alignItems: 'center' }} variant="primary">Save Changes</Button> */}
+                            </Modal.Footer>
+                        </Modal> : null
+                    }
 
 
 

@@ -33,6 +33,8 @@ export default function GoogleLoginn(props) {
                 Onclick: () => { Swal.clickConfirm() }
             }).then(() => {
                 window.location.href = "http://localhost:3000/main_menu_page"
+                // window.location.href = "https://adoring-curran-14d8ac.netlify.app/main_menu_page"
+                
             })
         }
         else {

@@ -7,6 +7,7 @@ import { GoPlus } from 'react-icons/go';
 import { BiSearchAlt2 } from 'react-icons/bi';
 import { RiUserSettingsLine } from 'react-icons/ri';
 
+
 export default function FCMainMenuPage() {
 
     const backbtn = () => {

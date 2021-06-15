@@ -378,7 +378,7 @@ export default class CCRegisterPage extends Component {
             <div style={{ backgroundColor: '#1d21243b', height: '100%' }} className={classes.NewBLogCard}>
                 <Container>
                     <div className={classes.Container}>
-                        <Button variant="secondary" size="sm" href="/" className="but"> BACK </Button><br></br>
+                        <Button variant="info" size="sm" href="/" className="but"> BACK </Button><br></br>
                         <div><Avatar alt="Remy Sharp" src="https://i.ibb.co/GF9rjsr/circle-cropped.png" style={{ width: '20vh', height: '20vh', marginTop: '10px' }} /></div>
                         <h1 style={{ marginLeft: 7, width: '90%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '35px' }} className="ExPa"> Create an Account </h1><br></br>
                         {/* <Button style={{ boxShadow:'0 0 50px 10px #141414',marginLeft: 7,width: '90%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '22px' }} fullWidth color="info" size="sm" disabled='false' >Create an Account</Button> */}

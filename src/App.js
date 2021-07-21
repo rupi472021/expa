@@ -85,7 +85,7 @@ class App extends Component {
     console.log("this.state.data_from_sql " + this.state.data_from_sql)
     console.log("in componentDidMount function");
 
-    let apiUrl = `http://localhost:51566/api/User`;
+    let apiUrl = `http://localhost:53281/api/User`;
     //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User`;
 
     fetch(apiUrl)
@@ -108,7 +108,7 @@ class App extends Component {
         });
 
 
-    let apiUrl1 = `http://localhost:51566/api/Questionnaire`;
+    let apiUrl1 = `http://localhost:53281/api/Questionnaire`;
     fetch(apiUrl1)
       .then(res => {
         console.log('res=', res);
@@ -133,7 +133,7 @@ class App extends Component {
 
     console.log("you will accept " + this.state.payloadBodyEmail + " for this trip: " + this.state.payloadBodyTripName)
 
-    let apiUrl = `http://localhost:51566/api/ParticipantsInTrip`;
+    let apiUrl = `http://localhost:53281/api/ParticipantsInTrip`;
 
     const Participant = {
       TripName: this.state.payloadBodyTripName,
@@ -167,6 +167,7 @@ class App extends Component {
 
   accpetUserFunctionFromModal = () => {
 
+    this.accpetUserFunction();
     alert("you have a new participant in your trip!")
     this.setState({ show: false });
 
@@ -204,9 +205,9 @@ class App extends Component {
         {/* <ReactNotification /> */}
         <Switch>
           <Route exact path="/">
-            <CCLoginPage dataFromApptoLoginPage={this.state.data_from_sql} />
+            <CCLoginPage dataFromApptoLoginPage={this.state.data_from_sql}/>
           </Route>
-          <Route exact path="/register" >
+          <Route exact path="/register">
             <CCRegisterPage dataFromApptoRegisterPage={this.state.data_from_sql} QuesDatafromApptoRegisterPage={this.state.Ques_data_fromSQL} Token={this.state.token_num} />
           </Route>
           <Route exact path="/forget_password_page" >

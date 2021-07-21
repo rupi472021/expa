@@ -53,7 +53,7 @@ export default class CCLoginPage extends Component {
                 {'Copyright © '}
                 <Link style={{ fontWeight: 'bold', fontColor: 'black' }} onClick={this.handleShow}>
                     ExPa Application
-          </Link>
+                </Link>
                 {new Date().getFullYear()}
                 {' '}
             </Typography>
@@ -79,7 +79,7 @@ export default class CCLoginPage extends Component {
 
         console.log("in handle function");
         console.log(this.props.dataFromApptoLoginPage) // show all data from Users table in the SQL from parent
-        
+
         if (this.props.dataFromApptoLoginPage.find((user => user.Email === this.state.email) && (user => user.Password === this.state.password))) {
 
             let index = this.props.dataFromApptoLoginPage.findIndex(obj => obj.Email === this.state.email);
@@ -150,13 +150,13 @@ export default class CCLoginPage extends Component {
                                     <Button variant="warning" style={{ width: '90%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '15px' }} fullWidth size="sm" ><Link style={{ color: 'black' }} to="/forget_password_page">Forgot Password</Link></Button>
                                 </Grid>
                                 <Grid item xs>
-                                    <Button variant="warning" style={{ width: '90%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '15px' }} href="/Register" fullWidth size="sm" > Sign Up</Button><br></br>
+                                    <Button variant="warning" style={{ width: '90%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '15px' }} fullWidth size="sm" ><Link style={{ color: 'black' }} to="/Register">Sign Up</Link></Button>
                                 </Grid>
                             </Grid>
                         </form>
                         <br></br><br></br><br></br>
                         <div style={{ width: '80%', marginBottom: '-50px' }}>
-                            <p style={{ width: '60%', fontWeight: 'bold', fontSize: '15px', marginLeft: '55px', marginTop: '-45px' }}> Quick Access With </p>
+                            <p style={{ width: '60%', fontWeight: 'bold', fontSize: '15px', marginLeft: '55px', marginTop: '-45px' }}> Quick Access With: </p>
                         </div><br></br><br></br>
                         <div style={{ height: 70, width: '80%' }}>
                             <div style={{ marginRight: 100 }}>

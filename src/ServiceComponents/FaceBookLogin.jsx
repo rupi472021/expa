@@ -38,6 +38,9 @@ export default class FaceBookLogin extends Component {
 
     checkIfUserExistsInSQL = (data) => {
 
+        console.log("data.email is " + data.email)
+        console.log("this.props.dataFromParent " + this.props.dataFromParent)
+
         if (this.props.dataFromParent.find((user => user.Email === data.email))) {
 
             Swal.fire({
@@ -68,7 +71,7 @@ export default class FaceBookLogin extends Component {
             this.setState.isLoggedIn ? 'Home' :
                 (<div style={{ marginTop: 5 }}>
                     <FacebookLogin
-                        appId="452917926124291"
+                        appId="297951512122443"
                         autoLoad={false}
                         textButton='Login'
                         fields="name,email,picture"

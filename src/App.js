@@ -15,8 +15,8 @@ import firebase from './firebase';
 import 'react-notifications-component/dist/theme.css';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
-import Modal from './Modal.js';
 import '@coreui/coreui/dist/css/coreui.min.css';
+import Modal from './Modal.js';
 
 
 class App extends Component {
@@ -28,10 +28,10 @@ class App extends Component {
       snackBarStatus: false,
       payloadTtile: '',
       show: false
-    }
+    };
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
-  };
+  }
 
   showModal = () => {
     this.setState({ show: true });
@@ -41,7 +41,8 @@ class App extends Component {
     this.setState({ show: false });
   };
 
-  componentDidMount = () => { //GET all Users from Users_expa (SQL) onload
+  componentDidMount = () => 
+  { //GET all Users from Users_expa (SQL) onload
 
     const messaging = firebase.messaging();
     messaging.requestPermission().then(() => {
@@ -79,30 +80,12 @@ class App extends Component {
         payloadBodyRequester: a[2],
         payloadBodyRequesterImge: a[3]
       })
-
-      // store.addNotification({
-      //   title: payload.notification.title + '!',
-      //   message: payload.notification.body,
-      //   type: "warning",
-      //   insert: "top",
-      //   container: "top-right",
-      //   animationIn: ["animate__animated", "animate__fadeIn"],
-      //   animationOut: ["animate__animated", "animate__fadeOut"],
-      //   dismiss: {
-      //     duration: 5000,
-      //   },
-      //   slidingExit: {
-      //     duration: 800,
-      //     timingFunction: 'ease-out',
-      //     delay: 0
-      //   }
-      // });
-
     });
 
+    console.log("this.state.data_from_sql " + this.state.data_from_sql)
     console.log("in componentDidMount function");
 
-    let apiUrl = `http://localhost:53281/api/User`;
+    let apiUrl = `http://localhost:51566/api/User`;
     //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User`;
 
     fetch(apiUrl)
@@ -125,7 +108,7 @@ class App extends Component {
         });
 
 
-    let apiUrl1 = `http://localhost:53281/api/Questionnaire`;
+    let apiUrl1 = `http://localhost:51566/api/Questionnaire`;
     fetch(apiUrl1)
       .then(res => {
         console.log('res=', res);
@@ -150,7 +133,7 @@ class App extends Component {
 
     console.log("you will accept " + this.state.payloadBodyEmail + " for this trip: " + this.state.payloadBodyTripName)
 
-    let apiUrl = `http://localhost:53281/api/ParticipantsInTrip`;
+    let apiUrl = `http://localhost:51566/api/ParticipantsInTrip`;
 
     const Participant = {
       TripName: this.state.payloadBodyTripName,
@@ -178,32 +161,8 @@ class App extends Component {
 
   deniedUserFunction = () => {
 
-    console.log("you will accept " + this.state.payloadBodyEmail + " for this trip: " + this.state.payloadBodyTripName)
+    console.log("you just denied " + this.state.payloadBodyEmail + " from this trip: " + this.state.payloadBodyTripName)
 
-    let apiUrl = `http://localhost:53281/api/ParticipantsInTrip`;
-
-    const Participant = {
-      TripName: this.state.payloadBodyTripName,
-      AdminEmail: localStorage.getItem('user_email'),
-      ParticipantEmail: this.state.payloadBodyEmail,
-      Active: false
-    }
-
-    ////POST To Participants_in_Trip SQL TABLE
-    fetch(apiUrl, {
-      method: 'POST', // *GET, POST, PUT, DELETE, etc.
-      mode: 'cors', // no-cors, *cors, same-origin
-      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: 'same-origin', // include, *same-origin, omit
-      headers: {
-        'Content-Type': 'application/json'
-        // 'Content-type': 'application/json; charset=UTF-8', //very important to add the 'charset=UTF-8'!!!!
-        // 'Accept': 'application/json; charset=UTF-8'
-      },
-      redirect: 'follow', // manual, *follow, error
-      referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-      body: JSON.stringify(Participant) // body data type must match "Content-Type" header
-    })
   }
 
   accpetUserFunctionFromModal = () => {
@@ -244,7 +203,7 @@ class App extends Component {
         <Modal handleDENIED={this.deniedUserFunctionFromModal} handleACCEPT={this.accpetUserFunctionFromModal} show={this.state.show} handleClose={this.hideModal} name={this.state.payloadBodyRequester} email={this.state.payloadBodyEmail} img={this.state.payloadBodyRequesterImge}> </Modal>
         {/* <ReactNotification /> */}
         <Switch>
-          <Route exact path="/" >
+          <Route exact path="/">
             <CCLoginPage dataFromApptoLoginPage={this.state.data_from_sql} />
           </Route>
           <Route exact path="/register" >

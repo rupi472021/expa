@@ -25,6 +25,7 @@ const ColorButton1 = withStyles((theme) => ({
     },
 }))(Button);
 
+
 const Modal = ({ handleClose, show, name, email, img, handleACCEPT, handleDENIED }) => {
     const showHideClassName = show ? "modal display-block" : "modal display-none";
 

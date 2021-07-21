@@ -41,7 +41,7 @@ export default class CCMyprofile extends Component {
 
         console.log("in componentDidMount function");
 
-        let apiUrl = `http://localhost:53281/api/Questionnaire?email=` + localStorage.getItem('user_email');
+        let apiUrl = `http://localhost:51566/api/Questionnaire?email=` + localStorage.getItem('user_email');
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/Questionnaire/getSpecificQuestionnaire`;
 
         fetch(apiUrl)
@@ -117,7 +117,7 @@ export default class CCMyprofile extends Component {
 
     changePasswordPUT = () => {
 
-        let apiUrl = `http://localhost:53281/api/User/` + localStorage.getItem('user_email') + "/" + this.state.password;
+        let apiUrl = `http://localhost:51566/api/User/` + localStorage.getItem('user_email') + "/" + this.state.password;
 
         fetch(apiUrl, {
             method: 'PUT', // *GET, POST, PUT, DELETE, etc.
@@ -155,7 +155,7 @@ export default class CCMyprofile extends Component {
                 console.log("you click on Save Button")
 
                 //PUT to Questionnaire:
-                let apiUrl = `http://localhost:53281/api/Questionnaire/` + localStorage.getItem('user_email') + "/" + this.state.q1 + "/" + this.state.q3 + "/" + this.state.q4 + "/" + this.state.q5 + "/" + this.state.q6 + "/" + this.state.q7 + "/" + this.state.q8 + "/" + this.state.q9 + "/" + this.state.q10 + "/" + this.state.q11;
+                let apiUrl = `http://localhost:51566/api/Questionnaire/` + localStorage.getItem('user_email') + "/" + this.state.q1 + "/" + this.state.q3 + "/" + this.state.q4 + "/" + this.state.q5 + "/" + this.state.q6 + "/" + this.state.q7 + "/" + this.state.q8 + "/" + this.state.q9 + "/" + this.state.q10 + "/" + this.state.q11;
                 //let apiUrl = `http://localhost:54976/api/Questionnaire/benmshulam@gmail.com/1/3/4/5/6/7/8/9/10/11`;
                 //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip/`+this.state.trip_name+"/"+this.state.match_percent+"/"+this.state.with_children;
 
@@ -277,7 +277,7 @@ export default class CCMyprofile extends Component {
                 <AiOutlineRollback onClick={this.backbtn} size={50} style={{ marginLeft: 320 }}></AiOutlineRollback>
                 {/* <Button color="secondary" size="sm" onClick={this.backbtn}> Main Menu </Button><br></br><br></br> */}
                 {/* <div><Button variant="secondary" size="sm" onClick={this.backbtn} className="but"> Main Menu </Button></div><br></br> */}
-                <img src={this.state.profile_image} alt={true} style={{ width: '45%', height: 200, borderRadius: 100, borderWidth: 2, borderStyle: 'solid' }} /><br></br><br></br>
+                <img src={this.state.profile_image} alt={true} style={{ width: '45%', height: '90%', borderRadius: 100, borderWidth: 2, borderStyle: 'solid' }} /><br></br><br></br>
                 <input style={{ display: 'none' }} type="file" id="icon-button-file" accept="image/*" id="icon-button-file" capture="environment" onChange={this.fileSelectedHandler} ref={fileInput => this.fileInput = fileInput} />
                 <h2><GrCamera style={{ marginRight: -120, marginTop: -120, marginLeft: 5 }} onClick={() => this.fileInput.click()} /></h2>
                 <Form style={{ marginTop: -40 }} >

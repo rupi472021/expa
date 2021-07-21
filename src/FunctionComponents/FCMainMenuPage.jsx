@@ -42,7 +42,7 @@ export default function FCMainMenuPage() {
             </div>
             <br></br><br></br>
             <div>
-                <div style={{ marginTop: 20 }}>
+                <div style={{ marginTop: -40 }}>
                     <img src="https://img.icons8.com/nolan/64/border-color.png" onClick={() => window.location.href = "/main_menu_page/create_new_trip_page"} /><br></br><br></br>
                     {/* <h1></h1> */}
                     <img src="https://img.icons8.com/cute-clipart/64/000000/search.png" onClick={() => window.location.href = "/main_menu_page/search_trip_page"} />

@@ -39,7 +39,7 @@ export default class CCResetPasswordPage extends Component {
     sendMail = (index) => {
 
         window.Email.send({
-            Host: "smtp.google.com",
+            Host: "smtp.elasticemail.com",
             Username: "expaapp2021@gmail.com",
             Password: "095391DC1421931213BDE94909369A63964C",
             To: this.state.email,

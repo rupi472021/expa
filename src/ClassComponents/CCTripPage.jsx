@@ -74,7 +74,7 @@ export default class CCTripPage extends Component {
     };
 
     componentDidMount = () => {
-        let apiUrl = `http://localhost:51566/api/NewTrip/getripByName/${localStorage.getItem('trip_name')}/`
+        let apiUrl = `http://localhost:53281/api/NewTrip/getripByName/${localStorage.getItem('trip_name')}/`
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
@@ -99,7 +99,7 @@ export default class CCTripPage extends Component {
 
     getParticipantTripDate() {
 
-        let apiUrl = `http://localhost:51566/api/User/getParticiByName/${localStorage.getItem('trip_name')}/`
+        let apiUrl = `http://localhost:53281/api/User/getParticiByName/${localStorage.getItem('trip_name')}/`
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
@@ -226,7 +226,7 @@ export default class CCTripPage extends Component {
 
             }
 
-            let apiUrl = `http://localhost:51566/api/TripEquipment`;
+            let apiUrl = `http://localhost:53281/api/TripEquipment`;
             //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
             ////POST To Trip_Equipment SQL TABLE
@@ -269,7 +269,7 @@ export default class CCTripPage extends Component {
 
             }
 
-            let apiUrl = `http://localhost:51566/api/TripEquipment`;
+            let apiUrl = `http://localhost:53281/api/TripEquipment`;
             //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
             ////POST To Trip_Equipment SQL TABLE
@@ -314,7 +314,7 @@ export default class CCTripPage extends Component {
 
             }
 
-            let apiUrl = `http://localhost:51566/api/TripEquipment`;
+            let apiUrl = `http://localhost:53281/api/TripEquipment`;
             //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
             ////POST To Trip_Equipment SQL TABLE
@@ -360,7 +360,7 @@ export default class CCTripPage extends Component {
 
             }
 
-            let apiUrl = `http://localhost:51566/api/TripEquipment`;
+            let apiUrl = `http://localhost:53281/api/TripEquipment`;
             //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
             ////POST To Trip_Equipment SQL TABLE

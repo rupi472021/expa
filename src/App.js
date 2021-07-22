@@ -18,6 +18,8 @@ import Snackbar from '@material-ui/core/Snackbar';
 import '@coreui/coreui/dist/css/coreui.min.css';
 import Modal from './Modal.js';
 
+import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
+
 
 class App extends Component {
 
@@ -41,8 +43,7 @@ class App extends Component {
     this.setState({ show: false });
   };
 
-  componentDidMount = () => 
-  { //GET all Users from Users_expa (SQL) onload
+  componentDidMount = () => { //GET all Users from Users_expa (SQL) onload
 
     const messaging = firebase.messaging();
     messaging.requestPermission().then(() => {
@@ -85,7 +86,7 @@ class App extends Component {
     console.log("this.state.data_from_sql " + this.state.data_from_sql)
     console.log("in componentDidMount function");
 
-    let apiUrl = `http://localhost:51566/api/User`;
+    let apiUrl = `http://localhost:53281/api/User`;
     //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User`;
 
     fetch(apiUrl)
@@ -108,7 +109,7 @@ class App extends Component {
         });
 
 
-    let apiUrl1 = `http://localhost:51566/api/Questionnaire`;
+    let apiUrl1 = `http://localhost:53281/api/Questionnaire`;
     fetch(apiUrl1)
       .then(res => {
         console.log('res=', res);
@@ -133,7 +134,7 @@ class App extends Component {
 
     console.log("you will accept " + this.state.payloadBodyEmail + " for this trip: " + this.state.payloadBodyTripName)
 
-    let apiUrl = `http://localhost:51566/api/ParticipantsInTrip`;
+    let apiUrl = `http://localhost:53281/api/ParticipantsInTrip`;
 
     const Participant = {
       TripName: this.state.payloadBodyTripName,
@@ -229,11 +230,28 @@ class App extends Component {
           </Route>
           <Route exact path="/trip_page" >
             <CCTripPage />
+            <Map google={this.props.google} zoom={14}>
+
+              <Marker onClick={this.onMarkerClick}
+                name={'Current location'} />
+
+              <InfoWindow onClose={this.onInfoWindowClose}>
+                {/* <div>
+       <h1>{this.state.selectedPlace.name}</h1>
+     </div> */}
+              </InfoWindow>
+            </Map>
           </Route>
         </Switch>
+
+
       </div>
     )
   }
 }
 
-export default withRouter(App);
+// export default withRouter(App);
+
+export default GoogleApiWrapper({
+  apiKey: ("AIzaSyAYat-h4SLP816AQyGfE6s5QTUvmalLiXg")
+})(App)

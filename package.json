@@ -28,6 +28,7 @@
     "feather-icons": "^4.28.0",
     "firebase": "^8.6.3",
     "fontsource-roboto": "^4.0.0",
+    "google-maps-react": "^2.0.6",
     "googleapis": "^71.0.0",
     "history": "^5.0.0",
     "http2": "^3.3.7",

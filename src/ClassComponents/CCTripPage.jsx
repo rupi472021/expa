@@ -18,10 +18,6 @@ import FCEditList from '../FunctionComponents/FCEditList';
 import Select from '@material-ui/core/Select';
 import { BiCamera } from "react-icons/bi";
 
-
-
-
-
 const useStyles = makeStyles((theme) => ({
     margin: {
         margin: theme.spacing(1),
@@ -56,14 +52,18 @@ export default class CCTripPage extends Component {
             Check6: '',
             NumOfPartners: 1,
             arrOfEquipment: ['water', 'Tent', 'Gas', 'Sun Screen'],
-            Equipment1: '',
-            Equipment2: '',
-            Equipment3: '',
-            Equipment4: '',
+            Equipment1: 'Water',
+            Equipment2: 'Gas',
+            Equipment3: 'Tent',
+            Equipment4: 'Kitchen supplies',
             WhoBring1: '',
             WhoBring2: '',
             WhoBring3: '',
             WhoBring4: '',
+            b1: '',
+            b2: '',
+            b3: '',
+            b4: '',
         };
         this._onButtonClick = this._onButtonClick.bind(this);
         this._EditListButtonClick = this._EditListButtonClick.bind(this);
@@ -127,9 +127,28 @@ export default class CCTripPage extends Component {
     }
 
     _EditListButtonClick() {
-        this.setState({
-            showChecklistComponent: true,
-        });
+
+        console.log("in _EditListButtonClick")
+
+        this.setState({ showChecklistComponent: true });
+
+        let apiUrl = `http://localhost:51566/api/TripEquipment`
+
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+
+                console.log("The Equipment for this trip -  trip's Equipment data from sql")
+                //console.log(data);
+                this.state.filterData = data.filter(e => e.BringEmail == "benmshulam@gmail.com")
+                console.log(this.state.filterData[0].BringEmail)
+                this.setState({ b4: this.state.filterData[0].BringEmail })
+
+
+            }).catch(function (error) {
+                console.log("Error getting document:", error);
+            });
+
     }
 
     _ViewParticipantsButtonClick() {
@@ -195,7 +214,7 @@ export default class CCTripPage extends Component {
         console.log("WhoBring3 is: " + this.state.WhoBring3)
         console.log("WhoBring4 is: " + this.state.WhoBring4)
 
-        if (this.state.Equipment1 !== '') {
+        if (this.state.WhoBring1 !== '') {
 
             console.log("you are in the first if")
 
@@ -238,7 +257,7 @@ export default class CCTripPage extends Component {
             );
         }
 
-        if (this.state.Equipment2 !== '') {
+        if (this.state.WhoBring2 !== '') {
 
             console.log("you are in the second if")
 
@@ -283,7 +302,7 @@ export default class CCTripPage extends Component {
 
 
 
-        if (this.state.Equipment3 !== '') {
+        if (this.state.WhoBring3 !== '') {
 
             console.log("you are in the third if")
 
@@ -329,7 +348,7 @@ export default class CCTripPage extends Component {
 
 
 
-        if (this.state.Equipment4 !== '') {
+        if (this.state.WhoBring4 !== '') {
 
             console.log("you are in the fourth if")
 
@@ -414,29 +433,17 @@ export default class CCTripPage extends Component {
                                         Travel Checklist
                                     </h5>
 
-
-                                    <Table striped bordered hover variant="dark">
+                                    <Table striped bordered hover variant="dark" style={{ opacity: this.state.opacity }}>
                                         <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Equipment</th>
-                                                <th>Who Bring?</th>
-                                            </tr>
+                                            {/* <tr>
+                                                <th>Who Bring What </th>
+                                            </tr> */}
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>1</td>
+                                                <h6>Water</h6>
                                                 <td>
-                                                    <select id="dropdown" onChange={(e) => this.setState({ Equipment1: e.target.value })}>
-                                                        <option value="Choose">Choose</option>
-                                                        <option value="Water">Water</option>
-                                                        <option value="Tent">Tent</option>
-                                                        <option value="Gas">Gas</option>
-                                                        <option value="food">food</option>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <select id="dropdown" onChange={(e) => this.setState({ WhoBring1: e.target.value })}>
+                                                    <select id="dropdown" disabled={this.state.disabled} onChange={(e) => this.setState({ Check1: e.target.value })}>
                                                         <option value=""></option>
                                                         <option value={localStorage.getItem('user_email')}>{localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}</option>
                                                         {
@@ -447,18 +454,10 @@ export default class CCTripPage extends Component {
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>2</td>
+                                                {/* <td><TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" name="email" autoComplete="email" autoFocus onChange={(e) => this.setState({ email: e.target.value })} /></td> */}
+                                                <h6>Gas</h6>
                                                 <td>
-                                                    <select id="dropdown" onChange={(e) => this.setState({ Equipment2: e.target.value })}>
-                                                        <option value="Choose">Choose</option>
-                                                        <option value="Water">Water</option>
-                                                        <option value="Tent">Tent</option>
-                                                        <option value="Gas">Gas</option>
-                                                        <option value="food">food</option>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <select id="dropdown" onChange={(e) => this.setState({ WhoBring2: e.target.value })}>
+                                                    <select id="dropdown" disabled={this.state.disabled} onChange={(e) => this.setState({ Check2: e.target.value })}>
                                                         <option value=""></option>
                                                         <option value={localStorage.getItem('user_email')}>{localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}</option>
                                                         {
@@ -469,18 +468,10 @@ export default class CCTripPage extends Component {
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>3</td>
+                                                {/* <td><TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" name="email" autoComplete="email" autoFocus onChange={(e) => this.setState({ email: e.target.value })} /></td> */}
+                                                <h6>Tent</h6>
                                                 <td>
-                                                    <select id="dropdown" onChange={(e) => this.setState({ Equipment3: e.target.value })}>
-                                                        <option value="Choose">Choose</option>
-                                                        <option value="Water">Water</option>
-                                                        <option value="Tent">Tent</option>
-                                                        <option value="Gas">Gas</option>
-                                                        <option value="food">food</option>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <select id="dropdown" onChange={(e) => this.setState({ WhoBring3: e.target.value })}>
+                                                    <select id="dropdown" disabled={this.state.disabled} onChange={(e) => this.setState({ Check3: e.target.value })}>
                                                         <option value=""></option>
                                                         <option value={localStorage.getItem('user_email')}>{localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}</option>
                                                         {
@@ -491,18 +482,24 @@ export default class CCTripPage extends Component {
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>4</td>
+                                                {/* <td><TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" name="email" autoComplete="email" autoFocus onChange={(e) => this.setState({ email: e.target.value })} /></td> */}
+                                                <h6>a</h6>
                                                 <td>
-                                                    <select id="dropdown" onChange={(e) => this.setState({ Equipment4: e.target.value })}>
-                                                        <option value="Choose">Choose</option>
-                                                        <option value="Water">Water</option>
-                                                        <option value="Tent">Tent</option>
-                                                        <option value="Gas">Gas</option>
-                                                        <option value="food">food</option>
+                                                    <select id="dropdown" disabled={this.state.disabled} onChange={(e) => this.setState({ Check4: e.target.value })}>
+                                                        <option value=""></option>
+                                                        <option value={localStorage.getItem('user_email')}>{localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}</option>
+                                                        {
+                                                            this.state.ParticipantsArray?.length > 0 &&
+                                                            this.state.ParticipantsArray?.map((item, key) => <option value={item.Partner.Email}>{item.Partner.Fname} {item.Partner.Lname}</option>)
+                                                        }
                                                     </select>
                                                 </td>
+                                            </tr>
+                                            <tr>
+                                                {/* <td><TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" name="email" autoComplete="email" autoFocus onChange={(e) => this.setState({ email: e.target.value })} /></td> */}
+                                                <h6>b</h6>
                                                 <td>
-                                                    <select id="dropdown" onChange={(e) => this.setState({ WhoBring4: e.target.value })}>
+                                                    <select id="dropdown" disabled={this.state.disabled} onChange={(e) => this.setState({ Check5: e.target.value })}>
                                                         <option value=""></option>
                                                         <option value={localStorage.getItem('user_email')}>{localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}</option>
                                                         {
@@ -514,13 +511,15 @@ export default class CCTripPage extends Component {
                                             </tr>
                                         </tbody>
                                     </Table>
-
-                                    {/* <Button variant="info" onClick={this._EditListButtonClick}>Edit List</Button> */}
-                                    <Button variant="info" onClick={this._SaveListButtonClick}>Save</Button>
-
+                                    <Button variant="info" onClick={this._EditListButtonClick}>Edit List</Button>
                                     <h1></h1>
                                 </Col>
-                                <Col style={{ boxShadow: '0px 0px 150px 10px ', fontSize: '14px', borderRadius: '10px', borderColor: 'black' }}><br></br><br></br><br></br><br></br><br></br><br></br><div>MAP TRIP COMPONENT<br></br>In Progress . . .</div></Col>
+                                <Col style={{ boxShadow: '0px 0px 150px 10px ', fontSize: '14px', borderRadius: '10px', borderColor: 'black' }}><br></br><br></br><br></br><br></br><br></br><br></br>
+                                    <div>
+
+
+                                    </div>
+                                </Col>
                             </Row>
 
                         </Container>
@@ -550,7 +549,7 @@ export default class CCTripPage extends Component {
                                         <tr>
                                             <h5>Water</h5>
                                             <td>
-                                                <select onChange={(e) => this.setState({ Check1: e.target.value })}>
+                                                <select onChange={(e) => this.setState({ WhoBring1: e.target.value })}>
                                                     <option></option>
                                                     <option value={localStorage.getItem('user_email')}>{localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}</option>
                                                     {
@@ -564,7 +563,7 @@ export default class CCTripPage extends Component {
                                             {/* <td><TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" name="email" autoComplete="email" autoFocus onChange={(e) => this.setState({ email: e.target.value })} /></td> */}
                                             <h5>Gas</h5>
                                             <td>
-                                                <select id="dropdown" onChange={(e) => this.setState({ Check2: e.target.value })}>
+                                                <select id="dropdown" onChange={(e) => this.setState({ WhoBring2: e.target.value })}>
                                                     <option value=""></option>
                                                     <option value={localStorage.getItem('user_email')}>{localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}</option>
                                                     {
@@ -578,7 +577,7 @@ export default class CCTripPage extends Component {
                                             {/* <td><TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" name="email" autoComplete="email" autoFocus onChange={(e) => this.setState({ email: e.target.value })} /></td> */}
                                             <h5>Tent</h5>
                                             <td>
-                                                <select id="dropdown" onChange={(e) => this.setState({ Check3: e.target.value })}>
+                                                <select id="dropdown" onChange={(e) => this.setState({ WhoBring3: e.target.value })}>
                                                     <option value=""></option>
                                                     <option value={localStorage.getItem('user_email')}>{localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}</option>
                                                     {
@@ -592,8 +591,8 @@ export default class CCTripPage extends Component {
                                             {/* <td><TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" name="email" autoComplete="email" autoFocus onChange={(e) => this.setState({ email: e.target.value })} /></td> */}
                                             <h5>Kitchen supplies</h5>
                                             <td>
-                                                <select id="dropdown" onChange={(e) => this.setState({ Check4: e.target.value })}>
-                                                    <option value=""></option>
+                                                <select id="dropdown" onChange={(e) => this.setState({ WhoBring4: e.target.value })}>
+                                                    <option value={this.state.b4}>{this.state.b4}</option>
                                                     <option value={localStorage.getItem('user_email')}>{localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}</option>
                                                     {
                                                         this.state.ParticipantsArray?.length > 0 &&
@@ -631,11 +630,10 @@ export default class CCTripPage extends Component {
                                             </td>
                                         </tr>
                                     </tbody>
-
                                 </Table>
                             </Modal.Body>
                             <Modal.Footer>
-                                <Button style={{ alignItems: 'center' }} variant="primary">Save Changes</Button>
+                                <Button style={{ alignItems: 'center' }} variant="primary" onClick={this._SaveListButtonClick}>Save Changes</Button>
                                 <Button variant="secondary" onClick={() => this.setState({ showChecklistComponent: false })}  >Close</Button>
                             </Modal.Footer>
                         </Modal> : null

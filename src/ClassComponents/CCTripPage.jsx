@@ -74,7 +74,7 @@ export default class CCTripPage extends Component {
     };
 
     componentDidMount = () => {
-        let apiUrl = `http://localhost:53281/api/NewTrip/getripByName/${localStorage.getItem('trip_name')}/`
+        let apiUrl = `http://localhost:51566/api/NewTrip/getripByName/${localStorage.getItem('trip_name')}/`
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
@@ -99,7 +99,7 @@ export default class CCTripPage extends Component {
 
     getParticipantTripDate() {
 
-        let apiUrl = `http://localhost:53281/api/User/getParticiByName/${localStorage.getItem('trip_name')}/`
+        let apiUrl = `http://localhost:51566/api/User/getParticiByName/${localStorage.getItem('trip_name')}/`
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
@@ -139,10 +139,29 @@ export default class CCTripPage extends Component {
             .then(data => {
 
                 console.log("The Equipment for this trip -  trip's Equipment data from sql")
-                //console.log(data);
-                this.state.filterData = data.filter(e => e.BringEmail == "benmshulam@gmail.com")
-                console.log(this.state.filterData[0].BringEmail)
-                this.setState({ b4: this.state.filterData[0].BringEmail })
+                console.log(data); //data is all table
+                this.state.filterData = data.filter(e => e.TripName == localStorage.getItem('trip_name'))
+                console.log(this.state.filterData) //Equipment per trip
+
+                for (let index = 0; index < this.state.filterData.length; index++) {
+
+                    if (this.state.filterData[index].Eq == 'Water') {
+                        this.setState({ b1: this.state.filterData[index].Fname + " " + this.state.filterData[index].Lname })
+                    }
+
+                    if (this.state.filterData[index].Eq == 'Gas') {
+                        this.setState({ b2: this.state.filterData[index].Fname + " " + this.state.filterData[index].Lname })
+                    }
+
+                    if (this.state.filterData[index].Eq == 'Tent') {
+                        this.setState({ b3: this.state.filterData[index].Fname + " " + this.state.filterData[index].Lname })
+                    }
+
+                    if (this.state.filterData[index].Eq == 'Kitchen supplies') {
+                        this.setState({ b4: this.state.filterData[index].Fname + " " + this.state.filterData[index].Lname })
+                    }
+
+                }
 
 
             }).catch(function (error) {
@@ -226,7 +245,7 @@ export default class CCTripPage extends Component {
 
             }
 
-            let apiUrl = `http://localhost:53281/api/TripEquipment`;
+            let apiUrl = `http://localhost:51566/api/TripEquipment`;
             //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
             ////POST To Trip_Equipment SQL TABLE
@@ -269,7 +288,7 @@ export default class CCTripPage extends Component {
 
             }
 
-            let apiUrl = `http://localhost:53281/api/TripEquipment`;
+            let apiUrl = `http://localhost:51566/api/TripEquipment`;
             //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
             ////POST To Trip_Equipment SQL TABLE
@@ -314,7 +333,7 @@ export default class CCTripPage extends Component {
 
             }
 
-            let apiUrl = `http://localhost:53281/api/TripEquipment`;
+            let apiUrl = `http://localhost:51566/api/TripEquipment`;
             //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
             ////POST To Trip_Equipment SQL TABLE
@@ -360,7 +379,7 @@ export default class CCTripPage extends Component {
 
             }
 
-            let apiUrl = `http://localhost:53281/api/TripEquipment`;
+            let apiUrl = `http://localhost:51566/api/TripEquipment`;
             //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
             ////POST To Trip_Equipment SQL TABLE
@@ -550,7 +569,7 @@ export default class CCTripPage extends Component {
                                             <h5>Water</h5>
                                             <td>
                                                 <select onChange={(e) => this.setState({ WhoBring1: e.target.value })}>
-                                                    <option></option>
+                                                    <option value={this.state.b1}>{this.state.b1}</option>
                                                     <option value={localStorage.getItem('user_email')}>{localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}</option>
                                                     {
                                                         this.state.ParticipantsArray?.length > 0 &&
@@ -564,7 +583,7 @@ export default class CCTripPage extends Component {
                                             <h5>Gas</h5>
                                             <td>
                                                 <select id="dropdown" onChange={(e) => this.setState({ WhoBring2: e.target.value })}>
-                                                    <option value=""></option>
+                                                    <option value={this.state.b2}>{this.state.b2}</option>
                                                     <option value={localStorage.getItem('user_email')}>{localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}</option>
                                                     {
                                                         this.state.ParticipantsArray?.length > 0 &&
@@ -578,7 +597,7 @@ export default class CCTripPage extends Component {
                                             <h5>Tent</h5>
                                             <td>
                                                 <select id="dropdown" onChange={(e) => this.setState({ WhoBring3: e.target.value })}>
-                                                    <option value=""></option>
+                                                    <option value={this.state.b3}>{this.state.b3}</option>
                                                     <option value={localStorage.getItem('user_email')}>{localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}</option>
                                                     {
                                                         this.state.ParticipantsArray?.length > 0 &&
@@ -591,36 +610,8 @@ export default class CCTripPage extends Component {
                                             {/* <td><TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" name="email" autoComplete="email" autoFocus onChange={(e) => this.setState({ email: e.target.value })} /></td> */}
                                             <h5>Kitchen supplies</h5>
                                             <td>
-                                                <select id="dropdown" onChange={(e) => this.setState({ WhoBring4: e.target.value })}>
+                                                <select id="dropdown" onChange={(e) => this.setState({ WhoBring4: e.target.value })}>                          
                                                     <option value={this.state.b4}>{this.state.b4}</option>
-                                                    <option value={localStorage.getItem('user_email')}>{localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}</option>
-                                                    {
-                                                        this.state.ParticipantsArray?.length > 0 &&
-                                                        this.state.ParticipantsArray?.map((item, key) => <option value={item.Partner.Email}>{item.Partner.Fname} {item.Partner.Lname}</option>)
-                                                    }
-                                                </select>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            {/* <td><TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" name="email" autoComplete="email" autoFocus onChange={(e) => this.setState({ email: e.target.value })} /></td> */}
-                                            <h5>Emergency and hygiene supplies</h5>
-                                            <td>
-                                                <select id="dropdown" onChange={(e) => this.setState({ Check5: e.target.value })}>
-                                                    <option value=""></option>
-                                                    <option value={localStorage.getItem('user_email')}>{localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}</option>
-                                                    {
-                                                        this.state.ParticipantsArray?.length > 0 &&
-                                                        this.state.ParticipantsArray?.map((item, key) => <option value={item.Partner.Email}>{item.Partner.Fname} {item.Partner.Lname}</option>)
-                                                    }
-                                                </select>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            {/* <td><TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" name="email" autoComplete="email" autoFocus onChange={(e) => this.setState({ email: e.target.value })} /></td> */}
-                                            <h5>Small repair kit</h5>
-                                            <td>
-                                                <select id="dropdown" onChange={(e) => this.setState({ Check6: e.target.value })}>
-                                                    <option value=""></option>
                                                     <option value={localStorage.getItem('user_email')}>{localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}</option>
                                                     {
                                                         this.state.ParticipantsArray?.length > 0 &&

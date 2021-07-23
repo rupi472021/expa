@@ -26,6 +26,7 @@ export default class CCLoginPage extends Component {
             social_media_name: 'Login Page',
             image: 'https://png.pngtree.com/png-clipart/20200701/original/pngtree-character-default-avatar-png-image_5407167.jpg',
             data_from_sql: '',
+
         }
 
         //  this.url = "https://www.mboxdrive.com/Record (online-voice-recorder.com).mp3";
@@ -33,7 +34,29 @@ export default class CCLoginPage extends Component {
     };
 
     componentDidMount = () => {
+
         localStorage.clear();
+
+        //get all Token_expa from SQL
+        let apiUrl2 = `http://localhost:51566/api/Token`;
+        fetch(apiUrl2)
+            .then(res => {
+                console.log('res=', res);
+                console.log('res.status', res.status);
+                console.log('res.ok', res.ok);
+                return res.json()
+            })
+            .then(
+                (result) => {
+                    console.log("GET Token data from SQL= ", result);
+                    // result.map(st => console.log(st.Fname)); // all Fname in Users_Expa
+                    this.setState({
+                        AllTokens_fromSQL: result,
+                    })
+                },
+                (error) => {
+                    console.log("err GET=", error);
+                });
     }
 
     handleShow = () => {
@@ -129,6 +152,30 @@ export default class CCLoginPage extends Component {
     //      this.audio.play();
     //  }
 
+    checkToken = () => {
+
+        console.log("in checkToken")
+
+        console.log(this.state.email)
+
+        var index = this.state.AllTokens_fromSQL.findIndex(obj => obj.Email === this.state.email);
+        console.log(index)
+
+        if (index == -1) {
+            console.log("please check again")
+            this.setState({ Token: -1 })
+        }
+
+        console.log(this.props.TokenNumberFromBrowser)
+
+        if (this.props.TokenNumberFromBrowser === this.state.AllTokens_fromSQL[index].Token_number) {
+            this.setState({ Token: this.props.TokenNumberFromBrowser })
+            console.log("the token is match")
+        }
+
+
+    }
+
     render() {
         return (
             <div className={classes.NewBLogCard} >
@@ -145,6 +192,7 @@ export default class CCLoginPage extends Component {
                             {/* <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" /> */}
                             <br></br><br></br>
                             <Button variant="dark" style={{ boxShadow: '0 0 10px  #141414', width: '100%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '20px' }} onClick={this.signinbtn} fullWidth size="lg" >Log In</Button><br></br><br></br><br></br>
+                            {/* <Button variant="dark" style={{ boxShadow: '0 0 10px  #141414', width: '100%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '20px' }} onClick={this.checkToken} fullWidth size="lg" >Check Token</Button><br></br><br></br><br></br> */}
                             <Grid container>
                                 <Grid item xs>
                                     <Button variant="warning" style={{ width: '90%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '15px' }} fullWidth size="sm" ><Link style={{ color: 'black' }} to="/forget_password_page">Forgot Password</Link></Button>

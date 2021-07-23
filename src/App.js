@@ -86,7 +86,7 @@ class App extends Component {
     console.log("this.state.data_from_sql " + this.state.data_from_sql)
     console.log("in componentDidMount function");
 
-    let apiUrl = `http://localhost:53281/api/User`;
+    let apiUrl = `http://localhost:51566/api/User`;
     //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User`;
 
     fetch(apiUrl)
@@ -109,7 +109,7 @@ class App extends Component {
         });
 
 
-    let apiUrl1 = `http://localhost:53281/api/Questionnaire`;
+    let apiUrl1 = `http://localhost:51566/api/Questionnaire`;
     fetch(apiUrl1)
       .then(res => {
         console.log('res=', res);
@@ -128,13 +128,37 @@ class App extends Component {
         (error) => {
           console.log("err GET=", error);
         });
+
+
+
+    //get all Token_expa from SQL
+    let apiUrl2 = `http://localhost:51566/api/Token`;
+    fetch(apiUrl2)
+      .then(res => {
+        console.log('res=', res);
+        console.log('res.status', res.status);
+        console.log('res.ok', res.ok);
+        return res.json()
+      })
+      .then(
+        (result) => {
+          console.log("GET Token data from SQL= ", result);
+          // result.map(st => console.log(st.Fname)); // all Fname in Users_Expa
+          this.setState({
+            Token_fromSQL: result,
+          })
+        },
+        (error) => {
+          console.log("err GET=", error);
+        });
+
   }
 
   accpetUserFunction = () => {
 
     console.log("you will accept " + this.state.payloadBodyEmail + " for this trip: " + this.state.payloadBodyTripName)
 
-    let apiUrl = `http://localhost:53281/api/ParticipantsInTrip`;
+    let apiUrl = `http://localhost:51566/api/ParticipantsInTrip`;
 
     const Participant = {
       TripName: this.state.payloadBodyTripName,
@@ -205,7 +229,7 @@ class App extends Component {
         {/* <ReactNotification /> */}
         <Switch>
           <Route exact path="/">
-            <CCLoginPage dataFromApptoLoginPage={this.state.data_from_sql} />
+            <CCLoginPage dataFromApptoLoginPage={this.state.data_from_sql} TokenNumberFromBrowser={this.state.token_num} />
           </Route>
           <Route exact path="/register" >
             <CCRegisterPage dataFromApptoRegisterPage={this.state.data_from_sql} QuesDatafromApptoRegisterPage={this.state.Ques_data_fromSQL} Token={this.state.token_num} />
@@ -214,7 +238,7 @@ class App extends Component {
             <CCResetPasswordPage dataFromApptoResetPasswordPage={this.state.data_from_sql} />
           </Route>
           <Route exact path="/main_menu_page" >
-            <FCMainMenuPage />
+            <FCMainMenuPage TokenFromSQL={this.state.Token_fromSQL} TokenNumberFromBrowser={this.state.token_num} />
           </Route>
           <Route exact path="/main_menu_page/create_new_trip_page" >
             <CCCreateNewTrip />
@@ -228,9 +252,9 @@ class App extends Component {
           <Route exact path="/main_menu_page/search_trip_page" >
             <CCSearchPage />
           </Route>
-          <Route exact path="/trip_page" >
+          <Route exact path="/trip_page">
             <CCTripPage />
-            <Map google={this.props.google} zoom={14}>
+            <Map style={{ width: '25vh', height: '50vh', marginLeft: '210px', marginTop: '-550px', borderRadius: 10 }} google={this.props.google} zoom={14}>
 
               <Marker onClick={this.onMarkerClick}
                 name={'Current location'} />

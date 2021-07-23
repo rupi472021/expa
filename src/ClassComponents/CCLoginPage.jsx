@@ -143,8 +143,8 @@ export default class CCLoginPage extends Component {
                 showConfirmButton: true,
                 Onclick: () => { Swal.clickConfirm() }
             }).then(() => {
-                // window.location.href = "http://localhost:3000/main_menu_page"
-                window.location.href = "https://adoring-curran-14d8ac.netlify.app/main_menu_page"
+                 window.location.href = "http://localhost:3000/main_menu_page"
+                //window.location.href = "https://adoring-curran-14d8ac.netlify.app/main_menu_page"
             })
         }
         else {
@@ -173,7 +173,7 @@ export default class CCLoginPage extends Component {
     checkToken = () => {
 
         console.log("in checkToken")
-        console.log(this.props.TokenNumberFromBrowser)
+        console.log(this.state.token_num)
 
         // console.log(this.state.email)
 
@@ -191,24 +191,29 @@ export default class CCLoginPage extends Component {
         //     this.setState({ Token: this.props.TokenNumberFromBrowser })
         //     console.log("the token is match")
         // }
-
-        let apiUrlEditToken = `http://localhost:51566/api/Token/` + this.state.email + "/" + localStorage.getItem('Token_number');
-        //TokenNumberFromBrowser: this.props.TokenNumberFromBrowser,
+        const newToken = {
+            Email: this.state.email,
+            Token_number: this.state.token_num
+        }
+        let apiUrlEditToken = `http://localhost:51566/api/Token/EditToken`;
 
         fetch(apiUrlEditToken, {
-            method: 'PUT', // *GET, POST, PUT, DELETE, etc.
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, *cors, same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
             credentials: 'same-origin', // include, *same-origin, omit
             headers: {
-                'Content-Type': 'application/json'
-                //'Content-type': 'application/json; charset=UTF-8', //very important to add the 'charset=UTF-8'!!!!
+                'Content-Type': 'application/json',
+                //'Content-Type': 'application/json; charset=UTF-8', //very important to add the 'charset=UTF-8'!!!!
                 //'Accept': 'application/json; charset=UTF-8'
             },
             redirect: 'follow', // manual, *follow, error
             referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-            // body: JSON.stringify(newTrip) // body data type must match "Content-Type" header
+            body: JSON.stringify(newToken) // body data type must match "Content-Type" header
         })
+
+        this.signinbtn();
+
     }
 
     render() {
@@ -226,8 +231,8 @@ export default class CCLoginPage extends Component {
                             <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password" onChange={(a) => this.setState({ password: a.target.value })} />
                             {/* <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" /> */}
                             <br></br><br></br>
-                            <Button variant="dark" style={{ boxShadow: '0 0 10px  #141414', width: '100%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '20px' }} onClick={this.signinbtn} fullWidth size="lg" >Log In</Button><br></br><br></br><br></br>
-                            <Button variant="dark" style={{ boxShadow: '0 0 10px  #141414', width: '100%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '20px' }} onClick={this.checkToken} fullWidth size="lg" >Check Token</Button><br></br><br></br><br></br>
+                            <Button variant="dark" style={{ boxShadow: '0 0 10px  #141414', width: '100%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '20px' }} onClick={this.checkToken} fullWidth size="lg" >Log In</Button><br></br><br></br><br></br>
+                            {/* <Button variant="dark" style={{ boxShadow: '0 0 10px  #141414', width: '100%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '20px' }} onClick={this.checkToken} fullWidth size="lg" >Check Token</Button><br></br><br></br><br></br> */}
                             <Grid container>
                                 <Grid item xs>
                                     <Button variant="warning" style={{ width: '90%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '15px' }} fullWidth size="sm" ><Link style={{ color: 'black' }} to="/forget_password_page">Forgot Password</Link></Button>

@@ -14,6 +14,8 @@ import classes from './BlogCard.module.css';
 import Box from '@material-ui/core/Box';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
+import firebase from '../firebase';
+
 
 
 export default class CCLoginPage extends Component {
@@ -36,6 +38,22 @@ export default class CCLoginPage extends Component {
     componentDidMount = () => {
 
         localStorage.clear();
+
+        const messaging = firebase.messaging();
+        messaging.requestPermission().then(() => {
+            console.log("Notifications allowed");
+            return messaging.getToken();
+        })
+            .then(token => {
+                console.log("Token Is in LoginPge: " + token);
+                console.log("Token length : " + token.length);
+                localStorage.setItem('Token_number', token)
+                this.setState({ token_num: token });
+            })
+            .catch(err => {
+                console.log("No permission to send push", err);
+            });
+
 
         //get all Token_expa from SQL
         let apiUrl2 = `http://localhost:51566/api/Token`;
@@ -155,25 +173,42 @@ export default class CCLoginPage extends Component {
     checkToken = () => {
 
         console.log("in checkToken")
-
-        console.log(this.state.email)
-
-        var index = this.state.AllTokens_fromSQL.findIndex(obj => obj.Email === this.state.email);
-        console.log(index)
-
-        if (index == -1) {
-            console.log("please check again")
-            this.setState({ Token: -1 })
-        }
-
         console.log(this.props.TokenNumberFromBrowser)
 
-        if (this.props.TokenNumberFromBrowser === this.state.AllTokens_fromSQL[index].Token_number) {
-            this.setState({ Token: this.props.TokenNumberFromBrowser })
-            console.log("the token is match")
-        }
+        // console.log(this.state.email)
 
+        // var index = this.state.AllTokens_fromSQL.findIndex(obj => obj.Email === this.state.email);
+        // console.log(index)
 
+        // if (index == -1) {
+        //     console.log("please check again")
+        //     this.setState({ Token: -1 })
+        // }
+
+        // console.log(this.props.TokenNumberFromBrowser)
+
+        // if (this.props.TokenNumberFromBrowser === this.state.AllTokens_fromSQL[index].Token_number) {
+        //     this.setState({ Token: this.props.TokenNumberFromBrowser })
+        //     console.log("the token is match")
+        // }
+
+        let apiUrlEditToken = `http://localhost:51566/api/Token/` + this.state.email + "/" + localStorage.getItem('Token_number');
+        //TokenNumberFromBrowser: this.props.TokenNumberFromBrowser,
+
+        fetch(apiUrlEditToken, {
+            method: 'PUT', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, *cors, same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json'
+                //'Content-type': 'application/json; charset=UTF-8', //very important to add the 'charset=UTF-8'!!!!
+                //'Accept': 'application/json; charset=UTF-8'
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+            // body: JSON.stringify(newTrip) // body data type must match "Content-Type" header
+        })
     }
 
     render() {
@@ -192,7 +227,7 @@ export default class CCLoginPage extends Component {
                             {/* <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" /> */}
                             <br></br><br></br>
                             <Button variant="dark" style={{ boxShadow: '0 0 10px  #141414', width: '100%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '20px' }} onClick={this.signinbtn} fullWidth size="lg" >Log In</Button><br></br><br></br><br></br>
-                            {/* <Button variant="dark" style={{ boxShadow: '0 0 10px  #141414', width: '100%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '20px' }} onClick={this.checkToken} fullWidth size="lg" >Check Token</Button><br></br><br></br><br></br> */}
+                            <Button variant="dark" style={{ boxShadow: '0 0 10px  #141414', width: '100%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '20px' }} onClick={this.checkToken} fullWidth size="lg" >Check Token</Button><br></br><br></br><br></br>
                             <Grid container>
                                 <Grid item xs>
                                     <Button variant="warning" style={{ width: '90%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '15px' }} fullWidth size="sm" ><Link style={{ color: 'black' }} to="/forget_password_page">Forgot Password</Link></Button>

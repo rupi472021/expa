@@ -229,11 +229,7 @@ class App extends Component {
         {/* <ReactNotification /> */}
         <Switch>
           <Route exact path="/">
-<<<<<<< Updated upstream
             <CCLoginPage dataFromApptoLoginPage={this.state.data_from_sql} TokenNumberFromBrowser={this.state.token_num} />
-=======
-            <CCLoginPage dataFromApptoLoginPage={this.state.data_from_sql} />
->>>>>>> Stashed changes
           </Route>
           <Route exact path="/register" >
             <CCRegisterPage dataFromApptoRegisterPage={this.state.data_from_sql} QuesDatafromApptoRegisterPage={this.state.Ques_data_fromSQL} Token={this.state.token_num} />
@@ -242,7 +238,7 @@ class App extends Component {
             <CCResetPasswordPage dataFromApptoResetPasswordPage={this.state.data_from_sql} />
           </Route>
           <Route exact path="/main_menu_page" >
-            <FCMainMenuPage TokenFromSQL={this.state.Token_fromSQL} TokenNumberFromBrowser={this.state.token_num} />
+            <FCMainMenuPage />
           </Route>
           <Route exact path="/main_menu_page/create_new_trip_page" >
             <CCCreateNewTrip />

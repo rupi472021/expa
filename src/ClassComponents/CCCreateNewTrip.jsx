@@ -265,10 +265,10 @@ export default class CCCreateNewTrip extends Component {
                             <Form.Label style={{ fontWeight: 'bold', fontSize: 20 }} > Nights ? </Form.Label><br></br>
                             <ButtonGroup size="sm" variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ trip_nights: e.target.value })}>
                                 <Button value="0">0</Button>&nbsp;&nbsp;
-                                    <Button value="1">1</Button>&nbsp;&nbsp;
-                                    <Button value="2">2</Button>&nbsp;&nbsp;
-                                    <Button value="3">3</Button>&nbsp;&nbsp;
-                                </ButtonGroup>
+                                <Button value="1">1</Button>&nbsp;&nbsp;
+                                <Button value="2">2</Button>&nbsp;&nbsp;
+                                <Button value="3">3</Button>&nbsp;&nbsp;
+                            </ButtonGroup>
                             <h1>{this.state.with_children}</h1>
                             <br></br>
 
@@ -277,10 +277,10 @@ export default class CCCreateNewTrip extends Component {
                             <Form.Label style={{ fontWeight: 'bold', fontSize: 20 }} > Where ? </Form.Label><br></br>
                             <ButtonGroup size="sm" variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ trip_area: e.target.value })}>
                                 <Button value="North">North</Button>&nbsp;&nbsp;
-                                    <Button value="South">South</Button>&nbsp;&nbsp;
-                                    <Button value="East">East</Button>&nbsp;&nbsp;
-                                    <Button value="West">West</Button>&nbsp;&nbsp;
-                                </ButtonGroup>
+                                <Button value="South">South</Button>&nbsp;&nbsp;
+                                <Button value="East">East</Button>&nbsp;&nbsp;
+                                <Button value="West">West</Button>&nbsp;&nbsp;
+                            </ButtonGroup>
                         </Form>
                         <br></br>
                         <Form.Group controlId="formBasicName">
@@ -292,18 +292,18 @@ export default class CCCreateNewTrip extends Component {
                     <Form.Label style={{ fontWeight: 'bold', fontSize: 20 }} > Vehicle Type ? </Form.Label><br></br>
                     <ButtonGroup size="sm" variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ vehicle_type: e.target.value })}>
                         <Button value="Jeep">Jeep</Button>&nbsp;&nbsp;
-                                    <Button value="ATV">ATV</Button>&nbsp;&nbsp;
-                                    <Button value="RZR">RZR</Button>&nbsp;&nbsp;
-                                    <Button value="Motorcycle">Motorcycle</Button>&nbsp;&nbsp;
-                                    <Button value="None"> None </Button>
+                        <Button value="ATV">ATV</Button>&nbsp;&nbsp;
+                        <Button value="RZR">RZR</Button>&nbsp;&nbsp;
+                        <Button value="Motorcycle">Motorcycle</Button>&nbsp;&nbsp;
+                        <Button value="None"> None </Button>
                     </ButtonGroup>
 
                     <br></br><br></br>
                     <Form.Label style={{ fontWeight: 'bold', fontSize: 20 }} > With Children ? </Form.Label><br></br>
                     <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ with_children: e.target.value })}>
                         <Button value="YES">YES</Button>&nbsp;&nbsp;
-                                    <Button value="NO">NO</Button>&nbsp;&nbsp;
-                                </ButtonGroup>
+                        <Button value="NO">NO</Button>&nbsp;&nbsp;
+                    </ButtonGroup>
 
                     <br></br><br></br>
                     <Form.Label style={{ fontWeight: 'bold', fontSize: 20 }} >I want At least {this.state.match_percent}% match with my ExPa Partners!</Form.Label><br></br>

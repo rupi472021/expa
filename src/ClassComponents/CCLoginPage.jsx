@@ -148,8 +148,8 @@ export default class CCLoginPage extends Component {
                 showConfirmButton: true,
                 Onclick: () => { Swal.clickConfirm() }
             }).then(() => {
-                // window.location.href = "http://localhost:3000/main_menu_page"
-                window.location.href = "https://adoring-curran-14d8ac.netlify.app/main_menu_page"
+                 window.location.href = "http://localhost:3000/main_menu_page"
+                //window.location.href = "https://adoring-curran-14d8ac.netlify.app/main_menu_page"
             })
         }
         else {
@@ -216,6 +216,9 @@ export default class CCLoginPage extends Component {
             referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
             body: JSON.stringify(newToken) // body data type must match "Content-Type" header
         })
+
+        this.signinbtn();
+
     }
 
     render() {
@@ -233,8 +236,8 @@ export default class CCLoginPage extends Component {
                             <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password" onChange={(a) => this.setState({ password: a.target.value })} />
                             {/* <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" /> */}
                             <br></br><br></br>
-                            <Button variant="dark" style={{ boxShadow: '0 0 10px  #141414', width: '100%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '20px' }} onClick={this.signinbtn} fullWidth size="lg" >Log In</Button><br></br><br></br><br></br>
-                            <Button variant="dark" style={{ boxShadow: '0 0 10px  #141414', width: '100%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '20px' }} onClick={this.checkToken} fullWidth size="lg" >Check Token</Button><br></br><br></br><br></br>
+                            <Button variant="dark" style={{ boxShadow: '0 0 10px  #141414', width: '100%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '20px' }} onClick={this.checkToken} fullWidth size="lg" >Log In</Button><br></br><br></br><br></br>
+                            {/* <Button variant="dark" style={{ boxShadow: '0 0 10px  #141414', width: '100%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '20px' }} onClick={this.checkToken} fullWidth size="lg" >Check Token</Button><br></br><br></br><br></br> */}
                             <Grid container>
                                 <Grid item xs>
                                     <Button variant="warning" style={{ width: '90%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '15px' }} fullWidth size="sm" ><Link style={{ color: 'black' }} to="/forget_password_page">Forgot Password</Link></Button>

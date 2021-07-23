@@ -161,6 +161,7 @@ export default class CCCreateNewTrip extends Component {
                 if (dataLength == 0) { alert("you don't have any match for now") }
                 else { alert("Sweet, you have " + dataLength + " matchs!") }
                 window.location.href = "http://localhost:3000/trip_page"
+                // window.location.href = "http://localhost:3000/trip_page/tripname="+this.state.trip_name
             }).catch(function (error) {
                 console.log("Error getting document:", error);
             });

@@ -28,7 +28,7 @@ export default class CCLoginPage extends Component {
             social_media_name: 'Login Page',
             image: 'https://png.pngtree.com/png-clipart/20200701/original/pngtree-character-default-avatar-png-image_5407167.jpg',
             data_from_sql: '',
-
+            stamToken: '',
         }
 
         //  this.url = "https://www.mboxdrive.com/Record (online-voice-recorder.com).mp3";
@@ -56,7 +56,7 @@ export default class CCLoginPage extends Component {
 
 
         //get all Token_expa from SQL
-        let apiUrl2 = `http://localhost:51566/api/Token`;
+        let apiUrl2 = `http://localhost:53281/api/Token`;
         fetch(apiUrl2)
             .then(res => {
                 console.log('res=', res);
@@ -75,6 +75,11 @@ export default class CCLoginPage extends Component {
                 (error) => {
                     console.log("err GET=", error);
                 });
+
+
+
+                this.setState({ stamToken: localStorage.getItem('Token_number') })
+
     }
 
     handleShow = () => {
@@ -173,7 +178,7 @@ export default class CCLoginPage extends Component {
     checkToken = () => {
 
         console.log("in checkToken")
-        console.log(this.props.TokenNumberFromBrowser)
+        console.log(this.state.token_num)
 
         // console.log(this.state.email)
 
@@ -191,23 +196,25 @@ export default class CCLoginPage extends Component {
         //     this.setState({ Token: this.props.TokenNumberFromBrowser })
         //     console.log("the token is match")
         // }
-
-        let apiUrlEditToken = `http://localhost:51566/api/Token/` + this.state.email + "/" + localStorage.getItem('Token_number');
-        //TokenNumberFromBrowser: this.props.TokenNumberFromBrowser,
+        const newToken = {
+            Email: this.state.email,
+            Token_number: this.state.token_num
+        }
+        let apiUrlEditToken = `http://localhost:53281/api/Token/EditToken`;
 
         fetch(apiUrlEditToken, {
-            method: 'PUT', // *GET, POST, PUT, DELETE, etc.
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, *cors, same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
             credentials: 'same-origin', // include, *same-origin, omit
             headers: {
-                'Content-Type': 'application/json'
-                //'Content-type': 'application/json; charset=UTF-8', //very important to add the 'charset=UTF-8'!!!!
+                'Content-Type': 'application/json',
+                //'Content-Type': 'application/json; charset=UTF-8', //very important to add the 'charset=UTF-8'!!!!
                 //'Accept': 'application/json; charset=UTF-8'
             },
             redirect: 'follow', // manual, *follow, error
             referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-            // body: JSON.stringify(newTrip) // body data type must match "Content-Type" header
+            body: JSON.stringify(newToken) // body data type must match "Content-Type" header
         })
     }
 

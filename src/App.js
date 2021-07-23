@@ -29,7 +29,8 @@ class App extends Component {
       Ques_data_fromSQL: '',
       snackBarStatus: false,
       payloadTtile: '',
-      show: false
+      show: false,
+      test:'a'
     };
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
@@ -86,7 +87,7 @@ class App extends Component {
     console.log("this.state.data_from_sql " + this.state.data_from_sql)
     console.log("in componentDidMount function");
 
-    let apiUrl = `http://localhost:51566/api/User`;
+    let apiUrl = `http://localhost:53281/api/User`;
     //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User`;
 
     fetch(apiUrl)
@@ -109,7 +110,7 @@ class App extends Component {
         });
 
 
-    let apiUrl1 = `http://localhost:51566/api/Questionnaire`;
+    let apiUrl1 = `http://localhost:53281/api/Questionnaire`;
     fetch(apiUrl1)
       .then(res => {
         console.log('res=', res);
@@ -132,7 +133,7 @@ class App extends Component {
 
 
     //get all Token_expa from SQL
-    let apiUrl2 = `http://localhost:51566/api/Token`;
+    let apiUrl2 = `http://localhost:53281/api/Token`;
     fetch(apiUrl2)
       .then(res => {
         console.log('res=', res);
@@ -158,7 +159,7 @@ class App extends Component {
 
     console.log("you will accept " + this.state.payloadBodyEmail + " for this trip: " + this.state.payloadBodyTripName)
 
-    let apiUrl = `http://localhost:51566/api/ParticipantsInTrip`;
+    let apiUrl = `http://localhost:53281/api/ParticipantsInTrip`;
 
     const Participant = {
       TripName: this.state.payloadBodyTripName,

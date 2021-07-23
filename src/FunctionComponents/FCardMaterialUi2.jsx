@@ -40,6 +40,11 @@ const useStyles = makeStyles((theme) => ({
 export default function MediaCard2(props) {
     const classes = useStyles();
 
+    function test() {
+        alert("hey"+props.name)
+    }
+
+
     return (
         <div>
             <Card className={classes.root}>
@@ -56,7 +61,7 @@ export default function MediaCard2(props) {
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
-                    <ColorButton variant="contained" color="primary" className={classes.margin}> more  </ColorButton>
+                    <ColorButton variant="contained" color="primary" className={classes.margin} onClick={test} > View  </ColorButton>
                     {/* <Button className={classes.button} size="large" color="primary"> Ask to join! </Button> */}
                 </CardActions>
             </Card><br></br>

@@ -41,7 +41,7 @@ export default class CCMyprofile extends Component {
 
         console.log("in componentDidMount function");
 
-        let apiUrl = `http://localhost:51566/api/Questionnaire?email=` + localStorage.getItem('user_email');
+        let apiUrl = `http://localhost:53281/api/Questionnaire?email=` + localStorage.getItem('user_email');
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/Questionnaire/getSpecificQuestionnaire`;
 
         fetch(apiUrl)
@@ -77,8 +77,8 @@ export default class CCMyprofile extends Component {
     checkValidation = () => {
 
         console.log("in checkValidation function")
-
-        if (this.state.password === '' && this.state.confirm_password === '' && (this.state.q1 !== '' || this.state.q3 !=='' || this.state.q4 !== '' || this.state.q5 !== '' || this.state.q6 !=='' || this.state.q7 !== '' || this.state.q8 !== '' || this.state.q9 !== '' || this.state.q10 !== '' || this.state.q11 !== '')) {
+        console.log(this.state.confirm_password);
+        if (this.state.password === '' && this.state.confirm_password === '' && (this.state.q1 !== '' || this.state.q3 !== '' || this.state.q4 !== '' || this.state.q5 !== '' || this.state.q6 !== '' || this.state.q7 !== '' || this.state.q8 !== '' || this.state.q9 !== '' || this.state.q10 !== '' || this.state.q11 !== '')) {
 
             console.log("changeQuestionnairePUT")
             this.changeQuestionnairePUT(); //this function PUT the Questionnaire only
@@ -117,9 +117,8 @@ export default class CCMyprofile extends Component {
     }
 
     changePasswordPUT = () => {
-
-        let apiUrl = `http://localhost:51566/api/User/` + localStorage.getItem('user_email') + "/" + this.state.password;
-
+        console.log("in change password put")
+        let apiUrl = `http://localhost:53281/api/User/` + localStorage.getItem('user_email') + "/" + this.state.password;
         fetch(apiUrl, {
             method: 'PUT', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, *cors, same-origin
@@ -156,7 +155,7 @@ export default class CCMyprofile extends Component {
                 console.log("you click on Save Button")
 
                 //PUT to Questionnaire:
-                let apiUrl = `http://localhost:51566/api/Questionnaire/` + localStorage.getItem('user_email') + "/" + this.state.q1 + "/" + this.state.q3 + "/" + this.state.q4 + "/" + this.state.q5 + "/" + this.state.q6 + "/" + this.state.q7 + "/" + this.state.q8 + "/" + this.state.q9 + "/" + this.state.q10 + "/" + this.state.q11;
+                let apiUrl = `http://localhost:53281/api/Questionnaire/` + localStorage.getItem('user_email') + "/" + this.state.q1 + "/" + this.state.q3 + "/" + this.state.q4 + "/" + this.state.q5 + "/" + this.state.q6 + "/" + this.state.q7 + "/" + this.state.q8 + "/" + this.state.q9 + "/" + this.state.q10 + "/" + this.state.q11;
                 //let apiUrl = `http://localhost:54976/api/Questionnaire/benmshulam@gmail.com/1/3/4/5/6/7/8/9/10/11`;
                 //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip/`+this.state.trip_name+"/"+this.state.match_percent+"/"+this.state.with_children;
 

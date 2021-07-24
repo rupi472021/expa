@@ -247,7 +247,7 @@ class App extends Component {
           <Route exact path="/main_menu_page/my_profile" >
             <CCMyprofile />
           </Route>
-          <Route exact path="/main_menu_page/my_trips" >
+          <Route exact path="/main_menu_page/my_trips"   >
             <CCMyTrip />
           </Route>
           <Route exact path="/main_menu_page/search_trip_page" >

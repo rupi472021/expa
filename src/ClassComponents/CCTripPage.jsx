@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component,useRef } from 'react'
 import { AiOutlineRollback } from 'react-icons/ai';
 import Swal from 'sweetalert2';
 import { Form, Button, DropdownButton, Dropdown, ButtonGroup, ProgressBar, CardColumns, Modal, Card } from 'react-bootstrap';
@@ -17,12 +17,20 @@ import FCEditList from '../FunctionComponents/FCEditList';
 //import Weathers from '../Element/EWeather';
 import Select from '@material-ui/core/Select';
 import { BiCamera } from "react-icons/bi";
+import Webcam from "react-webcam";
+// import {useRef} from "react";
+
+
+
+
 
 const useStyles = makeStyles((theme) => ({
     margin: {
         margin: theme.spacing(1),
     },
 }));
+
+
 
 
 <link rel="stylesheet/less" type="text/css" href="styles.less" />
@@ -40,10 +48,12 @@ export default class CCTripPage extends Component {
             ParticipantsArray: [],
             opacity: 0.6,
             disabled: true,
+            disabled1: true,
             showComponent: false,
             showChecklistComponent: false,
             showParticipantsComponent: false,
             showWeatherComponent: false,
+            showCameraComponent: false,
             // Check1: '',
             // Check2: '',
             // Check3: '',
@@ -60,21 +70,32 @@ export default class CCTripPage extends Component {
             WhoBring2: '',
             WhoBring3: '',
             WhoBring4: '',
+            WhoBring5: '',
+            WhoBring6: '',
+            WhoBring7: '',
+
             b1: '',
             b2: '',
             b3: '',
             b4: '',
+            b5: '',
+            b6: '',
+            b7: '',
+
+
         };
         this._onButtonClick = this._onButtonClick.bind(this);
         this._EditListButtonClick = this._EditListButtonClick.bind(this);
         this._ViewParticipantsButtonClick = this._ViewParticipantsButtonClick.bind(this);
         this._onWeatherButtonClick = this._onWeatherButtonClick.bind(this);
+        this._onCameraButtonClick = this._onCameraButtonClick.bind(this);
+
 
 
     };
 
     componentDidMount = () => {
-        let apiUrl = `http://localhost:51566/api/NewTrip/getripByName/${localStorage.getItem('trip_name')}/`
+        let apiUrl = `http://localhost:53281/api/NewTrip/getripByName/${localStorage.getItem('trip_name')}/`
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
@@ -92,14 +113,19 @@ export default class CCTripPage extends Component {
 
         console.log("this.state.TripsByName....");
         console.log(this.state.TripsByName);
+        // console.log(this.state.TripsByName[0].Area);
         console.log(this.state.tempName);
+        console.log(this.state.email);
+
+
+
 
         this.getParticipantTripDate();
     }
 
     getParticipantTripDate() {
 
-        let apiUrl = `http://localhost:51566/api/User/getParticiByName/${localStorage.getItem('trip_name')}/`
+        let apiUrl = `http://localhost:53281/api/User/getParticiByName/${localStorage.getItem('trip_name')}/`
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
@@ -128,11 +154,18 @@ export default class CCTripPage extends Component {
 
     _EditListButtonClick() {
 
+        //Checking if user is The Trip Admin
+        if (this.state.email == localStorage.getItem('user_email')) {
+            this.setState({
+                disabled1: false,
+            });
+        }
+
         console.log("in _EditListButtonClick")
 
         this.setState({ showChecklistComponent: true });
 
-        let apiUrl = `http://localhost:51566/api/TripEquipment`
+        let apiUrl = `http://localhost:53281/api/TripEquipment`
 
         fetch(apiUrl)
             .then(response => response.json())
@@ -182,6 +215,20 @@ export default class CCTripPage extends Component {
         });
     }
 
+    _onCameraButtonClick() {
+        // const webRef=useRef(null);
+        // let img="httpL;';'";
+        // const showImage=()=>{
+        //     img=webRef.current.getScreenshot();
+
+
+        this.setState({
+            showCameraComponent: true,
+        });
+
+        
+    }
+
 
 
 
@@ -191,6 +238,7 @@ export default class CCTripPage extends Component {
             showComponent: false,
             showParticipantsComponent: false,
             showWeatherComponent: false,
+            showCameraComponent: false
         });
     }
 
@@ -245,7 +293,7 @@ export default class CCTripPage extends Component {
 
             }
 
-            let apiUrl = `http://localhost:51566/api/TripEquipment`;
+            let apiUrl = `http://localhost:53281/api/TripEquipment`;
             //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
             ////POST To Trip_Equipment SQL TABLE
@@ -288,7 +336,7 @@ export default class CCTripPage extends Component {
 
             }
 
-            let apiUrl = `http://localhost:51566/api/TripEquipment`;
+            let apiUrl = `http://localhost:53281/api/TripEquipment`;
             //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
             ////POST To Trip_Equipment SQL TABLE
@@ -333,7 +381,7 @@ export default class CCTripPage extends Component {
 
             }
 
-            let apiUrl = `http://localhost:51566/api/TripEquipment`;
+            let apiUrl = `http://localhost:53281/api/TripEquipment`;
             //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
             ////POST To Trip_Equipment SQL TABLE
@@ -379,7 +427,7 @@ export default class CCTripPage extends Component {
 
             }
 
-            let apiUrl = `http://localhost:51566/api/TripEquipment`;
+            let apiUrl = `http://localhost:53281/api/TripEquipment`;
             //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
             ////POST To Trip_Equipment SQL TABLE
@@ -410,6 +458,10 @@ export default class CCTripPage extends Component {
             );
         }
 
+
+
+
+
     }
 
     render() {
@@ -428,7 +480,7 @@ export default class CCTripPage extends Component {
                             <Button size="sm" variant="warning" onClick={this._onWeatherButtonClick}><b>Weather</b></Button>
                             <Button size="sm" variant="info" onClick={this._onButtonClick}><b>Info</b></Button>
                             <Button variant="danger" size="sm" onClick={this._ViewParticipantsButtonClick}><b>{this.state.ParticipantsArray.length + 1} / {this.state.participants}</b></Button>
-                            <BiCamera size={40} ></BiCamera>
+                            <BiCamera size={40} onClick={this._onCameraButtonClick} ></BiCamera>
                         </nav>
                         <div><ProgressBar animated striped variant="success" now={(this.state.ParticipantsArray.length / this.state.participants) * 100} label="Participants Capacity" /></div>
 
@@ -502,7 +554,7 @@ export default class CCTripPage extends Component {
                                             </tr>
                                             <tr>
                                                 {/* <td><TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" name="email" autoComplete="email" autoFocus onChange={(e) => this.setState({ email: e.target.value })} /></td> */}
-                                                <h6>a</h6>
+                                                <h6>Coffee</h6>
                                                 <td>
                                                     <select id="dropdown" disabled={this.state.disabled} onChange={(e) => this.setState({ Check4: e.target.value })}>
                                                         <option value=""></option>
@@ -516,7 +568,7 @@ export default class CCTripPage extends Component {
                                             </tr>
                                             <tr>
                                                 {/* <td><TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" name="email" autoComplete="email" autoFocus onChange={(e) => this.setState({ email: e.target.value })} /></td> */}
-                                                <h6>b</h6>
+                                                <h6>Light</h6>
                                                 <td>
                                                     <select id="dropdown" disabled={this.state.disabled} onChange={(e) => this.setState({ Check5: e.target.value })}>
                                                         <option value=""></option>
@@ -530,7 +582,7 @@ export default class CCTripPage extends Component {
                                             </tr>
                                         </tbody>
                                     </Table>
-                                    <Button variant="info" onClick={this._EditListButtonClick}>Edit List</Button>
+                                    <Button variant="info" onClick={this._EditListButtonClick}>View List</Button>
                                     <h1></h1>
                                 </Col>
                                 <Col style={{ boxShadow: '0px 0px 150px 10px ', fontSize: '14px', borderRadius: '10px', borderColor: 'black' }}><br></br><br></br><br></br><br></br><br></br><br></br>
@@ -561,10 +613,6 @@ export default class CCTripPage extends Component {
 
                                     <tbody>
                                         {/* <td><TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" name="email" autoComplete="email" autoFocus /></td> */}
-
-
-
-
                                         <tr>
                                             <h5>Water</h5>
                                             <td>
@@ -610,7 +658,35 @@ export default class CCTripPage extends Component {
                                             {/* <td><TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" name="email" autoComplete="email" autoFocus onChange={(e) => this.setState({ email: e.target.value })} /></td> */}
                                             <h5>Kitchen supplies</h5>
                                             <td>
-                                                <select id="dropdown" onChange={(e) => this.setState({ WhoBring4: e.target.value })}>                          
+                                                <select id="dropdown" onChange={(e) => this.setState({ WhoBring4: e.target.value })}>
+                                                    <option value={this.state.b4}>{this.state.b4}</option>
+                                                    <option value={localStorage.getItem('user_email')}>{localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}</option>
+                                                    {
+                                                        this.state.ParticipantsArray?.length > 0 &&
+                                                        this.state.ParticipantsArray?.map((item, key) => <option value={item.Partner.Email}>{item.Partner.Fname} {item.Partner.Lname}</option>)
+                                                    }
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            {/* <td><TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" name="email" autoComplete="email" autoFocus onChange={(e) => this.setState({ email: e.target.value })} /></td> */}
+                                            <h5>Coffee</h5>
+                                            <td>
+                                                <select id="dropdown" onChange={(e) => this.setState({ WhoBring4: e.target.value })}>
+                                                    <option value={this.state.b4}>{this.state.b4}</option>
+                                                    <option value={localStorage.getItem('user_email')}>{localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}</option>
+                                                    {
+                                                        this.state.ParticipantsArray?.length > 0 &&
+                                                        this.state.ParticipantsArray?.map((item, key) => <option value={item.Partner.Email}>{item.Partner.Fname} {item.Partner.Lname}</option>)
+                                                    }
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            {/* <td><TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" name="email" autoComplete="email" autoFocus onChange={(e) => this.setState({ email: e.target.value })} /></td> */}
+                                            <h5>Light</h5>
+                                            <td>
+                                                <select id="dropdown" onChange={(e) => this.setState({ WhoBring4: e.target.value })}>
                                                     <option value={this.state.b4}>{this.state.b4}</option>
                                                     <option value={localStorage.getItem('user_email')}>{localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}</option>
                                                     {
@@ -624,7 +700,7 @@ export default class CCTripPage extends Component {
                                 </Table>
                             </Modal.Body>
                             <Modal.Footer>
-                                <Button style={{ alignItems: 'center' }} variant="primary" onClick={this._SaveListButtonClick}>Save Changes</Button>
+                                <Button disabled={this.state.disabled1} style={{ alignItems: 'center' }} variant="primary" onClick={this._SaveListButtonClick}>Save Changes</Button>
                                 <Button variant="secondary" onClick={() => this.setState({ showChecklistComponent: false })}  >Close</Button>
                             </Modal.Footer>
                         </Modal> : null
@@ -727,6 +803,49 @@ export default class CCTripPage extends Component {
                             </Modal.Footer>
                         </Modal> : null
                     }
+
+
+
+                    {/* Showing camera Component */}
+                    {this.state.showCameraComponent ?
+                        <Modal
+                            show={this.state.showCameraComponent}
+                            onHide={this.CloseEditList}
+                            backdrop="static"
+                            keyboard={false}
+                        >
+                            <Modal.Header closeButton>
+                                <Modal.Title className="App">
+                                    heys
+                                    <Webcam/>
+                                    {/* <div className="App">
+                                    react webcam
+                                    <Webcam ref={webRef} />
+                                    <button
+                                        onClick={() => {
+                                            showImage();
+                                        }}>
+                                        show image in console
+                                    </button>
+                                    <br />
+                                </div> */}
+                                </Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+
+
+                            </Modal.Body>
+                            <Modal.Footer>
+                                {/* <Button variant="secondary" onClick={() => this.setState({ showComponent: false })}  >Close</Button>
+<Button style={{ alignItems: 'center' }} variant="primary">Save Changes</Button> */}
+                            </Modal.Footer>
+                        </Modal> : null
+                    }
+
+
+
+
+
 
                 </div >
             </div>

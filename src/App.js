@@ -19,7 +19,9 @@ import '@coreui/coreui/dist/css/coreui.min.css';
 import Modal from './Modal.js';
 
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
+import CameraOpen from './FunctionComponents/CameraOpen';
 
+import Webcam from "react-webcam";
 
 class App extends Component {
 
@@ -30,7 +32,7 @@ class App extends Component {
       snackBarStatus: false,
       payloadTtile: '',
       show: false,
-      test:'a'
+      test: 'a'
     };
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
@@ -157,6 +159,7 @@ class App extends Component {
 
   accpetUserFunction = () => {
 
+
     console.log("you will accept " + this.state.payloadBodyEmail + " for this trip: " + this.state.payloadBodyTripName)
 
     let apiUrl = `http://localhost:53281/api/ParticipantsInTrip`;
@@ -205,9 +208,19 @@ class App extends Component {
 
   }
 
+  // moveto() {
+  //   alert("hey")
+  //   return(
+  //     // <Webcam />
+  //     <h1>ken</h1>
+  //     );
+  // }
+
   render() {
     return (
+
       <div className="App">
+        
         <Snackbar
           style={{ marginBottom: 575 }}
           anchorOrigin={{
@@ -228,6 +241,7 @@ class App extends Component {
         />
         <Modal handleDENIED={this.deniedUserFunctionFromModal} handleACCEPT={this.accpetUserFunctionFromModal} show={this.state.show} handleClose={this.hideModal} name={this.state.payloadBodyRequester} email={this.state.payloadBodyEmail} img={this.state.payloadBodyRequesterImge}> </Modal>
         {/* <ReactNotification /> */}
+        {/* <Button color="primary" onClick={<CameraOpen/>}>Open Camera</Button> */}
         <Switch>
           <Route exact path="/">
             <CCLoginPage dataFromApptoLoginPage={this.state.data_from_sql} TokenNumberFromBrowser={this.state.token_num} />
@@ -254,6 +268,7 @@ class App extends Component {
             <CCSearchPage />
           </Route>
           <Route exact path="/trip_page">
+          {/* <Route exact path="/main_menu_page/trip_page?"{...localStorage.getItem('trip_name')} > */}
             <CCTripPage />
             <Map style={{ width: '25vh', height: '50vh', marginLeft: '210px', marginTop: '-550px', borderRadius: 10 }} google={this.props.google} zoom={14}>
 

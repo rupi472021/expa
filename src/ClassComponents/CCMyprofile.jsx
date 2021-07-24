@@ -97,6 +97,7 @@ export default class CCMyprofile extends Component {
                 denyButtonText: `Don't save`,
             }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
+                console.log(result)
                 if (result.isConfirmed) {
                     this.changePasswordPUT();  //this function PUT the Password only
                 }
@@ -282,13 +283,13 @@ export default class CCMyprofile extends Component {
                 <h2><GrCamera style={{ marginRight: -120, marginTop: -120, marginLeft: 5 }} onClick={() => this.fileInput.click()} /></h2>
                 <Form style={{ marginTop: -40 }} >
                     <Form.Group controlId="formBasicEmail" style={{ width: '75%', marginLeft: 50 }} >
-                        <TextField className="TextField" disabled={this.state.disabled} style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="New Passowrd" label="Please Enter New Passowrd" name="Password" autoComplete="New Passowrd" onChange={(e) => this.setState({ email: e.target.value })} autoFocus />
+                        <TextField className="TextField" disabled={this.state.disabled} style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="New Passowrd" label="Please Enter New Passowrd" name="Password" autoComplete="New Passowrd" onChange={(e) => this.setState({ password: e.target.value })} autoFocus />
                         {/* <Button style={{ width: '70%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold', fontSize: '20px' }} fullWidth variant="warning" size="sm" disabled='false' >New Password </Button><br></br> */}
                         {/* <Form.Label style={{ fontWeight: 'bold', fontSize: 20, textDecorationLine: 'underline' }} > New Password </Form.Label> */}
                         {/* <Form.Control style={{ borderRadius: 20, borderWidth: 2 }} type="password" placeholder="Enter your New Password" onChange={(ee) => this.setState({ password: ee.target.value })} /> */}
                     </Form.Group>
                     <Form.Group controlId="formBasicPassword" style={{ width: '75%', marginLeft: 50 }} >
-                        <TextField className="TextField" disabled={this.state.disabled} style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="confirm" label="Please Confirm Password" name="confirmPassword" autoComplete="Confirm Password" onChange={(e) => this.setState({ email: e.target.value })} autoFocus />
+                        <TextField className="TextField" disabled={this.state.disabled} style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="confirm" label="Please Confirm Password" name="confirmPassword" autoComplete="Confirm Password" onChange={(e) => this.setState({ confirm_password: e.target.value })} autoFocus />
                         {/* <Button style={{ width: '70%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold', fontSize: '20px' }} fullWidth variant="warning" size="sm" disabled='false' >Confirm Password </Button><br></br> */}
                         {/* <Form.Label style={{ fontWeight: 'bold', fontSize: 20, textDecorationLine: 'underline' }} >Confirm Password</Form.Label> */}
                         {/* <Form.Control style={{ borderRadius: 20, borderWidth: 2 }} type="password" placeholder="Confirm Password" onChange={(e) => this.setState({ confirm_password: e.target.value })} /> */}

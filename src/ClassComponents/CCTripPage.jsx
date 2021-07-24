@@ -95,7 +95,7 @@ export default class CCTripPage extends Component {
     };
 
     componentDidMount = () => {
-        let apiUrl = `http://localhost:53281/api/NewTrip/getripByName/${localStorage.getItem('trip_name')}/`
+        let apiUrl = `http://localhost:51566/api/NewTrip/getripByName/${localStorage.getItem('trip_name')}/`
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
@@ -106,6 +106,7 @@ export default class CCTripPage extends Component {
                     console.log(item.Date);
                     this.state.TripsByName.push({ Trip: item });
                     this.setState({ name: item.Name, date: item.Date, email: item.Admin_email, area: item.Area, matchper: item.MatchPercent, numofnight: item.NumOfnights, participants: item.Participants, time: item.Time, vehicle: item.VehicleType, children: item.WithChildren });
+                    localStorage.setItem('admin_email', item.Admin_email);
                 })
             }).catch(function (error) {
                 console.log("Error getting document:", error);
@@ -125,7 +126,7 @@ export default class CCTripPage extends Component {
 
     getParticipantTripDate() {
 
-        let apiUrl = `http://localhost:53281/api/User/getParticiByName/${localStorage.getItem('trip_name')}/`
+        let apiUrl = `http://localhost:51566/api/User/getParticiByName/${localStorage.getItem('trip_name')}/`
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
@@ -155,7 +156,7 @@ export default class CCTripPage extends Component {
     _EditListButtonClick() {
 
         //Checking if user is The Trip Admin
-        if (this.state.email == localStorage.getItem('user_email')) {
+        if (localStorage.getItem('admin_email') == localStorage.getItem('user_email')) {
             this.setState({
                 disabled1: false,
             });
@@ -165,7 +166,7 @@ export default class CCTripPage extends Component {
 
         this.setState({ showChecklistComponent: true });
 
-        let apiUrl = `http://localhost:53281/api/TripEquipment`
+        let apiUrl = `http://localhost:51566/api/TripEquipment`
 
         fetch(apiUrl)
             .then(response => response.json())
@@ -293,7 +294,7 @@ export default class CCTripPage extends Component {
 
             }
 
-            let apiUrl = `http://localhost:53281/api/TripEquipment`;
+            let apiUrl = `http://localhost:51566/api/TripEquipment`;
             //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
             ////POST To Trip_Equipment SQL TABLE
@@ -336,7 +337,7 @@ export default class CCTripPage extends Component {
 
             }
 
-            let apiUrl = `http://localhost:53281/api/TripEquipment`;
+            let apiUrl = `http://localhost:51566/api/TripEquipment`;
             //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
             ////POST To Trip_Equipment SQL TABLE
@@ -381,7 +382,7 @@ export default class CCTripPage extends Component {
 
             }
 
-            let apiUrl = `http://localhost:53281/api/TripEquipment`;
+            let apiUrl = `http://localhost:51566/api/TripEquipment`;
             //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
             ////POST To Trip_Equipment SQL TABLE
@@ -427,7 +428,7 @@ export default class CCTripPage extends Component {
 
             }
 
-            let apiUrl = `http://localhost:53281/api/TripEquipment`;
+            let apiUrl = `http://localhost:51566/api/TripEquipment`;
             //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
             ////POST To Trip_Equipment SQL TABLE
@@ -488,7 +489,7 @@ export default class CCTripPage extends Component {
                         <nav class="navbar navbar-inverse" style={{ backgroundColor: 'grey' }}>
                             <h3 style={{ boxShadow: '0px 50px 150px 10px yellow', fontSize: '14px', backgroundColor: 'gold', borderRadius: '2px' }}>&nbsp;&nbsp;AT: <b>{this.state.date}</b>&nbsp;&nbsp;</h3>
                             <h3 style={{ boxShadow: '0px 50px 150px 10px yellow', fontSize: '14px', backgroundColor: 'gold', borderRadius: '2px' }}>&nbsp;&nbsp; Name: <b>{this.state.name}</b>&nbsp;&nbsp;</h3>
-                            <h3 style={{ boxShadow: '0px 50px 150px 10px yellow', fontSize: '14px', backgroundColor: 'gold', borderRadius: '2px' }}>&nbsp;&nbsp;Admin: <b>{localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}&nbsp;&nbsp;</b></h3>
+                            <h3 style={{ boxShadow: '0px 50px 150px 10px yellow', fontSize: '14px', backgroundColor: 'gold', borderRadius: '2px' }}>&nbsp;&nbsp;Admin: <b>{localStorage.getItem('admin_email')}&nbsp;&nbsp;</b></h3>
                         </nav>
 
 

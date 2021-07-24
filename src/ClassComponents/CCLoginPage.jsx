@@ -56,7 +56,7 @@ export default class CCLoginPage extends Component {
 
 
         //get all Token_expa from SQL
-        let apiUrl2 = `http://localhost:53281/api/Token`;
+        let apiUrl2 = `http://localhost:51566/api/Token`;
         fetch(apiUrl2)
             .then(res => {
                 console.log('res=', res);
@@ -200,7 +200,7 @@ export default class CCLoginPage extends Component {
             Email: this.state.email,
             Token_number: this.state.token_num
         }
-        let apiUrlEditToken = `http://localhost:53281/api/Token/EditToken`;
+        let apiUrlEditToken = `http://localhost:51566/api/Token/EditToken`;
 
         fetch(apiUrlEditToken, {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.

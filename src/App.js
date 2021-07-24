@@ -17,7 +17,6 @@ import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import '@coreui/coreui/dist/css/coreui.min.css';
 import Modal from './Modal.js';
-
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 import CameraOpen from './FunctionComponents/CameraOpen';
 
@@ -26,13 +25,18 @@ import Webcam from "react-webcam";
 class App extends Component {
 
   constructor(props) {
+
+    var today = new Date(),
+      date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
     super(props);
     this.state = {
       Ques_data_fromSQL: '',
       snackBarStatus: false,
       payloadTtile: '',
       show: false,
-      test: 'a'
+      test: 'a',
+      currentDate: date,
     };
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
@@ -46,7 +50,103 @@ class App extends Component {
     this.setState({ show: false });
   };
 
+  CheckTripsDate = () => {
+
+    //this function check if the Trip's date passed
+
+    let apiUrlCheckDate = `http://localhost:51566/api/NewTrip`;
+    //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User`;
+
+    fetch(apiUrlCheckDate)
+      .then(res => {
+        console.log('res=', res);
+        console.log('res.status', res.status);
+        console.log('res.ok', res.ok);
+        return res.json()
+      })
+      .then(
+        (result) => {
+          console.log("GET dates data from SQL= ", result);
+          // result.map(st => console.log(st.Fname)); // all Fname in Users_Expa
+          this.setState({
+            dates_data_sql: result,
+          })
+
+          for (let index = 0; index < result.length; index++) {
+
+            console.log(this.state.currentDate)
+            var TripDate = result[index].Date.replace('"', '');
+            var TripDate = new Date(TripDate);
+            const dateFromSql = TripDate.getFullYear() + '-' + (TripDate.getMonth() + 1) + '-' + TripDate.getDate();
+
+            console.log(dateFromSql)
+
+            if (this.state.currentDate >= dateFromSql) {
+
+              console.log(result[index].Name)
+              this.ChangeActiveToFalse(result[index].Name);
+
+            }
+
+
+          }
+
+
+          // for (let index = 0; index < result.length; index++) {
+
+          //   console.log(this.state.currentDate)
+          //   var TripDate = result[3].Date.replace('"', '');
+          //   var TripDate = new Date(TripDate);
+          //   const dateFromSql = TripDate.getFullYear() + '-' + (TripDate.getMonth() + 1) + '-' + TripDate.getDate();
+
+          //   console.log(dateFromSql)
+
+          //   if (this.state.currentDate >= dateFromSql) {
+
+          //     console.log(result[3].Name)
+          //     this.ChangeActiveToFalse(result[3].Name);
+
+          //   }
+
+          // }
+
+
+
+
+        },
+        (error) => {
+          console.log("err GET=", error);
+        });
+
+  }
+
+
+  ChangeActiveToFalse = (tripName) => {
+
+    console.log(tripName)
+    const zero = false;
+    let apiUrlChangeTripToFalse = `http://localhost:51566/api/ParticipantsInTrip/tripName/` + tripName + "/changeTripTo/" + zero;
+
+    fetch(apiUrlChangeTripToFalse, {
+      method: 'PUT', // *GET, POST, PUT, DELETE, etc.
+      mode: 'cors', // no-cors, *cors, same-origin
+      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: 'same-origin', // include, *same-origin, omit
+      headers: {
+        'Content-Type': 'application/json'
+        // 'Content-type': 'application/json; charset=UTF-8', //very important to add the 'charset=UTF-8'!!!!
+        // 'Accept': 'application/json; charset=UTF-8'
+      },
+      redirect: 'follow', // manual, *follow, error
+      referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+      // body: JSON.stringify(newTrip) // body data type must match "Content-Type" header
+    })
+
+  }
+
   componentDidMount = () => { //GET all Users from Users_expa (SQL) onload
+
+    this.CheckTripsDate();
 
     const messaging = firebase.messaging();
     messaging.requestPermission().then(() => {
@@ -89,7 +189,7 @@ class App extends Component {
     console.log("this.state.data_from_sql " + this.state.data_from_sql)
     console.log("in componentDidMount function");
 
-    let apiUrl = `http://localhost:53281/api/User`;
+    let apiUrl = `http://localhost:51566/api/User`;
     //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User`;
 
     fetch(apiUrl)
@@ -112,7 +212,7 @@ class App extends Component {
         });
 
 
-    let apiUrl1 = `http://localhost:53281/api/Questionnaire`;
+    let apiUrl1 = `http://localhost:51566/api/Questionnaire`;
     fetch(apiUrl1)
       .then(res => {
         console.log('res=', res);
@@ -135,7 +235,7 @@ class App extends Component {
 
 
     //get all Token_expa from SQL
-    let apiUrl2 = `http://localhost:53281/api/Token`;
+    let apiUrl2 = `http://localhost:51566/api/Token`;
     fetch(apiUrl2)
       .then(res => {
         console.log('res=', res);
@@ -162,7 +262,7 @@ class App extends Component {
 
     console.log("you will accept " + this.state.payloadBodyEmail + " for this trip: " + this.state.payloadBodyTripName)
 
-    let apiUrl = `http://localhost:53281/api/ParticipantsInTrip`;
+    let apiUrl = `http://localhost:51566/api/ParticipantsInTrip`;
 
     const Participant = {
       TripName: this.state.payloadBodyTripName,
@@ -186,6 +286,44 @@ class App extends Component {
       referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
       body: JSON.stringify(Participant) // body data type must match "Content-Type" header
     })
+
+    this.firebaseNotification();
+
+  }
+
+  firebaseNotification = () => {
+
+    let a = 'https://fcm.googleapis.com/fcm/send';
+
+    // Modified
+    var payload = {
+
+      "notification": {
+        "title": "hhiiiiiiiiiiii",
+        "body": "welcome ttttotototoototo"
+      },
+      "to": 'ciayXAEUiflKWvsPOJQ6xj:APA91bHBOH4HzuzV-5_Splq6sWpHbm4-cLmYIKeG1Hp4cwh20aU5x-mR9Q2D9fkvnY3CY2JpF4NaDZjqoyFFGZ-ur3vQ_Eoa8qIpXFNKCiZ8jyQ8vPKWRiHGbDYMFA8JzSjMgkbSk12C'
+    }
+
+    fetch(a, {
+      method: 'POST',
+      body: JSON.stringify(payload),
+      headers: new Headers({
+        "Authorization": "key=AAAA0zw3Jk0:APA91bFQ-pTU1AITIoyAShNxSl8naD667ilNfyXDlqEwLFjXcLiBxG6psIHEz7Xyo_ksJgvwAKHRpdYUzRb_THciRuGIyOYSCNEDXvbkqHh9-H0uAhCQpvopg2Y65e_tOrb8tTTcDVpc",
+        'Content-type': 'application/json; charset=UTF-8' //very important to add the 'charset=UTF-8'!!!!
+      })
+    })
+      .then(res => {
+        console.log('res=', res);
+        return res.json()
+      })
+      .then(
+        (result) => {
+          console.log("fetch POST= ", result);
+        },
+        (error) => {
+          console.log("err post=", error);
+        });
   }
 
   deniedUserFunction = () => {
@@ -198,6 +336,8 @@ class App extends Component {
 
     alert("you have a new participant in your trip!")
     this.setState({ show: false });
+
+    this.accpetUserFunction();
 
   }
 
@@ -220,7 +360,7 @@ class App extends Component {
     return (
 
       <div className="App">
-        
+
         <Snackbar
           style={{ marginBottom: 575 }}
           anchorOrigin={{
@@ -268,7 +408,7 @@ class App extends Component {
             <CCSearchPage />
           </Route>
           <Route exact path="/trip_page">
-          {/* <Route exact path="/main_menu_page/trip_page?"{...localStorage.getItem('trip_name')} > */}
+            {/* <Route exact path="/main_menu_page/trip_page?"{...localStorage.getItem('trip_name')} > */}
             <CCTripPage />
             <Map style={{ width: '25vh', height: '50vh', marginLeft: '210px', marginTop: '-550px', borderRadius: 10 }} google={this.props.google} zoom={14}>
 

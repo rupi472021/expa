@@ -169,13 +169,13 @@ export default class CCSearchPage extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{backgroundColor: '#747400',color:'white'}}>
                 <div><br></br>
-                    <AiOutlineRollback onClick={this.backbtn} size={30} style={{ marginLeft: 320 }}></AiOutlineRollback>
+                    <AiOutlineRollback onClick={this.backbtn} size={30} style={{ marginLeft: 320,color:'white' }}></AiOutlineRollback>
                     <h3>Search the best trip for you!</h3><br></br>
-                    <FormControl style={{ marginRight: 75 }}>
-                        <InputLabel htmlFor="age-native-simple">Area</InputLabel>
-                        <Select
+                    <FormControl style={{ marginRight: 75,color:'white' }}>
+                        <InputLabel style={{color:'white'}} htmlFor="age-native-simple">Area</InputLabel>
+                        <Select style={{color:'white'}}
                             native
                             onChange={this.Sort}
                             inputProps={{
@@ -191,8 +191,8 @@ export default class CCSearchPage extends Component {
                         </Select>
                     </FormControl>
                     <FormControl>
-                        <InputLabel htmlFor="age-native-simple">Vehicle</InputLabel>
-                        <Select
+                        <InputLabel style={{color:'white'}} htmlFor="age-native-simple">Vehicle</InputLabel>
+                        <Select style={{color:'white'}}
                             native
                             onChange={this.Sort}
                             inputProps={{
@@ -210,7 +210,7 @@ export default class CCSearchPage extends Component {
                     </FormControl>
                 </div>
                 <br></br>
-                <CardColumns>
+                <CardColumns style={{alignItems:'center'}}>
                     {
                         this.state.ShowTrips?.length > 0 &&
                         this.state.ShowTrips?.map((item) => <MediaCard admin={item.Trip.Admin_email} name={item.Trip.Name} date={item.Trip.Date} time={item.Trip.Time} participants={item.Trip.Participants} area={item.Trip.Area} vehicle={item.Trip.VehicleType} tokensArray={this.state.tokensArray} />)

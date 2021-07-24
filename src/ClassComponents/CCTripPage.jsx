@@ -89,7 +89,7 @@ class CCTripPage extends Component {
     };
 
     componentDidMount = () => {
-        let apiUrl = `http://localhost:51566/api/NewTrip/getripByName/${localStorage.getItem('trip_name')}/`
+        let apiUrl = `http://localhost:53281/api/NewTrip/getripByName/${localStorage.getItem('trip_name')}/`
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
@@ -101,6 +101,7 @@ class CCTripPage extends Component {
                     this.state.TripsByName.push({ Trip: item });
                     this.setState({ name: item.Name, date: item.Date, email: item.Admin_email, area: item.Area, matchper: item.MatchPercent, numofnight: item.NumOfnights, participants: item.Participants, time: item.Time, vehicle: item.VehicleType, children: item.WithChildren });
                     localStorage.setItem('admin_email', item.Admin_email);
+                    // localStorage.setItem('admin_name', item.Admin_email);
                 })
             }).catch(function (error) {
                 console.log("Error getting document:", error);
@@ -120,7 +121,7 @@ class CCTripPage extends Component {
 
     getParticipantTripDate() {
 
-        let apiUrl = `http://localhost:51566/api/User/getParticiByName/${localStorage.getItem('trip_name')}/`
+        let apiUrl = `http://localhost:53281/api/User/getParticiByName/${localStorage.getItem('trip_name')}/`
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
@@ -139,6 +140,41 @@ class CCTripPage extends Component {
         console.log("this.state.ParticipantsArray....");
         console.log(this.state.ParticipantsArray);
 
+
+
+        ///Get the Name of the user admin from SQl
+        let apiUrl1 = `http://localhost:53281/api/user/getSpecificUser/${localStorage.getItem('admin_email')}/`
+
+        fetch(apiUrl1)
+            .then(res => {
+                console.log('res=', res);
+                console.log('res.status', res.status);
+                console.log('res.ok', res.ok);
+                return res.json()
+            })
+            .then(
+                (result) => {
+                    console.log("GET Users data from SQL= ", result);
+                    
+                    // result.map(st => console.log(st.Fname)); // all Fname in Users_Expa
+                    this.setState({
+                        admindata: result,
+                        
+                    })
+                    console.log(this.state.admindata[0].Fname)
+                    this.setState({
+                        adminFName: this.state.admindata[0].Fname,
+                        adminLName: this.state.admindata[0].Lname
+
+
+                        
+                    })
+                },
+                (error) => {
+                    console.log("err GET=", error);
+                });
+
+        // console.log(this.state.admindata[0].Fname)
     }
 
     _onButtonClick() {
@@ -160,7 +196,7 @@ class CCTripPage extends Component {
 
         this.setState({ showChecklistComponent: true });
 
-        let apiUrl = `http://localhost:51566/api/TripEquipment`
+        let apiUrl = `http://localhost:53281/api/TripEquipment`
 
         fetch(apiUrl)
             .then(response => response.json())
@@ -288,7 +324,7 @@ class CCTripPage extends Component {
 
             }
 
-            let apiUrl = `http://localhost:51566/api/TripEquipment`;
+            let apiUrl = `http://localhost:53281/api/TripEquipment`;
             //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
             ////POST To Trip_Equipment SQL TABLE
@@ -331,7 +367,7 @@ class CCTripPage extends Component {
 
             }
 
-            let apiUrl = `http://localhost:51566/api/TripEquipment`;
+            let apiUrl = `http://localhost:53281/api/TripEquipment`;
             //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
             ////POST To Trip_Equipment SQL TABLE
@@ -376,7 +412,7 @@ class CCTripPage extends Component {
 
             }
 
-            let apiUrl = `http://localhost:51566/api/TripEquipment`;
+            let apiUrl = `http://localhost:53281/api/TripEquipment`;
             //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
             ////POST To Trip_Equipment SQL TABLE
@@ -422,7 +458,7 @@ class CCTripPage extends Component {
 
             }
 
-            let apiUrl = `http://localhost:51566/api/TripEquipment`;
+            let apiUrl = `http://localhost:53281/api/TripEquipment`;
             //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
             ////POST To Trip_Equipment SQL TABLE
@@ -453,10 +489,6 @@ class CCTripPage extends Component {
             );
         }
 
-
-
-
-
     }
 
     render() {
@@ -481,7 +513,7 @@ class CCTripPage extends Component {
                         <nav class="navbar navbar-inverse" style={{ backgroundColor: 'grey' }}>
                             <h3 style={{ boxShadow: '0px 50px 150px 10px yellow', fontSize: '14px', backgroundColor: 'gold', borderRadius: '2px' }}>&nbsp;&nbsp;AT: <b>{this.state.date}</b>&nbsp;&nbsp;</h3>
                             <h3 style={{ boxShadow: '0px 50px 150px 10px yellow', fontSize: '14px', backgroundColor: 'gold', borderRadius: '2px' }}>&nbsp;&nbsp; Name: <b>{this.state.name}</b>&nbsp;&nbsp;</h3>
-                            <h3 style={{ boxShadow: '0px 50px 150px 10px yellow', fontSize: '14px', backgroundColor: 'gold', borderRadius: '2px' }}>&nbsp;&nbsp;Admin: <b>{localStorage.getItem('admin_email')}&nbsp;&nbsp;</b></h3>
+                            <h3 style={{ boxShadow: '0px 50px 150px 10px yellow', fontSize: '14px', backgroundColor: 'gold', borderRadius: '2px' }}>&nbsp;&nbsp;Admin: <b> {this.state.adminFName} {this.state.adminLName}&nbsp;&nbsp;</b></h3>
                         </nav>
 
 
@@ -809,8 +841,13 @@ class CCTripPage extends Component {
                         >
                             <Modal.Header closeButton>
                                 <Modal.Title className="App">
+<<<<<<< Updated upstream
                                     heys
                                     <Webcam />
+=======
+
+                                    <Webcam style={{ height: 450, width: 330 }} />
+>>>>>>> Stashed changes
                                     {/* <div className="App">
                                     react webcam
                                     <Webcam ref={webRef} />

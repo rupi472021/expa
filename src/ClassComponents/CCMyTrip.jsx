@@ -37,6 +37,7 @@ export default class CCMyTrip extends Component {
                 console.log(data);
                 data.forEach((item) => {
                     this.state.AllTripsFromSql.push({ Trip: item });
+                    this.setState({ adminOfTripArr: data })
                 })
             }).catch(function (error) {
                 console.log("Error getting document:", error);
@@ -161,7 +162,7 @@ export default class CCMyTrip extends Component {
                 <CardColumns>
                     {
                         this.state.TripToRender?.length > 0 && this.state.sort !== '' &&
-                        this.state.TripToRender?.map((item, key) => <MediaCard2 name={item.Trip.Name} key={key} date={item.Trip.Date} time={item.Trip.Time} participants={item.Trip.Participants} area={item.Trip.Area} />)
+                        this.state.TripToRender?.map((item, key) => <MediaCard2 name={item.Trip.Name} key={key} date={item.Trip.Date} time={item.Trip.Time} participants={item.Trip.Participants} area={item.Trip.Area} adminTrip={this.state.adminOfTripArr} />)
                     }
                 </CardColumns>
                 <div>

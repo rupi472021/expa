@@ -122,6 +122,34 @@ class CCTripPage extends Component {
 
     getParticipantTripDate() {
 
+                ///Get the Name of the user admin from SQl
+                let apiUrl1 = `http://localhost:53281/api/user/getSpecificUser/${localStorage.getItem('admin_email')}/`
+
+                fetch(apiUrl1)
+                    .then(res => {
+                        console.log('res=', res);
+                        console.log('res.status', res.status);
+                        console.log('res.ok', res.ok);
+                        return res.json()
+                    })
+                    .then(
+                        (result) => {
+                            console.log("GET Users data from SQL= ", result);
+                            console.log(result[0].Fname)
+                            // result.map(st => console.log(st.Fname)); // all Fname in Users_Expa
+                            this.setState({
+                                admindata: result,
+                                adminFName: result[0].Fname,
+                                adminLName: result[0].Lname
+        
+                            })
+        
+        
+                        },
+                        (error) => {
+                            console.log("err GET=", error);
+                        });
+
         let apiUrl = `http://localhost:53281/api/User/getParticiByName/${localStorage.getItem('trip_name')}/`
         fetch(apiUrl)
             .then(response => response.json())
@@ -143,35 +171,8 @@ class CCTripPage extends Component {
 
 
 
-        ///Get the Name of the user admin from SQl
-        let apiUrl1 = `http://localhost:53281/api/user/getSpecificUser/${localStorage.getItem('admin_email')}/`
 
-        fetch(apiUrl1)
-            .then(res => {
-                console.log('res=', res);
-                console.log('res.status', res.status);
-                console.log('res.ok', res.ok);
-                return res.json()
-            })
-            .then(
-                (result) => {
-                    console.log("GET Users data from SQL= ", result);
-                    
-                    // result.map(st => console.log(st.Fname)); // all Fname in Users_Expa
-             
-                    this.setState({
-                        admindata: result,
-                        adminFName: result[0].Fname,
-                        adminLName: result[0].Lname
 
-                    })
-
-                    
-              
-                },
-                (error) => {
-                    console.log("err GET=", error);
-                });
 
     }
 
@@ -493,7 +494,7 @@ class CCTripPage extends Component {
 
         return (
             /*style={{ backgroundColor: '#1d21243b', height: '100%' }}*/
-            <div style={{ fontWeight: "bold", boxShadow: '10px 70px 300px 50px  yellow', fontSize: '30px', borderRadius: '15px'}}>
+            <div style={{ fontWeight: "bold", boxShadow: '10px 70px 300px 50px  yellow', fontSize: '30px', borderRadius: '15px' }}>
                 {/* <h1>{this.state.TripsByName[0].Trip.Name}</h1> */}
                 <Button variant="secondary" size="sm" onClick={this.backbtn} className="but"> Main Menu </Button><h1></h1>
                 {/* {Weathers} */}

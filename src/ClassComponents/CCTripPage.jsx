@@ -1,4 +1,4 @@
-import React, { Component,useRef } from 'react'
+import React, { Component, useRef } from 'react'
 import { AiOutlineRollback } from 'react-icons/ai';
 import Swal from 'sweetalert2';
 import { Form, Button, DropdownButton, Dropdown, ButtonGroup, ProgressBar, CardColumns, Modal, Card } from 'react-bootstrap';
@@ -19,10 +19,7 @@ import Select from '@material-ui/core/Select';
 import { BiCamera } from "react-icons/bi";
 import Webcam from "react-webcam";
 // import {useRef} from "react";
-
-
-
-
+import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 
 const useStyles = makeStyles((theme) => ({
     margin: {
@@ -30,14 +27,11 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-
-
-
 <link rel="stylesheet/less" type="text/css" href="styles.less" />
 
+class CCTripPage extends Component {
 
-
-export default class CCTripPage extends Component {
+    //export default class CCTripPage extends Component {
 
     constructor(props) {
         super(props);
@@ -227,7 +221,7 @@ export default class CCTripPage extends Component {
             showCameraComponent: true,
         });
 
-        
+
     }
 
 
@@ -469,12 +463,10 @@ export default class CCTripPage extends Component {
 
         return (
             /*style={{ backgroundColor: '#1d21243b', height: '100%' }}*/
-            <div style={{ fontWeight: "bold", boxShadow: '10px 70px 300px 50px  yellow', fontSize: '30px', borderRadius: '15px' }}>
+            <div style={{ fontWeight: "bold", boxShadow: '10px 70px 300px 50px  yellow', fontSize: '30px', borderRadius: '15px'}}>
                 {/* <h1>{this.state.TripsByName[0].Trip.Name}</h1> */}
-
                 <Button variant="secondary" size="sm" onClick={this.backbtn} className="but"> Main Menu </Button><h1></h1>
                 {/* {Weathers} */}
-
                 <div style={{ fontWeight: "bold", boxShadow: '10px 70px 300px 50px  yellow', fontSize: '30px', borderRadius: '15px' }}>
                     <div>
                         <nav class="navbar navbar-inverse" style={{ backgroundColor: 'grey' }}>
@@ -586,18 +578,18 @@ export default class CCTripPage extends Component {
                                     <Button variant="info" onClick={this._EditListButtonClick}>View List</Button>
                                     <h1></h1>
                                 </Col>
-                                <Col style={{ boxShadow: '0px 0px 150px 10px ', fontSize: '14px', borderRadius: '10px', borderColor: 'black' }}><br></br><br></br><br></br><br></br><br></br><br></br>
-                                    <div>
-
-
-                                    </div>
+                                <Col style={{ boxShadow: '0px 0px 150px 10px ', fontSize: '14px', borderRadius: '10px', borderColor: 'black' }}>
+                                    <Map style={{ marginLeft: '-25px', borderRadius: '10px' }} google={this.props.google} zoom={11}>
+                                        <Marker onClick={this.onMarkerClick}
+                                            name={'Current location'} />
+                                        <InfoWindow onClose={this.onInfoWindowClose}>
+                                        </InfoWindow>
+                                    </Map>
                                 </Col>
                             </Row>
-
                         </Container>
                     </div>
                     <div style={{ boxShadow: '0px 0px 150px 10px yellow', borderRadius: '10px' }}><br></br><br></br>Admin Chat<br></br><br></br><br></br></div>
-
                     {/* Showing Checklist  */}
                     {this.state.showChecklistComponent ?
                         <Modal
@@ -818,7 +810,7 @@ export default class CCTripPage extends Component {
                             <Modal.Header closeButton>
                                 <Modal.Title className="App">
                                     heys
-                                    <Webcam/>
+                                    <Webcam />
                                     {/* <div className="App">
                                     react webcam
                                     <Webcam ref={webRef} />
@@ -854,3 +846,9 @@ export default class CCTripPage extends Component {
         )
     }
 }
+
+export default GoogleApiWrapper({
+    apiKey: ("AIzaSyAYat-h4SLP816AQyGfE6s5QTUvmalLiXg")
+})(CCTripPage)
+
+

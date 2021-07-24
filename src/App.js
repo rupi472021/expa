@@ -17,7 +17,7 @@ import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import '@coreui/coreui/dist/css/coreui.min.css';
 import Modal from './Modal.js';
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
+//import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 import CameraOpen from './FunctionComponents/CameraOpen';
 
 import Webcam from "react-webcam";
@@ -81,7 +81,7 @@ class App extends Component {
 
             console.log(dateFromSql)
 
-            if (this.state.currentDate >= dateFromSql) {
+            if (this.state.currentDate > dateFromSql) {
 
               console.log(result[index].Name)
               this.ChangeActiveToFalse(result[index].Name);
@@ -287,44 +287,8 @@ class App extends Component {
       body: JSON.stringify(Participant) // body data type must match "Content-Type" header
     })
 
-    this.firebaseNotification();
-
   }
 
-  firebaseNotification = () => {
-
-    let a = 'https://fcm.googleapis.com/fcm/send';
-
-    // Modified
-    var payload = {
-
-      "notification": {
-        "title": "hhiiiiiiiiiiii",
-        "body": "welcome ttttotototoototo"
-      },
-      "to": 'ciayXAEUiflKWvsPOJQ6xj:APA91bHBOH4HzuzV-5_Splq6sWpHbm4-cLmYIKeG1Hp4cwh20aU5x-mR9Q2D9fkvnY3CY2JpF4NaDZjqoyFFGZ-ur3vQ_Eoa8qIpXFNKCiZ8jyQ8vPKWRiHGbDYMFA8JzSjMgkbSk12C'
-    }
-
-    fetch(a, {
-      method: 'POST',
-      body: JSON.stringify(payload),
-      headers: new Headers({
-        "Authorization": "key=AAAA0zw3Jk0:APA91bFQ-pTU1AITIoyAShNxSl8naD667ilNfyXDlqEwLFjXcLiBxG6psIHEz7Xyo_ksJgvwAKHRpdYUzRb_THciRuGIyOYSCNEDXvbkqHh9-H0uAhCQpvopg2Y65e_tOrb8tTTcDVpc",
-        'Content-type': 'application/json; charset=UTF-8' //very important to add the 'charset=UTF-8'!!!!
-      })
-    })
-      .then(res => {
-        console.log('res=', res);
-        return res.json()
-      })
-      .then(
-        (result) => {
-          console.log("fetch POST= ", result);
-        },
-        (error) => {
-          console.log("err post=", error);
-        });
-  }
 
   deniedUserFunction = () => {
 
@@ -411,17 +375,6 @@ class App extends Component {
           <Route exact path="/trip_page">
             {/* <Route exact path="/main_menu_page/trip_page?"{...localStorage.getItem('trip_name')} > */}
             <CCTripPage />
-            <Map style={{ width: '25vh', height: '50vh', marginLeft: '210px', marginTop: '-550px', borderRadius: 10 }} google={this.props.google} zoom={14}>
-
-              <Marker onClick={this.onMarkerClick}
-                name={'Current location'} />
-
-              <InfoWindow onClose={this.onInfoWindowClose}>
-                {/* <div>
-       <h1>{this.state.selectedPlace.name}</h1>
-     </div> */}
-              </InfoWindow>
-            </Map>
           </Route>
         </Switch>
 
@@ -431,8 +384,8 @@ class App extends Component {
   }
 }
 
-// export default withRouter(App);
+export default withRouter(App);
 
-export default GoogleApiWrapper({
-  apiKey: ("AIzaSyAYat-h4SLP816AQyGfE6s5QTUvmalLiXg")
-})(App)
+// export default GoogleApiWrapper({
+//   apiKey: ("AIzaSyAYat-h4SLP816AQyGfE6s5QTUvmalLiXg")
+// })(App)

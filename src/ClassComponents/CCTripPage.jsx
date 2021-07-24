@@ -841,13 +841,8 @@ class CCTripPage extends Component {
                         >
                             <Modal.Header closeButton>
                                 <Modal.Title className="App">
-<<<<<<< Updated upstream
-                                    heys
-                                    <Webcam />
-=======
 
                                     <Webcam style={{ height: 450, width: 330 }} />
->>>>>>> Stashed changes
                                     {/* <div className="App">
                                     react webcam
                                     <Webcam ref={webRef} />

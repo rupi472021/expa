@@ -198,6 +198,7 @@ class App extends Component {
 
     alert("you have a new participant in your trip!")
     this.setState({ show: false });
+    this.accpetUserFunction();
 
   }
 

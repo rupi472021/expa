@@ -42,7 +42,7 @@ export default function MediaCard2(props) {
 
     function test() {
         alert("hey" + props.name)
-        // window.location.href = "http://localhost:3000/trip_page/tripname="+props.name
+        window.location.href = "http://localhost:3000/trip_page?"+props.name
     }
 
 

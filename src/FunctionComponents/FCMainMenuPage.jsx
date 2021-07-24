@@ -29,15 +29,15 @@ export default function FCMainMenuPage() {
     }
 
     return (
-        <div style={{ backgroundColor: '#1d21243b', height: '100vh', alignItems: 'center' }}>
+        <div style={{ backgroundColor: '#747400', height: '100vh', alignItems: 'center' }}>
             <AiOutlineRollback onClick={backbtn} size={50} style={{ marginLeft: 320 }}></AiOutlineRollback>
             {/* <div style={{ padding: 5 }}><Button size="sm" onClick={backbtn}>BACK</Button></div> */}
-            <div style={{ textAlign: 'center', marginTop: -50 }}><br></br>
+            <div  /*style={{ textAlign: 'center', marginTop: 50 }}*/><br></br>
                 <div>
                     <img src={localStorage.getItem('user_image')} alt={true} style={{ width: '45%', height: '90%', borderRadius: 100, borderWidth: 2, borderStyle: 'solid' }} /><br></br><br></br><br></br>
                 </div>
-                <p>
-                    <h1 style={{ width: '100%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '28px' }} className="ExPa">{localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}, Welcome To ExPa!</h1>
+                <p >
+                    <h1 style={{ width: '100%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '28px',color:'white' }} className="ExPa">{localStorage.getItem('user_fname')} {localStorage.getItem('user_lname')}, Welcome To ExPa!</h1>
                 </p>
             </div>
             <br></br><br></br>

@@ -41,10 +41,17 @@ export default function MediaCard2(props) {
     const classes = useStyles();
 
     function test() {
-        //alert("hey" + props.name)
+
+        const index = props.adminTrip.findIndex(item=>item.Name === props.name)
+
+        console.log(props.adminTrip)
+        console.log(props.adminTrip[index].Admin_email)
+
         localStorage.setItem('trip_name', props.name)
+        localStorage.setItem('admin_email', props.adminTrip[index].Admin_email)
+
         window.location.href = "http://localhost:3000/trip_page?" + props.name
-        
+
     }
 
 

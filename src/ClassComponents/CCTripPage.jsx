@@ -32,8 +32,6 @@ const useStyles = makeStyles((theme) => ({
 
 class CCTripPage extends Component {
 
-    //export default class CCTripPage extends Component {
-
     constructor(props) {
         super(props);
         this.state = {

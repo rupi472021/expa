@@ -150,7 +150,7 @@ export default class CCRegisterPage extends Component {
                 LAnswer: this.state.answerList
             }
             ///post to questionnaire 
-            let apiUrl = `http://localhost:53281/api/Questionnaire`;
+            let apiUrl = `http://localhost:51566/api/Questionnaire`;
             //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/Questionnaire`;
 
             console.log("New Answer const");
@@ -189,7 +189,7 @@ export default class CCRegisterPage extends Component {
             Image: this.state.selectedFile,
         }
 
-        let apiUrl1 = `http://localhost:53281/api/User`;
+        let apiUrl1 = `http://localhost:51566/api/User`;
 
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User`;
 
@@ -223,7 +223,7 @@ export default class CCRegisterPage extends Component {
 
     postToken = () => {
 
-        let apiUrl2 = `http://localhost:53281/api/Token`;
+        let apiUrl2 = `http://localhost:51566/api/Token`;
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/Token`;
 
         const newToken = {

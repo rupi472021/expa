@@ -19,6 +19,7 @@ export default class CCMyTrip extends Component {
         this.state = {
             TripToRender: [],
             AllTripsFromSql: [],
+            AdminTrips: [],
             ParticipantTrips: [],
             AllTfilterrips: [],
             activeTrips: '',
@@ -68,6 +69,8 @@ export default class CCMyTrip extends Component {
                 console.log("Error getting document:", error);
             });
 
+
+
     }
 
     backbtn = () => {
@@ -100,15 +103,36 @@ export default class CCMyTrip extends Component {
 
         if (e.target.value === "byMe") {
 
+            alert("in by me")
+            let apiUrl2 = `http://localhost:53281/api/NewTrip/getmyadmintrips/email/${localStorage.getItem('user_email')}`
+            fetch(apiUrl2)
+                .then(response => response.json())
+                .then(data => {
+                    //this.state.temparray=[];
+                    console.log("The trips im the admin for this email -  trips data from sql")
+                    console.log(data);
+                    data.forEach((item) => {
+                        this.state.AdminTrips.push({ Trip: item });
+                        // this.setState({ adminOfTripArr: data })
+                    })
+                }).catch(function (error) {
+                    console.log("Error getting document:", error);
+                });
+            console.log("AllTripsFromSql....");
+            console.log(this.state.AllTripsFromSql);
+
+
+
+            console.log(this.state.AllTripsFromSql)
             const fal = false;
             const tru = true;
 
             console.log("you choose trips by me");
             const TripsByMe = this.state.AllTripsFromSql.filter(f => f.Trip.Admin_email === localStorage.getItem('user_email'))
             const TripsByMee = TripsByMe.filter(d => d.Trip.Active == tru)
+            console.log(TripsByMee)
 
 
-            
             this.setState({
                 TripToRender: TripsByMee,
                 sort: "byMe"
@@ -159,8 +183,8 @@ export default class CCMyTrip extends Component {
 
                 console.log("there is false")
 
-            const filterArr = this.state.AllTripsFromSql.filter(item => item.Trip.Active === false);
-            console.log(filterArr);
+                const filterArr = this.state.AllTripsFromSql.filter(item => item.Trip.Active === false);
+                console.log(filterArr);
 
             }
 
@@ -186,12 +210,12 @@ export default class CCMyTrip extends Component {
 
     render() {
         return (
-            <div  style={{backgroundColor:'#92A8D1'}}>
-                <div><Button  style={{color:'white'}} variant="secondary" size="sm" onClick={this.backbtn} className="but"> Main Menu </Button></div><br></br>
+            <div style={{ backgroundColor: '#92A8D1' }}>
+                <div><Button style={{ color: 'white' }} variant="secondary" size="sm" onClick={this.backbtn} className="but"> Main Menu </Button></div><br></br>
                 <Button style={{ width: '90%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold', fontSize: '40px' }} fullWidth variant="info" size="lg" disabled='false' >My Trips</Button><br></br><br></br>
                 {/* <InputLabel htmlFor="age-native-simple">What do you want to see?</InputLabel> */}
                 <Select
-                style={{color:'white'}}
+                    style={{ color: 'white' }}
                     native
                     onChange={this.Sort}
                     inputProps={{
@@ -199,11 +223,12 @@ export default class CCMyTrip extends Component {
                         id: 'age-native-simple',
                     }}
                 >
-        
-                    <option style={{color:'black'}} value="PleaseChoose"> Watch Your Trips </option>
-                    <option style={{color:'black'}} value="byMe">I'm the Trip Admin</option>
-                    <option style={{color:'black'}} value="participate"> I'm a Partner </option>
-                    <option style={{color:'black'}} value="PreviousTrips"> Previous Trips </option>
+
+                    <option style={{ color: 'black' }} value="PleaseChoose"> Watch Your Trips </option>
+                    <option style={{ color: 'black' }} value="byMe">I'm the Trip Admin</option>
+                    <option style={{ color: 'black' }} value="participate"> I'm a Partner </option>
+                    <option style={{ color: 'black' }} value="PreviousTrips"> Previous Trips </option>
+
                 </Select>
                 <br></br><br></br>
                 <CardColumns>

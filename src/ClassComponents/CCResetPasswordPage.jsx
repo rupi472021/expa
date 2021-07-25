@@ -38,7 +38,7 @@ class CCResetPasswordPage extends Component {
     }
 
     sendMail = (index) => {
-
+alert(this.state.email)
         window.Email.send({
             Host: "smtp.elasticemail.com",
             Username: "expaapp2021@gmail.com",

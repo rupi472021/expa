@@ -90,7 +90,9 @@ class CCRegisterPage extends Component {
                 text: "Some Details Are Missing",
                 Onclick: () => { Swal.clickConfirm() }
             }).then(() => {
-                window.location.reload(false)
+                //window.location.reload(false)
+                this.props.history.push('/register');
+
             })
 
 
@@ -103,7 +105,9 @@ class CCRegisterPage extends Component {
                 text: "Hi " + this.state.email + " you are allready sign up before !",
                 Onclick: () => { Swal.clickConfirm() }
             }).then(() => {
-                window.location.reload(false)
+                //window.location.reload(false)
+                this.props.history.push('/register');
+
             })
         }
         //Validate Confirm Password 
@@ -114,7 +118,9 @@ class CCRegisterPage extends Component {
                 text: "Confirm Password Missing Details - Please Insert Again ",
                 Onclick: () => { Swal.clickConfirm() }
             }).then(() => {
-                window.location.reload(false);
+                //window.location.reload(false);
+                this.props.history.push('/register');
+
             })
         }
         else {

@@ -47,7 +47,7 @@ function FCMainMenuPage(props) {
             </div>
             <br></br><br></br>
             <div>
-                <div style={{ marginTop: -40 }}>
+                <div style={{ marginTop: 30 }}>
                     <img src="https://img.icons8.com/nolan/64/border-color.png" onClick={() => props.history.push('/main_menu_page/create_new_trip_page')} /><br></br><br></br>
                     {/* <h1></h1> */}
                     <img src="https://img.icons8.com/cute-clipart/64/000000/search.png" onClick={() => props.history.push('/main_menu_page/search_trip_page')} />
@@ -57,7 +57,7 @@ function FCMainMenuPage(props) {
                     {/* <Button style={{ width: '60%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold' }} fullWidth color="warning" size="lg" href='/main_menu_page/create_new_trip_page' >New Trip</Button> */}
                 </div>
                 <br></br><br></br><br></br><br></br><br></br>
-                <div style={{ marginTop: -20 }}>
+                <div style={{ marginTop: 0 }}>
 
                     {/* <img src="https://img.icons8.com/fluent/48/000000/add-user-group-woman-man.png"/> */}
                     <img style={{ marginRight: 250 }} src="https://img.icons8.com/bubbles/50/000000/edit-user.png" onClick={() => props.history.push('/main_menu_page/my_profile')} />

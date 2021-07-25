@@ -166,7 +166,7 @@ class CCMyTrip extends Component {
     render() {
         return (
             <div style={{ backgroundColor: '#92A8D1' }}>
-                <div><Button style={{ color: 'white' }} variant="secondary" size="sm" onClick={this.backbtn} className="but"> Main Menu </Button></div><br></br>
+                <div><Button style={{ color: 'white' }} variant="warning" size="sm" onClick={this.backbtn} className="but"> Main Menu </Button></div><br></br>
                 <Button style={{ width: '90%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold', fontSize: '40px' }} fullWidth variant="info" size="lg" disabled='false' >My Trips</Button><br></br><br></br>
                 {/* <InputLabel htmlFor="age-native-simple">What do you want to see?</InputLabel> */}
                 <Select

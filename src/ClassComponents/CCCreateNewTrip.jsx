@@ -320,7 +320,7 @@ class CCCreateNewTrip extends Component {
                     <Form.Label style={{ fontWeight: 'bold', fontSize: 20 }} >I want At least {this.state.match_percent}% match with my ExPa Partners!</Form.Label><br></br>
                     <RangeSlider value={this.state.match_percent} onChange={(match) => this.setState({ match_percent: match.target.value })} />
                     <br></br>
-                    <Button disabled={this.state.disable} variant="secondary" type="button" onClick={this.editTripDetails} > Edit Trip </Button>
+                    <Button disabled={this.state.disable} variant="info" type="button" onClick={this.editTripDetails} > Edit Trip </Button>
                     <br></br><br></br>
                     <Button style={{ marginBottom: '10px' }} variant="success" type="button" onClick={this.checkValidationbtn} > Publish Trip </Button>
                 </div >

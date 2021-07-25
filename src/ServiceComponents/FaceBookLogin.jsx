@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import FacebookLogin from 'react-facebook-login';
 import Swal from 'sweetalert2'
+import { Switch, Route, withRouter } from 'react-router-dom';
 
-export default class FaceBookLogin extends Component {
+class FaceBookLogin extends Component {
 
     constructor(props) {
         super(props);
@@ -51,7 +52,11 @@ export default class FaceBookLogin extends Component {
                 showConfirmButton: true,
                 Onclick: () => { Swal.clickConfirm() }
             }).then(() => {
-                window.location.href = "http://localhost:3000/main_menu_page";
+
+                //window.location.href = "http://localhost:3000/main_menu_page";
+                this.props.history.push('/main_menu_page');
+
+
             })
         }
         else {
@@ -71,7 +76,7 @@ export default class FaceBookLogin extends Component {
             this.setState.isLoggedIn ? 'Home' :
                 (<div style={{ marginTop: 5 }}>
                     <FacebookLogin
-                        appId="297951512122443"
+                        appId="452917926124291"
                         autoLoad={false}
                         textButton='Login'
                         fields="name,email,picture"
@@ -84,3 +89,4 @@ export default class FaceBookLogin extends Component {
     }
 }
 
+export default withRouter(FaceBookLogin);

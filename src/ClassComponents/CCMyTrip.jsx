@@ -12,6 +12,9 @@ import InputLabel from '@material-ui/core/InputLabel';
 export default class CCMyTrip extends Component {
 
     constructor(props) {
+
+        var today = new Date(),
+            date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
         super(props);
         this.state = {
             TripToRender: [],
@@ -21,7 +24,8 @@ export default class CCMyTrip extends Component {
             activeTrips: '',
             sort: '',
             aaa: [],
-            All: []
+            All: [],
+            currentDate: date,
         }
     };
 
@@ -96,12 +100,17 @@ export default class CCMyTrip extends Component {
 
         if (e.target.value === "byMe") {
 
+            const fal = false;
+            const tru = true;
+
             console.log("you choose trips by me");
             const TripsByMe = this.state.AllTripsFromSql.filter(f => f.Trip.Admin_email === localStorage.getItem('user_email'))
-            console.log(TripsByMe);
+            const TripsByMee = TripsByMe.filter(d => d.Trip.Active == tru)
 
+
+            
             this.setState({
-                TripToRender: TripsByMe,
+                TripToRender: TripsByMee,
                 sort: "byMe"
             })
 
@@ -138,6 +147,41 @@ export default class CCMyTrip extends Component {
             })
 
         }
+
+
+
+        if (e.target.value === "PreviousTrips") {
+
+            console.log("in PreviousTrips option");
+            console.log(this.state.AllTripsFromSql);
+
+            if (this.state.AllTripsFromSql.some(i => i.Trip.Active === false)) {
+
+                console.log("there is false")
+
+            const filterArr = this.state.AllTripsFromSql.filter(item => item.Trip.Active === false);
+            console.log(filterArr);
+
+            }
+
+
+            //localStorage.getItem('user_email')
+
+            //if (filterArr[0].Trip.Admin_email === localStorage.getItem('user_email')) {
+
+            //     console.log("yes");
+            //  }
+
+
+
+
+            //TripToRender
+
+
+
+        }
+
+
     }
 
     render() {
@@ -157,6 +201,7 @@ export default class CCMyTrip extends Component {
                     <option value="PleaseChoose"> Watch Your Trips </option>
                     <option value="byMe">I'm the Trip Admin</option>
                     <option value="participate"> I'm a Partner </option>
+                    <option value="PreviousTrips"> Previous Trips </option>
                 </Select>
                 <br></br><br></br>
                 <CardColumns>

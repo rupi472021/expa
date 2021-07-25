@@ -89,7 +89,8 @@ class CCTripPage extends Component {
     };
 
     componentDidMount = () => {
-        let apiUrl = `http://localhost:51566/api/NewTrip/getripByName/${localStorage.getItem('trip_name')}/`
+        let apiUrl = `http://localhost:53281/api/NewTrip/getripByName/${localStorage.getItem('trip_name')}/`
+        console.log("in compo"+localStorage.getItem('trip_name'))
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
@@ -122,7 +123,7 @@ class CCTripPage extends Component {
     getParticipantTripDate() {
 
                 ///Get the Name of the user admin from SQl
-                let apiUrl1 = `http://localhost:51566/api/user/getSpecificUser/${localStorage.getItem('admin_email')}/`
+                let apiUrl1 = `http://localhost:53281/api/user/getSpecificUser/${localStorage.getItem('admin_email')}/`
 
                 fetch(apiUrl1)
                     .then(res => {
@@ -149,11 +150,11 @@ class CCTripPage extends Component {
                             console.log("err GET=", error);
                         });
 
-        let apiUrl = `http://localhost:51566/api/User/getParticiByName/${localStorage.getItem('trip_name')}/`
+        let apiUrl = `http://localhost:53281/api/User/getParticiByName/${localStorage.getItem('trip_name')}/`
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
-                // console.log("The trip for this trip name -  trips data from sql")
+                console.log("The trip for this trip name -  trips data from sql")
                 console.log(data);
                 data.forEach((item) => {
                     // console.log("item us");
@@ -194,7 +195,7 @@ class CCTripPage extends Component {
 
         this.setState({ showChecklistComponent: true });
 
-        let apiUrl = `http://localhost:51566/api/TripEquipment`
+        let apiUrl = `http://localhost:53281/api/TripEquipment`
 
         fetch(apiUrl)
             .then(response => response.json())
@@ -322,7 +323,7 @@ class CCTripPage extends Component {
 
             }
 
-            let apiUrl = `http://localhost:51566/api/TripEquipment`;
+            let apiUrl = `http://localhost:53281/api/TripEquipment`;
             //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
             ////POST To Trip_Equipment SQL TABLE
@@ -365,7 +366,7 @@ class CCTripPage extends Component {
 
             }
 
-            let apiUrl = `http://localhost:51566/api/TripEquipment`;
+            let apiUrl = `http://localhost:53281/api/TripEquipment`;
             //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
             ////POST To Trip_Equipment SQL TABLE
@@ -410,7 +411,7 @@ class CCTripPage extends Component {
 
             }
 
-            let apiUrl = `http://localhost:51566/api/TripEquipment`;
+            let apiUrl = `http://localhost:53281/api/TripEquipment`;
             //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
             ////POST To Trip_Equipment SQL TABLE
@@ -456,7 +457,7 @@ class CCTripPage extends Component {
 
             }
 
-            let apiUrl = `http://localhost:51566/api/TripEquipment`;
+            let apiUrl = `http://localhost:53281/api/TripEquipment`;
             //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
             ////POST To Trip_Equipment SQL TABLE

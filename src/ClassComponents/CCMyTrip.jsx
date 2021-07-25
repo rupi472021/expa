@@ -31,7 +31,7 @@ export default class CCMyTrip extends Component {
 
     componentDidMount = () => {
 
-        let apiUrl = `http://localhost:51566/api/NewTrip/`
+        let apiUrl = `http://localhost:53281/api/NewTrip/`
 
         fetch(apiUrl)
             .then(response => response.json())
@@ -50,7 +50,7 @@ export default class CCMyTrip extends Component {
         console.log(this.state.AllTripsFromSql);
 
 
-        let apiUrl1 = `http://localhost:51566/api/ParticipantsInTrip/getSpecific/${localStorage.getItem('user_email')}/`
+        let apiUrl1 = `http://localhost:53281/api/ParticipantsInTrip/getSpecific/${localStorage.getItem('user_email')}/`
 
         fetch(apiUrl1)
             .then(response => response.json())

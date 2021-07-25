@@ -150,7 +150,7 @@ export default class CCRegisterPage extends Component {
                 LAnswer: this.state.answerList
             }
             ///post to questionnaire 
-            let apiUrl = `http://localhost:51566/api/Questionnaire`;
+            let apiUrl = `http://localhost:53281/api/Questionnaire`;
             //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/Questionnaire`;
 
             console.log("New Answer const");
@@ -189,7 +189,7 @@ export default class CCRegisterPage extends Component {
             Image: this.state.selectedFile,
         }
 
-        let apiUrl1 = `http://localhost:51566/api/User`;
+        let apiUrl1 = `http://localhost:53281/api/User`;
 
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User`;
 
@@ -223,7 +223,7 @@ export default class CCRegisterPage extends Component {
 
     postToken = () => {
 
-        let apiUrl2 = `http://localhost:51566/api/Token`;
+        let apiUrl2 = `http://localhost:53281/api/Token`;
         //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/Token`;
 
         const newToken = {
@@ -385,8 +385,8 @@ export default class CCRegisterPage extends Component {
 
                         <form>
                             <div id="part1" style={{ marginTop: -35 }}>
-                                <p style={{ width: '40%', fontWeight: 'bold', fontSize: '15px', marginLeft: '115px' }}>Access With </p><br></br><br></br><br></br>
-                                <GoogleRegisterPage queDatafromParent={this.props.QuesDatafromApptoRegisterPage} dataFromParent={this.props.dataFromApptoRegisterPage}/* {...this.state.fname=localStorage.getItem('user_fname')} {...this.state.lname=localStorage.getItem('user_lname')}{...this.state.email=localStorage.getItem('user_email')}{...this.state.source=localStorage.getItem('user_image')} */ />
+                                {/* <p style={{ width: '40%', fontWeight: 'bold', fontSize: '15px', marginLeft: '115px' }}>Access With </p><br></br><br></br><br></br>
+                                <GoogleRegisterPage queDatafromParent={this.props.QuesDatafromApptoRegisterPage} dataFromParent={this.props.dataFromApptoRegisterPage} {...this.state.fname=localStorage.getItem('user_fname')} {...this.state.lname=localStorage.getItem('user_lname')}{...this.state.email=localStorage.getItem('user_email')}{...this.state.source=localStorage.getItem('user_image')}  /> */}
                                 <br></br>
                                 <TextField className="TextField" disabled={this.state.disabled} style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" onChange={(e) => this.setState({ email: e.target.value })} autoFocus />
                                 <Row>

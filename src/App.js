@@ -54,7 +54,7 @@ class App extends Component {
 
     //this function check if the Trip's date passed
 
-    let apiUrlCheckDate = `http://localhost:51566/api/NewTrip`;
+    let apiUrlCheckDate = `http://localhost:53281/api/NewTrip`;
     //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User`;
 
     fetch(apiUrlCheckDate)
@@ -125,7 +125,7 @@ class App extends Component {
 
     console.log(tripName)
     const zero = false;
-    let apiUrlChangeTripToFalse = `http://localhost:51566/api/ParticipantsInTrip/tripName/` + tripName + "/changeTripTo/" + zero;
+    let apiUrlChangeTripToFalse = `http://localhost:53281/api/ParticipantsInTrip/tripName/` + tripName + "/changeTripTo/" + zero;
 
     fetch(apiUrlChangeTripToFalse, {
       method: 'PUT', // *GET, POST, PUT, DELETE, etc.
@@ -189,7 +189,7 @@ class App extends Component {
     console.log("this.state.data_from_sql " + this.state.data_from_sql)
     console.log("in componentDidMount function");
 
-    let apiUrl = `http://localhost:51566/api/User`;
+    let apiUrl = `http://localhost:53281/api/User`;
     //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User`;
 
     fetch(apiUrl)
@@ -212,7 +212,7 @@ class App extends Component {
         });
 
 
-    let apiUrl1 = `http://localhost:51566/api/Questionnaire`;
+    let apiUrl1 = `http://localhost:53281/api/Questionnaire`;
     fetch(apiUrl1)
       .then(res => {
         console.log('res=', res);
@@ -235,7 +235,7 @@ class App extends Component {
 
 
     //get all Token_expa from SQL
-    let apiUrl2 = `http://localhost:51566/api/Token`;
+    let apiUrl2 = `http://localhost:53281/api/Token`;
     fetch(apiUrl2)
       .then(res => {
         console.log('res=', res);
@@ -262,7 +262,7 @@ class App extends Component {
 
     console.log("you will accept " + this.state.payloadBodyEmail + " for this trip: " + this.state.payloadBodyTripName)
 
-    let apiUrl = `http://localhost:51566/api/ParticipantsInTrip`;
+    let apiUrl = `http://localhost:53281/api/ParticipantsInTrip`;
 
     const Participant = {
       TripName: this.state.payloadBodyTripName,

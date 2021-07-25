@@ -8,6 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { orange } from '@material-ui/core/colors';
+import { Switch, Route, withRouter } from 'react-router-dom';
 
 const ColorButton = withStyles((theme) => ({
     root: {
@@ -37,12 +38,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function MediaCard2(props) {
+function MediaCard2(props) {
     const classes = useStyles();
 
     function test() {
 
-        const index = props.adminTrip.findIndex(item=>item.Name === props.name)
+        const index = props.adminTrip.findIndex(item => item.Name === props.name)
 
         console.log(props.adminTrip)
         console.log(props.adminTrip[index].Admin_email)
@@ -50,7 +51,9 @@ export default function MediaCard2(props) {
         localStorage.setItem('trip_name', props.name)
         localStorage.setItem('admin_email', props.adminTrip[index].Admin_email)
 
-        window.location.href = "http://localhost:3000/trip_page?" + props.name
+        //window.location.href = "http://localhost:3000/trip_page?" + props.name
+
+        props.history.push('/trip_page?' + props.name);
 
     }
 
@@ -78,3 +81,5 @@ export default function MediaCard2(props) {
         </div>
     );
 }
+
+export default withRouter(MediaCard2);

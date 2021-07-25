@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { Form, FormGroup, Input, Label, Button } from 'reactstrap'
 import Swal from 'sweetalert2';
+import { Switch, Route, withRouter } from 'react-router-dom';
 
-export default class CCResetPasswordPage extends Component {
+class CCResetPasswordPage extends Component {
 
     constructor(props) {
         super(props)
@@ -60,7 +61,10 @@ export default class CCResetPasswordPage extends Component {
                     position: 'center',
                     Onclick: () => { Swal.clickConfirm() }
                 }).then(() => {
-                    window.location.href = "http://localhost:3000"
+
+                    //window.location.href = "http://localhost:3000"
+                    this.props.history.push('/')
+
                 })
                 // Swal.fire({
                 //     icon: 'success',
@@ -98,3 +102,5 @@ export default class CCResetPasswordPage extends Component {
         )
     }
 }
+
+export default withRouter(CCResetPasswordPage);

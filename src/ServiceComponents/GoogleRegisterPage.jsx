@@ -3,8 +3,10 @@ import { GoogleLogin } from 'react-google-login';
 import Swal from 'sweetalert2'
 //refresh token
 //import { refreshTokenSetup } from '../utils/refreshTokenSetup';
-const clientId = '337989254519-c3ucmom5f9ubap04mfmv76am274hivnm.apps.googleusercontent.com';
+const clientId = '692650076345-58cr403pevv5uuetdgpdv45as54v0s4p.apps.googleusercontent.com';
 //const clientSecret = '4KEKfjaqldjasH0ntNzH26T2';
+
+
 export default function GoogleRegisterPage(props) {
 
     const onSuccess = (res) => {

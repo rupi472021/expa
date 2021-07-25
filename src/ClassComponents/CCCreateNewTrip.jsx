@@ -3,8 +3,9 @@ import { Form, Button, ButtonGroup } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import RangeSlider from 'react-bootstrap-range-slider';
 import CCTripPage from './CCTripPage';
+import { Switch, Route, withRouter } from 'react-router-dom';
 
-export default class CCCreateNewTrip extends Component {
+class CCCreateNewTrip extends Component {
 
     constructor(props) {
         super(props);
@@ -31,9 +32,9 @@ export default class CCCreateNewTrip extends Component {
         console.log("in componentDidMount function");
 
         // let apiUrl = `http://localhost:51566/api/NewTrip`;
-        let apiUrl = `http://localhost:51566/api/NewTrip/getAll`;
+        //let apiUrl = `https://localhost:51566/api/NewTrip/getAll`;
 
-        //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
+        let apiUrl = `https://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
         fetch(apiUrl)
             .then(res => {
@@ -109,8 +110,8 @@ export default class CCCreateNewTrip extends Component {
             MatchPercent: this.state.match_percent
         }
         this.setState({ tempObject: newTrip });
-        let apiUrl = `http://localhost:51566/api/NewTrip`;
-        //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
+        //let apiUrl = `http://localhost:51566/api/NewTrip`;
+        let apiUrl = `https://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
         ////POST To TRIP_Criteria SQL TABLE
         fetch(apiUrl, {
@@ -143,8 +144,8 @@ export default class CCCreateNewTrip extends Component {
     getmatch = () => {
         ///Getting all the Users
         console.log("in getmatch function");
-        let apiUrl = `http://localhost:51566/api/Questionnaire/getSpecific/${localStorage.getItem('user_email')}/${this.state.match_percent}`
-        //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/Questionnaire/getSpecific/${localStorage.getItem('user_email')}/${this.state.match_percent}`
+        //let apiUrl = `http://localhost:51566/api/Questionnaire/getSpecific/${localStorage.getItem('user_email')}/${this.state.match_percent}`
+        let apiUrl = `https://proj.ruppin.ac.il/igroup47/prod/api/Questionnaire/getSpecific/${localStorage.getItem('user_email')}/${this.state.match_percent}`
 
         fetch(apiUrl)
             .then(response => response.json())
@@ -161,7 +162,11 @@ export default class CCCreateNewTrip extends Component {
                 if (dataLength == 0) { alert("you don't have any match for now") }
                 else { alert("Sweet, you have " + dataLength + " matchs!") }
                 // window.location.href = "http://localhost:3000/trip_page"
-                window.location.href = "http://localhost:3000/trip_page?" + localStorage.getItem('trip_name');
+
+                //window.location.href = "http://localhost:3000/trip_page?" + localStorage.getItem('trip_name');
+
+                this.props.history.push('/trip_page?' + localStorage.getItem('trip_name'));
+                
                 // window.location.href = "http://localhost:3000/trip_page/tripname="+this.state.trip_name
             }).catch(function (error) {
                 console.log("Error getting document:", error);
@@ -180,7 +185,12 @@ export default class CCCreateNewTrip extends Component {
             confirmButtonText: 'Yes'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = "http://localhost:3000/main_menu_page"
+
+                //window.location.href = "http://localhost:3000/main_menu_page"
+
+                this.props.history.push('/main_menu_page');
+
+
             }
         })
     }
@@ -220,8 +230,8 @@ export default class CCCreateNewTrip extends Component {
         }
 
         // event.preventDefault(); 
-        let apiUrl = `http://localhost:51566/api/NewTrip/` + this.state.trip_name + "/" + this.state.match_percent + "/" + this.state.with_children;
-        //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip/`+this.state.trip_name+"/"+this.state.match_percent+"/"+this.state.with_children;
+        //let apiUrl = `http://localhost:51566/api/NewTrip/` + this.state.trip_name + "/" + this.state.match_percent + "/" + this.state.with_children;
+        let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip/` + this.state.trip_name + "/" + this.state.match_percent + "/" + this.state.with_children;
 
         fetch(apiUrl, {
             method: 'PUT', // *GET, POST, PUT, DELETE, etc.
@@ -318,3 +328,5 @@ export default class CCCreateNewTrip extends Component {
         )
     }
 }
+
+export default withRouter(CCCreateNewTrip);

@@ -12,8 +12,9 @@ import RangeSlider from 'react-bootstrap-range-slider';
 import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
 import GoogleRegisterPage from '../ServiceComponents/GoogleRegisterPage';
 import { GrCamera } from 'react-icons/gr';
+import { Switch, Route, withRouter } from 'react-router-dom';
 
-export default class CCRegisterPage extends Component {
+class CCRegisterPage extends Component {
 
 
     commentSection = React.createRef();
@@ -150,8 +151,8 @@ export default class CCRegisterPage extends Component {
                 LAnswer: this.state.answerList
             }
             ///post to questionnaire 
-            let apiUrl = `http://localhost:51566/api/Questionnaire`;
-            //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/Questionnaire`;
+            //let apiUrl = `http://localhost:51566/api/Questionnaire`;
+            let apiUrl = `https://proj.ruppin.ac.il/igroup47/prod/api/Questionnaire`;
 
             console.log("New Answer const");
             console.log(newAnswer);
@@ -189,9 +190,8 @@ export default class CCRegisterPage extends Component {
             Image: this.state.selectedFile,
         }
 
-        let apiUrl1 = `http://localhost:51566/api/User`;
-
-        //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User`;
+        //let apiUrl1 = `http://localhost:51566/api/User`;
+        let apiUrl1 = `https://proj.ruppin.ac.il/igroup47/prod/api/User`;
 
         ////POST
         fetch(apiUrl1, {
@@ -223,8 +223,8 @@ export default class CCRegisterPage extends Component {
 
     postToken = () => {
 
-        let apiUrl2 = `http://localhost:51566/api/Token`;
-        //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/Token`;
+        //let apiUrl2 = `http://localhost:51566/api/Token`;
+        let apiUrl2 = `https://proj.ruppin.ac.il/igroup47/prod/api/Token`;
 
         const newToken = {
             Email: this.state.email,
@@ -284,7 +284,13 @@ export default class CCRegisterPage extends Component {
             showConfirmButton: true,
             Onclick: () => { Swal.clickConfirm() }
         }).then(() => {
-            window.location.href = "http://localhost:3000/main_menu_page"
+
+
+            //window.location.href = "http://localhost:3000/main_menu_page"
+
+            this.props.history.push('/main_menu_page');
+
+
         })
 
     }
@@ -326,7 +332,7 @@ export default class CCRegisterPage extends Component {
 
             //this.apiUrl = `http://localhost:51566/api/User/uploadedFiles`;
 
-            this.apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User/uploadedFiles`;
+            this.apiUrl = `https://proj.ruppin.ac.il/igroup47/prod/api/User/uploadedFiles`;
 
             fetch(this.apiUrl,
                 {
@@ -373,7 +379,6 @@ export default class CCRegisterPage extends Component {
 
 
     render() {
-
         return (
             <div style={{ backgroundColor: '#92A8D1', height: '100%' }} className={classes.NewBLogCard}>
                 <Container>
@@ -555,3 +560,4 @@ export default class CCRegisterPage extends Component {
 }
 
 
+export default withRouter(CCRegisterPage);

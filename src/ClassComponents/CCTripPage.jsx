@@ -20,6 +20,7 @@ import { BiCamera } from "react-icons/bi";
 import Webcam from "react-webcam";
 // import {useRef} from "react";
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
+import { Switch, Route, withRouter } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     margin: {
@@ -89,8 +90,11 @@ class CCTripPage extends Component {
     };
 
     componentDidMount = () => {
-        let apiUrl = `http://localhost:51566/api/NewTrip/getripByName/${localStorage.getItem('trip_name')}/`
-        console.log("in compo"+localStorage.getItem('trip_name'))
+
+        //let apiUrl = `http://localhost:51566/api/NewTrip/getripByName/${localStorage.getItem('trip_name')}/`
+        let apiUrl = `https://proj.ruppin.ac.il/igroup47/prod/api/NewTrip/getripByName/${localStorage.getItem('trip_name')}/`;
+
+        console.log("in compo" + localStorage.getItem('trip_name'))
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
@@ -122,34 +126,37 @@ class CCTripPage extends Component {
 
     getParticipantTripDate() {
 
-                ///Get the Name of the user admin from SQl
-                let apiUrl1 = `http://localhost:51566/api/user/getSpecificUser/${localStorage.getItem('admin_email')}/`
+        ///Get the Name of the user admin from SQl
+        //let apiUrl1 = `http://localhost:51566/api/user/getSpecificUser/${localStorage.getItem('admin_email')}/`
+        let apiUrl1 = `https://proj.ruppin.ac.il/igroup47/prod/api/User/getSpecificUser/${localStorage.getItem('admin_email')}/`
 
-                fetch(apiUrl1)
-                    .then(res => {
-                        console.log('res=', res);
-                        console.log('res.status', res.status);
-                        console.log('res.ok', res.ok);
-                        return res.json()
+        fetch(apiUrl1)
+            .then(res => {
+                console.log('res=', res);
+                console.log('res.status', res.status);
+                console.log('res.ok', res.ok);
+                return res.json()
+            })
+            .then(
+                (result) => {
+                    console.log("GET Users data from SQL= ", result);
+                    // result.map(st => console.log(st.Fname)); // all Fname in Users_Expa
+                    this.setState({
+                        admindata: result,
+                        adminFName: result[0].Fname,
+                        adminLName: result[0].Lname
+
                     })
-                    .then(
-                        (result) => {
-                            console.log("GET Users data from SQL= ", result);
-                            // result.map(st => console.log(st.Fname)); // all Fname in Users_Expa
-                            this.setState({
-                                admindata: result,
-                                adminFName: result[0].Fname,
-                                adminLName: result[0].Lname
-        
-                            })
-        
-        
-                        },
-                        (error) => {
-                            console.log("err GET=", error);
-                        });
 
-        let apiUrl = `http://localhost:51566/api/User/getParticiByName/${localStorage.getItem('trip_name')}/`
+
+                },
+                (error) => {
+                    console.log("err GET=", error);
+                });
+
+        //let apiUrl = `http://localhost:51566/api/User/getParticiByName/${localStorage.getItem('trip_name')}/`
+        let apiUrl = `https://proj.ruppin.ac.il/igroup47/prod/api/User/getParticiByName/${localStorage.getItem('trip_name')}/`;
+
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
@@ -194,7 +201,9 @@ class CCTripPage extends Component {
 
         this.setState({ showChecklistComponent: true });
 
-        let apiUrl = `http://localhost:51566/api/TripEquipment`
+        //let apiUrl = `http://localhost:51566/api/TripEquipment`
+        let apiUrl = `https://proj.ruppin.ac.il/igroup47/prod/api/TripEquipment`;
+
 
         fetch(apiUrl)
             .then(response => response.json())
@@ -234,7 +243,7 @@ class CCTripPage extends Component {
 
     _ViewParticipantsButtonClick() {
         this.setState({
-            showParticipantsComponent: true,
+            showParticipantsComponent: false,
         });
     }
 
@@ -290,8 +299,9 @@ class CCTripPage extends Component {
         }).then((result) => {
             if (result.isConfirmed) {
                 // localStorage.clear();
-                window.location.href = "http://localhost:3000/main_menu_page"
-                // window.location.href = "http://proj.ruppin.ac.il/igroup47/prod/"       
+                //window.location.href = "http://localhost:3000/main_menu_page"
+
+                this.props.history.push('/main_menu_page');
             }
         })
     }
@@ -322,8 +332,8 @@ class CCTripPage extends Component {
 
             }
 
-            let apiUrl = `http://localhost:51566/api/TripEquipment`;
-            //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
+            //let apiUrl = `http://localhost:51566/api/TripEquipment`;
+            let apiUrl = `https://proj.ruppin.ac.il/igroup47/prod/api/TripEquipment`;
 
             ////POST To Trip_Equipment SQL TABLE
             fetch(apiUrl, {
@@ -365,8 +375,8 @@ class CCTripPage extends Component {
 
             }
 
-            let apiUrl = `http://localhost:51566/api/TripEquipment`;
-            //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
+            //let apiUrl = `http://localhost:51566/api/TripEquipment`;
+            let apiUrl = `https://proj.ruppin.ac.il/igroup47/prod/api/TripEquipment`;
 
             ////POST To Trip_Equipment SQL TABLE
             fetch(apiUrl, {
@@ -410,8 +420,8 @@ class CCTripPage extends Component {
 
             }
 
-            let apiUrl = `http://localhost:51566/api/TripEquipment`;
-            //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
+            //let apiUrl = `http://localhost:51566/api/TripEquipment`;
+            let apiUrl = `https://proj.ruppin.ac.il/igroup47/prod/api/TripEquipment`;
 
             ////POST To Trip_Equipment SQL TABLE
             fetch(apiUrl, {
@@ -456,8 +466,8 @@ class CCTripPage extends Component {
 
             }
 
-            let apiUrl = `http://localhost:51566/api/TripEquipment`;
-            //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
+            //let apiUrl = `http://localhost:51566/api/TripEquipment`;
+            let apiUrl = `https://proj.ruppin.ac.il/igroup47/prod/api/TripEquipment`;
 
             ////POST To Trip_Equipment SQL TABLE
             fetch(apiUrl, {
@@ -877,8 +887,9 @@ class CCTripPage extends Component {
     }
 }
 
-export default GoogleApiWrapper({
-    apiKey: ("AIzaSyAYat-h4SLP816AQyGfE6s5QTUvmalLiXg")
+export default GoogleApiWrapper ({ apiKey: ("AIzaSyAYat-h4SLP816AQyGfE6s5QTUvmalLiXg")
 })(CCTripPage)
+
+
 
 

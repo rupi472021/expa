@@ -5,9 +5,9 @@ import { GrCamera } from 'react-icons/gr';
 import Swal from 'sweetalert2';
 import TextField from '@material-ui/core/TextField';
 import { AiOutlineRollback } from 'react-icons/ai';
+import { Switch, Route, withRouter } from 'react-router-dom';
 
-
-export default class CCMyprofile extends Component {
+class CCMyprofile extends Component {
 
     constructor(props) {
         super(props);
@@ -41,8 +41,8 @@ export default class CCMyprofile extends Component {
 
         console.log("in componentDidMount function");
 
-        let apiUrl = `http://localhost:53281/api/Questionnaire?email=` + localStorage.getItem('user_email');
-        //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/Questionnaire/getSpecificQuestionnaire`;
+        //let apiUrl = `http://localhost:53281/api/Questionnaire?email=` + localStorage.getItem('user_email');
+        let apiUrl = `https://proj.ruppin.ac.il/igroup47/prod/api/Questionnaire?email=` + localStorage.getItem('user_email');
 
         fetch(apiUrl)
             .then(res => {
@@ -117,8 +117,12 @@ export default class CCMyprofile extends Component {
     }
 
     changePasswordPUT = () => {
+
         console.log("in change password put")
-        let apiUrl = `http://localhost:53281/api/User/` + localStorage.getItem('user_email') + "/" + this.state.password;
+
+        //let apiUrl = `http://localhost:53281/api/User/` + localStorage.getItem('user_email') + "/" + this.state.password;
+        let apiUrl = `https://proj.ruppin.ac.il/igroup47/prod/api/User/` + localStorage.getItem('user_email') + "/" + this.state.password;
+
         fetch(apiUrl, {
             method: 'PUT', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, *cors, same-origin
@@ -135,7 +139,10 @@ export default class CCMyprofile extends Component {
         })
         Swal.fire('Saved!', '', 'success',).then((result) => {
             if (result.isConfirmed) {
-                window.location.reload(false);
+
+                //window.location.reload(false);
+
+                this.props.history.push('/main_menu_page/my_profile');
             }
         })
     }
@@ -155,10 +162,9 @@ export default class CCMyprofile extends Component {
                 console.log("you click on Save Button")
 
                 //PUT to Questionnaire:
-                let apiUrl = `http://localhost:53281/api/Questionnaire/` + localStorage.getItem('user_email') + "/" + this.state.q1 + "/" + this.state.q3 + "/" + this.state.q4 + "/" + this.state.q5 + "/" + this.state.q6 + "/" + this.state.q7 + "/" + this.state.q8 + "/" + this.state.q9 + "/" + this.state.q10 + "/" + this.state.q11;
-                //let apiUrl = `http://localhost:54976/api/Questionnaire/benmshulam@gmail.com/1/3/4/5/6/7/8/9/10/11`;
-                //let apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/NewTrip/`+this.state.trip_name+"/"+this.state.match_percent+"/"+this.state.with_children;
+                //let apiUrl = `http://localhost:53281/api/Questionnaire/` + localStorage.getItem('user_email') + "/" + this.state.q1 + "/" + this.state.q3 + "/" + this.state.q4 + "/" + this.state.q5 + "/" + this.state.q6 + "/" + this.state.q7 + "/" + this.state.q8 + "/" + this.state.q9 + "/" + this.state.q10 + "/" + this.state.q11;
 
+                let apiUrl = `https://proj.ruppin.ac.il/igroup47/prod/api/Questionnaire/` + localStorage.getItem('user_email') + "/" + this.state.q1 + "/" + this.state.q3 + "/" + this.state.q4 + "/" + this.state.q5 + "/" + this.state.q6 + "/" + this.state.q7 + "/" + this.state.q8 + "/" + this.state.q9 + "/" + this.state.q10 + "/" + this.state.q11;
                 fetch(apiUrl, {
                     method: 'PUT', // *GET, POST, PUT, DELETE, etc.
                     mode: 'cors', // no-cors, *cors, same-origin
@@ -192,7 +198,10 @@ export default class CCMyprofile extends Component {
             confirmButtonText: 'Yes'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = "http://localhost:3000/main_menu_page"
+
+                //window.location.href = "http://localhost:3000/main_menu_page"
+                this.props.history.push('/main_menu_page');
+
             }
         })
     }
@@ -222,7 +231,7 @@ export default class CCMyprofile extends Component {
 
             //this.apiUrl = `http://localhost:51566/api/User/uploadedFiles`;
 
-            this.apiUrl = `http://proj.ruppin.ac.il/igroup47/prod/api/User/uploadedFiles`;
+            this.apiUrl = `https://proj.ruppin.ac.il/igroup47/prod/api/User/uploadedFiles`;
             //src={this.state.imgURL}
 
             fetch(this.apiUrl,
@@ -443,3 +452,5 @@ export default class CCMyprofile extends Component {
         )
     }
 }
+
+export default withRouter(CCMyprofile);

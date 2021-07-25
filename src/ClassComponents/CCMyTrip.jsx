@@ -7,9 +7,9 @@ import '../MyStyle.css';
 import MediaCard2 from '../FunctionComponents/FCardMaterialUi2';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
+import { Switch, Route, withRouter } from 'react-router-dom';
 
-
-export default class CCMyTrip extends Component {
+class CCMyTrip extends Component {
 
     constructor(props) {
 
@@ -32,7 +32,8 @@ export default class CCMyTrip extends Component {
 
     componentDidMount = () => {
 
-        let apiUrl = `http://localhost:51566/api/NewTrip/`
+        //let apiUrl = `http://localhost:51566/api/NewTrip/`
+        let apiUrl = `https://proj.ruppin.ac.il/igroup47/prod/api/NewTrip/`;
 
         fetch(apiUrl)
             .then(response => response.json())
@@ -51,7 +52,9 @@ export default class CCMyTrip extends Component {
         console.log(this.state.AllTripsFromSql);
 
 
-        let apiUrl1 = `http://localhost:51566/api/ParticipantsInTrip/getSpecific/${localStorage.getItem('user_email')}/`
+        //let apiUrl1 = `http://localhost:51566/api/ParticipantsInTrip/getSpecific/${localStorage.getItem('user_email')}/`
+        let apiUrl1 = `https://proj.ruppin.ac.il/igroup47/prod/api/ParticipantsInTrip/getSpecific/${localStorage.getItem('user_email')}/`;
+
 
         fetch(apiUrl1)
             .then(response => response.json())
@@ -84,7 +87,11 @@ export default class CCMyTrip extends Component {
             confirmButtonText: 'Yes'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = "http://localhost:3000/main_menu_page"
+
+                //window.location.href = "http://localhost:3000/main_menu_page"
+
+                this.props.history.push('/main_menu_page');
+
             }
         })
     }
@@ -112,8 +119,6 @@ export default class CCMyTrip extends Component {
             const TripsByMe = this.state.AllTripsFromSql.filter(f => f.Trip.Admin_email === localStorage.getItem('user_email'))
             // const TripsByMee = TripsByMe.filter(d => d.Trip.Active == tru)
             // console.log(TripsByMee)
-
-            const TripsByMe = this.state.AllTripsFromSql.filter(f => f.Trip.Admin_email === localStorage.getItem('user_email'))
 
             this.setState({
                 TripToRender: TripsByMe,
@@ -194,3 +199,5 @@ export default class CCMyTrip extends Component {
         )
     }
 }
+
+export default withRouter(CCMyTrip);

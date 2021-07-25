@@ -1,11 +1,13 @@
 import React from 'react';
 import { GoogleLogin } from 'react-google-login';
 import Swal from 'sweetalert2'
+import { Switch, Route, withRouter } from 'react-router-dom';
 //refresh token
 //import { refreshTokenSetup } from '../utils/refreshTokenSetup';
-const clientId = '337989254519-c3ucmom5f9ubap04mfmv76am274hivnm.apps.googleusercontent.com';
+const clientId = '692650076345-58cr403pevv5uuetdgpdv45as54v0s4p.apps.googleusercontent.com';
 //const clientSecret = '4KEKfjaqldjasH0ntNzH26T2';
-export default function GoogleLoginn(props) {
+
+function GoogleLoginn(props) {
 
     const onSuccess = (res) => {
 
@@ -32,9 +34,11 @@ export default function GoogleLoginn(props) {
                 showConfirmButton: true,
                 Onclick: () => { Swal.clickConfirm() }
             }).then(() => {
-                window.location.href = "http://localhost:3000/main_menu_page"
+
+                //window.location.href = "http://localhost:3000/main_menu_page"
+                props.history.push('/main_menu_page');
                 // window.location.href = "https://adoring-curran-14d8ac.netlify.app/main_menu_page"
-                
+
             })
         }
         else {
@@ -67,6 +71,7 @@ export default function GoogleLoginn(props) {
 }
 
 //export default GoogleLoginn;
+export default withRouter(GoogleLoginn);
 
 
 

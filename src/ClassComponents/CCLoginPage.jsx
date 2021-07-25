@@ -15,10 +15,9 @@ import Box from '@material-ui/core/Box';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
 import firebase from '../firebase';
+import { Switch, Route, withRouter } from 'react-router-dom';
 
-
-
-export default class CCLoginPage extends Component {
+class CCLoginPage extends Component {
 
     constructor(props) {
         super(props);
@@ -56,7 +55,8 @@ export default class CCLoginPage extends Component {
 
 
         //get all Token_expa from SQL
-        let apiUrl2 = `http://localhost:51566/api/Token`;
+        //let apiUrl2 = `http://localhost:51566/api/Token`;
+        let apiUrl2 = `https://proj.ruppin.ac.il/igroup47/prod/api/Token`;
         fetch(apiUrl2)
             .then(res => {
                 console.log('res=', res);
@@ -78,7 +78,7 @@ export default class CCLoginPage extends Component {
 
 
 
-                this.setState({ stamToken: localStorage.getItem('Token_number') })
+        this.setState({ stamToken: localStorage.getItem('Token_number') })
 
     }
 
@@ -138,7 +138,7 @@ export default class CCLoginPage extends Component {
             if (this.props.dataFromApptoLoginPage[index].Image === 'https://png.pngtree.com/png-clipart/20200701/original/pngtree-character-default-avatar-png-image_5407167.jpg') {
                 localStorage.setItem('user_image', "https://png.pngtree.com/png-clipart/20200701/original/pngtree-character-default-avatar-png-image_5407167.jpg")
             }
-            else (localStorage.setItem('user_image', "http://proj.ruppin.ac.il/igroup47/prod/uploadedFiles/" + this.state.email + ".png"))
+            else (localStorage.setItem('user_image', "https://proj.ruppin.ac.il/igroup47/prod/uploadedFiles/" + this.state.email + ".png"))
 
             Swal.fire({
                 position: 'center',
@@ -148,8 +148,14 @@ export default class CCLoginPage extends Component {
                 showConfirmButton: true,
                 Onclick: () => { Swal.clickConfirm() }
             }).then(() => {
-                //   window.location.href = "http://localhost:3000/main_menu_page"
-                window.location.href = "https://agitated-varahamihira-62ad26.netlify.app/main_menu_page"
+
+                console.log("you click ok in SWAL")
+
+                this.props.history.push('/main_menu_page');
+
+                //window.location.href = "http://localhost:3000/main_menu_page"
+                //window.location.href = "https://agitated-varahamihira-62ad26.netlify.app/main_menu_page"
+
             })
         }
         else {
@@ -200,7 +206,8 @@ export default class CCLoginPage extends Component {
             Email: this.state.email,
             Token_number: this.state.token_num
         }
-        let apiUrlEditToken = `http://localhost:51566/api/Token/EditToken`;
+        //let apiUrlEditToken = `http://localhost:51566/api/Token/EditToken`;
+        let apiUrlEditToken = `https://proj.ruppin.ac.il/igroup47/prod/api/Token/EditToken`;
 
         fetch(apiUrlEditToken, {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -268,3 +275,4 @@ export default class CCLoginPage extends Component {
 }
 
 
+export default withRouter(CCLoginPage);

@@ -6,9 +6,10 @@ import MediaCard from '../FunctionComponents/FCardMaterialUi';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
+import { Switch, Route, withRouter } from 'react-router-dom';
 
 
-export default class CCSearchPage extends Component {
+class CCSearchPage extends Component {
 
     constructor(props) {
         super(props);
@@ -29,7 +30,8 @@ export default class CCSearchPage extends Component {
 
         console.log("in componentDidMount search page")
 
-        let apiUrl = `http://localhost:51566/api/NewTrip`
+        //let apiUrl = `https://localhost:51566/api/NewTrip`
+        let apiUrl = `https://proj.ruppin.ac.il/igroup47/prod/api/NewTrip`;
 
         fetch(apiUrl)
             .then(response => response.json())
@@ -54,7 +56,8 @@ export default class CCSearchPage extends Component {
         console.log("VehicleTypqChange: " + this.state.VehicleTypqChange);
 
 
-        let apiUrl1 = `http://localhost:51566/api/Token`
+        //let apiUrl1 = `http://localhost:51566/api/Token`
+        let apiUrl1 = `https://proj.ruppin.ac.il/igroup47/prod/api/Token`;
 
         fetch(apiUrl1)
             .then(response => response.json())
@@ -162,7 +165,8 @@ export default class CCSearchPage extends Component {
             confirmButtonText: 'Yes'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = "http://localhost:3000/main_menu_page"
+                //window.location.href = "http://localhost:3000/main_menu_page"
+                this.props.history.push('/main_menu_page')
                 // window.location.href = "http://proj.ruppin.ac.il/igroup47/prod/"       
             }
         })
@@ -221,4 +225,6 @@ export default class CCSearchPage extends Component {
         )
     }
 }
+
+export default withRouter(CCSearchPage);
 

@@ -135,7 +135,6 @@ class CCTripPage extends Component {
                     .then(
                         (result) => {
                             console.log("GET Users data from SQL= ", result);
-                            console.log(result[0].Fname)
                             // result.map(st => console.log(st.Fname)); // all Fname in Users_Expa
                             this.setState({
                                 admindata: result,
@@ -620,7 +619,7 @@ class CCTripPage extends Component {
                             </Row>
                         </Container>
                     </div>
-                    <div style={{ boxShadow: '0px 0px 150px 10px yellow', borderRadius: '10px' }}><br></br><br></br>Admin Chat<br></br><br></br><br></br></div>
+                    {/* <div style={{ boxShadow: '0px 0px 150px 10px yellow', borderRadius: '10px' }}><br></br><br></br>Admin Chat<br></br><br></br><br></br></div> */}
                     {/* Showing Checklist  */}
                     {this.state.showChecklistComponent ?
                         <Modal

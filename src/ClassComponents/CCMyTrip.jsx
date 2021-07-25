@@ -103,38 +103,19 @@ export default class CCMyTrip extends Component {
 
         if (e.target.value === "byMe") {
 
-            alert("in by me")
-            let apiUrl2 = `http://localhost:53281/api/NewTrip/getmyadmintrips/email/${localStorage.getItem('user_email')}`
-            fetch(apiUrl2)
-                .then(response => response.json())
-                .then(data => {
-                    //this.state.temparray=[];
-                    console.log("The trips im the admin for this email -  trips data from sql")
-                    console.log(data);
-                    data.forEach((item) => {
-                        this.state.AdminTrips.push({ Trip: item });
-                        // this.setState({ adminOfTripArr: data })
-                    })
-                }).catch(function (error) {
-                    console.log("Error getting document:", error);
-                });
-            console.log("AllTripsFromSql....");
-            console.log(this.state.AllTripsFromSql);
-
-
-
+            
             console.log(this.state.AllTripsFromSql)
             const fal = false;
             const tru = true;
 
             console.log("you choose trips by me");
             const TripsByMe = this.state.AllTripsFromSql.filter(f => f.Trip.Admin_email === localStorage.getItem('user_email'))
-            const TripsByMee = TripsByMe.filter(d => d.Trip.Active == tru)
-            console.log(TripsByMee)
+            // const TripsByMee = TripsByMe.filter(d => d.Trip.Active == tru)
+            // console.log(TripsByMee)
 
 
             this.setState({
-                TripToRender: TripsByMee,
+                TripToRender: TripsByMe,
                 sort: "byMe"
             })
 
@@ -174,38 +155,6 @@ export default class CCMyTrip extends Component {
 
 
 
-        if (e.target.value === "PreviousTrips") {
-
-            console.log("in PreviousTrips option");
-            console.log(this.state.AllTripsFromSql);
-
-            if (this.state.AllTripsFromSql.some(i => i.Trip.Active === false)) {
-
-                console.log("there is false")
-
-                const filterArr = this.state.AllTripsFromSql.filter(item => item.Trip.Active === false);
-                console.log(filterArr);
-
-            }
-
-
-            //localStorage.getItem('user_email')
-
-            //if (filterArr[0].Trip.Admin_email === localStorage.getItem('user_email')) {
-
-            //     console.log("yes");
-            //  }
-
-
-
-
-            //TripToRender
-
-
-
-        }
-
-
     }
 
     render() {
@@ -227,7 +176,7 @@ export default class CCMyTrip extends Component {
                     <option style={{ color: 'black' }} value="PleaseChoose"> Watch Your Trips </option>
                     <option style={{ color: 'black' }} value="byMe">I'm the Trip Admin</option>
                     <option style={{ color: 'black' }} value="participate"> I'm a Partner </option>
-                    <option style={{ color: 'black' }} value="PreviousTrips"> Previous Trips </option>
+                    {/* <option style={{ color: 'black' }} value="PreviousTrips"> Previous Trips </option> */}
 
                 </Select>
                 <br></br><br></br>

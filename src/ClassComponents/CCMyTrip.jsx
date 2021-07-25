@@ -186,11 +186,12 @@ export default class CCMyTrip extends Component {
 
     render() {
         return (
-            <div>
-                <div><Button variant="secondary" size="sm" onClick={this.backbtn} className="but"> Main Menu </Button></div><br></br>
+            <div  style={{backgroundColor:'#92A8D1'}}>
+                <div><Button  style={{color:'white'}} variant="secondary" size="sm" onClick={this.backbtn} className="but"> Main Menu </Button></div><br></br>
                 <Button style={{ width: '90%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold', fontSize: '40px' }} fullWidth variant="info" size="lg" disabled='false' >My Trips</Button><br></br><br></br>
                 {/* <InputLabel htmlFor="age-native-simple">What do you want to see?</InputLabel> */}
                 <Select
+                style={{color:'white'}}
                     native
                     onChange={this.Sort}
                     inputProps={{
@@ -198,10 +199,11 @@ export default class CCMyTrip extends Component {
                         id: 'age-native-simple',
                     }}
                 >
-                    <option value="PleaseChoose"> Watch Your Trips </option>
-                    <option value="byMe">I'm the Trip Admin</option>
-                    <option value="participate"> I'm a Partner </option>
-                    <option value="PreviousTrips"> Previous Trips </option>
+        
+                    <option style={{color:'black'}} value="PleaseChoose"> Watch Your Trips </option>
+                    <option style={{color:'black'}} value="byMe">I'm the Trip Admin</option>
+                    <option style={{color:'black'}} value="participate"> I'm a Partner </option>
+                    <option style={{color:'black'}} value="PreviousTrips"> Previous Trips </option>
                 </Select>
                 <br></br><br></br>
                 <CardColumns>

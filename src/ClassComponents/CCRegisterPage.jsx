@@ -118,7 +118,7 @@ export default class CCRegisterPage extends Component {
         }
         else {
 
-            window.scrollTo({ top: 750, behavior: 'smooth' })
+            window.scrollTo({ top: 700, behavior: 'smooth' })
             this.setState(prevState => ({
                 opacity: 1,
                 disabled: true,
@@ -375,23 +375,23 @@ export default class CCRegisterPage extends Component {
     render() {
 
         return (
-            <div style={{ backgroundColor: '#1d21243b', height: '100%' }} className={classes.NewBLogCard}>
+            <div style={{ backgroundColor: '#92A8D1', height: '100%' }} className={classes.NewBLogCard}>
                 <Container>
                     <div className={classes.Container}>
-                        <Button variant="info" size="sm" href="/" className="but"> BACK </Button><br></br>
-                        <div><Avatar alt="Remy Sharp" src="https://i.ibb.co/GF9rjsr/circle-cropped.png" style={{ width: '20vh', height: '20vh', marginTop: '10px' }} /></div>
+                        <Button variant="secondary" size="sm" href="/" className="but"> BACK </Button><br></br>
+                        <div><Avatar alt="Remy Sharp" src="https://i.ibb.co/GF9rjsr/circle-cropped.png" style={{ width: '20vh', height: '20vh', marginTop: '25px' }} /></div>
                         <h1 style={{ marginLeft: 7, width: '90%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '35px' }} className="ExPa"> Create an Account </h1><br></br>
                         {/* <Button style={{ boxShadow:'0 0 50px 10px #141414',marginLeft: 7,width: '90%', borderRadius: 10, borderWidth: 5, fontWeight: 'bold', fontSize: '22px' }} fullWidth color="info" size="sm" disabled='false' >Create an Account</Button> */}
 
                         <form>
-                            <div id="part1" style={{ marginTop: -35 }}>
+                            <div id="part1" style={{ marginTop: -25 }}>
                                 {/* <p style={{ width: '40%', fontWeight: 'bold', fontSize: '15px', marginLeft: '115px' }}>Access With </p><br></br><br></br><br></br>
                                 <GoogleRegisterPage queDatafromParent={this.props.QuesDatafromApptoRegisterPage} dataFromParent={this.props.dataFromApptoRegisterPage} {...this.state.fname=localStorage.getItem('user_fname')} {...this.state.lname=localStorage.getItem('user_lname')}{...this.state.email=localStorage.getItem('user_email')}{...this.state.source=localStorage.getItem('user_image')}  /> */}
                                 <br></br>
                                 <TextField className="TextField" disabled={this.state.disabled} style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" onChange={(e) => this.setState({ email: e.target.value })} autoFocus />
                                 <Row>
                                     <Col>
-                                        <TextField disabled={this.state.disabled} style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="fname" label="First Name" name="fname" autoComplete="First Name" onChange={(e) => this.setState({ fname: e.target.value })} autoFocus />
+                                        <TextField disabled={this.state.disabled} style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" requir    ed fullWidth id="fname" label="First Name" name="fname" autoComplete="First Name" onChange={(e) => this.setState({ fname: e.target.value })} autoFocus />
                                     </Col>
                                     <Col>
                                         <TextField disabled={this.state.disabled} style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="lname" label="Last Name" name="lname" autoComplete="Last Name" onChange={(e) => this.setState({ lname: e.target.value })} autoFocus />
@@ -407,7 +407,7 @@ export default class CCRegisterPage extends Component {
                                 </Row>
                                 <br></br><br></br>
 
-                                <Button style={{ width: '80%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold', marginTop: -60 }} fullWidth variant="warning" size="lg" onClick={this.submitUserData} disabled={this.state.disabled} >Let's GO !</Button>
+                                <Button style={{ width: '80%', borderRadius: 20, borderWidth: 5, fontWeight: 'bold', marginTop: 30 }} fullWidth variant="warning" size="lg" onClick={this.submitUserData} disabled={this.state.disabled} >Let's GO !</Button>
                                 <br></br><br></br><br></br><br></br>
                                 <h5>Choose Your Profile Picture</h5>
                                 <div>
@@ -501,8 +501,8 @@ export default class CCRegisterPage extends Component {
 
                                 <h4>That Word Better Describes Me</h4>
                                 <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group" onClick={(e) => this.setState({ q9: e.target.value })}>
-                                    <Button disabled={!this.state.disabled} value="affable ">Affable</Button>&nbsp;&nbsp;
-                                    <Button disabled={!this.state.disabled} value="troglodyte ">Troglodyte</Button>&nbsp;&nbsp;
+                                    <Button disabled={!this.state.disabled} value="affable ">Friendly</Button>&nbsp;&nbsp;
+                                    <Button disabled={!this.state.disabled} value="troglodyte ">Loner</Button>&nbsp;&nbsp;
                                 </ButtonGroup>
                                 {/* <h4>{this.state.q9}</h4> */}
                                 <br></br><br></br><br></br>

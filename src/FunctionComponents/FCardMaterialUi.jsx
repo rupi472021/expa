@@ -62,6 +62,8 @@ export default function MediaCard(props) {
 
     async function chekcIndex() {
 
+
+
         console.log("the admin of this trip is : " + props.admin)
         console.log(tokensArray);
 

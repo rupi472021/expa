@@ -29,7 +29,7 @@ export default function FCMainMenuPage() {
     }
 
     return (
-        <div style={{ backgroundColor: '#a6dbff', height: '100vh', alignItems: 'center' }}>
+        <div style={{ backgroundColor: '#92A8D1', height: '100vh', alignItems: 'center' }}>
             <AiOutlineRollback onClick={backbtn} size={50} style={{ marginLeft: 320,color:'white' }}></AiOutlineRollback>
             {/* <div style={{ padding: 5 }}><Button size="sm" onClick={backbtn}>BACK</Button></div> */}
             <div  /*style={{ textAlign: 'center', marginTop: 50 }}*/><br></br>

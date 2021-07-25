@@ -65,6 +65,7 @@ export default class CCSearchPage extends Component {
                 console.log("Error getting document:", error);
             });
 
+
     }
 
     Sort = (e) => {
@@ -169,13 +170,13 @@ export default class CCSearchPage extends Component {
 
     render() {
         return (
-            <div style={{backgroundColor: '#747400',color:'white'}}>
+            <div style={{backgroundColor: '#92A8D1',color:'white'}}>
                 <div><br></br>
                     <AiOutlineRollback onClick={this.backbtn} size={30} style={{ marginLeft: 320,color:'white' }}></AiOutlineRollback>
-                    <h3>Search the best trip for you!</h3><br></br>
+                    <h3>Search For The Best Trip For You!</h3><br></br>
                     <FormControl style={{ marginRight: 75,color:'white' }}>
                         <InputLabel style={{color:'white'}} htmlFor="age-native-simple">Area</InputLabel>
-                        <Select style={{color:'white'}}
+                        <Select style={{color:'black'}}
                             native
                             onChange={this.Sort}
                             inputProps={{
@@ -192,7 +193,7 @@ export default class CCSearchPage extends Component {
                     </FormControl>
                     <FormControl>
                         <InputLabel style={{color:'white'}} htmlFor="age-native-simple">Vehicle</InputLabel>
-                        <Select style={{color:'white'}}
+                        <Select style={{color:'black'}}
                             native
                             onChange={this.Sort}
                             inputProps={{

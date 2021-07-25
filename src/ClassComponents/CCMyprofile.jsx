@@ -273,7 +273,7 @@ export default class CCMyprofile extends Component {
     render() {
         return (
 
-            <div style={{ backgroundColor: '#1d21243b', height: '100%' }}><br></br>
+            <div style={{ backgroundColor: '#92A8D1', height: '100%' }}><br></br>
                 <AiOutlineRollback onClick={this.backbtn} size={50} style={{ marginLeft: 320 }}></AiOutlineRollback>
                 {/* <Button color="secondary" size="sm" onClick={this.backbtn}> Main Menu </Button><br></br><br></br> */}
                 {/* <div><Button variant="secondary" size="sm" onClick={this.backbtn} className="but"> Main Menu </Button></div><br></br> */}

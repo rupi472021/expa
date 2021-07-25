@@ -223,7 +223,7 @@ export default class CCLoginPage extends Component {
 
     render() {
         return (
-            <div className={classes.NewBLogCard} >
+            <div className={classes.NewBLogCard} /*style={{backgroundColor:'#92A8D1'}}*/ >
                 <Container>
                     <CssBaseline />
                     <div className={classes.Container} >
@@ -231,7 +231,7 @@ export default class CCLoginPage extends Component {
                         {/* https://i.ibb.co/dGdXgZn/circle-cropped.png */}
                         <Avatar alt="Remy Sharp" src="https://i.ibb.co/hDyjsJX/1618776403339.png" style={{ width: '35vh', height: '35vh', marginTop: -50, borderRadius: 1 }} />
                         <br></br>
-                        <form style={{ marginTop: -25 }}>
+                        <form style={{ marginTop: 0 }}>
                             <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus onChange={(e) => this.setState({ email: e.target.value })} />
                             <TextField style={{ backgroundColor: 'white' }} variant="outlined" margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password" onChange={(a) => this.setState({ password: a.target.value })} />
                             {/* <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" /> */}
